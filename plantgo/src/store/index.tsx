@@ -1,0 +1,19 @@
+import { connect, createStoreHook } from 'react-redux'
+
+const counterReducer = (state = { counter: 0 }, action:any) => {
+  if (action.type === 'increment') {
+    return {
+    counter: state.counter + 1
+   };
+  }
+  if (action.type === 'decrement') {
+    return {
+      counter: state.counter - 1
+    };
+  }
+
+  return state;
+}
+const store = createStoreHook();
+
+export default store;
