@@ -1,17 +1,19 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import Login from './views/loginView'
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { createRoot } from 'react-dom/client';
+import { Provider } from 'react-redux';
 import './index.css';
-import App from './App';
-import { Provider } from 'react-redux/es/exports';
-import store from './store/index';
-import { BrowserRouter } from 'react-router-dom';
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
+
+const container = document.getElementById('root')!;
+const root = createRoot(container);
+
 root.render(
-  <BrowserRouter>
-    <Provider store={store()}>
-        <App />
-    </Provider>
-  </BrowserRouter>
+  <React.StrictMode>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/login' element={<Login />} />
+      </Routes>
+    </BrowserRouter>
+  </React.StrictMode>
 );
