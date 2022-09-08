@@ -1,4 +1,4 @@
-package com.ssafy.plantgo.model;
+package com.ssafy.plantgo.model.entity;
 
 public enum AuthProvider {
     local,

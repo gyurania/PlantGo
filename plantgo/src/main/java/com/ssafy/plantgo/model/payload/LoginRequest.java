@@ -1,4 +1,4 @@
-package com.ssafy.plantgo.payload;
+package com.ssafy.plantgo.model.payload;
 
 
 import lombok.Getter;

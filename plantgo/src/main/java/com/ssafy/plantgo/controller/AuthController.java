@@ -1,13 +1,13 @@
 package com.ssafy.plantgo.controller;
 
 import com.ssafy.plantgo.exception.BadRequestException;
-import com.ssafy.plantgo.model.AuthProvider;
-import com.ssafy.plantgo.model.User;
-import com.ssafy.plantgo.payload.ApiResponse;
-import com.ssafy.plantgo.payload.AuthResponse;
-import com.ssafy.plantgo.payload.LoginRequest;
-import com.ssafy.plantgo.payload.SignUpRequest;
-import com.ssafy.plantgo.repository.UserRepository;
+import com.ssafy.plantgo.model.entity.AuthProvider;
+import com.ssafy.plantgo.model.entity.User;
+import com.ssafy.plantgo.model.payload.ApiResponse;
+import com.ssafy.plantgo.model.payload.AuthResponse;
+import com.ssafy.plantgo.model.payload.LoginRequest;
+import com.ssafy.plantgo.model.payload.SignUpRequest;
+import com.ssafy.plantgo.model.repository.UserRepository;
 import com.ssafy.plantgo.security.TokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
