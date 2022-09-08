@@ -1,8 +1,8 @@
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/plantgo
-    username: 'root'
-    password: 'Qoguswnd201!'
+    username: 'queant'
+    password: 'queant1234'
 
   jpa:
     show-sql: true

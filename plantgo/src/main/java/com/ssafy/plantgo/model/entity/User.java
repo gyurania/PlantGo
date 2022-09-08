@@ -1,4 +1,4 @@
-package com.ssafy.plantgo.model;
+package com.ssafy.plantgo.model.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
