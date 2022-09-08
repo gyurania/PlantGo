@@ -1,8 +1,8 @@
 package com.ssafy.plantgo.controller;
 
 import com.ssafy.plantgo.exception.BadRequestException;
-import com.ssafy.plantgo.model.dto.AuthProvider;
-import com.ssafy.plantgo.model.dto.User;
+import com.ssafy.plantgo.model.entity.AuthProvider;
+import com.ssafy.plantgo.model.entity.User;
 import com.ssafy.plantgo.model.payload.ApiResponse;
 import com.ssafy.plantgo.model.payload.AuthResponse;
 import com.ssafy.plantgo.model.payload.LoginRequest;

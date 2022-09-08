@@ -1,7 +1,7 @@
 package com.ssafy.plantgo.security;
 
 import com.ssafy.plantgo.exception.ResourceNotFoundException;
-import com.ssafy.plantgo.model.dto.User;
+import com.ssafy.plantgo.model.entity.User;
 import com.ssafy.plantgo.model.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

@@ -1,8 +1,8 @@
 package com.ssafy.plantgo.security.oauth2;
 
 import com.ssafy.plantgo.exception.OAuth2AuthenticationProcessingException;
-import com.ssafy.plantgo.model.dto.AuthProvider;
-import com.ssafy.plantgo.model.dto.User;
+import com.ssafy.plantgo.model.entity.AuthProvider;
+import com.ssafy.plantgo.model.entity.User;
 import com.ssafy.plantgo.model.repository.UserRepository;
 import com.ssafy.plantgo.security.UserPrincipal;
 import com.ssafy.plantgo.security.oauth2.user.OAuth2UserInfo;
