@@ -2,7 +2,7 @@ package com.ssafy.plantgo.security.oauth2.user;
 
 
 import com.ssafy.plantgo.exception.OAuth2AuthenticationProcessingException;
-import com.ssafy.plantgo.model.AuthProvider;
+import com.ssafy.plantgo.model.dto.AuthProvider;
 
 import java.util.Map;
 
