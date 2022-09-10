@@ -1,25 +1,27 @@
 package com.ssafy.plantgo.controller;
 
-import com.ssafy.plantgo.exception.ResourceNotFoundException;
+import com.ssafy.plantgo.model.common.ApiResponse;
 import com.ssafy.plantgo.model.entity.User;
-import com.ssafy.plantgo.model.repository.UserRepository;
-import com.ssafy.plantgo.security.CurrentUser;
-import com.ssafy.plantgo.security.UserPrincipal;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
+import com.ssafy.plantgo.model.service.UserService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/api/v1/users")
+@RequiredArgsConstructor
 public class UserController {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserService userService;
 
-    @GetMapping("/user/me")
-    @PreAuthorize("hasRole('USER')")
-    public User getCurrentUser(@CurrentUser UserPrincipal userPrincipal) {
-        return userRepository.findById(userPrincipal.getId())
-                .orElseThrow(() -> new ResourceNotFoundException("User", "id", userPrincipal.getId()));
+    @GetMapping
+    public ApiResponse getUser() {
+        org.springframework.security.core.userdetails.User principal = (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        User user = userService.getUser(principal.getUsername());
+
+        return ApiResponse.success("user", user);
     }
 }

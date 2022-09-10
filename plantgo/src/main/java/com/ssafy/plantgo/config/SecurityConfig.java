@@ -1,142 +1,162 @@
 package com.ssafy.plantgo.config;
 
-import com.ssafy.plantgo.security.CustomUserDetailsService;
-import com.ssafy.plantgo.security.RestAuthenticationEntryPoint;
-import com.ssafy.plantgo.security.TokenAuthenticationFilter;
-import com.ssafy.plantgo.security.oauth2.CustomOAuth2UserService;
-import com.ssafy.plantgo.security.oauth2.HttpCookieOAuth2AuthorizationRequestRepository;
-import com.ssafy.plantgo.security.oauth2.OAuth2AuthenticationFailureHandler;
-import com.ssafy.plantgo.security.oauth2.OAuth2AuthenticationSuccessHandler;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.ssafy.plantgo.exception.RestAuthenticationEntryPoint;
+import com.ssafy.plantgo.model.entity.RoleType;
+import com.ssafy.plantgo.model.repository.OAuth2AuthorizationRequestBasedOnCookieRepository;
+import com.ssafy.plantgo.model.repository.UserRefreshTokenRepository;
+import com.ssafy.plantgo.model.service.CustomOAuth2UserService;
+import com.ssafy.plantgo.model.service.CustomUserDetailsService;
+import com.ssafy.plantgo.oauth.entity.handler.OAuth2AuthenticationFailureHandler;
+import com.ssafy.plantgo.oauth.entity.handler.OAuth2AuthenticationSuccessHandler;
+import com.ssafy.plantgo.oauth.entity.handler.TokenAccessDeniedHandler;
+import com.ssafy.plantgo.oauth.filter.TokenAuthenticationFilter;
+import com.ssafy.plantgo.oauth.token.AuthTokenProvider;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.oauth2.client.web.AuthorizationRequestRepository;
-import org.springframework.security.oauth2.core.endpoint.OAuth2AuthorizationRequest;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsUtils;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.Arrays;
 
 @Configuration
-@EnableWebSecurity // Spring Security 활성화
-@EnableGlobalMethodSecurity( // Security Method 활성화
-        securedEnabled = true, // @Secured를 사용하여 인가처리
-        jsr250Enabled = true, // @RolesAllowed를 사용하여 인가처리
-        prePostEnabled = true  // @PreAuthorize를 사용하여 인가처리
-)
+@RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    private CustomUserDetailsService customUserDetailsService;
-
-    @Autowired
-    private CustomOAuth2UserService customOAuth2UserService;
-
-    @Autowired
-    private OAuth2AuthenticationSuccessHandler oAuth2AuthenticationSuccessHandler;
-
-    @Autowired
-    private OAuth2AuthenticationFailureHandler oAuth2AuthenticationFailureHandler;
-
-    @Autowired
-    private HttpCookieOAuth2AuthorizationRequestRepository httpCookieOAuth2AuthorizationRequestRepository;
-
-    @Bean
-    public TokenAuthenticationFilter tokenAuthenticationFilter() {
-        return new TokenAuthenticationFilter();
-    }
+    private final CorsProperties corsProperties;
+    private final AppProperties appProperties;
+    private final AuthTokenProvider tokenProvider;
+    private final CustomUserDetailsService userDetailsService;
+    private final CustomOAuth2UserService oAuth2UserService;
+    private final TokenAccessDeniedHandler tokenAccessDeniedHandler;
+    private final UserRefreshTokenRepository userRefreshTokenRepository;
 
     /*
-      By default, Spring OAuth2 uses HttpSessionOAuth2AuthorizationRequestRepository to save
-      the authorization request. But, since our service is stateless, we can't save it in
-      the session. We'll save the request in a Base64 encoded cookie instead.
-    */
-    @Bean
-    public HttpCookieOAuth2AuthorizationRequestRepository cookieAuthorizationRequestRepository() {
-        return new HttpCookieOAuth2AuthorizationRequestRepository();
-    }
-
-    // Authorization에 사용할 userDetailService와 Passwordencoder 정의
+     * UserDetailsService 설정
+     * */
     @Override
-    public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
-        authenticationManagerBuilder
-                .userDetailsService(customUserDetailsService)
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService)
                 .passwordEncoder(passwordEncoder());
-    }
-
-    // Custom Security Config에서 사용할 passwordencoder 정의
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
-
-    // AuthenticationManager 외부에서 사용하기 위해
-    // AuthenticationManagerBean을 이용하여
-    // SpringSecurity 밖으로 Authentication을 빼내야 한다.(@Bean설정필요)
-    // @Autowired는 에러
-    @Bean(BeanIds.AUTHENTICATION_MANAGER)
-    @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .cors() // cors허용
+                .cors()
                 .and()
-                .sessionManagement() // session creation policy를 stateless정의하여 session 사용 안함
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // 토큰 사용을 위해
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .csrf() // csrf 사용 안함
-                .disable()
-                .formLogin() // 로그인 폼 비활성화
-                .disable()
-                .httpBasic()// 기본 로그인 창 비활성화
-                .disable()
+                .csrf().disable()
+                .formLogin().disable()
+                .httpBasic().disable()
                 .exceptionHandling()
                 .authenticationEntryPoint(new RestAuthenticationEntryPoint())
+                .accessDeniedHandler(tokenAccessDeniedHandler)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/",
-                        "/error",
-                        "/favicon.ico",
-                        "/**/*.png",
-                        "/**/*.gif",
-                        "/**/*.svg",
-                        "/**/*.jpg",
-                        "/**/*.html",
-                        "/**/*.css",
-                        "/**/*.js")
-                .permitAll()
-                .antMatchers("/auth/**", "/oauth2/**")
-                .permitAll()
-                .anyRequest()
-                .authenticated()
+                .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
+                .antMatchers("/api/**").hasAnyAuthority(RoleType.USER.getCode())
+                .antMatchers("/api/**/admin/**").hasAnyAuthority(RoleType.ADMIN.getCode())
+                .anyRequest().authenticated()
                 .and()
                 .oauth2Login()
                 .authorizationEndpoint()
-                .baseUri("/oauth2/authorize") // 클라이언트 첫 로그인 uri
-                .authorizationRequestRepository(cookieAuthorizationRequestRepository())
+                .baseUri("/oauth2/authorization")
+                .authorizationRequestRepository(oAuth2AuthorizationRequestBasedOnCookieRepository())
                 .and()
                 .redirectionEndpoint()
-                .baseUri("/oauth2/callback/*")
+                .baseUri("/*/oauth2/code/*")
                 .and()
                 .userInfoEndpoint()
-                .userService(customOAuth2UserService)
+                .userService(oAuth2UserService)
                 .and()
-                .successHandler(oAuth2AuthenticationSuccessHandler)
-                .failureHandler(oAuth2AuthenticationFailureHandler);
+                .successHandler(oAuth2AuthenticationSuccessHandler())
+                .failureHandler(oAuth2AuthenticationFailureHandler());
 
-        // Add our custom Token based authentication filter
         http.addFilterBefore(tokenAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+    }
+
+    /*
+     * auth 매니저 설정
+     * */
+    @Override
+    @Bean(BeanIds.AUTHENTICATION_MANAGER)
+    protected AuthenticationManager authenticationManager() throws Exception {
+        return super.authenticationManager();
+    }
+
+    /*
+     * security 설정 시, 사용할 인코더 설정
+     * */
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    /*
+     * 토큰 필터 설정
+     * */
+    @Bean
+    public TokenAuthenticationFilter tokenAuthenticationFilter() {
+        return new TokenAuthenticationFilter(tokenProvider);
+    }
+
+    /*
+     * 쿠키 기반 인가 Repository
+     * 인가 응답을 연계 하고 검증할 때 사용.
+     * */
+    @Bean
+    public OAuth2AuthorizationRequestBasedOnCookieRepository oAuth2AuthorizationRequestBasedOnCookieRepository() {
+        return new OAuth2AuthorizationRequestBasedOnCookieRepository();
+    }
+
+    /*
+     * Oauth 인증 성공 핸들러
+     * */
+    @Bean
+    public OAuth2AuthenticationSuccessHandler oAuth2AuthenticationSuccessHandler() {
+        return new OAuth2AuthenticationSuccessHandler(
+                tokenProvider,
+                appProperties,
+                userRefreshTokenRepository,
+                oAuth2AuthorizationRequestBasedOnCookieRepository()
+        );
+    }
+
+    /*
+     * Oauth 인증 실패 핸들러
+     * */
+    @Bean
+    public OAuth2AuthenticationFailureHandler oAuth2AuthenticationFailureHandler() {
+        return new OAuth2AuthenticationFailureHandler(oAuth2AuthorizationRequestBasedOnCookieRepository());
+    }
+
+    /*
+     * Cors 설정
+     * */
+    @Bean
+    public UrlBasedCorsConfigurationSource corsConfigurationSource() {
+        UrlBasedCorsConfigurationSource corsConfigSource = new UrlBasedCorsConfigurationSource();
+
+        CorsConfiguration corsConfig = new CorsConfiguration();
+        corsConfig.setAllowedHeaders(Arrays.asList(corsProperties.getAllowedHeaders().split(",")));
+        corsConfig.setAllowedMethods(Arrays.asList(corsProperties.getAllowedMethods().split(",")));
+        corsConfig.setAllowedOrigins(Arrays.asList(corsProperties.getAllowedOrigins().split(",")));
+        corsConfig.setAllowCredentials(true);
+        corsConfig.setMaxAge(corsConfig.getMaxAge());
+
+        corsConfigSource.registerCorsConfiguration("/**", corsConfig);
+        return corsConfigSource;
     }
 }
