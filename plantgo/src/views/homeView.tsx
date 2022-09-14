@@ -1,7 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
+import './HomeView.css'
+
+// import lo from 'lottie-web'
+// import defineLordIconElement from "lord-icon-element";
+// import animationData from '../animation/refreshAnimation.json'
+import { Player } from '@lottiefiles/react-lottie-player';
+
 
 
 function HomeView() {
+
   const mapElement = useRef(null);
 
   const [latitude, setLatitude] = useState(37.5656)
@@ -12,14 +20,6 @@ function HomeView() {
     setLongitude(position.coords.longitude)
     console.log(position)
   })
-
-  // useEffect(() => {
-  //   navigator.geolocation.watchPosition((position) => {
-  //     setLatitude(position.coords.latitude)
-  //     setLongitude(position.coords.longitude)
-  //     console.log(position)
-  //   })
-  // }, [])
 
   console.log('위도', latitude)
   console.log('경도', longitude)
@@ -39,7 +39,6 @@ function HomeView() {
 
     // const location = new naver.maps.LatLng(37.5656, 126.9769);
     const location = new naver.maps.LatLng(latitude, longitude);
-
 
     const mapOptions: naver.maps.MapOptions = {
       center: location,
@@ -63,8 +62,19 @@ function HomeView() {
     console.log(mapOptions.zoom)
   }, [latitude, longitude]);
 
-
-  return <div ref={mapElement} style={{ width: 360, height: 800 }} />;
+  return (
+    <div>
+      <h2 className="title">Plant Go!</h2>
+      {/* <iframe src="https://embed.lottiefiles.com/animation/60895"></iframe> */}
+      <Player
+        src='https://assets9.lottiefiles.com/packages/lf20_osrsnzbe.json'
+        loop
+        autoplay
+        style={{ height: '50px', width: '50px' }}
+      />
+      <div ref={mapElement} style={{ width: 360, height: 800 }} className='map'/>
+    </div>
+  )
 }
 
 
