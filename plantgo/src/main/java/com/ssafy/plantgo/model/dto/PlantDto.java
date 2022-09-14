@@ -15,6 +15,7 @@ import javax.persistence.Id;
 public class PlantDto {
 
     private int plantId;
+    private boolean collected;
     private String korName;
     private String schName;
     private String korNameSn;

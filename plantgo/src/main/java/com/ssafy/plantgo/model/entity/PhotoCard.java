@@ -21,20 +21,11 @@ public class PhotoCard {
 	@Column(name = "photocard_id")
 	private int photocardId;
 
-	@Column(name = "korName", columnDefinition = "VARCHAR(255)", nullable = false)
-	private String korName;
-
-	@Column(name = "schName", columnDefinition = "VARCHAR(255)", nullable = false)
-	private String schName;
-
 	@Column(name = "latitude", columnDefinition = "DOUBLE", nullable = false)
 	private double latitude;
 
 	@Column(name = "longitude", columnDefinition = "DOUBLE", nullable = false)
 	private double longitude;
-
-	@Column(name = "address", columnDefinition = "VARCHAR(255)", nullable = false)
-	private String address;
 
 	@Column(name = "photo_url", columnDefinition = "TEXT", nullable = false)
 	private String photoUrl;
@@ -47,6 +38,6 @@ public class PhotoCard {
 
 	// Foreign key 회원아이디
 	@ManyToOne
-	@JoinColumn(name = "member_id", columnDefinition = "BIGINT", referencedColumnName = "USER_SEQ", nullable = false)
+	@JoinColumn(name = "userSeq")
 	private User user;
 }
