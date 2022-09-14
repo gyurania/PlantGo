@@ -1,6 +1,6 @@
 package com.ssafy.plantgo.service.photocard;
 
-import com.ssafy.plantgo.dto.photocard.PhotocardDto;
+import com.ssafy.plantgo.model.dto.PhotocardDto;
 
 public interface PhotocardService {
 
