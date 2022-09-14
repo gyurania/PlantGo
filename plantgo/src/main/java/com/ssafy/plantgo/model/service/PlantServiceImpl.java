@@ -2,13 +2,13 @@ package com.ssafy.plantgo.model.service;
 
 import com.ssafy.plantgo.model.dto.PlantDto;
 import com.ssafy.plantgo.model.entity.PhotoCard;
+import com.ssafy.plantgo.model.entity.User;
 import com.ssafy.plantgo.model.repository.PhotocardRepository;
 import com.ssafy.plantgo.model.repository.PlantRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -50,7 +50,7 @@ public class PlantServiceImpl implements PlantService{
 
     @Override
     public List<Integer> getPlantIds(UUID memberId) {
-        Optional<List<PhotoCard>> result = photocardRepository.findByUser(User.builder().)
+        Optional<List<PhotoCard>> result = photocardRepository.findByUser(User.builder().build());
         return null;
     }
 }

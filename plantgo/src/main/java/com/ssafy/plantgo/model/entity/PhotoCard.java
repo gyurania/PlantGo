@@ -47,6 +47,6 @@ public class PhotoCard {
 
 	// Foreign key 회원아이디
 	@ManyToOne
-	@JoinColumn(name = "member_id", columnDefinition = "BIGINT", referencedColumnName = "id", nullable = false)
+	@JoinColumn(name = "member_id", columnDefinition = "BIGINT", referencedColumnName = "USER_SEQ", nullable = false)
 	private User user;
 }
