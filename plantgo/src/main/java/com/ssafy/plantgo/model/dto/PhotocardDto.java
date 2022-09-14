@@ -1,4 +1,4 @@
-package com.ssafy.plantgo.dto.photocard;
+package com.ssafy.plantgo.model.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

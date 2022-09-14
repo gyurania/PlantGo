@@ -72,7 +72,7 @@ public class PlantApiUtil {
 
 
                 Plant plant = Plant.builder()
-                        .plant_id(Integer.parseInt(getTagValue("plantPilbkNo", eElement)))
+                        .plantId(Integer.parseInt(getTagValue("plantPilbkNo", eElement)))
                         .korName(getTagValue("plantGnrlNm", eElement))
                         .schName(getTagValue("plantSpecsScnm", eElement))
                         .korNameSn(getTagValue("notRcmmGnrlNm", eElement))
@@ -82,7 +82,7 @@ public class PlantApiUtil {
 
                 if(!getTagValue("detailYn", eElement).equals("Y")) continue;
                 //상세정보 받기
-                url = "http://openapi.nature.go.kr/openapi/service/rest/PlantService/plntIlstrInfo?serviceKey="+key+"&q1="+plant.getPlant_id();
+                url = "http://openapi.nature.go.kr/openapi/service/rest/PlantService/plntIlstrInfo?serviceKey="+key+"&q1="+plant.getPlantId();
 
                 dbFactoty = DocumentBuilderFactory.newInstance();
                 dBuilder = dbFactoty.newDocumentBuilder();
