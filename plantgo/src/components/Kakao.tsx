@@ -1,5 +1,5 @@
 import React from "react"
-import { KAKAO_AUTH_URL } from "../informations/Oauth";
+import { KAKAO_AUTH_URL } from "../informations/oauth";
 function KakaoLogin() {
   return (
     <a href={KAKAO_AUTH_URL}>
