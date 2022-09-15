@@ -1,14 +1,10 @@
 package com.ssafy.plantgo.model.service;
 
-import com.ssafy.plantgo.model.dto.PlantDto;
-import com.ssafy.plantgo.model.dto.PlantResponseDto;
-
-import java.util.List;
-import java.util.UUID;
+import com.ssafy.plantgo.model.dto.PlantResponse;
 
 public interface PlantService {
-    PlantResponseDto plantList(Long userSeq, int page);
-    PlantResponseDto plantCollected(Long userSeq, int page);
-    PlantResponseDto plantNotCollected(Long userSeq, int page);
+    PlantResponse plantList(Long userSeq, int page);
+    PlantResponse plantCollected(Long userSeq, int page);
+    PlantResponse plantNotCollected(Long userSeq, int page);
     void getPlantIds(Long userSeq);
 }
