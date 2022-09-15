@@ -11,6 +11,7 @@ import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -45,12 +46,12 @@ public class PlantnetApiTest {
             System.out.println(jsonString);
             System.out.println();
             JSONObject jsonObj = new JSONObject(jsonString);
+            JSONArray resultarr = jsonObj.getJSONArray("results");
+            JSONObject mostcorrect = resultarr.getJSONObject(0);
+            JSONObject species = mostcorrect.getJSONObject("species");
+            String scientificName = species.getString("scientificNameWithoutAuthor");
+            System.out.println(scientificName);
 
-            JSONObject result = jsonObj.getJSONObject("results");
-            JSONObject species = result.getJSONObject("species");
-            JSONObject name = species.getJSONObject("scientificNameWithoutAuthor");
-            System.out.println("학명은?");
-            System.out.println(name);
         } catch (IOException e) {
             e.printStackTrace();
         }
