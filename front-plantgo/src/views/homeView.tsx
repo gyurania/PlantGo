@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { getCookie } from "../components/cookie";
 import './HomeView.css'
 
 // import lo from 'lottie-web'
@@ -24,6 +25,10 @@ function HomeView() {
   console.log('경도', longitude)
 
   useEffect(() => {
+    if (!getCookie('loginToken')) {
+      window.location.replace("/login")
+    }
+
     const { naver } = window;
     if (!mapElement.current || !naver) return;
 

@@ -6,7 +6,7 @@ import { createRoot } from 'react-dom/client';
 // import { Provider } from 'react-redux';
 import './index.css';
 import axios from 'axios';
-import SuccessLoginKaKao from './components/successLoginKakao';
+import SuccessLogin from './components/successLogin';
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
@@ -18,7 +18,7 @@ root.render(
       <Routes>
         <Route path='/login' element={<Login />} />
         <Route path='/' element={<Home />} />
-        <Route path='/oauth/redirect' element={<SuccessLoginKaKao/>}/>
+        <Route path='/oauth/redirect' element={<SuccessLogin/>}/>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
