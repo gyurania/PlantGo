@@ -9,7 +9,6 @@ import './HomeView.css'
 
 
 function HomeView() {
-
   const mapElement = useRef(null);
 
   const [latitude, setLatitude] = useState(37.5656)
@@ -25,6 +24,10 @@ function HomeView() {
   console.log('경도', longitude)
 
   useEffect(() => {
+    if (!sessionStorage.getItem('loginToken')) {
+      window.location.replace("/login")
+    }
+
     const { naver } = window;
     if (!mapElement.current || !naver) return;
 
