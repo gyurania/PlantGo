@@ -18,7 +18,7 @@ root.render(
       <Routes>
         <Route path='/login' element={<Login />} />
         <Route path='/' element={<Home />} />
-        <Route path='/oauth/callback/kakao' element={<SuccessLoginKaKao/>}/>
+        <Route path='/oauth/redirect' element={<SuccessLoginKaKao/>}/>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

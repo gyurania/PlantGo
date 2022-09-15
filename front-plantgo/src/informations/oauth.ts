@@ -1,5 +1,3 @@
-import CLIENT_ID from "./code";
-
 const BACK_URI = "http://localhost:8080/oauth2/authorization";
 const REDIRECT_URI = "http://localhost:3000/oauth/redirect";
 

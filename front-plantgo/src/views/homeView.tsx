@@ -9,7 +9,6 @@ import './HomeView.css'
 
 
 function HomeView() {
-
   const mapElement = useRef(null);
 
   const [latitude, setLatitude] = useState(37.5656)

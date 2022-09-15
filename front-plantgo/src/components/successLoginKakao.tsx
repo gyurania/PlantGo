@@ -1,15 +1,18 @@
-import React from "react";
-import { KAKAO_AUTH_URL } from "../informations/oauth";
+import React, {useEffect} from "react";
 import { useLocation } from "react-router-dom";
-import axios from "axios";
 
 
-function SuccessLoginKaKao() {
+function SuccessLogin() {
   
 	const location = useLocation();
-  const KAKAO_CODE = location.search.split('=')[1];
+  const CODE = location.search.split('=')[1];
+  useEffect(() => {
+    localStorage.clear();
+    localStorage.setItem("token", CODE);
+    window.location.replace("/");
+  });
   return (
-    <h1>{KAKAO_CODE}</h1>
+    <></>
   )
 }
-export default SuccessLoginKaKao;
+export default SuccessLogin;
