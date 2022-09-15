@@ -1,13 +1,12 @@
 package com.ssafy.plantgo.model.service;
 
 import com.ssafy.plantgo.model.dto.PlantDto;
-import com.ssafy.plantgo.model.dto.PlantResponseDto;
+import com.ssafy.plantgo.model.dto.PlantResponse;
 import com.ssafy.plantgo.model.entity.PhotoCard;
 import com.ssafy.plantgo.model.entity.Plant;
 import com.ssafy.plantgo.model.entity.User;
 import com.ssafy.plantgo.model.repository.PhotocardRepository;
 import com.ssafy.plantgo.model.repository.PlantRepository;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -38,7 +36,7 @@ public class PlantServiceImpl implements PlantService{
     }
 
     @Override
-    public PlantResponseDto plantList(Long userSeq, int page) {
+    public PlantResponse plantList(Long userSeq, int page) {
         if(this.plantIds == null) getPlantIds(userSeq);
 
         Pageable pageable = PageRequest.of(page-1, 10, Sort.by("korName"));
@@ -51,7 +49,7 @@ public class PlantServiceImpl implements PlantService{
             plantDtoList.add(plantDto);
         });
 
-        PlantResponseDto plantResponseDto = PlantResponseDto.builder()
+        PlantResponse plantResponseDto = PlantResponse.builder()
                 .plantDtoList(plantDtoList)
                 .totalPage(result.getTotalPages())
                 .totalCnt(result.getTotalElements())
@@ -61,7 +59,7 @@ public class PlantServiceImpl implements PlantService{
     }
 
     @Override
-    public PlantResponseDto plantCollected(Long userSeq, int page) {
+    public PlantResponse plantCollected(Long userSeq, int page) {
         if(this.plantIds == null) getPlantIds(userSeq);
 
         Pageable pageable = PageRequest.of(page-1, 10, Sort.by("korName"));
@@ -75,7 +73,7 @@ public class PlantServiceImpl implements PlantService{
             plantDtoList.add(plantDto);
         });
 
-        PlantResponseDto plantResponseDto = PlantResponseDto.builder()
+        PlantResponse plantResponseDto = PlantResponse.builder()
                 .plantDtoList(plantDtoList)
                 .totalPage(result.getTotalPages())
                 .totalCnt(result.getTotalElements())
@@ -85,7 +83,7 @@ public class PlantServiceImpl implements PlantService{
     }
 
     @Override
-    public PlantResponseDto plantNotCollected(Long userSeq, int page) {
+    public PlantResponse plantNotCollected(Long userSeq, int page) {
         if(this.plantIds == null) getPlantIds(userSeq);
 
         Pageable pageable = PageRequest.of(page-1, 10, Sort.by("korName"));
@@ -94,7 +92,7 @@ public class PlantServiceImpl implements PlantService{
         List<PlantDto> plantDtoList = new ArrayList<>();
         result.get().forEach(plant -> plantDtoList.add(modelMapper.map(plant, PlantDto.class)));
 
-        PlantResponseDto plantResponseDto = PlantResponseDto.builder()
+        PlantResponse plantResponseDto = PlantResponse.builder()
                 .plantDtoList(plantDtoList)
                 .totalPage(result.getTotalPages())
                 .totalCnt(result.getTotalElements())
