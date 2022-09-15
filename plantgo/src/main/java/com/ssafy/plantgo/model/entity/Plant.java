@@ -16,7 +16,7 @@ import javax.persistence.Id;
 @Builder
 public class Plant {
     @Id
-    private int plant_id;
+    private int plantId;
     private String korName;
     private String schName;
     private String korNameSn;
