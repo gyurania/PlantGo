@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import { getCookie } from "../components/cookie";
 import './HomeView.css'
 
 // import lo from 'lottie-web'
