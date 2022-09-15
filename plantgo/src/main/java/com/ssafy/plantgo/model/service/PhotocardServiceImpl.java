@@ -2,6 +2,8 @@ package com.ssafy.plantgo.model.service;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.ObjectMetadata;
+import com.ssafy.plantgo.model.dto.PhotocardRequest;
+import com.ssafy.plantgo.model.entity.User;
 import com.ssafy.plantgo.model.service.PhotocardService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -30,11 +32,16 @@ public class PhotocardServiceImpl implements PhotocardService {
 
 	/** 포토카드 등록하기 */
 	@Override
-	public void registPhotocard(PhotocardDto photocardDto, MultipartFile img) {
-		PhotoCard photocard = modelMapper.map(photocardDto, PhotoCard.class);
+	public void registPhotocard(PhotocardRequest photocardRequest, MultipartFile img) throws IOException {
+		String photoUrl = upload(img);
+		PhotoCard photocard = PhotoCard.builder()
+				.latitude(photocardRequest.getLatitude())
+				.longitude(photocardRequest.getLongitude())
+				.user(User.builder().userSeq(photocardRequest.getUserSeq()).build())
+				.photoUrl(photoUrl)
+				.plantId(photocardRequest.getPlantId())
+				.build();
 		photocardRepository.save(photocard);
-		
-		return;
 	}
 
 	@Override
