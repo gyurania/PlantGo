@@ -25,7 +25,7 @@ function HomeView() {
   console.log('경도', longitude)
 
   useEffect(() => {
-    if (!getCookie('loginToken')) {
+    if (!sessionStorage.getItem('loginToken')) {
       window.location.replace("/login")
     }
 
