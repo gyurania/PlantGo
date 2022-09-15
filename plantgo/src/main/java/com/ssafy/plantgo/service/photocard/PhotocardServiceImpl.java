@@ -4,7 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ssafy.plantgo.dto.photocard.PhotocardDto;
+import com.ssafy.plantgo.model.dto.PhotocardDto;
 import com.ssafy.plantgo.model.entity.PhotoCard;
 import com.ssafy.plantgo.model.repository.PhotocardRepository;
 

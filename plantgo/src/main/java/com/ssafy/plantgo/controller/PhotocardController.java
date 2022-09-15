@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ssafy.plantgo.dto.photocard.PhotocardDto;
+import com.ssafy.plantgo.model.dto.PhotocardDto;
 import com.ssafy.plantgo.service.photocard.PhotocardService;
 
 @RestController
