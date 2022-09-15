@@ -21,6 +21,7 @@ public class ApiResponse<T> {
     private final static String NOT_EXPIRED_TOKEN_YET = "Not expired token yet.";
 
     private final ApiResponseHeader header;
+
     private final Map<String, T> body;
 
     public static <T> ApiResponse<T> success(String name, T body) {
