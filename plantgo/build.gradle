@@ -50,6 +50,9 @@ dependencies {
 	implementation 'org.apache.httpcomponents:httpmime:4.5.13'
 	// Json Library
 	implementation 'org.json:json:20190722'
+
+	//S3 서버
+	implementation "com.amazonaws:aws-java-sdk-s3:1.12.281"
 }
 
 tasks.named('test') {
