@@ -10,23 +10,14 @@ import lombok.Data;
 @ApiModel("PhotocardDto")
 public class PhotocardDto {
 
-	@ApiModelProperty(name = "멤버 아이디")
-	private String memberId;
-
-	@ApiModelProperty(name = "식물의 국명")
-	private String korName;
-
-	@ApiModelProperty(name = "식물의 학명")
-	private String schName;
+	@ApiModelProperty(name = "유저번호")
+	private Long userSeq;
 
 	@ApiModelProperty(name = "식물을 발견한 위도")
 	private double latitude;
 
 	@ApiModelProperty(name = "식물을 발견한 경도")
 	private double longitude;
-
-	@ApiModelProperty(name = "식물 발견 주소")
-	private String address;
 
 	@ApiModelProperty(name = "사진 저장 경로")
 	private String photoUrl;

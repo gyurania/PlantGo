@@ -12,7 +12,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class PlantResponseDto {
+public class PlantResponse {
+    @Builder.Default
     List<PlantDto> plantDtoList = new ArrayList<>();
     int totalPage;
     long totalCnt;

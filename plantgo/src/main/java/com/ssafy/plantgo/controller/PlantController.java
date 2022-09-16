@@ -1,8 +1,8 @@
 package com.ssafy.plantgo.controller;
 
 
-import com.ssafy.plantgo.model.dto.PlantRequestDto;
-import com.ssafy.plantgo.model.dto.PlantResponseDto;
+import com.ssafy.plantgo.model.dto.PlantRequest;
+import com.ssafy.plantgo.model.dto.PlantResponse;
 import com.ssafy.plantgo.model.service.PlantService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -28,8 +28,8 @@ public class PlantController {
     })
     @ApiOperation(value="식물도감 전체 리스트 조회", notes="userSeq, page 필수")
     @PostMapping
-    public ResponseEntity<?> getPlantList(@RequestBody PlantRequestDto requestDto){
-        PlantResponseDto plantResponseDto = plantService.plantList(requestDto.getUserSeq(), requestDto.getPage());
+    public ResponseEntity<?> getPlantList(@RequestBody PlantRequest requestDto){
+        PlantResponse plantResponseDto = plantService.plantList(requestDto.getUserSeq(), requestDto.getPage());
         return new ResponseEntity<>(plantResponseDto, HttpStatus.OK);
     }
 
@@ -39,8 +39,8 @@ public class PlantController {
     })
     @PostMapping("/collected")
     @ApiOperation(value="수집된 식물도감 리스트 조회", notes="userSeq, page 필수")
-    public ResponseEntity<?> getCollectedPlantList(@RequestBody PlantRequestDto requestDto){
-        PlantResponseDto plantResponseDto = plantService.plantCollected(requestDto.getUserSeq(), requestDto.getPage());
+    public ResponseEntity<?> getCollectedPlantList(@RequestBody PlantRequest requestDto){
+        PlantResponse plantResponseDto = plantService.plantCollected(requestDto.getUserSeq(), requestDto.getPage());
         return new ResponseEntity<>(plantResponseDto, HttpStatus.OK);
     }
 
@@ -50,8 +50,8 @@ public class PlantController {
     })
     @PostMapping("/not-collected")
     @ApiOperation(value="수집되지 않은 식물도감 리스트 조회", notes="userSeq, page 필수")
-    public ResponseEntity<?> getNotCollectedPlantList(@RequestBody PlantRequestDto requestDto){
-        PlantResponseDto plantResponseDto = plantService.plantNotCollected(requestDto.getUserSeq(), requestDto.getPage());
+    public ResponseEntity<?> getNotCollectedPlantList(@RequestBody PlantRequest requestDto){
+        PlantResponse plantResponseDto = plantService.plantNotCollected(requestDto.getUserSeq(), requestDto.getPage());
         return new ResponseEntity<>(plantResponseDto, HttpStatus.OK);
     }
 }

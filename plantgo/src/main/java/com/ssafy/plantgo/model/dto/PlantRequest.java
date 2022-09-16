@@ -6,7 +6,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class PlantRequestDto {
+public class PlantRequest {
     Long userSeq;
     int page;
 }

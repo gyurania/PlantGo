@@ -1,6 +1,7 @@
 package com.ssafy.plantgo.controller;
 
 import com.ssafy.plantgo.model.common.ApiResponse;
+import com.ssafy.plantgo.model.dto.UserResponseDto;
 import com.ssafy.plantgo.model.entity.User;
 import com.ssafy.plantgo.model.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -14,14 +15,19 @@ public class UserController {
 
     private final UserService userService;
 
-    @GetMapping("/{id}")
-    public ApiResponse getUser(@PathVariable String id) {
+    @GetMapping
+    public ApiResponse getUser() {
+        System.out.println("hello");
+        System.out.println("SecurityContextHolder.getContext().getAuthentication().getPrincipal() = " + SecurityContextHolder.getContext().getAuthentication().getPrincipal());
 
-        User user = userService.getUser(id);
+        org.springframework.security.core.userdetails.User principal =
+                (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        System.out.println("principal.getUsername() = " + principal.getUsername());
+        System.out.println("principal.getUsername() = " + principal.getPassword());
+        UserResponseDto user = userService.getUser(principal.getUsername());
 
         return ApiResponse.success("user", user);
     }
-
 
 
 }
