@@ -14,4 +14,7 @@ public interface PlantRepository extends JpaRepository<Plant, Integer> {
 
     Page<Plant> findByPlantIdIn(Set<Integer> plantIds, Pageable pageable);
     Page<Plant> findByPlantIdNotIn(Set<Integer> plantIds, Pageable pageable);
+
+    @Query(value = "select * from plant where sch_name like %:name%", nativeQuery = true)
+    public Plant findByScientificname(@Param(value="name") String name);
 }

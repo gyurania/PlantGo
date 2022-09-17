@@ -26,4 +26,10 @@ public class UserServiceImpl implements UserService{
         UserResponseDto userresponse = modelMapper.map(user, UserResponseDto.class);
         return userresponse;
     }
+
+    @Override
+    public User getUserEntity(String id) {
+        User user = userRepository.findByUserId(id);
+        return user;
+    }
 }
