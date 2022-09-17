@@ -21,17 +21,17 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 public class PlantnetApiTest {
 
-    private static final String IMAGE1 = "C:\\Users\\SSAFY\\Desktop\\rose.jpg";
-    private static final String IMAGE2 = "C:\\Users\\SSAFY\\Desktop\\greenleaf.jpg";
+    private static final String IMAGE1 = "C:\\Users\\SSAFY\\Desktop\\zeph.jpg";
+    private static final String IMAGE2 = "https:\\plantgo.s3.ap-northeast-2.amazonaws.com\\b2ac04ec-d1d1-4b43-abbd-a59ed33b1ef9-zeph.jpg";
     private static final String URL = "https://my-api.plantnet.org/v2/identify/all?api-key=2b10gA30OhZUKxTfs01xa0Tgh";
     @Test
     public void findPlantByImg() {
-        File file1 = new File(IMAGE1);
+//        File file1 = new File(IMAGE1);
         File file2 = new File(IMAGE2);
 
         HttpEntity entity = MultipartEntityBuilder.create()
-                .addPart("images", new FileBody(file1)).addTextBody("organs", "flower")
-                .addPart("images", new FileBody(file2)).addTextBody("organs", "leaf")
+                .addPart("images", new FileBody(file2)).addTextBody("organs", "flower")
+//                .addPart("images", new FileBody(file2)).addTextBody("organs", "leaf")
                 .build();
 
         HttpPost request = new HttpPost(URL);
