@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:mysql://54.180.156.173:3306/plantgo
-    username: 'plantgo'
-    password: 'a703pg7'
+    url: jdbc:mysql://localhost:3306/plantgo
+    username: 'root'
+    password: 'Qoguswnd201!'
 
   jpa:
     show-sql: true
@@ -72,8 +72,8 @@ jwt.secret: '8sknjlO3NPTBqo319DHLNqsQAfRJEdKsETOds'
 app:
   auth:
     tokenSecret: 926D96C90030DD58429D2751AC1BDBBC
-    tokenExpiry: 1800000
-    refreshTokenExpiry: 604800000
+    tokenExpiry: 18000000
+    refreshTokenExpiry: 6048000000
   oauth2:
     authorizedRedirectUris:
       - http://localhost:3000/oauth/redirect
