@@ -30,3 +30,7 @@
 .over-map {
     z-index: 10;
 }
+
+.tmp-img {
+    z-index: 20
+}
