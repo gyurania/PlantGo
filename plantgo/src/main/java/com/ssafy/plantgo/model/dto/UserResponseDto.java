@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class UserResponseDto {
 
+    Long userSeq;
     String username;
     String email;
 }
