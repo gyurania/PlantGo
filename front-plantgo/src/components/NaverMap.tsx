@@ -8,24 +8,24 @@ function NaverMap(props: any) {
   const [currMarkers, setCurrMarkers] = useState(Array);
   const [dragedCenter, setDragedCenter] = useState(Object);
 
-  // 드래그 했을 때 중앙 기준 식물정보 받아오기
-  useEffect(() => {
-    axios({
-      method: "get",
-      url: "http://localhost:8080/api/map",
-      data: {
-        lat: props.lat,
-        lng: props.lng,
-      },
-    })
-      .then((res) => {
-        const tmpMarkers = currMarkers;
-        tmpMarkers.concat(res.data);
+  // // 드래그 했을 때 중앙 기준 식물정보 받아오기
+  // useEffect(() => {
+  //   axios({
+  //     method: "get",
+  //     url: "http://localhost:8080/api/map",
+  //     data: {
+  //       lat: props.lat,
+  //       lng: props.lng,
+  //     },
+  //   })
+  //     .then((res) => {
+  //       const tmpMarkers = currMarkers;
+  //       tmpMarkers.concat(res.data);
 
-        setCurrMarkers(tmpMarkers);
-      })
-      .catch((err) => console.log(err));
-  }, [dragedCenter]);
+  //       setCurrMarkers(tmpMarkers);
+  //     })
+  //     .catch((err) => console.log(err));
+  // }, [dragedCenter]);
 
   // 네이버 맵 생성, 맵 관련 각종 이벤트리스너, 로직
   useEffect(() => {
@@ -53,7 +53,7 @@ function NaverMap(props: any) {
     // 지도 옵션
     const mapOptions: naver.maps.MapOptions = {
       center: location,
-      zoom: 16,
+      zoom: 17,
     };
 
     // 지도 생성
@@ -114,6 +114,16 @@ function NaverMap(props: any) {
       const lat = map.getCenter().x;
       const lng = map.getCenter().y;
       setDragedCenter({ lat: lat, lng: lng });
+      axios({
+        method: "get",
+        url: "https://naveropenapi.apigw.ntruss.com/map-reversegeocode/v2/gc",
+        headers: {
+          "X-NCP-APIGW-API-KEY-ID": "6s70rnjtot",
+          "X-NCP-APIGW-API-KEY": "uDvd8ChhbkZbYjXX1z7y88hd3bZEiLEzYtN8kiiq",
+        },
+      })
+        .then((res) => console.log(res.data))
+        .catch((err) => console.log(err));
     });
 
     const updateMarkers = (
