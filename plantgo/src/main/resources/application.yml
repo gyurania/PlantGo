@@ -20,7 +20,7 @@ spring:
             clientId: rOMZbZsfVQ3G0SlFYn7g
             client-secret: _UXmsitDL2
             clientAuthenticationMethod: post
-            redirect-uri: "http://localhost:8080/login/oauth2/code/NAVER"
+            redirect-uri: "http://j7a703.p.ssafy.io:8080/login/oauth2/code/NAVER"
             authorization-grant-type: authorization_code
             scope:
               - nickname
@@ -30,7 +30,7 @@ spring:
           google:
             clientId: 416742949716-pao515mh3u0itqv4givjfp1jg9e16rbv.apps.googleusercontent.com
             clientSecret: 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
-            redirect-uri: "http://localhost:8080/login/oauth2/code/GOOGLE"
+            redirect-uri: "http://j7a703.p.ssafy.io:8080/login/oauth2/code/GOOGLE"
             scope:
               - email
               - profile
@@ -39,7 +39,7 @@ spring:
             clientSecret: YqeQLgtC3GvwHwF5LVg8BPqj1Jq9hitQ
             clientAuthenticationMethod: post
             authorizationGrantType: authorization_code
-            redirectUri: "http://localhost:8080/login/oauth2/code/KAKAO"
+            redirectUri: "http://j7a703.p.ssafy.io:8080/login/oauth2/code/KAKAO"
             scope:
               - profile_nickname
               - profile_image
@@ -72,8 +72,8 @@ jwt.secret: '8sknjlO3NPTBqo319DHLNqsQAfRJEdKsETOds'
 app:
   auth:
     tokenSecret: 926D96C90030DD58429D2751AC1BDBBC
-    tokenExpiry: 1800000
-    refreshTokenExpiry: 604800000
+    tokenExpiry: 18000000
+    refreshTokenExpiry: 6048000000
   oauth2:
     authorizedRedirectUris:
       - http://localhost:3000/oauth/redirect
