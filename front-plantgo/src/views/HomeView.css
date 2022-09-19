@@ -13,14 +13,24 @@
     text-transform: lowercase;
 
     color: #000000;
+    z-index: 10;
 }
 
 .map {
     z-index: -1;
 }
 
-.anima {
+.plus-icon {
     position: absolute;
-    top: 15px;
-    right: 20px;
+    top: 50px;
+    left: 20px;
+    z-index: 10;
+}
+
+.over-map {
+    z-index: 10;
+}
+
+.tmp-img {
+    z-index: 20
 }
