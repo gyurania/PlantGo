@@ -3,7 +3,9 @@ import KakaoLogin from "../components/Kakao";
 
 function Login() {
   return (
-    <KakaoLogin/>
+    <div>
+      <KakaoLogin />
+    </div>
   );
 }
 
