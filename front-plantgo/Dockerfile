@@ -9,7 +9,7 @@ COPY front-plantgo/package.json /usr/src/app/package.json
 RUN npm install --silent
 # RUN npm install react-scripts@3.4.1 -g --silent
 
-COPY . /usr/src/app/front-plantgo
+COPY front-plantgo/. /usr/src/app
 RUN npm run build
 
 FROM nginx:latest
