@@ -9,9 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class UserResponseDto {
-
-    Long userSeq;
-    String username;
-    String email;
+public class PhotocardUpdateRequest {
+    private String memo;
 }
