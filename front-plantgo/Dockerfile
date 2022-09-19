@@ -7,7 +7,7 @@ ENV PATH /usr/src/app/node_modules/.bin:$PATH
 CMD ["ls", "-al"]
 
 # COPY <복사할 파일 경로> <이미지에서 파일이 위치할 경로>
-COPY package.json /usr/src/app/package.json
+COPY front-plantgo/package.json /usr/src/app/package.json
 CMD ["ls", "-al"]
 
 RUN npm install --silent
