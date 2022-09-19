@@ -24,9 +24,9 @@ public class UserController {
                 (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         System.out.println("principal.getUsername() = " + principal.getUsername());
         System.out.println("principal.getUsername() = " + principal.getPassword());
-        UserResponseDto user = userService.getUser(principal.getUsername());
+        UserResponseDto userdto = userService.getUser(principal.getUsername());
 
-        return ApiResponse.success("user", user);
+        return ApiResponse.success("user", userdto);
     }
 
 
