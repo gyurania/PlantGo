@@ -4,8 +4,8 @@ import spring from "../api/spring";
 import Bearer from "../components/bearer";
 
 function PlantList() {
-  let plantList = ''
-  let userSeq = ''
+  let plantList:any = ''
+  let userSeq:string = ''
   useEffect(() => {
     function getUserInfo() {
       const loginToken = sessionStorage.getItem('loginToken')
