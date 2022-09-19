@@ -69,7 +69,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
 //                .antMatchers("/", "/**","/plants/**", "/photocard/**").permitAll()
-                .antMatchers("/api/**").hasAnyAuthority(RoleType.USER.getCode())
+//                .antMatchers("/api/**").hasAnyAuthority(RoleType.USER.getCode())
+                .antMatchers("/api/**").permitAll()
                 .antMatchers("/api/**/admin/**").hasAnyAuthority(RoleType.ADMIN.getCode())
 
 
