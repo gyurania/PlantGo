@@ -1,6 +1,5 @@
-
-
 spring:
+  profiles.active: local
   datasource:
     url: jdbc:mysql://54.180.156.173:3306/plantgo
     username: 'plantgo'
