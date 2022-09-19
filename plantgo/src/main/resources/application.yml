@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/plantgo
-    username: 'root'
-    password: 'Qoguswnd201!'
+    url: jdbc:mysql://54.180.156.173:3306/plantgo
+    username: 'plantgo'
+    password: 'a703pg7'
 
   jpa:
     show-sql: true
@@ -20,7 +20,7 @@ spring:
             clientId: rOMZbZsfVQ3G0SlFYn7g
             client-secret: _UXmsitDL2
             clientAuthenticationMethod: post
-            redirect-uri: "http://localhost:8080/login/oauth2/code/NAVER"
+            redirect-uri: "http://j7a703.p.ssafy.io:8080/login/oauth2/code/NAVER"
             authorization-grant-type: authorization_code
             scope:
               - nickname
@@ -30,7 +30,7 @@ spring:
           google:
             clientId: 416742949716-pao515mh3u0itqv4givjfp1jg9e16rbv.apps.googleusercontent.com
             clientSecret: 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
-            redirect-uri: "http://localhost:8080/login/oauth2/code/GOOGLE"
+            redirect-uri: "http://j7a703.p.ssafy.io:8080/login/oauth2/code/GOOGLE"
             scope:
               - email
               - profile
@@ -39,7 +39,7 @@ spring:
             clientSecret: YqeQLgtC3GvwHwF5LVg8BPqj1Jq9hitQ
             clientAuthenticationMethod: post
             authorizationGrantType: authorization_code
-            redirectUri: "http://localhost:8080/login/oauth2/code/KAKAO"
+            redirectUri: "http://j7a703.p.ssafy.io:8080/login/oauth2/code/KAKAO"
             scope:
               - profile_nickname
               - profile_image
