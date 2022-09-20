@@ -116,6 +116,7 @@ public class PhotocardServiceImpl implements PhotocardService {
                 .longitude(photocardRequest.getLongitude())
                 .user(User.builder().userSeq(photocardRequest.getUserSeq()).build())
                 .photoUrl(photoUrl)
+                .area(photocardRequest.getArea())
                 .plantId(plant.getPlantId())
                 .build();
         photocardRepository.save(photocard);
