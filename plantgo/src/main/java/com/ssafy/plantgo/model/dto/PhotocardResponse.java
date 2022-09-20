@@ -37,4 +37,7 @@ public class PhotocardResponse {
 	@ApiModelProperty(name = "식물도감 아이디")
 	private int plantId;
 
+	@ApiModelProperty(name = "구획")
+	private String area;
+
 }

@@ -12,5 +12,6 @@ public class PhotocardRequest {
     private double latitude;
     private double longitude;
     private int plantId;
+    private String area;
 
 }
