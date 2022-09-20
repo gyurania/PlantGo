@@ -18,6 +18,7 @@ FROM nginx:latest
 
 RUN rm -rf /etc/nginx/conf.d
 # COPY conf /etc/nginx
+COPY ./sites-available/default /etc/nginx/conf.d
 
 COPY --from=builder /usr/src/app/build /usr/share/nginx/html
 
