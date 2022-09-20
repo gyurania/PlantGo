@@ -42,6 +42,9 @@ public class PhotoCard {
 	@Column(name = "plant_id", columnDefinition = "INT", nullable = false)
 	private int plantId;
 
+	@Column(name = "area")
+	private String area;
+
 	// Foreign key 회원아이디
 	@ManyToOne
 	@JoinColumn(name = "userSeq")
