@@ -150,7 +150,7 @@ public class PhotocardServiceImpl implements PhotocardService {
 
     @Override
     public PhotocardListResponse getPhotocards(User user) {
-        Optional<List<PhotoCard>> photocardList = photocardRepository.findByUser(user);
+        List<PhotoCard> photocardList = photocardRepository.findByUserSeq(user.getUserSeq());
         PhotocardListResponse response = new PhotocardListResponse(photocardList);
         return response;
     }
