@@ -103,6 +103,7 @@ function PlantList() {
       console.error(err)
     })
   }, []);
+  
   return (
     <div>
       <h1>{JSON.stringify(plantList)}</h1>
