@@ -41,7 +41,7 @@ public class PhotocardController {
 
 	/** 해당 유저의 모든 포토카드 가져오기 */
 	@GetMapping
-	public ResponseEntity<PhotocardListResponse> getPhotocards() {
+	public ResponseEntity<PhotocardListResponse> getAllPhotocardsByUser() {
 		org.springframework.security.core.userdetails.User principal =
 				(org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		User user = userService.getUserEntity(principal.getUsername());

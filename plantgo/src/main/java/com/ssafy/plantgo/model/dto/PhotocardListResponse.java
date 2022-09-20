@@ -19,5 +19,5 @@ import java.util.Optional;
 public class PhotocardListResponse {
 
     @ApiModelProperty("List")
-    private Optional<List<PhotoCard>> photocardList;
+    Optional<List<PhotoCard>> photocardList = Optional.empty();
 }
