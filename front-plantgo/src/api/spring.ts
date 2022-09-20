@@ -1,7 +1,7 @@
 const HOST = 'http://j7a703.p.ssafy.io:8080/'
 
-const PHOTOCARD = 'photocard/'
-const PLANT = 'plants/'
+const PHOTOCARD = 'api/photocard/'
+const PLANT = 'api/plants/'
 const USER = 'api/v1/users/'
 
 export default {
