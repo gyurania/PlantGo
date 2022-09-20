@@ -13,5 +13,6 @@ import java.util.Optional;
 public interface PhotocardRepository extends JpaRepository<PhotoCard, Integer> {
     Optional<List<PhotoCard>> findByUser(User user);
 
+    List<PhotoCard> findByUserSeq(Long userSeq);
 
 }
