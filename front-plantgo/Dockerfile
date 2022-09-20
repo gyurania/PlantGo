@@ -17,7 +17,7 @@ FROM nginx:latest
 # COPY --from=build-stage /var/jenkins_home/workspace/deploytest/testproject_react/build /usr/share/nginx/html
 
 RUN rm -rf /etc/nginx/conf.d
-# COPY conf /etc/nginx
+COPY conf /etc/nginx
 
 COPY --from=builder /usr/src/app/build /usr/share/nginx/html
 
