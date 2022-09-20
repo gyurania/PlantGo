@@ -15,6 +15,6 @@ public class SampleController {
     @GetMapping("/test")
     public String sample() {
 
-        return "hello123123123123123123";
+        return "헬로우우";
     }
 }
