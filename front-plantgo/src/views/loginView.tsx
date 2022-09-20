@@ -1,7 +1,7 @@
 import React from "react";
-import GoogleLogin from "../components/google";
-import NaverLogin from "../components/naver";
-import KakaoLogin from "../components/kakao";
+import GoogleLogin from "../components/Google";
+import NaverLogin from "../components/Naver";
+import KakaoLogin from "../components/Kakao";
 
 function Login() {
   return (
