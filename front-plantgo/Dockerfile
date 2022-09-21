@@ -17,7 +17,7 @@ COPY ${JAR_FILE} ./
 RUN npm install --silent
 # RUN npm install react-scripts@3.4.1 -g --silent
 # COPY front-plantgo/. /usr/src/app
-COPY /front01/front-plantgod .
+COPY /front01/front-plantgo .
 RUN npm run build
 
 # Nginx
