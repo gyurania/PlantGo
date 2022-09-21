@@ -25,11 +25,19 @@ RUN npm run build
 # Nginx
 FROM nginx:latest
 
-RUN rm -rf /etc/nginx/conf.d
+# RUN rm -rf /etc/nginx/conf.d
 # COPY conf /etc/nginx
-COPY ./sites-available/default /etc/nginx/conf.d
+# COPY ./sites-available/default /etc/nginx/conf.d
 
-COPY --from=builder /usr/src/app/build /usr/share/nginx/html
+# COPY --from=builder /usr/src/app/build /usr/share/nginx/html
+
+COPY ./nginx.conf /etc/nginx/nginx.conf
+
+## Remove default nginx index page
+RUN rm -rf /usr/share/nginx/html/*
+
+# Copy from the stahg 1
+COPY --from=builder /front-plantgo/build /usr/share/nginx/html
 
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
