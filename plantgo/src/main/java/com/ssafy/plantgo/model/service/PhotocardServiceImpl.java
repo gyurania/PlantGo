@@ -5,6 +5,7 @@ import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.ssafy.plantgo.model.dto.*;
 import com.ssafy.plantgo.model.entity.Plant;
 import com.ssafy.plantgo.model.entity.User;
+import com.ssafy.plantgo.model.repository.MapRepository;
 import com.ssafy.plantgo.model.repository.PlantRepository;
 import lombok.RequiredArgsConstructor;
 import org.apache.http.HttpEntity;
@@ -37,6 +38,7 @@ public class PhotocardServiceImpl implements PhotocardService {
     private final PhotocardRepository photocardRepository;
     private final PlantRepository plantRepository;
     private final ModelMapper modelMapper;
+    private final MapRepository mapRepository;
 
     private static final String PlantNetApi = "https://my-api.plantnet.org/v2/identify/all?api-key=2b10gA30OhZUKxTfs01xa0Tgh";
     @Value("${cloud.aws.s3.bucket}")
@@ -156,10 +158,12 @@ public class PhotocardServiceImpl implements PhotocardService {
     }
 
     @Override
-    public Optional<PhotoCard> getPhotocardbyID(int photocard_id) {
-        Optional<PhotoCard> photocard = photocardRepository.findById(photocard_id);
-        return photocard;
+    public MapResponse getPhotocardsByArea(String area) {
+        Optional<List<PhotoCard>> photocardList = mapRepository.findByArea(area);
+        MapResponse response = new MapResponse(photocardList);
+        return response;
     }
+
 
 
 }
