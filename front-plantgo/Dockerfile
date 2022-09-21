@@ -7,7 +7,7 @@ WORKDIR /var/jenkins_home/workspace/front01/front-plantgo
 
 # COPY <복사할 파일 경로> <이미지에서 파일이 위치할 경로>
 # COPY front-plantgo/package.json /usr/src/app/package.json
-COPY package.json ./
+COPY ./package.json ./
 RUN npm install --silent
 # RUN npm install react-scripts@3.4.1 -g --silent
 # COPY front-plantgo/. /usr/src/app
