@@ -1,20 +1,21 @@
 FROM node:16.16.0 as builder
 
-RUN mkdir /usr/src/app
-WORKDIR /usr/src/app
-ENV PATH /usr/src/app/node_modules/.bin:$PATH
+# RUN mkdir /usr/src/app
+# WORKDIR /usr/src/app
+WORKDIR /var/jenkins_home/workspace/front01/front-plantgo
+# ENV PATH /usr/src/app/node_modules/.bin:$PATH
 
 # COPY <복사할 파일 경로> <이미지에서 파일이 위치할 경로>
-COPY front-plantgo/package.json /usr/src/app/package.json
+# COPY front-plantgo/package.json /usr/src/app/package.json
+COPY package.json ./
 RUN npm install --silent
 # RUN npm install react-scripts@3.4.1 -g --silent
-
-COPY front-plantgo/. /usr/src/app
+# COPY front-plantgo/. /usr/src/app
+COPY . .
 RUN npm run build
 
+# Nginx
 FROM nginx:latest
-
-# COPY --from=build-stage /var/jenkins_home/workspace/deploytest/testproject_react/build /usr/share/nginx/html
 
 RUN rm -rf /etc/nginx/conf.d
 # COPY conf /etc/nginx
