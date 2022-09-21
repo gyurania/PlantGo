@@ -39,7 +39,7 @@ public class PhotocardController {
 	}
 
 	/** area이름으로 포토카드 가져오기 */
-	@PostMapping("")
+	@PostMapping("/map")
 	public ResponseEntity<MapResponse> getPhotocardsByArea(@RequestPart MapRequest mapRequest) {
 		MapResponse response = photocardService.getPhotocardsByArea(mapRequest.getArea());
 		if(response==null)
