@@ -11,6 +11,6 @@ import lombok.Data;
 @AllArgsConstructor
 public class MapRequest {
 
-   String area;
+   private String area;
 
 }
