@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
-import spring from "../api/spring";
 
 function NaverMap(props: any) {
   const mapElement = useRef(null);
@@ -114,16 +113,6 @@ function NaverMap(props: any) {
       const lat = map.getCenter().x;
       const lng = map.getCenter().y;
       setDragedCenter({ lat: lat, lng: lng });
-      axios({
-        method: "get",
-        url: "https://naveropenapi.apigw.ntruss.com/map-reversegeocode/v2/gc",
-        headers: {
-          "X-NCP-APIGW-API-KEY-ID": "6s70rnjtot",
-          "X-NCP-APIGW-API-KEY": "uDvd8ChhbkZbYjXX1z7y88hd3bZEiLEzYtN8kiiq",
-        },
-      })
-        .then((res) => console.log(res.data))
-        .catch((err) => console.log(err));
     });
 
     const updateMarkers = (
