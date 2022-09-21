@@ -31,10 +31,10 @@ FROM nginx:latest
 
 # COPY --from=builder /usr/src/app/build /usr/share/nginx/html
 
-COPY ./nginx.conf /etc/nginx/nginx.conf
+# COPY ./nginx.conf /etc/nginx/nginx.conf
 
-## Remove default nginx index page
-RUN rm -rf /usr/share/nginx/html/*
+# ## Remove default nginx index page
+# RUN rm -rf /usr/share/nginx/html/*
 
 # Copy from the stahg 1
 COPY --from=builder /front-plantgo/build /usr/share/nginx/html
