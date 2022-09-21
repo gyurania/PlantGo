@@ -25,7 +25,7 @@ class PlantApiUtilTest {
     public void insertPlant(){
         PlantApiUtil plantApiUtil = new PlantApiUtil(plantRepository);
 
-        for(int i=1; i<=10; i++){
+        for(int i=41; i<=50; i++){
             plantApiUtil.insertPlant(i);
 
         }
