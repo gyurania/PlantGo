@@ -11,11 +11,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Data
-@ApiModel("MapPhotocardList")
+@ApiModel("PhotocardList")
 @Builder
 @AllArgsConstructor
 public class MapResponse {
 
-    @ApiModelProperty("MapPhotocardList")
+    @ApiModelProperty("PhotocardList")
     private Optional<List<PhotoCard>> mapPhotocardList;
 }
