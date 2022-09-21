@@ -16,6 +16,6 @@ public interface PhotocardService {
 
 	PhotocardResponse updatePhotocard(PhotocardUpdateRequest photocardUpdateRequest, int photocard_id);
 	PhotocardListResponse getPhotocards(User user);
-	Optional<PhotoCard> getPhotocardbyID(int photocard_id);
+	MapResponse getPhotocardsByArea(String area);
 
 }
