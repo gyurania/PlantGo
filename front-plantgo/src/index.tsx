@@ -8,6 +8,7 @@ import axios from 'axios';
 import SuccessLogin from './components/successLogin';
 import WebcamCapture from './views/cameraView';
 import PlantList from './views/plantsListView';
+import 'bootstrap/dist/css/bootstrap.css';
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
