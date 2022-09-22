@@ -17,5 +17,5 @@ COPY front-plantgo/nginx.conf /etc/nginx/nginx.conf
 RUN rm -rf /usr/share/nginx/html/*
 COPY --from=builder /var/jenkins_home/workspace/front01/front-plantgo/build /usr/share/nginx/html
 
-EXPOSE 80
+EXPOSE 3000
 CMD ["nginx", "-g", "daemon off;"]
