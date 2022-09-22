@@ -24,6 +24,5 @@ COPY --from=build-stage ./app/build /app
 
 # 도커 컨테이너 외부에 노출할 포트 지정
 EXPOSE 80
-
 # 컨테이너 실행 시 자동으로 실행할 명령어
 CMD ["nginx", "-g", "daemon off;"]
