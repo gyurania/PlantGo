@@ -1,13 +1,16 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./HomeView.css";
 
 import NaverMap from "../components/NaverMap";
 
-function HomeView() {
+function HomeView({}) {
   // if (!sessionStorage.getItem('loginToken')) {
   //   window.location.replace("/login")
   // }
+
+  const navigate = useNavigate();
 
   const [latitude, setLatitude] = useState(37.5656);
   const [longitude, setLongitude] = useState(126.9769);
@@ -45,13 +48,18 @@ function HomeView() {
   //   setIsRenewed((isRenewed + 1) % 2)
   // }
 
+  const goCamera = () => {
+    navigate("/camera");
+  };
+
   return (
     <div>
       <div className="over-map">
         <h2 className="title">Plant Go!</h2>
         <p className="plus-icon">Plus Button</p>
-        <p className="plus-icon">
-          Renew Button
+        <p className="plus-icon">Renew Button</p>
+        <p className="camera-icon" onClick={goCamera}>
+          Camera Icon
         </p>
       </div>
       <NaverMap
