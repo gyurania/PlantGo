@@ -1,28 +1,37 @@
-FROM node:16.16.0 as builder
+FROM node:lts-alpine as build-stage
 
+# 명령어가 실행될 WORKDIR 설정
 WORKDIR /app
 
-# COPY <복사할 파일 경로> <이미지에서 파일이 위치할 경로>
+# 패키지 파일 WORKDIR로 복사
 COPY package*.json ./
-RUN npm install --silent
 
+# 의존성 전체 설치(실서비스 배포 시, --production 옵션 추가)
+RUN npm install
+
+# 모든 파일들을 WORKDIR로 복사
 COPY . .
+
+# 프로젝트 빌드
 RUN npm run build
 
-# Nginx
-FROM nginx:latest
+# 이미지 사용(nginx)
+FROM nginx:stable-alpine as production-stage
+
+# app 디렉토리 생성
 RUN mkdir /app
 
+# nginx의 default.conf를 삭제
 RUN rm /etc/nginx/conf.d/default.conf
 
-COPY ./nginx.conf /etc/nginx/nginx.conf
+# HOST PC의 nginx.conf를 우측의 경로로 복사
+COPY ./nginx.conf /etc/nginx/conf.d
 
-## Remove default nginx index page
-# RUN pwd
-# RUN rm -rf /usr/share/nginx/html/*
-# RUN pwd
-# COPY --from=builder ./app/build /usr/share/nginx/html
-COPY --from=builder ./app/build /app
+# 빌드한 바이너리를 실행할 이미지로 전달
+COPY --from=build-stage ./app/dist /app
 
+# 도커 컨테이너 외부에 노출할 포트 지정
 EXPOSE 80
+
+# 컨테이너 실행 시 자동으로 실행할 명령어
 CMD ["nginx", "-g", "daemon off;"]
