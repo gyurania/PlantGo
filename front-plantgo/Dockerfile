@@ -10,7 +10,7 @@ COPY . .
 RUN npm run build
 
 # Nginx
-FROM nginx:latest as builder
+FROM nginx:latest
 COPY nginx.conf /etc/nginx/nginx.conf
 
 ## Remove default nginx index page
