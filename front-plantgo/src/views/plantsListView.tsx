@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import spring from "../api/spring";
-
+import TopNavBar from "../components/topNavBar";
+import DownNavBar from "../components/downNavBar";
 function PlantList() {
 
   // useState
@@ -104,9 +105,16 @@ function PlantList() {
     })
   }, []);
   
+  
   return (
-    <div>
-      <h1>{JSON.stringify(plantList)}</h1>
+    <div style={{
+      width: 360,
+      height: 800
+      }}>
+      <TopNavBar/>
+      <br />
+      <h1>{JSON.stringify(plantList[1])}</h1>
+      <DownNavBar/>
     </div>
   )
 };
