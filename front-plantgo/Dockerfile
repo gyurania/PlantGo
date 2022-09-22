@@ -3,7 +3,7 @@ FROM node:16.16.0 as builder
 WORKDIR /app
 
 # COPY <복사할 파일 경로> <이미지에서 파일이 위치할 경로>
-COPY package.json ./
+COPY package*.json ./
 RUN npm install --silent
 
 COPY . .
