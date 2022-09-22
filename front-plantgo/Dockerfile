@@ -6,7 +6,7 @@ WORKDIR /var/jenkins_home/workspace/front01/front-plantgo
 COPY package.json ./
 RUN npm install --silent
 
-COPY front-plantgo .
+COPY . .
 RUN npm run build
 
 # Nginx
