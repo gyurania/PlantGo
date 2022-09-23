@@ -29,7 +29,6 @@ public class PhotocardController {
 	public ResponseEntity<PhotocardResponse> photocardRegist(@RequestPart PhotocardRequest photocardRequest, @RequestPart MultipartFile img) {
 		try {
 			String url = photocardService.upload(img);
-			log.info("[Controller: photocardRegist] imgUrl : {}", url);
 			PhotocardResponse photocardResponse = photocardService.registPhotocard(photocardRequest, img);
 			return ResponseEntity.ok(photocardResponse);
 		} catch (IOException e) {
@@ -41,10 +40,7 @@ public class PhotocardController {
 	/** area이름으로 포토카드 가져오기 */
 	@PostMapping("/map/{area}")
 	public ResponseEntity<MapResponse> getPhotocardsByArea(@PathVariable String area) {
-		System.out.println(area);
 		MapResponse response = photocardService.getPhotocardsByArea(area);
-		if(response==null)
-			return ResponseEntity.ok(null);
 		return ResponseEntity.ok(response);
 	}
 
@@ -52,19 +48,13 @@ public class PhotocardController {
 	/** 해당 유저의 모든 포토카드 가져오기 */
 	@GetMapping
 	public ResponseEntity<PhotocardListResponse> getAllPhotocardsByUser() {
-		org.springframework.security.core.userdetails.User principal =
-				(org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		User user = userService.getUserEntity(principal.getUsername());
-		PhotocardListResponse response = photocardService.getPhotocards(user);
-		if(response==null)
-			return ResponseEntity.ok(null);
+		PhotocardListResponse response = photocardService.getPhotocards(userService.getUserEntity());
 		return ResponseEntity.ok(response);
 	}
 
 	/** 포토카드의 메모 수정 */
 	@PostMapping("/{photocard_id}")
 	public ResponseEntity<PhotocardResponse> updateMemo(@RequestBody PhotocardUpdateRequest photocardUpdateRequest, @PathVariable int photocard_id) {
-
 		PhotocardResponse photocardResponse = photocardService.updatePhotocard(photocardUpdateRequest, photocard_id);
 		return ResponseEntity.ok(photocardResponse);
 	}
