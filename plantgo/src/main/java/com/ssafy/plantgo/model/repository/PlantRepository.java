@@ -20,4 +20,6 @@ public interface PlantRepository extends JpaRepository<Plant, Integer> {
 
     @Query(value = "SELECT * FROM plant order by RAND() limit 1",nativeQuery = true)
     public List<Plant> findAll();
+
+    Plant findByPlantId(int plant_id);
 }
