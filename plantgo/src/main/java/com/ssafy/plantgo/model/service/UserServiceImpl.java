@@ -22,38 +22,39 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class UserServiceImpl implements UserService {
 
-    private final UserRepository userRepository;
+	private final UserRepository userRepository;
 
-    private final RankRepository rankRepository;
-    private final ModelMapper modelMapper;
+	private final RankRepository rankRepository;
+	private final ModelMapper modelMapper;
 
-    public UserServiceImpl(UserRepository userRepository, RankRepository rankRepository, ModelMapper modelMapper) {
-        this.userRepository = userRepository;
-        this.rankRepository = rankRepository;
-        this.modelMapper = modelMapper;
-    }
+	public UserServiceImpl(UserRepository userRepository, RankRepository rankRepository, ModelMapper modelMapper) {
+		this.userRepository = userRepository;
+		this.rankRepository = rankRepository;
+		this.modelMapper = modelMapper;
+	}
 
-    @Override
-    public UserResponseDto getUser() {
-        org.springframework.security.core.userdetails.User principal =
-                (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user = userRepository.findByUserId(principal.getUsername());
-        UserResponseDto userresponse = modelMapper.map(user, UserResponseDto.class);
-        return userresponse;
-    }
+	@Override
+	public UserResponseDto getUser() {
+		org.springframework.security.core.userdetails.User principal = (org.springframework.security.core.userdetails.User) SecurityContextHolder
+				.getContext().getAuthentication().getPrincipal();
+		User user = userRepository.findByUserId(principal.getUsername());
+		UserResponseDto userresponse = modelMapper.map(user, UserResponseDto.class);
+		return userresponse;
+	}
 
-    @Override
-    public User getUserEntity() {
-        org.springframework.security.core.userdetails.User principal =
-                (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user = userRepository.findByUserId(principal.getUsername());
-        return user;
-    }
+	@Override
+	public User getUserEntity() {
+		org.springframework.security.core.userdetails.User principal = (org.springframework.security.core.userdetails.User) SecurityContextHolder
+				.getContext().getAuthentication().getPrincipal();
+		User user = userRepository.findByUserId(principal.getUsername());
+		return user;
+	}
 
 	/** Spark에서 처리한 랭킹 DB에서 반환 */
 	@Override
 	public RankResponse getRank() {
-		List<Rank> rankList = rankRepository.findAll();
+		long count = rankRepository.countAll();
+		List<Rank> rankList = rankRepository.findAll(count - 30);
 		List<RankResponseDto> rankResponseList = new LinkedList<>();
 
 		for (Rank rank : rankList) {
@@ -62,7 +63,7 @@ public class UserServiceImpl implements UserService {
 
 			RankResponseDto rankDto = new RankResponseDto(userSeq, rank.getPlantsCollects(), rank.getInsertTime(),
 					userName);
-			
+
 			rankResponseList.add(rankDto);
 		}
 
