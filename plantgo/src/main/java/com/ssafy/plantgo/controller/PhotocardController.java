@@ -40,8 +40,8 @@ public class PhotocardController {
 	}
 
 	/** area이름으로 포토카드 가져오기 */
-	@PostMapping("/map/{area}")
-	@ApiOperation(value="포토카드 등록", notes="img 파일과 userSeq, latitude, longitude, plantId, area 정보 필요")
+	@GetMapping("/map/{area}")
+	@ApiOperation(value="area이름으로 포토카드 가져오기", notes="area이름을 pathvariable로 넘겨주면 됩니다")
 	public ResponseEntity<MapResponse> getPhotocardsByArea(@PathVariable String area) {
 		MapResponse response = photocardService.getPhotocardsByArea(area);
 		return ResponseEntity.ok(response);
