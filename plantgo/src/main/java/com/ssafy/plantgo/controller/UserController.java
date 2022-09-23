@@ -2,7 +2,7 @@ package com.ssafy.plantgo.controller;
 
 import com.ssafy.plantgo.model.common.ApiResponse;
 import com.ssafy.plantgo.model.dto.PhotocardResponse;
-import com.ssafy.plantgo.model.dto.UserRankResponse;
+import com.ssafy.plantgo.model.dto.RankResponse;
 import com.ssafy.plantgo.model.dto.UserResponseDto;
 import com.ssafy.plantgo.model.entity.User;
 import com.ssafy.plantgo.model.service.UserService;
@@ -25,8 +25,11 @@ public class UserController {
     }
 
     @GetMapping("/rank")
-    public ResponseEntity<UserRankResponse> getUserRank() {
-        UserRankResponse rankResponse = userService.getRank();
+    public ResponseEntity<RankResponse> getUserRank() {
+        RankResponse rankResponse = userService.getRank();
+        if(rankResponse==null)
+            return ResponseEntity.ok(null);
+
         return ResponseEntity.ok(rankResponse);
     }
 

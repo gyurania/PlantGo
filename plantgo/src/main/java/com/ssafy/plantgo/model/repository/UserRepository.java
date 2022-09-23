@@ -11,4 +11,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query(value = "select count(*) from user",nativeQuery = true)
     int countUser();
+    
+    // userSeq로 User 반환
+    User findByUserSeq(Long userSeq);
 }
