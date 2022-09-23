@@ -6,9 +6,11 @@ import DownNavBar from "../components/downNavBar";
 function PlantList() {
 
   // useState
-
+  const loadMore = () => setPageNumber(prev => prev+1);
   const [userSeq, setUserSeq] = useState(0);
-  const [plantList, setPlantList] = useState([]);
+  const [plantList, setPlantList] = useState({});
+  const [pageNumber, setPageNumber] = useState(1);
+  const [loading, setLoading] = useState(false);
   const [collectedPlantList, setCollectedPlantList] = useState([])
   const [nonCollectedPlantList, setNonCollectedPlantList] = useState([])
 
@@ -21,7 +23,25 @@ function PlantList() {
   if (!loginToken) {
     window.location.replace('/login')
   }
+      // plantlist 가져오는 함수
+  const fetchPlantList = async () => {
+    axios({
+      method: 'post',
+      url: spring.plants.list(),
+      headers: {
+        'Authorization': `Bearer ${loginToken}`
+      },
+      data: {
+        'page': pageNumber,
+        'userSeq': userSeq
+      }
+    })
+    .then((res) => setPlantList({...plantList, ...res.data.plantDtoList}))
+    .then(() => setLoading(true))
+    .catch((err) => console.error(err))
+  };
 
+  // 곧바로 실행되는 것
   useEffect(() => {
 
     // userSeq 가져오는 함수
@@ -40,28 +60,9 @@ function PlantList() {
     .catch(function (err) {
       console.error(err)
     })
-
-    // plantlist 가져오는 함수
-
-    axios({
-      method: 'post',
-      url: spring.plants.list(),
-      headers: {
-        'Authorization': `Bearer ${loginToken}`
-      },
-      data: {
-        'page': 1,
-        'userSeq': userSeq
-      }
-    })
-    .then(function (res) {
-      console.log(res.data)
-      setPlantList(res.data.plantDtoList)
-    })
-    .catch(function (err) {
-      console.error(err)
-    })
-
+    
+    fetchPlantList()
+    
     // 수집한 식물 리스트 가져오는 함수
 
     axios({
@@ -103,17 +104,16 @@ function PlantList() {
     .catch(function (err) {
       console.error(err)
     })
-  }, []);
+  }, [pageNumber]);
   
   
   return (
     <div style={{
       width: 360,
       height: 800
-      }}>
-      <TopNavBar/>
+      }}> 
       <br />
-      <h1>{JSON.stringify(plantList[1])}</h1>
+      <h1>{JSON.stringify(plantList)}</h1>
       <DownNavBar/>
     </div>
   )

@@ -6,9 +6,9 @@ import "./HomeView.css";
 import NaverMap from "../components/NaverMap";
 
 function HomeView({}) {
-  // if (!sessionStorage.getItem('loginToken')) {
-  //   window.location.replace("/login")
-  // }
+  if (!sessionStorage.getItem("loginToken")) {
+    window.location.replace("/login");
+  }
 
   const navigate = useNavigate();
 
