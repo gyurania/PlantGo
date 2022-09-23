@@ -18,7 +18,7 @@ import java.io.IOException;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/photocard")
+@RequestMapping("/api/photocard")
 public class PhotocardController {
 
 	private final PhotocardService photocardService;
