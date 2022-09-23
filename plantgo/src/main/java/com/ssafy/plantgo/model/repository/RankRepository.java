@@ -11,6 +11,8 @@ import java.util.List;
 @Repository
 public interface RankRepository extends JpaRepository<Rank, Long> {
 
-    @Query(value = "SELECT * FROM userrank order by insert_time desc limit 30",nativeQuery = true)
-    List<Rank> findAll();
+	// 최신 데이터 30명 중 수집한 식물 수가 많은 순서대로 반환
+	@Query(value = "SELECT * FROM userrank order by insert_time DESC, "
+			+ "plants_collects DESC limit 30", nativeQuery = true)
+	List<Rank> findAll();
 }
