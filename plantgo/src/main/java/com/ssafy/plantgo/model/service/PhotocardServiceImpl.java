@@ -55,33 +55,24 @@ public class PhotocardServiceImpl implements PhotocardService {
         String scientificName = "";
         /** 사진으로 식물의 학명 찾아오기 */
 
-//        File file = new File(photoUrl);
-        // 멀티파일을 파일형태로 변환
         File f = null;
         int n;
         f = new File(img.getOriginalFilename());
         try (InputStream in  = img.getInputStream(); OutputStream os = new FileOutputStream(f)){
-            //      。
-            //     byte[] ss = multipartFile.getBytes();  while
             byte[] buffer = new byte[4096];
             while ((n = in.read(buffer,0,4096)) != -1){
                 os.write(buffer,0,n);
             }
-            //
             BufferedReader bufferedReader = new BufferedReader(new FileReader(f));
-            System.out.println(bufferedReader.readLine());
-            //
             bufferedReader.close();
         }catch (IOException e){
             e.printStackTrace();
         }
         File file = new File(f.toURI());
 
-//        File file = new File("C:\\Users\\SSAFY\\Desktop\\zeph.jpg");
         HttpEntity entity = MultipartEntityBuilder.create()
                 .addPart("images", new FileBody(file))
                 .addTextBody("organs", "flower")
-//                .addPart("images", new FileBody(file2)).addTextBody("organs", "leaf")
                 .build();
 
 
@@ -147,6 +138,8 @@ public class PhotocardServiceImpl implements PhotocardService {
         photocard.setMemo(photocardUpdateRequest.getMemo());
         photocardRepository.save(photocard);
         PhotocardResponse photocardResponse = modelMapper.map(photocard, PhotocardResponse.class);
+        photocardResponse.setSch_name(plantRepository.findByPlantId(photocard.getPlantId()).getSchName());
+        photocardResponse.setKor_name(plantRepository.findByPlantId(photocard.getPlantId()).getKorName());
         return photocardResponse;
     }
 
