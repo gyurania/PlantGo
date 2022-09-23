@@ -6,49 +6,46 @@ import Webcam from "react-webcam";
 const videoConstraints = {
   width: 360,
   height: 500,
-  facingMode: "user",
+  facingMode: { exact: "environment" },
 };
 
 const WebcamCapture = () => {
   const webcamRef = useRef(null);
 
   const [imgSrc, setImgSrc] = useState("");
+  const [formImg, setFormImg] = useState();
+  const [position, setPosition] = useState({ lat: 0, lng: 0, area: "" });
 
   const navigate = useNavigate();
 
+  // 처음 랜더링 될 때만 현재 좌표와 행정구역 업데이트
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((pos) => {
+        axios({
+          method: "get",
+          url: `/map-reversegeocode/v2/gc?coords=${pos.coords.longitude},${pos.coords.latitude}&output=json`,
+          headers: {
+            "X-NCP-APIGW-API-KEY-ID": "6s70rnjtot",
+            "X-NCP-APIGW-API-KEY": "uDvd8ChhbkZbYjXX1z7y88hd3bZEiLEzYtN8kiiq",
+          },
+        })
+          .then((res) => {
+            setPosition({
+              lat: pos.coords.latitude,
+              lng: pos.coords.longitude,
+              area: res.data.results[0].region.area2.name,
+            });
+          })
+          .catch((err) => console.log(err));
+      });
+    }
+  }, []);
+
+  // 사진을 찍으면 base64에서 form-data로 바꿔주기
   useEffect(() => {
     if (imgSrc !== "") {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition((position) => {
-          // setLatitude(position.coords.latitude);
-          // setLongitude(position.coords.longitude);
-          axios({
-            method: "get",
-            url: `/map-reversegeocode/v2/gc?coords=${position.coords.longitude},${position.coords.latitude}&output=json`,
-            headers: {
-              "X-NCP-APIGW-API-KEY-ID": "6s70rnjtot",
-              "X-NCP-APIGW-API-KEY": "uDvd8ChhbkZbYjXX1z7y88hd3bZEiLEzYtN8kiiq",
-            },
-          }).then((res) => {
-            console.log(
-              "reverse geocode",
-              res.data.results[0].region.area2.name
-            );
-            navigate("/plantResult", {
-              state: {
-                imgSrc: imgSrc,
-                position: {
-                  lat: position.coords.latitude,
-                  lng: position.coords.longitude,
-                },
-                area: res.data.results[0].region.area2.name,
-              },
-            });
-          });
-        });
-      } else {
-        window.alert("현재 위치를 확인할 수 없습니다ㅠㅠ");
-      }
+      //
     }
   }, [imgSrc]);
 
