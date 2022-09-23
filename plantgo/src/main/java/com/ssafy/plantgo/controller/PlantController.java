@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RequiredArgsConstructor
 @CrossOrigin("*")
-@RequestMapping("/api/plants")
+@RequestMapping("/plants")
 public class PlantController {
 
     private final PlantService plantService;
