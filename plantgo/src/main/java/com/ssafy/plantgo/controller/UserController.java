@@ -20,23 +20,13 @@ public class UserController {
 
     @GetMapping
     public ApiResponse getUser() {
-        System.out.println("hello");
-        System.out.println("SecurityContextHolder.getContext().getAuthentication().getPrincipal() = " + SecurityContextHolder.getContext().getAuthentication().getPrincipal());
-
-        org.springframework.security.core.userdetails.User principal =
-                (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        System.out.println("principal.getUsername() = " + principal.getUsername());
-        System.out.println("principal.getUsername() = " + principal.getPassword());
-        UserResponseDto userdto = userService.getUser(principal.getUsername());
-
+        UserResponseDto userdto = userService.getUser();
         return ApiResponse.success("user", userdto);
     }
 
     @GetMapping("/rank")
     public ResponseEntity<UserRankResponse> getUserRank() {
         UserRankResponse rankResponse = userService.getRank();
-        if(rankResponse==null)
-            return ResponseEntity.ok(null);
         return ResponseEntity.ok(rankResponse);
     }
 

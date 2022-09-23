@@ -6,8 +6,8 @@ import com.ssafy.plantgo.model.entity.User;
 
 public interface UserService {
 
-    UserResponseDto getUser(String id);
-    User getUserEntity(String id);
+    UserResponseDto getUser();
+    User getUserEntity();
 
     UserRankResponse getRank();
 
