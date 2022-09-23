@@ -8,6 +8,7 @@ import com.ssafy.plantgo.model.repository.RankRepository;
 import com.ssafy.plantgo.model.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,15 +30,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserResponseDto getUser(String id) {
-        User user = userRepository.findByUserId(id);
+    public UserResponseDto getUser() {
+        org.springframework.security.core.userdetails.User principal =
+                (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userRepository.findByUserId(principal.getUsername());
         UserResponseDto userresponse = modelMapper.map(user, UserResponseDto.class);
         return userresponse;
     }
 
     @Override
-    public User getUserEntity(String id) {
-        User user = userRepository.findByUserId(id);
+    public User getUserEntity() {
+        org.springframework.security.core.userdetails.User principal =
+                (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userRepository.findByUserId(principal.getUsername());
         return user;
     }
 
