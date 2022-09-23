@@ -47,7 +47,7 @@ public class PhotocardDummyTest {
     @Test
     public void insertDummy() {
         StringBuilder sb = new StringBuilder();
-        for (int tc = 1; tc <= 10; tc++) {
+        for (int tc = 1; tc <= 1000000; tc++) {
 
             /** API URL 초기화 */
             sb.setLength(0);
@@ -105,7 +105,7 @@ public class PhotocardDummyTest {
                 System.out.println("userSeq랜덤추출");
                 int numberOfUser = userRepository.countUser();
                 System.out.println("현재유저몇명? " + numberOfUser);
-                Long userSeq = (long)((int) ((Math.random() * 8) + 1));
+                Long userSeq = (long)((int) ((Math.random() * 42) + 9));
 
                 if(User.builder().userSeq(userSeq).build()==null)
                     continue;
