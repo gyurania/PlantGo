@@ -21,7 +21,9 @@ function NaverMap(props: any) {
     console.log("반복설정");
     if (navigator.geolocation) {
       console.log("셋쨰");
+      console.log("뭐임 대체");
       navigator.geolocation.getCurrentPosition((pos) => {
+        console.log("왜 여기는 안 와줘..?");
         const lat = pos.coords.latitude;
         const lng = pos.coords.longitude;
         console.log(lat);
