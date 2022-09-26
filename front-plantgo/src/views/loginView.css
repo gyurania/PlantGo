@@ -37,8 +37,7 @@ body,html {
     display: block;
     width: 40px;
     height: 40px;
-    background-color: rgba(255, 255, 255, 0.25);
-    bottom: -100px;
+    bottom: 0;
     border-radius: 50%;
     
     -webkit-animation: square 25s infinite;
@@ -74,7 +73,6 @@ body,html {
     
     animation-duration: 22s;
     
-    background-color: rgba(255, 255, 255, 0.25);
 }
 
 .bg-bubbles li:nth-child(5){
@@ -87,7 +85,6 @@ body,html {
     height: 120px;
     
     animation-delay: 3s;
-    background-color: rgba(255, 255, 255, 0.25);
 }
 
 .bg-bubbles li:nth-child(7){
@@ -114,7 +111,6 @@ body,html {
     
     animation-delay: 2s;
     animation-duration: 40s;
-    background-color: rgba(255, 255, 255, 0.25);
 }
 
 .bg-bubbles li:nth-child(10){
@@ -126,10 +122,10 @@ body,html {
 }
 
 @-webkit-keyframes square {
-  0%   { transform: translateY(0); }
-  100% { transform: translateY(-700px) rotate(600deg); }
+  0%   { transform: translateY(0); background-color: rgba(255, 255, 255, 0.25);}
+  100% { transform: translateY(-700px) rotate(600deg); background-color: rgba(255, 255, 255, 0.25);}
 }
 @keyframes square {
-  0%   { transform: translateY(0); }
-  100% { transform: translateY(-700px) rotate(600deg); }
+  0%   { transform: translateY(0); background-color: rgba(255, 255, 255, 0.25);}
+  100% { transform: translateY(-700px) rotate(600deg); background-color: rgba(255, 255, 255, 0.25);}
 }
