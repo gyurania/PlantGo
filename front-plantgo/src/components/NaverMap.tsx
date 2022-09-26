@@ -62,7 +62,8 @@ function NaverMap(props: any) {
       method: "post",
       url: `https://j7a703.p.ssafy.io/api/photocard/map/${area}`,
       headers: {
-        Authorization: token,
+        Authorization:
+          "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyNDM3OTkyOTQ1Iiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTY2NDE4NjAxMX0.wdtHp36qdKK_uDFzO47HnhxDNhW5GCeI_OU8lhnHlDU",
       },
     })
       .then((res) => {
