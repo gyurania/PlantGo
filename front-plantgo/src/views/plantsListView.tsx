@@ -10,40 +10,10 @@ function PlantList() {
   // useState
   const [userSeq, setUserSeq] = useState(0);
   const [plantList, setPlantList] = useState<any | any[]>([]);
-  const [pageNumber, setPageNumber] = useState<any | any[]>(1)
+  const [pageNumber, setPageNumber] = useState(1)
   const [isLoaded, setIsLoaded] = useState(false);
   // const [collectedPlantList, setCollectedPlantList] = useState([]);
   // const [nonCollectedPlantList, setNonCollectedPlantList] = useState([]);
-
-  // Loading 후 가져오기
-
-  const getMorePlant = () => {
-    setIsLoaded(true);
-    setPageNumber((prev: number) => prev + 1);
-    console.log(pageNumber)
-    fetchPlantList()
-    setIsLoaded(false);
-  }
-
-  // interSection 콜백 함수
-
-  const onIntersect: IntersectionObserverCallback = (
-    [entry],
-    observer
-  ) => {
-    if (entry.isIntersecting && !isLoaded && (pageNumber !== 419)) {
-      observer.unobserve(entry.target);
-      getMorePlant();
-      observer.observe(entry.target);
-    }
-  }
-
-  const { setTarget } = useIntersectionObserver({
-    root: null,
-    rootMargin: '0px',
-    threshold: 1.0,
-    onIntersect,
-  });
 
   // Login key
 
@@ -140,9 +110,12 @@ function PlantList() {
 
   useEffect(() => {
     
-    fetchPlantList()
     // fetchCollected()
     // fetchNotCollected()
+    while (pageNumber !== 419) {
+      fetchPlantList()
+      setPageNumber(prevNumber => prevNumber+1)
+    }
   })
 
   return (
@@ -151,14 +124,9 @@ function PlantList() {
       height: 800
     }}>
       <br />
-      <div>{JSON.stringify(plantList)}</div>
-      <div style={{
-        height: 200,
-        width: 800
-      }} ref={setTarget}
-      >
-        {isLoaded && <h1>Loading..</h1>}
-      </div>
+      <pre>
+        {JSON.stringify(plantList)}
+      </pre>
     </div>
   )
 }
