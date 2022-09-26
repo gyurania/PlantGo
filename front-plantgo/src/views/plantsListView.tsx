@@ -1,14 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import spring from "../api/spring";
-import Card from 'react-bootstrap/Card'
 
 function PlantList() {
 
+  // function
+  const pageEnd = useRef<any>()
+  const loadMore = () => setPageNumber((prev) => prev + 1)
+
   // useState
+  
   const [userSeq, setUserSeq] = useState(0);
-  const [plantList, setPlantList] = useState([]);
-  const [pageNumber, setPageNumber] = useState(1)
+  const [plantList, setPlantList] = useState<any>([]);
+  const [pageNumber, setPageNumber] = useState<number>(1)
   // const [collectedPlantList, setCollectedPlantList] = useState([]);
   // const [nonCollectedPlantList, setNonCollectedPlantList] = useState([]);
 
@@ -22,7 +26,7 @@ function PlantList() {
     window.location.replace('/login')
   }
 
-  const getUserSeq() {
+  const getUserSeq = () => {
     axios({
       method: 'get',
       url: spring.user.getUser(),
@@ -40,7 +44,7 @@ function PlantList() {
   }
   
   // plantlist 가져오는 함수
-  const fetchPlantList:any() {
+  const fetchPlantList = async (pageNumber:number) => {
     axios({
       method: 'post',
       url: spring.plants.list(),
@@ -55,7 +59,7 @@ function PlantList() {
       .then((res) => {
         console.log(res.data)
         console.log(pageNumber)
-        setPlantList(plantList => plantList + res.data.plantDtoList)
+        setPlantList((plantList:any) => [...plantList, ...res.data.plantDtoList])
       })
       .catch((err) => console.error(err))
   };
@@ -102,15 +106,30 @@ function PlantList() {
   //     })
   // };
 
-  // 곧바로 실행되는 것
+  // 곧바로 실행되는 것(최초 1회)
   useEffect(() => {
 
     // userSeq 가져오는 함수
     getUserSeq()
-    fetchPlantList()
+    fetchPlantList(pageNumber)
     // fetchCollected()
     // fetchNotCollected()
   }, [])
+
+  
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries: any) => {
+        if (entries[0].isIntersecting) {
+          loadMore()
+        }
+      }, { threshold: 1 })
+    observer.observe(pageEnd?.current)
+  }, [])
+
+  // pageNumber에 변화 있으면 실행
+  useEffect(() => {
+    fetchPlantList(pageNumber)
+  }, [pageNumber])
 
   return (
     <div style={{
@@ -119,6 +138,7 @@ function PlantList() {
     }}>
       <br/>
       <h4>{JSON.stringify(plantList)}</h4>
+      <div ref={pageEnd}></div>
     </div>
   )
 }
