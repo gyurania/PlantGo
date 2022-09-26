@@ -66,7 +66,7 @@ function HomeView({}) {
   return (
     <div>
       <div className="over-map">
-        <h2 className="title">Plant Go!</h2>
+        <img src="./plantGO_logo_wot_rbg.jpg" alt="logo" />
         <p className="plus-icon">Plus Button</p>
         <p className="plus-icon">Renew Button</p>
         <p className="camera-icon" onClick={goCamera}>
