@@ -158,7 +158,10 @@ function PlantList() {
           imgUrl={plant.imgUrl}
         />
       })};
-      <div ref={setTarget}>{isLoaded && <h1>Loading..</h1>}</div>
+      <button style={{
+        height: 100,
+        width: 1000
+      }} ref={setTarget}>{isLoaded && <h1>Loading..</h1>}</button>
     </div>
   )
 }
