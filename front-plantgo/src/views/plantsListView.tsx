@@ -114,16 +114,9 @@ function PlantList() {
     // fetchCollected()
     // fetchNotCollected()
     while (pageNumber !== 10) {
-      if (!isLoaded) {
-        setIsLoaded(true)
         fetchPlantList()
         setPageNumber(prevNumber => prevNumber + 1)
-        setIsLoaded(false)
       }
-      else {
-        
-      }
-    }
   })
 
   return (
