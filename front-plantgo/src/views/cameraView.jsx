@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Camera from "react-html5-camera-photo";
 import "react-html5-camera-photo/build/css/index.css";
 import axios from "axios";
+import Spinner from '../img/leap.gif';
 
 function App(props) {
   const [imgSrc, setImgSrc] = useState("");
@@ -101,7 +102,8 @@ function App(props) {
   } else {
     return (
       <div>
-        <h1>Loading...</h1>
+        <img src={Spinner} alt="로딩 페이지" width="40%" />
+        <p>식물 정보 가져오는 중..</p>
       </div>
     );
   }
