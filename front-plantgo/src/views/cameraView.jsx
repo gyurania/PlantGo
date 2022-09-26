@@ -3,10 +3,10 @@ import { useNavigate } from "react-router-dom";
 import Camera from "react-html5-camera-photo";
 import "react-html5-camera-photo/build/css/index.css";
 import axios from "axios";
-import Spinner from '../img/leap.gif';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
+import Spinner from "../img/leap.gif";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 function App(props) {
   const [imgSrc, setImgSrc] = useState("");
@@ -26,9 +26,12 @@ function App(props) {
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((pos) => {
+        consoel.log(base_server_url);
         axios({
           method: "get",
-          url: `/map-reversegeocode/v2/gc?coords=${pos.coords.longitude},${pos.coords.latitude}&output=json`,
+          url:
+            base_server_url +
+            `/map-reversegeocode/v2/gc?coords=${pos.coords.longitude},${pos.coords.latitude}&output=json`,
           headers: {
             "X-NCP-APIGW-API-KEY-ID": "6s70rnjtot",
             "X-NCP-APIGW-API-KEY": "uDvd8ChhbkZbYjXX1z7y88hd3bZEiLEzYtN8kiiq",
@@ -105,29 +108,33 @@ function App(props) {
   // React DOM
   if (formImg === null) {
     return (
-      <Container fluid style={{
-        height: "100vh",
-        backgroundSize: "cover"
-      }}>
-      <Camera
-        onTakePhoto={(dataUri) => {
-          handleTakePhoto(dataUri);
+      <Container
+        fluid
+        style={{
+          height: "100vh",
+          backgroundSize: "cover",
         }}
-        idealResolution={{ width: 360, height: 800 }}
-      />
+      >
+        <Camera
+          onTakePhoto={(dataUri) => {
+            handleTakePhoto(dataUri);
+          }}
+          idealResolution={{ width: 360, height: 800 }}
+        />
       </Container>
     );
   } else {
     return (
-      <Container fluid style={{
-        height: "100vh"
-      }}>
-
-      <div class ="row justify-content-center">
-        <img src={Spinner} alt="로딩 페이지" width="30%" />
-        식물 정보 가져오는 중..
-      </div>
-
+      <Container
+        fluid
+        style={{
+          height: "100vh",
+        }}
+      >
+        <div class="row justify-content-center">
+          <img src={Spinner} alt="로딩 페이지" width="30%" />
+          식물 정보 가져오는 중..
+        </div>
       </Container>
     );
   }
