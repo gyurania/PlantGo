@@ -26,7 +26,7 @@ function PlantList() {
   }
   
   // plantlist 가져오는 함수
-  const fetchPlantList = () => {
+  const fetchPlantList = async () => {
     axios({
       method: 'post',
       url: spring.plants.list(),
@@ -40,6 +40,7 @@ function PlantList() {
     })
       .then((res) => {
         console.log(res.data)
+        console.log(pageNumber)
         setPlantList([...plantList, res.data.plantDtoList])
       })
       .catch((err) => console.error(err))
@@ -112,9 +113,16 @@ function PlantList() {
     
     // fetchCollected()
     // fetchNotCollected()
-    while (pageNumber !== 419) {
-      fetchPlantList()
-      setPageNumber(prevNumber => prevNumber+1)
+    while (pageNumber !== 10) {
+      if (!isLoaded) {
+        setIsLoaded(true)
+        fetchPlantList()
+        setPageNumber(prevNumber => prevNumber + 1)
+        setIsLoaded(false)
+      }
+      else {
+        
+      }
     }
   })
 
