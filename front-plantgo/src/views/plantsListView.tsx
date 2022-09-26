@@ -21,9 +21,26 @@ function PlantList() {
   if (!loginToken) {
     window.location.replace('/login')
   }
+
+  const getUserSeq = () => {
+    axios({
+      method: 'get',
+      url: spring.user.getUser(),
+      headers: {
+        'Authorization': `Bearer ${loginToken}`
+      }
+    })
+      .then(function (res) {
+        console.log(res.data.body.user.userSeq);
+        setUserSeq(res.data.body.user.userSeq);
+      })
+      .catch(function (err) {
+        console.error(err)
+      })
+  }
   
   // plantlist 가져오는 함수
-  const fetchPlantList = async () => {
+  const fetchPlantList = () => {
     axios({
       method: 'post',
       url: spring.plants.list(),
@@ -92,20 +109,7 @@ function PlantList() {
 
     // userSeq 가져오는 함수
 
-    axios({
-      method: 'get',
-      url: spring.user.getUser(),
-      headers: {
-        'Authorization': `Bearer ${loginToken}`
-      }
-    })
-      .then(function (res) {
-        console.log(res.data.body.user.userSeq);
-        setUserSeq(res.data.body.user.userSeq);
-      })
-      .catch(function (err) {
-        console.error(err)
-      })
+    getUserSeq()
     
     fetchPlantList()
     // fetchCollected()
