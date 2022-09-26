@@ -12,13 +12,12 @@ import Image from 'react-bootstrap/Image'
 function Login() {
   return (
     <Container fluid style={{
-      backgroundImage: `url(${bgimg})`,
-      //width: 360,
-      height: 800,
-      backgroundSize: "cover"
+        backgroundImage: `url(${bgimg})`,
+        height: "100vh",
+        backgroundSize: "cover"
       }}>
-
-      <Row>
+      <Row style={{height: "15%"}}></Row>
+      <Row >
         <Image src={logo} alt="" className="mx-auto d-block mt-5 mb-3" style={{
           width: 270,
           height: 350,
