@@ -43,7 +43,7 @@ const Ranking = () => {
     console.log(rank.rankList);
   }, [rank]);
 
-  if (rank.rankList === null) {
+  if (rank === null) {
     return (
       <div>
         <h1>기다려!!</h1>
