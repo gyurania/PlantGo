@@ -37,23 +37,23 @@ function HomeView({}) {
     }
   }, [isRenewed]);
 
-  // 3. 2번에서 위치 받아오면 현재 위치
-  useEffect(() => {
-    if (isRenewed) {
-      axios({
-        method: "get",
-        url: "http://j7a703.p.ssafy.io:8080/api/map1",
-        data: {
-          lat: position.lat,
-          lng: position.lng,
-        },
-      })
-        .then((res) => {
-          setNearPlants(res.data);
-        })
-        .catch((err) => console.log(err));
-    }
-  }, [position]);
+  // // 3. 2번에서 위치 받아오면 현재 위치
+  // useEffect(() => {
+  //   if (isRenewed) {
+  //     axios({
+  //       method: "get",
+  //       url: "http://j7a703.p.ssafy.io:8080/api/map1",
+  //       data: {
+  //         lat: position.lat,
+  //         lng: position.lng,
+  //       },
+  //     })
+  //       .then((res) => {
+  //         setNearPlants(res.data);
+  //       })
+  //       .catch((err) => console.log(err));
+  //   }
+  // }, [position]);
 
   // const function = getIsRenewed(isRenewed:Boolean) => {
   //   setIsRenewed((isRenewed + 1) % 2)
