@@ -37,6 +37,8 @@ const Ranking = () => {
     console.log("rank는???");
     console.log(rank);
     console.log(typeof rank);
+    if (rank == null) return;
+    if (rank.rankList == null) return;
     console.log("rankList느느?????");
     console.log(rank.rankList);
   }, [rank]);
