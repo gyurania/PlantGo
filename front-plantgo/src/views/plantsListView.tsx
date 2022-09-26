@@ -160,7 +160,7 @@ function PlantList() {
           style={{ width: '18rem' }}
           className="mb-2"
         >
-          <Card.Header>Header</Card.Header>
+          <Card.Img variant="top" src={item.imgUrl} />
           <Card.Body>
             <Card.Title>{item.korName} Card Title </Card.Title>
           </Card.Body>
