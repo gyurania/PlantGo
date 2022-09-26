@@ -129,9 +129,9 @@
 
 @-webkit-keyframes square {
   0%   { transform: translateY(0); background-color: rgba(118, 186, 153, 0.25);}
-  100% { transform: translateY(-700px) rotate(600deg); background-color: rgba(118, 186, 153, 0.25);}
+  100% { transform: translateY(-1000px) rotate(600deg); background-color: rgba(118, 186, 153, 0.25);}
 }
 @keyframes square {
   0%   { transform: translateY(0); background-color: rgba(118, 186, 153, 0.25);}
-  100% { transform: translateY(-700px) rotate(600deg); background-color: rgba(118, 186, 153, 0.25);}
+  100% { transform: translateY(-1000px) rotate(600deg); background-color: rgba(118, 186, 153, 0.25);}
 }
