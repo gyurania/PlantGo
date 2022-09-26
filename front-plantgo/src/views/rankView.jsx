@@ -1,5 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState, useRef } from "react";
+import Divider from "@mui/material/Divider";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
 import { useNavigate, Link } from "react-router-dom";
 import "./RankView.css";
 
@@ -68,6 +72,7 @@ const Ranking = () => {
             {" "}
             {i + 1}등!! {rank.rankList[i].userName + " / "} 모은 식물의 개수 :{" "}
             {rank.rankList[i].plantsCollects}
+            <Divider />
           </div>
         );
       }
