@@ -36,13 +36,13 @@ const Ranking = () => {
   useEffect(() => {
     console.log("rank는???");
     console.log(rank);
+    console.log(typeof rank);
   }, [rank]);
 
   return (
     <div>
       <div>{JSON.stringify(rank)}</div>
       <h2> 아 몰랑 </h2>
-      <div>{rank.rankList[0]}</div>
     </div>
   );
 };
