@@ -4,6 +4,12 @@ import Divider from "@mui/material/Divider";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
 import { useNavigate, Link } from "react-router-dom";
 import "./RankView.css";
 
@@ -68,12 +74,26 @@ const Ranking = () => {
 
       for (let i = 0; i < rank.rankList.length; i++) {
         result.push(
-          <div className="ranks" key={i}>
-            {" "}
-            {i + 1}등!! {rank.rankList[i].userName + " / "} 모은 식물의 개수 :{" "}
-            {rank.rankList[i].plantsCollects}
-            <Divider />
-          </div>
+          <Card sx={{ minWidth: 275 }}>
+            <CardContent>
+              <Typography
+                sx={{ fontSize: 14 }}
+                color="text.secondary"
+                gutterBottom
+              >
+                Word of the Day
+              </Typography>
+              <Typography variant="h5" component="div">
+                {i + 1} 등!!
+              </Typography>
+              <Typography sx={{ mb: 1.5 }} color="text.secondary"></Typography>
+              <Typography variant="body2">
+                {rank.rankList[i].userName}님이
+                <br />
+                {rank.rankList[i].plantsCollects}개의 식물을 모으셨습니다!!
+              </Typography>
+            </CardContent>
+          </Card>
         );
       }
 
