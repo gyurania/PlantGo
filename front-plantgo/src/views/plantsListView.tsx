@@ -1,18 +1,19 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import axios from "axios";
 import spring from "../api/spring";
+import { useInView } from "react-intersection-observer"
+
 
 function PlantList() {
 
-  // function
-  const pageEnd = useRef<any>()
-  const loadMore = () => setPageNumber((prev) => prev + 1)
 
-  // useState
+  // useState, useRef, useInview
   
   const [userSeq, setUserSeq] = useState(0);
   const [plantList, setPlantList] = useState<any>([]);
-  const [pageNumber, setPageNumber] = useState<number>(1)
+  const [hasNextPage, setHasNextPage] = useState<boolean>(true);
+  const page = useRef<number>(1);
+  const [ref, inView] = useInView();
   // const [collectedPlantList, setCollectedPlantList] = useState([]);
   // const [nonCollectedPlantList, setNonCollectedPlantList] = useState([]);
 
@@ -44,7 +45,7 @@ function PlantList() {
   }
   
   // plantlist 가져오는 함수
-  const fetchPlantList = async (pageNumber:number) => {
+  const fetchPlantList = useCallback(async () => {
     axios({
       method: 'post',
       url: spring.plants.list(),
@@ -52,17 +53,20 @@ function PlantList() {
         'Authorization': `Bearer ${loginToken}`
       },
       data: {
-        'page': pageNumber,
+        'page': page,
         'userSeq': userSeq
       }
     })
       .then((res) => {
         console.log(res.data)
-        console.log(pageNumber)
-        setPlantList((plantList:any) => [...plantList, ...res.data.plantDtoList])
+        setPlantList((plantList: any) => [...plantList, ...res.data.plantDtoList])
+        setHasNextPage(res.data.plantDtoList.length === 10);
+        if (res.data.plantDtoList.length) {
+          page.current += 1;
+        }
       })
       .catch((err) => console.error(err))
-  };
+  }, []);
 
   // const fetchCollected = () => {
   //   axios({
@@ -108,28 +112,17 @@ function PlantList() {
 
   // 곧바로 실행되는 것(최초 1회)
   useEffect(() => {
-
     // userSeq 가져오는 함수
     getUserSeq()
-    fetchPlantList(pageNumber)
-    // fetchCollected()
-    // fetchNotCollected()
-  }, [])
-
-  
-  useEffect(() => {
-    const observer = new IntersectionObserver((entries: any) => {
-        if (entries[0].isIntersecting) {
-          loadMore()
-        }
-      }, { threshold: 1 })
-    observer.observe(pageEnd?.current)
   }, [])
 
   // pageNumber에 변화 있으면 실행
   useEffect(() => {
-    fetchPlantList(pageNumber)
-  }, [pageNumber])
+    console.log(inView, hasNextPage);
+    if (inView && hasNextPage) {
+      fetchPlantList();
+    }
+  }, [fetchPlantList, hasNextPage, inView]);
 
   return (
     <div style={{
@@ -137,9 +130,26 @@ function PlantList() {
       height: 800
     }}>
       <br/>
-      <h4>{JSON.stringify(plantList)}</h4>
-      <div ref={pageEnd}></div>
+      <div style={{ position: 'relative' }}>
+        {plantList?.map((plant: any) => (
+          <div
+            key={plant.plantId}
+            style={{
+              marginBottom: '1rem',
+              border: '1px solid #000',
+              padding: '8px',
+              background: plant.id % 10 === 0 ? 'skyblue' : '',
+            }}
+          >
+            <div>plantId: {plant.plantId}</div>
+            <div>이름: {plant.korNameSn}</div>
+            <img src={ plant.imgUrl } alt="" />
+          </div>
+        ))};
+      </div>
+      <div ref={ref} style={{ position: 'absolute', bottom: '100px' }} />
     </div>
   )
 }
+      
 export default PlantList;
