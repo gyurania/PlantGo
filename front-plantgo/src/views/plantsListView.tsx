@@ -12,8 +12,8 @@ function PlantList() {
   const [plantList, setPlantList] = useState<any | any[]>([]);
   const [pageNumber, setPageNumber] = useState<any | any[]>(1)
   const [isLoaded, setIsLoaded] = useState(false);
-  const [collectedPlantList, setCollectedPlantList] = useState([]);
-  const [nonCollectedPlantList, setNonCollectedPlantList] = useState([]);
+  // const [collectedPlantList, setCollectedPlantList] = useState([]);
+  // const [nonCollectedPlantList, setNonCollectedPlantList] = useState([]);
 
   // Loading 후 가져오기
 
@@ -70,52 +70,52 @@ function PlantList() {
     })
       .then((res) => {
         console.log(res.data)
-        setPlantList([...plantList, res.data.plantDtoList])
+        setPlantList((plantList:any) => plantList+res.data.plantDtoList)
       })
       .catch((err) => console.error(err))
   };
 
-  const fetchCollected = () => {
-    axios({
-      method: 'post',
-      url: spring.plants.collected(),
-      headers: {
-        'Authorization': `Bearer ${loginToken}`
-      },
-      data: {
-        'page': 1,
-        'userSeq': userSeq
-      }
-    })
-      .then(function (res) {
-        console.log(res.data)
-        setCollectedPlantList(res.data.plantDtoList)
-      })
-      .catch(function (err) {
-        console.error(err)
-      })
-  };
+  // const fetchCollected = () => {
+  //   axios({
+  //     method: 'post',
+  //     url: spring.plants.collected(),
+  //     headers: {
+  //       'Authorization': `Bearer ${loginToken}`
+  //     },
+  //     data: {
+  //       'page': 1,
+  //       'userSeq': userSeq
+  //     }
+  //   })
+  //     .then(function (res) {
+  //       console.log(res.data)
+  //       setCollectedPlantList(res.data.plantDtoList)
+  //     })
+  //     .catch(function (err) {
+  //       console.error(err)
+  //     })
+  // };
 
-  const fetchNotCollected = () => {
-    axios({
-      method: 'post',
-      url: spring.plants.noncollected(),
-      headers: {
-        'Authorization': `Bearer ${loginToken}`
-      },
-      data: {
-        'page': 1,
-        'userSeq': userSeq
-      }
-    })
-      .then(function (res) {
-        console.log(res.data)
-        setNonCollectedPlantList(res.data.plantDtoList)
-      })
-      .catch(function (err) {
-        console.error(err)
-      })
-  };
+  // const fetchNotCollected = () => {
+  //   axios({
+  //     method: 'post',
+  //     url: spring.plants.noncollected(),
+  //     headers: {
+  //       'Authorization': `Bearer ${loginToken}`
+  //     },
+  //     data: {
+  //       'page': 1,
+  //       'userSeq': userSeq
+  //     }
+  //   })
+  //     .then(function (res) {
+  //       console.log(res.data)
+  //       setNonCollectedPlantList(res.data.plantDtoList)
+  //     })
+  //     .catch(function (err) {
+  //       console.error(err)
+  //     })
+  // };
 
   // 곧바로 실행되는 것
   useEffect(() => {
@@ -141,8 +141,8 @@ function PlantList() {
   useEffect(() => {
     
     fetchPlantList()
-    fetchCollected()
-    fetchNotCollected()
+    // fetchCollected()
+    // fetchNotCollected()
   })
 
   return (
