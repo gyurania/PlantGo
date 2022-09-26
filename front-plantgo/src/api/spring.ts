@@ -1,4 +1,4 @@
-const HOST = 'http://j7a703.p.ssafy.io:8080/'
+const HOST = 'https://j7a703.p.ssafy.io:8080/'
 
 const PHOTOCARD = 'api/photocard/'
 const PLANT = 'api/plants/'
