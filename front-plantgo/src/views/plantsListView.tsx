@@ -179,7 +179,7 @@ function PlantList() {
                           !loading &&
                           page <= TOTAL_PAGES ? (
                           <div
-                              key={`${plantList.korName}-${i}`}
+                              key={`${plant.korName}-${i}`}
                               ref={setLastElement}
                           >
                               <UserCard data={plant} />
@@ -187,7 +187,7 @@ function PlantList() {
                       ) : (
                           <UserCard
                               data={plant}
-                              key={`${plantList.korName}-${i}`}
+                              key={`${plant.korName}-${i}`}
                           />
                       );
                   })}
