@@ -22,7 +22,7 @@ function PlantList() {
     window.location.replace('/login')
   }
 
-  const getUserSeq = () => {
+  const getUserSeq() {
     axios({
       method: 'get',
       url: spring.user.getUser(),
@@ -40,7 +40,7 @@ function PlantList() {
   }
   
   // plantlist 가져오는 함수
-  const fetchPlantList = () => {
+  const fetchPlantList:any() {
     axios({
       method: 'post',
       url: spring.plants.list(),
@@ -110,7 +110,7 @@ function PlantList() {
     fetchPlantList()
     // fetchCollected()
     // fetchNotCollected()
-  })
+  }, [])
 
   return (
     <div style={{
