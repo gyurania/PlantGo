@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import spring from "../api/spring";
-import useIntersectionObserver from "../customHook/useIO";
 import Card from 'react-bootstrap/Card'
-import Plant from "../components/miniCards";
 
 function PlantList() {
 
@@ -11,7 +9,6 @@ function PlantList() {
   const [userSeq, setUserSeq] = useState(0);
   const [plantList, setPlantList] = useState<any | any[]>([]);
   const [pageNumber, setPageNumber] = useState(1)
-  const [isLoaded, setIsLoaded] = useState(false);
   // const [collectedPlantList, setCollectedPlantList] = useState([]);
   // const [nonCollectedPlantList, setNonCollectedPlantList] = useState([]);
 
@@ -109,13 +106,10 @@ function PlantList() {
       .catch(function (err) {
         console.error(err)
       })
-  })
-
-  useEffect(() => {
     
+    fetchPlantList()
     // fetchCollected()
     // fetchNotCollected()
-    fetchPlantList()
   })
 
   return (
@@ -124,7 +118,7 @@ function PlantList() {
       height: 800
     }}>
       <br />
-      <div>{JSON.stringify(plantList)}</div>
+      <h4>{JSON.stringify(plantList)}</h4>
     </div>
   )
 }
