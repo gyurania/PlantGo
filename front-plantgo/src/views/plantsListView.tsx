@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import spring from "../api/spring";
-import useIntersectionObserver from "../customHook/useIO";
 import Card from 'react-bootstrap/Card'
-import Plant from "../components/miniCards";
 
 function PlantList() {
 
@@ -11,7 +9,6 @@ function PlantList() {
   const [userSeq, setUserSeq] = useState(0);
   const [plantList, setPlantList] = useState<any | any[]>([]);
   const [pageNumber, setPageNumber] = useState(1)
-  const [isLoaded, setIsLoaded] = useState(false);
   // const [collectedPlantList, setCollectedPlantList] = useState([]);
   // const [nonCollectedPlantList, setNonCollectedPlantList] = useState([]);
 
@@ -21,9 +18,9 @@ function PlantList() {
 
   // 로그인 안되어 있으면 로그인 화면으로 보내기
 
-  // if (!loginToken) {
-  //   window.location.replace('/login')
-  // }
+  if (!loginToken) {
+    window.location.replace('/login')
+  }
   
   // plantlist 가져오는 함수
   const fetchPlantList = async () => {
@@ -35,7 +32,7 @@ function PlantList() {
       },
       data: {
         'page': pageNumber,
-        'userSeq': 1
+        'userSeq': userSeq
       }
     })
       .then((res) => {
@@ -107,13 +104,8 @@ function PlantList() {
       .catch(function (err) {
         console.error(err)
       })
-  })
-
-  useEffect(() => {
-    while (pageNumber < 10) {
-      fetchPlantList()
-      setPageNumber(prevNumb => prevNumb+1)
-    }
+    
+    fetchPlantList()
     // fetchCollected()
     // fetchNotCollected()
   })
@@ -124,9 +116,7 @@ function PlantList() {
       height: 800
     }}>
       <br />
-      <pre>
-        {JSON.stringify(plantList)}
-      </pre>
+      <h4>{JSON.stringify(plantList)}</h4>
     </div>
   )
 }
