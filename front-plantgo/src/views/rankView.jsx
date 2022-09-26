@@ -27,7 +27,7 @@ const Ranking = () => {
         console.log(rank.rankList);
       })
       .catch((err) => console.log(err));
-  });
+  }, []);
 
   return (
     <div>
