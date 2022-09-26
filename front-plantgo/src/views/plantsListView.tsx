@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, useCallback } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import spring from "../api/spring";
 import { useInView } from "react-intersection-observer"
@@ -12,7 +12,7 @@ function PlantList() {
   const [userSeq, setUserSeq] = useState(0);
   const [plantList, setPlantList] = useState<any>([]);
   const [endPage, setEndPage] = useState<boolean>(true)
-  const page = useRef<number>(1);
+  const [page, setPage] = useState<number>(1);
   const [ref, inView] = useInView();
   // const [collectedPlantList, setCollectedPlantList] = useState([]);
   // const [nonCollectedPlantList, setNonCollectedPlantList] = useState([]);
@@ -45,7 +45,7 @@ function PlantList() {
   }
   
   // plantlist 가져오는 함수
-  const fetchPlantList = async () => {
+  const fetchPlantList = () => {
     axios({
       method: 'post',
       url: spring.plants.list(),
@@ -57,18 +57,20 @@ function PlantList() {
         'userSeq': userSeq
       }
     })
-      .then((res) => {
-        console.log(res.data)
-        setPlantList((plantList: any) => [...plantList, ...res.data.plantDtoList])
-        if (page.current === 419) {
-          setEndPage(false)
-        }
-        else {
-          page.current += 1
-        }
-        console.log(page)
-      })
-      .catch((err) => console.error(err))
+    .then((res) => {
+      console.log(res.data)
+      setPlantList((plantList: any) => [...plantList, ...res.data.plantDtoList])
+      if (page === 419) {
+        setEndPage(false)
+      }
+      else {
+        setPage(prev=>prev+1)
+      }
+      console.log(page)
+    })
+    .catch((err) => {
+      console.error(err)
+    })
   };
 
   // const fetchCollected = () => {
@@ -134,20 +136,7 @@ function PlantList() {
     }}>
       <br/>
       <div style={{ position: 'relative' }}>
-        {plantList?.map((plant: any) => (
-          <div
-            key={plant.plantId}
-            style={{
-              marginBottom: '1rem',
-              border: '1px solid #000',
-              padding: '8px',
-            }}
-          >
-            <div>plantId: {plant.plantId}</div>
-            <div>이름: {plant.korNameSn}</div>
-            <img src={ plant.imgUrl } alt="" />
-          </div>
-        ))};
+        {JSON.stringify(plantList)}
       </div>
       <div ref={ref} style={{ position: 'absolute', bottom: '100px' }} />
     </div>
