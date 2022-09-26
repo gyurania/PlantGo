@@ -4,6 +4,9 @@ import Camera from "react-html5-camera-photo";
 import "react-html5-camera-photo/build/css/index.css";
 import axios from "axios";
 import Spinner from '../img/leap.gif';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 
 function App(props) {
   const [imgSrc, setImgSrc] = useState("");
@@ -92,19 +95,30 @@ function App(props) {
   // React DOM
   if (formImg === null) {
     return (
+      <Container fluid style={{
+        height: "100vh",
+        backgroundSize: "cover"
+      }}>
       <Camera
         onTakePhoto={(dataUri) => {
           handleTakePhoto(dataUri);
         }}
         idealResolution={{ width: 360, height: 800 }}
       />
+      </Container>
     );
   } else {
     return (
-      <div>
-        <img src={Spinner} alt="로딩 페이지" width="40%" />
-        <p>식물 정보 가져오는 중..</p>
+      <Container fluid style={{
+        height: "100vh"
+      }}>
+
+      <div class ="row justify-content-center">
+        <img src={Spinner} alt="로딩 페이지" width="30%" />
+        식물 정보 가져오는 중..
       </div>
+
+      </Container>
     );
   }
 }
