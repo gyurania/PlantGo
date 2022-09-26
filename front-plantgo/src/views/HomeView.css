@@ -1,0 +1,43 @@
+.title {
+    position: absolute;
+    top: 15px;
+    left: 20px;
+
+    font-family: 'Aclonica', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 10px;
+    /* identical to box height, or 42% */
+    letter-spacing: 0.646609px;
+    text-transform: lowercase;
+
+    color: #000000;
+    z-index: 10;
+}
+
+.map {
+    z-index: -1;
+}
+
+.plus-icon {
+    position: absolute;
+    top: 50px;
+    left: 20px;
+    z-index: 10;
+}
+
+.camera-icon {
+    position: absolute;
+    top: 100px;
+    left: 20px;
+    z-index: 10;
+}
+
+.over-map {
+    z-index: 10;
+}
+
+.tmp-img {
+    z-index: 20
+}
