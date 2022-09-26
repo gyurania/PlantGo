@@ -5,7 +5,7 @@ function KakaoLogin() {
   const tempStyle = {
     width: "50px",
     height: "50px",
-    margin: "10px"
+    margin: "10px",
   }
   return (
     <a href={KAKAO_AUTH_URL}>
