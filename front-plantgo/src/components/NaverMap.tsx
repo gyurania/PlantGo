@@ -72,28 +72,28 @@ function NaverMap(props: any) {
   }, [area]);
 
   // 드래그 했을 때 중앙 기준 식물정보 받아오기
-  useEffect(() => {
-    if (isRenewed) {
-      axios({
-        method: "get",
-        url: "http://j7a703.p.ssafy.io/api/map1",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        data: {
-          lat: props.lat,
-          lng: props.lng,
-        },
-      })
-        .then((res) => {
-          const tmpMarkers = currMarkers;
-          tmpMarkers.concat(res.data);
+  // useEffect(() => {
+  //   if (isRenewed) {
+  //     axios({
+  //       method: "get",
+  //       url: "http://j7a703.p.ssafy.io/api/map1",
+  //       headers: {
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //       data: {
+  //         lat: props.lat,
+  //         lng: props.lng,
+  //       },
+  //     })
+  //       .then((res) => {
+  //         const tmpMarkers = currMarkers;
+  //         tmpMarkers.concat(res.data);
 
-          setCurrMarkers(tmpMarkers);
-        })
-        .catch((err) => console.log(err));
-    }
-  }, [dragedCenter]);
+  //         setCurrMarkers(tmpMarkers);
+  //       })
+  //       .catch((err) => console.log(err));
+  //   }
+  // }, [dragedCenter]);
 
   // 네이버 맵 생성, 맵 관련 각종 이벤트리스너, 로직
   useEffect(() => {
