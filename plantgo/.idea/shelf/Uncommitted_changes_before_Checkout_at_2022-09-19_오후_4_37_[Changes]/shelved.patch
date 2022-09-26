@@ -1,0 +1,24 @@
+Index: ../front-plantgo/src/views/loginView.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import React from \"react\";\r\nimport KakaoLogin from \"../components/Kakao\";\r\n\r\nfunction Login() {\r\n  return (\r\n    <div>\r\n      <KakaoLogin />\r\n    </div>\r\n  );\r\n}\r\n\r\n\r\nexport default Login;
+===================================================================
+diff --git a/../front-plantgo/src/views/loginView.tsx b/../front-plantgo/src/views/loginView.tsx
+--- a/../front-plantgo/src/views/loginView.tsx	
++++ b/../front-plantgo/src/views/loginView.tsx	
+@@ -1,10 +1,14 @@
+ import React from "react";
+-import KakaoLogin from "../components/Kakao";
++import KakaoLogin from "../components/kakao";
++import NaverLogin from "../components/naver";
++import GoogleLogin from "../components/google";
+ 
+ function Login() {
+   return (
+     <div>
+       <KakaoLogin />
++      <NaverLogin />
++      <GoogleLogin />
+     </div>
+   );
+ }
