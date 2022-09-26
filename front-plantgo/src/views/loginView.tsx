@@ -2,8 +2,8 @@ import React from "react";
 import GoogleLogin from "../components/Google";
 import NaverLogin from "../components/Naver";
 import KakaoLogin from "../components/Kakao";
-import bgimg from "../img/plantgo3.jpg";
-import logo from "../img/plantgo-white-font.png";
+import bgimg from "../img/plantgo5.jpg";
+import logo from "../img/플랜트고-색-폰트.png";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -11,20 +11,14 @@ import Image from 'react-bootstrap/Image'
 import "./loginView.css";
 function Login() {
   return (
-    <Container fluid style={{
-        backgroundImage: `url(${bgimg})`,
-        height: "100vh",
-        backgroundSize: "cover",
-        border: "3px",
-        boxSizing: "border-box"
-        
-      }}>
-
+    <Container fluid className="backgroundImg">
+      
       <Row style={{height: "10%"}}></Row>
       <Row >
         <Image src={logo} alt="" className="mx-auto d-block my-5" style={{
           width: 270,
           height: 350,
+          //backgroundColor: "black"
           // marginTop: 50,
           // marginBottom: 30,
         }}/>
@@ -36,7 +30,7 @@ function Login() {
         <Col style={{
           minWidth: "250px",
           maxWidth: "250px",
-          zIndex: 2
+          zIndex: 3
         }}>
           <KakaoLogin />
           <GoogleLogin />
