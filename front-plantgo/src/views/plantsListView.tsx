@@ -27,7 +27,7 @@ function PlantList() {
 
   // interSection 콜백 함수
 
-  const onIntersect: IntersectionObserverCallback = async (
+  const onIntersect: IntersectionObserverCallback = (
     [entry],
     observer
   ) => {
@@ -70,7 +70,7 @@ function PlantList() {
     })
       .then((res) => {
         console.log(res.data)
-        setPlantList((plantList:any) => plantList+res.data.plantDtoList)
+        setPlantList([...plantList, res.data.plantDtoList])
       })
       .catch((err) => console.error(err))
   };
@@ -151,17 +151,14 @@ function PlantList() {
       height: 800
     }}>
       <br />
-      {plantList.map((plant: any) => {
-        return <Plant
-          id={plant.id}
-          korName={plant.korName}
-          imgUrl={plant.imgUrl}
-        />
-      })};
-      <button style={{
-        height: 100,
-        width: 1000
-      }} ref={setTarget}>{isLoaded && <h1>Loading..</h1>}</button>
+      <div>{JSON.stringify(plantList)}</div>
+      <div style={{
+        height: 200,
+        width: 800
+      }} ref={setTarget}
+      >
+        {isLoaded && <h1>Loading..</h1>}
+      </div>
     </div>
   )
 }
