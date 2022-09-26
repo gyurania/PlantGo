@@ -10,7 +10,6 @@ function PlantList() {
   const [plantList, setPlantList] = useState<any | any[]>([]);
   const [pageNumber, setPageNumber] = useState<any | any[]>(1)
   const [isLoaded, setIsLoaded] = useState(false);
-  const [finalNumber, setFinalNumber] = useState(0);
   const [collectedPlantList, setCollectedPlantList] = useState([]);
   const [nonCollectedPlantList, setNonCollectedPlantList] = useState([]);
 
@@ -30,9 +29,9 @@ function PlantList() {
     [entry],
     observer
   ) => {
-    if (entry.isIntersecting && !isLoaded) {
+    if (entry.isIntersecting && !isLoaded && (pageNumber!==419)) {
       observer.unobserve(entry.target);
-      await getMorePlant();
+      getMorePlant();
       observer.observe(entry.target);
     }
   }
@@ -154,7 +153,7 @@ function PlantList() {
       <h2>{plantList.map((plant:any) => { 
         console.log(plant.korName)
       })};</h2>
-      {/* <div ref={setTarget}>{isLoaded && <h1>Loading..</h1>}</div> */}
+      <div ref={setTarget}>{isLoaded && <h1>Loading..</h1>}</div>
     </div>
   )
 };
