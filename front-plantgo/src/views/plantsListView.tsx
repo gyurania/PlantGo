@@ -144,15 +144,14 @@ function PlantList() {
     fetchNotCollected()
   })
 
-  let parseData = JSON.parse(plantList)
-
   return (
     <div style={{
       width: 360,
       height: 800
     }}>
       <br />
-      {parseData.map((item: any) => (
+      {JSON.parse(plantList)}
+      {/* {parseData.map((item: any) => (
         <Card
           bg={'Light'}
           key={item}
@@ -165,7 +164,7 @@ function PlantList() {
             <Card.Title>{item.korName} Card Title </Card.Title>
           </Card.Body>
         </Card>
-      ))};
+      ))}; */}
       <div ref={setTarget}>{isLoaded && <h1>Loading..</h1>}</div>
     </div>
   )
