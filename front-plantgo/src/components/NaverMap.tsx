@@ -11,7 +11,7 @@ function NaverMap(props: any) {
   const [isRenewed, setIsRenewed] = useState<boolean>(false);
   const [area, setArea] = useState<string>("");
 
-  const token = sessionStorage.getItem("userToken");
+  const token: any = sessionStorage.getItem("userToken");
 
   // 0. 랜더링 되면 타이머 설정해서 6초마다 행정구역 받아오기
   // 받아온 행정구역이 이전 값과 다르면 업데이트 하고 백에 요청 보내기
@@ -54,12 +54,27 @@ function NaverMap(props: any) {
     setIsRenewed(true);
   }, []);
 
+  // 1. 행정구역(area)받아오면 백에 식물 데이터 받아오기
+  useEffect(() => {
+    axios({
+      method: "get",
+      url: `https://j7a703.p.ssafy.io/api/photocard/map/${area}`,
+      headers: {
+        Authorization: token,
+      },
+    })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, [area]);
+
   // 드래그 했을 때 중앙 기준 식물정보 받아오기
   useEffect(() => {
     if (isRenewed) {
       axios({
         method: "get",
-        url: "http://j7a703.p.ssafy.io:8080/api/map1",
+        url: "http://j7a703.p.ssafy.io/api/map1",
         headers: {
           Authorization: `Bearer ${token}`,
         },
