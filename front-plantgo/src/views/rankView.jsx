@@ -28,8 +28,6 @@ const Ranking = () => {
   useEffect(() => {
     console.log("rank는???");
     console.log(rank);
-    console.log("rankList는???");
-    console.log(rank.rankList);
   }, [rank]);
 
   return (
