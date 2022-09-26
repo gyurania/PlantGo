@@ -28,7 +28,7 @@ function NaverMap(props: any) {
         console.log(lng);
         axios({
           method: "get",
-          url: `/map-reversegeocode/v2/gc?coords=${lng},${lat}&output=json`,
+          url: `/map-reversegeocode/v2/gc?coords=${pos.coords.longitude},${pos.coords.latitude}&output=json`,
           headers: {
             "X-NCP-APIGW-API-KEY-ID": "6s70rnjtot",
             "X-NCP-APIGW-API-KEY": "uDvd8ChhbkZbYjXX1z7y88hd3bZEiLEzYtN8kiiq",
