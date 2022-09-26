@@ -1,0 +1,12 @@
+.Rectangle {
+  box-sizing: border-box;
+
+  position: absolute;
+  width: 304px;
+  height: 155px;
+  left: 29px;
+  top: 70px;
+
+  border: 3px solid #ff9f29;
+  border-radius: 20px;
+}
