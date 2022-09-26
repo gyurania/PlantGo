@@ -136,7 +136,12 @@ function PlantList() {
     }}>
       <br/>
       <div style={{ position: 'relative' }}>
-        {JSON.stringify(plantList)}
+        {plantList.map((plant: any) => {
+          <ul key={plant.plantId}>
+            <li>{plant.korName}</li>
+            <li>{plant.imgUrl}</li>
+          </ul>
+        })};
       </div>
       <div ref={ref} style={{ position: 'absolute', bottom: '100px' }} />
     </div>
