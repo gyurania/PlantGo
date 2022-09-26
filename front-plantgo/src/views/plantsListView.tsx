@@ -11,7 +11,7 @@ function PlantList() {
   
   const [userSeq, setUserSeq] = useState(0);
   const [plantList, setPlantList] = useState<any>([]);
-  const [hasNextPage, setHasNextPage] = useState<boolean>(true);
+  const [endPage, setEndPage] = useState<boolean>(true)
   const page = useRef<number>(1);
   const [ref, inView] = useInView();
   // const [collectedPlantList, setCollectedPlantList] = useState([]);
@@ -60,9 +60,11 @@ function PlantList() {
       .then((res) => {
         console.log(res.data)
         setPlantList((plantList: any) => [...plantList, ...res.data.plantDtoList])
-        setHasNextPage(res.data.plantDtoList.length === 10);
-        if (res.data.plantDtoList.length) {
-          page.current += 1;
+        if (page.current === 419) {
+          setEndPage(false)
+        }
+        else {
+          page.current += 1
         }
         console.log(page)
       })
@@ -119,11 +121,11 @@ function PlantList() {
 
   // pageNumber에 변화 있으면 실행
   useEffect(() => {
-    console.log(inView, hasNextPage);
-    if (inView && hasNextPage) {
+    console.log(inView, endPage);
+    if (inView && endPage) {
       fetchPlantList();
     }
-  }, [hasNextPage, inView]);
+  }, [page, inView]);
 
   return (
     <div style={{
