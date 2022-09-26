@@ -12,7 +12,7 @@ const Ranking = () => {
   useEffect(() => {
     axios({
       method: "get",
-      url: "https://j7a703.p.ssafy.io:8080/v1/users/rank",
+      url: "https://j7a703.p.ssafy.io/api/v1/users/rank",
       headers: {
         Authorization: `Bearer ${token}`,
         "Access-Control-Allow-Credentials": true,
