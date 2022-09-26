@@ -3,6 +3,7 @@ import axios from "axios";
 import spring from "../api/spring";
 import useIntersectionObserver from "../customHook/useIO";
 import Card from 'react-bootstrap/Card'
+import Plant from "../components/miniCards";
 
 function PlantList() {
 
@@ -150,21 +151,13 @@ function PlantList() {
       height: 800
     }}>
       <br />
-      {JSON.parse(plantList)}
-      {/* {parseData.map((item: any) => (
-        <Card
-          bg={'Light'}
-          key={item}
-          text={'dark'}
-          style={{ width: '18rem' }}
-          className="mb-2"
-        >
-          <Card.Img variant="top" src={item.imgUrl} />
-          <Card.Body>
-            <Card.Title>{item.korName} Card Title </Card.Title>
-          </Card.Body>
-        </Card>
-      ))}; */}
+      {plantList.map((plant: any) => {
+        return <Plant
+          id={plant.id}
+          korName={plant.korName}
+          imgUrl={plant.imgUrl}
+        />
+      })};
       <div ref={setTarget}>{isLoaded && <h1>Loading..</h1>}</div>
     </div>
   )
