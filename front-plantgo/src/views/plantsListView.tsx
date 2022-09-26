@@ -138,7 +138,6 @@ function PlantList() {
               marginBottom: '1rem',
               border: '1px solid #000',
               padding: '8px',
-              background: plant.id % 10 === 0 ? 'skyblue' : '',
             }}
           >
             <div>plantId: {plant.plantId}</div>
