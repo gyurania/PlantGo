@@ -39,7 +39,7 @@ function PlantList() {
   const { setTarget } = useIntersectionObserver({
     root: null,
     rootMargin: '0px',
-    threshold: 0.5,
+    threshold: 0.1,
     onIntersect,
   });
 
@@ -149,7 +149,9 @@ function PlantList() {
       height: 800
       }}> 
       <br />
-      <h1>{JSON.stringify(plantList)}</h1>
+      <h2>{plantList.map((plant:any) => { 
+        console.log(plant.korName)
+      })};</h2>
       <div ref={setTarget}>{isLoaded && <h1>Loading..</h1>}</div>
     </div>
   )
