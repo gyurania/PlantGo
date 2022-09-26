@@ -49,7 +49,7 @@ function NaverMap(props: any) {
     } else {
       window.alert("gps동의부터하셈");
     }
-  }, 6000);
+  }, 300000);
 
   // 1. 랜더링 된 것 표시
   useEffect(() => {
