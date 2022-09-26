@@ -43,12 +43,22 @@ const Ranking = () => {
     console.log(rank.rankList);
   }, [rank]);
 
-  return (
-    <div>
-      <div>{JSON.stringify(rank)}</div>
-      <h2> 아 몰랑 </h2>
-    </div>
-  );
+  if (rank.rankList === null) {
+    return (
+      <div>
+        <h1>기다려!!</h1>
+      </div>
+    );
+  } else {
+    const rendering = () => {
+      const result = [];
+      for (let i = 0; i < rank.rankList.length; i++) {
+        result.push(<span key={i}>{rank.rankList[i] + " / "}</span>);
+      }
+      return result;
+    };
+    return <div>{rendering()}</div>;
+  }
 };
 
 export default Ranking;
