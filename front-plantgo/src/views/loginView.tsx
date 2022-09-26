@@ -19,7 +19,7 @@ function Login() {
         <Carousel>
           <Carousel.Item>
           <Image src={logo} alt="" className="mx-auto d-block my-5" style={{
-            width: 270,
+            width: 250,
             height: 350,
           }}/>
           </Carousel.Item>
