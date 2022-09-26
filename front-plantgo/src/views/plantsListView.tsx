@@ -45,7 +45,7 @@ function PlantList() {
   }
   
   // plantlist 가져오는 함수
-  const fetchPlantList = useCallback(async () => {
+  const fetchPlantList = async () => {
     axios({
       method: 'post',
       url: spring.plants.list(),
@@ -64,9 +64,10 @@ function PlantList() {
         if (res.data.plantDtoList.length) {
           page.current += 1;
         }
+        console.log(page)
       })
       .catch((err) => console.error(err))
-  }, []);
+  };
 
   // const fetchCollected = () => {
   //   axios({
@@ -122,7 +123,7 @@ function PlantList() {
     if (inView && hasNextPage) {
       fetchPlantList();
     }
-  }, [fetchPlantList, hasNextPage, inView]);
+  }, [hasNextPage, inView]);
 
   return (
     <div style={{
