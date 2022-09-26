@@ -11,7 +11,7 @@ function NaverMap(props: any) {
   const [isRenewed, setIsRenewed] = useState<boolean>(false);
   const [area, setArea] = useState<string>("");
 
-  const token = sessionStorage.getItem("userToken");
+  const token: any = sessionStorage.getItem("userToken");
 
   // 0. 랜더링 되면 타이머 설정해서 6초마다 행정구역 받아오기
   // 받아온 행정구역이 이전 값과 다르면 업데이트 하고 백에 요청 보내기
@@ -21,7 +21,9 @@ function NaverMap(props: any) {
     console.log("반복설정");
     if (navigator.geolocation) {
       console.log("셋쨰");
+      console.log("뭐임 대체");
       navigator.geolocation.getCurrentPosition((pos) => {
+        console.log("왜 여기는 안 와줘..?");
         const lat = pos.coords.latitude;
         const lng = pos.coords.longitude;
         console.log(lat);
@@ -35,6 +37,8 @@ function NaverMap(props: any) {
           },
         }).then((res) => {
           console.log("넷째");
+          console.log("res", res);
+          console.log("res.data", res.data);
           const tmp_area = res.data.results[0].region.area2.name;
           console.log("이전 구역 = ", area);
           console.log("새로운 구역 = ", tmp_area);
@@ -54,29 +58,45 @@ function NaverMap(props: any) {
     setIsRenewed(true);
   }, []);
 
-  // 드래그 했을 때 중앙 기준 식물정보 받아오기
+  // 1. 행정구역(area)받아오면 백에 식물 데이터 받아오기
   useEffect(() => {
-    if (isRenewed) {
-      axios({
-        method: "get",
-        url: "http://j7a703.p.ssafy.io:8080/api/map1",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        data: {
-          lat: props.lat,
-          lng: props.lng,
-        },
+    axios({
+      method: "post",
+      url: `https://j7a703.p.ssafy.io/api/photocard/map/${area}`,
+      headers: {
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyNDM3OTkyOTQ1Iiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTY2NDE4NjAxMX0.wdtHp36qdKK_uDFzO47HnhxDNhW5GCeI_OU8lhnHlDU",
+      },
+    })
+      .then((res) => {
+        console.log(res.data);
       })
-        .then((res) => {
-          const tmpMarkers = currMarkers;
-          tmpMarkers.concat(res.data);
+      .catch((err) => console.log(err));
+  }, [area]);
 
-          setCurrMarkers(tmpMarkers);
-        })
-        .catch((err) => console.log(err));
-    }
-  }, [dragedCenter]);
+  // 드래그 했을 때 중앙 기준 식물정보 받아오기
+  // useEffect(() => {
+  //   if (isRenewed) {
+  //     axios({
+  //       method: "get",
+  //       url: "http://j7a703.p.ssafy.io/api/map1",
+  //       headers: {
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //       data: {
+  //         lat: props.lat,
+  //         lng: props.lng,
+  //       },
+  //     })
+  //       .then((res) => {
+  //         const tmpMarkers = currMarkers;
+  //         tmpMarkers.concat(res.data);
+
+  //         setCurrMarkers(tmpMarkers);
+  //       })
+  //       .catch((err) => console.log(err));
+  //   }
+  // }, [dragedCenter]);
 
   // 네이버 맵 생성, 맵 관련 각종 이벤트리스너, 로직
   useEffect(() => {
