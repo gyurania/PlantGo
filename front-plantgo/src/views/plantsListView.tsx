@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import spring from "../api/spring";
 import useIntersectionObserver from "../customHook/useIO";
+import Card from 'react-bootstrap/Card'
 
 function PlantList() {
 
@@ -25,11 +26,11 @@ function PlantList() {
 
   // interSection 콜백 함수
 
-  const onIntersect: IntersectionObserverCallback = async(
+  const onIntersect: IntersectionObserverCallback = async (
     [entry],
     observer
   ) => {
-    if (entry.isIntersecting && !isLoaded && (pageNumber!==419)) {
+    if (entry.isIntersecting && !isLoaded && (pageNumber !== 419)) {
       observer.unobserve(entry.target);
       getMorePlant();
       observer.observe(entry.target);
@@ -39,7 +40,7 @@ function PlantList() {
   const { setTarget } = useIntersectionObserver({
     root: null,
     rootMargin: '0px',
-    threshold: 0.1,
+    threshold: 1.0,
     onIntersect,
   });
 
@@ -66,11 +67,11 @@ function PlantList() {
         'userSeq': userSeq
       }
     })
-    .then((res) => {
-      console.log(res.data)
-      setPlantList([...plantList, ...res.data.plantDtoList])
-    })
-    .catch((err) => console.error(err))
+      .then((res) => {
+        console.log(res.data)
+        setPlantList([...plantList, ...res.data.plantDtoList])
+      })
+      .catch((err) => console.error(err))
   };
 
   const fetchCollected = async () => {
@@ -127,13 +128,13 @@ function PlantList() {
         'Authorization': `Bearer ${loginToken}`
       }
     })
-    .then(function (res) {
-      console.log(res.data.body.user.userSeq);
-      setUserSeq(res.data.body.user.userSeq);
-    })
-    .catch(function (err) {
-      console.error(err)
-    })
+      .then(function (res) {
+        console.log(res.data.body.user.userSeq);
+        setUserSeq(res.data.body.user.userSeq);
+      })
+      .catch(function (err) {
+        console.error(err)
+      })
   })
 
   useEffect(() => {
@@ -142,19 +143,31 @@ function PlantList() {
     fetchCollected()
     fetchNotCollected()
   })
-  
-  
+
+  let parseData = JSON.parse(plantList)
+
   return (
     <div style={{
       width: 360,
       height: 800
-      }}> 
+    }}>
       <br />
-      <h2>{plantList.map((plant:any) => { 
-        console.log(plant.korName)
-      })};</h2>
+      {parseData.map((item: any) => (
+        <Card
+          bg={'Light'}
+          key={item}
+          text={'dark'}
+          style={{ width: '18rem' }}
+          className="mb-2"
+        >
+          <Card.Img variant="top" src={item.imgUrl} />
+          <Card.Body>
+            <Card.Title>{item.korName} Card Title </Card.Title>
+          </Card.Body>
+        </Card>
+      ))};
       <div ref={setTarget}>{isLoaded && <h1>Loading..</h1>}</div>
     </div>
   )
-};
+}
 export default PlantList;
