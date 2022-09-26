@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState, useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import "./RankView.css";
 
 const Ranking = () => {
   const navigate = useNavigate();
@@ -52,15 +53,26 @@ const Ranking = () => {
   } else {
     const rendering = () => {
       const result = [];
+      result.push(
+        <div className="Rectangle">
+          축하합니다 1등!!!
+          {rank.rankList[0].userName} 님 무려 {rank.rankList[0].plantsCollects}
+          개!!
+        </div>
+      );
+      // result.push(<List>);
+
       for (let i = 0; i < rank.rankList.length; i++) {
         result.push(
-          <div key={i}>
+          <div className="ranks" key={i}>
             {" "}
-            {i}등!! {rank.rankList[i].userName + " / "} 모은 식물의 개수 :{" "}
+            {i + 1}등!! {rank.rankList[i].userName + " / "} 모은 식물의 개수 :{" "}
             {rank.rankList[i].plantsCollects}
           </div>
         );
       }
+
+      // result.push(</List>);
       return result;
     };
     return <div>{rendering()}</div>;
