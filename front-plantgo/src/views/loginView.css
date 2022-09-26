@@ -135,3 +135,10 @@
   0%   { transform: translateY(0); background-color: rgba(118, 186, 153, 0.25);}
   100% { transform: translateY(-1000px) rotate(600deg); background-color: rgba(118, 186, 153, 0.25);}
 }
+
+p {
+    font-family: 'MICEGothic Bold';
+    font-weight: normal;
+    font-size: 30px;
+    color: #1C6758;
+}
