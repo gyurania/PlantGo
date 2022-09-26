@@ -42,6 +42,8 @@ function PlantList() {
         console.log(res.data)
         console.log(pageNumber)
         setPlantList([...plantList, res.data.plantDtoList])
+        setPageNumber(prev => prev + 1)
+        console.log(pageNumber)
       })
       .catch((err) => console.error(err))
   };
