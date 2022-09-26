@@ -7,7 +7,7 @@ const Ranking = () => {
   const [rank, setRank] = useState(null);
   //   const token = sessionStorage.getItem("loginToken");
   const token =
-    "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyNDM1Nzg1MzAxIiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTY2NDE3MTg3MX0.QZeXeVlkLufoZBM7yt3ugt_OdOrtv6HsmJkige9yzyw";
+    "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyNDM1Nzg1MzAxIiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTY2NDE4MzAwOH0.FDgjXXMEDjfRqZLS6RIgHMQpLK0alv0rKrLmju4PGrM";
   // 백엔드에서 rank data 받아오기
   useEffect(() => {
     axios({
