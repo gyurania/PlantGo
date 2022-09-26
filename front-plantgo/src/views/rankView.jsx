@@ -20,22 +20,25 @@ const Ranking = () => {
       },
     })
       .then((res) => {
-        setRank(res.data);
+        setRank(res.data.rankList);
       })
       .catch((err) => console.log(err));
   });
 
   return (
-    <table>
-      <tbody>
-        {rank.map((ranklist) => (
-          <tr key={ranklist.userSeq}>
-            <td>{ranklist.plantsCollects}</td>
-            <td>{ranklist.userName}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <div>
+      <div>{JSON.stringify(rank)}</div>
+      <table>
+        <tbody>
+          {rank.map((ranklist) => (
+            <tr key={ranklist.userSeq}>
+              <td>{ranklist.plantsCollects}</td>
+              <td>{ranklist.userName}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 };
 

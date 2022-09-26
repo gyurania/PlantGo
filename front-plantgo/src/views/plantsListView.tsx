@@ -10,8 +10,9 @@ function PlantList() {
   const [plantList, setPlantList] = useState<any | any[]>([]);
   const [pageNumber, setPageNumber] = useState<any | any[]>(1)
   const [isLoaded, setIsLoaded] = useState(false);
-  const [collectedPlantList, setCollectedPlantList] = useState([])
-  const [nonCollectedPlantList, setNonCollectedPlantList] = useState([])
+  const [finalNumber, setFinalNumber] = useState(0);
+  const [collectedPlantList, setCollectedPlantList] = useState([]);
+  const [nonCollectedPlantList, setNonCollectedPlantList] = useState([]);
 
   // Loading 후 가져오기
 
@@ -66,9 +67,10 @@ function PlantList() {
         'userSeq': userSeq
       }
     })
-    .then((res) =>
+    .then((res) => {
+      console.log(res.data)
       setPlantList([...plantList, ...res.data.plantDtoList])
-    )
+    })
     .catch((err) => console.error(err))
   };
 
@@ -152,7 +154,7 @@ function PlantList() {
       <h2>{plantList.map((plant:any) => { 
         console.log(plant.korName)
       })};</h2>
-      <div ref={setTarget}>{isLoaded && <h1>Loading..</h1>}</div>
+      {/* <div ref={setTarget}>{isLoaded && <h1>Loading..</h1>}</div> */}
     </div>
   )
 };
