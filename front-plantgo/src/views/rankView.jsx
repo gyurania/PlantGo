@@ -43,7 +43,7 @@ const Ranking = () => {
     console.log(rank.rankList);
   }, [rank]);
 
-  if (rank.rankList === null) {
+  if (rank === null) {
     return (
       <div>
         <h1>기다려!!</h1>
@@ -53,7 +53,13 @@ const Ranking = () => {
     const rendering = () => {
       const result = [];
       for (let i = 0; i < rank.rankList.length; i++) {
-        result.push(<span key={i}>{rank.rankList[i] + " / "}</span>);
+        result.push(
+          <div key={i}>
+            {" "}
+            {i}등!! {rank.rankList[i].userName + " / "} 모은 식물의 개수 :{" "}
+            {rank.rankList[i].plantsCollects}
+          </div>
+        );
       }
       return result;
     };
