@@ -35,6 +35,8 @@ function NaverMap(props: any) {
           },
         }).then((res) => {
           console.log("넷째");
+          console.log("res", res);
+          console.log("res.data", res.data);
           const tmp_area = res.data.results[0].region.area2.name;
           console.log("이전 구역 = ", area);
           console.log("새로운 구역 = ", tmp_area);
