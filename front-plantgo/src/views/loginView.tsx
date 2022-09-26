@@ -4,24 +4,42 @@ import NaverLogin from "../components/Naver";
 import KakaoLogin from "../components/Kakao";
 import bgimg from "../img/loginBackground.png";
 import logo from "../img/plantgo-white-font.png";
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import Image from 'react-bootstrap/Image'
 
 function Login() {
   return (
-    <div style={{
-      backgroundImage: `url(${bgimg})`,
-      width: 360,
-      height: 800
+    <Container fluid style={{
+        backgroundImage: `url(${bgimg})`,
+        height: "100vh",
+        backgroundSize: "cover"
       }}>
-      <img src={logo} alt="" style={{
-        width: 250,
-        height: 350,
-      }}/>
-      <KakaoLogin />
-      <br />
-      <GoogleLogin />
-      <br />
-      <NaverLogin />
-    </div>
+      <Row style={{height: "15%"}}></Row>
+      <Row >
+        <Image src={logo} alt="" className="mx-auto d-block my-5" style={{
+          width: 270,
+          height: 350,
+          // marginTop: 50,
+          // marginBottom: 30,
+        }}/>
+      </Row>
+
+
+      <Row>
+        <Col></Col>
+        <Col style={{
+          minWidth: "250px",
+          maxWidth: "250px"
+        }}>
+          <KakaoLogin />
+          <GoogleLogin />
+          <NaverLogin />
+        </Col>
+        <Col></Col>
+      </Row>
+    </Container>
   );
 }
 
