@@ -26,9 +26,16 @@ const Ranking = () => {
   });
 
   return (
-    <div>
-      <h2>{JSON.stringify(rank)}</h2>
-    </div>
+    <table>
+      <tbody>
+        {rank.map((ranklist) => (
+          <tr key={ranklist.userSeq}>
+            <td>{ranklist.plantsCollects}</td>
+            <td>{ranklist.userName}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
   );
 };
 
