@@ -21,6 +21,10 @@ const Ranking = () => {
     })
       .then((res) => {
         setRank(res.data);
+        console.log("rank는???");
+        console.log(rank);
+        console.log("rankList는???");
+        console.log(rank.rankList);
       })
       .catch((err) => console.log(err));
   });
