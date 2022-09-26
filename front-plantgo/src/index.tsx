@@ -9,6 +9,7 @@ import SuccessLogin from "./components/successLogin";
 import WebcamCapture from "./views/cameraView";
 import PlantList from "./views/plantsListView";
 import PlantResultView from "./views/plantResultView";
+import RankView from "./views/rankView";
 import "bootstrap/dist/css/bootstrap.css";
 
 const container = document.getElementById("root")!;
@@ -25,6 +26,7 @@ root.render(
         <Route path="/camera" element={<WebcamCapture />} />
         <Route path="/plantlist" element={<PlantList />} />
         <Route path="/plantResult" element={<PlantResultView />} />
+        <Route path="/rank" element={<RankView />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
