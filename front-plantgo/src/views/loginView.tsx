@@ -14,22 +14,12 @@ function Login() {
     <Container fluid style={{
         backgroundImage: `url(${bgimg})`,
         height: "100vh",
-        backgroundSize: "cover"
+        backgroundSize: "cover",
+        border: "3px",
+        boxSizing: "border-box"
         
       }}>
 
-      <ul className="bg-bubbles">
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-      </ul>
       <Row style={{height: "15%"}}></Row>
       <Row >
         <Image src={logo} alt="" className="mx-auto d-block my-5" style={{
@@ -45,7 +35,8 @@ function Login() {
         <Col></Col>
         <Col style={{
           minWidth: "250px",
-          maxWidth: "250px"
+          maxWidth: "250px",
+          zIndex: 2
         }}>
           <KakaoLogin />
           <GoogleLogin />
@@ -53,6 +44,18 @@ function Login() {
         </Col>
         <Col></Col>
       </Row>
+      <ul className="bg-bubbles">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
       
     </Container>
   );
