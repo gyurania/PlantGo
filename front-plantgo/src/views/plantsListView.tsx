@@ -7,7 +7,7 @@ function PlantList() {
 
   // useState
   const [userSeq, setUserSeq] = useState(0);
-  const [plantList, setPlantList] = useState<any | any[]>([]);
+  const [plantList, setPlantList] = useState([]);
   const [pageNumber, setPageNumber] = useState(1)
   // const [collectedPlantList, setCollectedPlantList] = useState([]);
   // const [nonCollectedPlantList, setNonCollectedPlantList] = useState([]);
@@ -55,9 +55,7 @@ function PlantList() {
       .then((res) => {
         console.log(res.data)
         console.log(pageNumber)
-        setPlantList([...plantList, res.data.plantDtoList])
-        setPageNumber(prev => prev + 1)
-        console.log(pageNumber)
+        setPlantList(plantList => plantList + res.data.plantDtoList)
       })
       .catch((err) => console.error(err))
   };
@@ -108,9 +106,7 @@ function PlantList() {
   useEffect(() => {
 
     // userSeq 가져오는 함수
-
     getUserSeq()
-    
     fetchPlantList()
     // fetchCollected()
     // fetchNotCollected()
@@ -121,7 +117,7 @@ function PlantList() {
       width: 360,
       height: 800
     }}>
-      <br />
+      <br/>
       <h4>{JSON.stringify(plantList)}</h4>
     </div>
   )
