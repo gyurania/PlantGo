@@ -144,7 +144,6 @@ function PlantList() {
     fetchNotCollected()
   })
 
-
   return (
     <div style={{
       width: 360,
@@ -164,8 +163,8 @@ function PlantList() {
           <Card.Body>
             <Card.Title>{item.korName} Card Title </Card.Title>
           </Card.Body>
-        </Card> */}
-      ))};
+        </Card>
+      ))}; */}
       <div ref={setTarget}>{isLoaded && <h1>Loading..</h1>}</div>
     </div>
   )
