@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import spring from "../api/spring";
-import TopNavBar from "../components/topNavBar";
 import DownNavBar from "../components/downNavBar";
 function PlantList() {
 
   // useState
+  const target = useRef();
   const loadMore = () => setPageNumber(prev => prev+1);
   const [userSeq, setUserSeq] = useState(0);
   const [plantList, setPlantList] = useState({});
@@ -61,6 +61,7 @@ function PlantList() {
       console.error(err)
     })
     
+    // 식물 도감 가져옴
     fetchPlantList()
     
     // 수집한 식물 리스트 가져오는 함수
@@ -104,6 +105,19 @@ function PlantList() {
     .catch(function (err) {
       console.error(err)
     })
+
+    if(loading){
+      //로딩되었을 때만 실행
+      const observer = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          loadMore();
+          console.log('loadmore')
+          //버튼에 도달했을 때 pageNumber를 1씩 증가시켜 데이터를 10개씩 더 보여줌.
+        }
+      });
+      //옵져버 탐색 시작
+      observer.observe(target.current);
+      }
   }, [pageNumber]);
   
   
@@ -114,7 +128,8 @@ function PlantList() {
       }}> 
       <br />
       <h1>{JSON.stringify(plantList)}</h1>
-      <DownNavBar/>
+      <button ref={target}>Load More</button>
+      <DownNavBar/> 
     </div>
   )
 };
