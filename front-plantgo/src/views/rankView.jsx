@@ -20,7 +20,7 @@ const Ranking = () => {
       },
     })
       .then((res) => {
-        setRank(res.data.rankList);
+        setRank(res.data);
       })
       .catch((err) => console.log(err));
   });
