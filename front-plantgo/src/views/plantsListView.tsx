@@ -113,10 +113,7 @@ function PlantList() {
     
     // fetchCollected()
     // fetchNotCollected()
-    while (pageNumber !== 10) {
-        fetchPlantList()
-        setPageNumber(prevNumber => prevNumber + 1)
-      }
+    fetchPlantList()
   })
 
   return (
@@ -125,9 +122,7 @@ function PlantList() {
       height: 800
     }}>
       <br />
-      <pre>
-        {JSON.stringify(plantList)}
-      </pre>
+      <div>{JSON.stringify(plantList)}</div>
     </div>
   )
 }
