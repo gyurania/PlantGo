@@ -16,7 +16,7 @@ function PlantList() {
 
   // Login key
 
-  let loginToken:any = sessionStorage.getItem('loginToken')
+  let loginToken = sessionStorage.getItem('loginToken')
 
   // 로그인 안되어 있으면 로그인 화면으로 보내부리기
 
@@ -110,8 +110,8 @@ function PlantList() {
       //로딩되었을 때만 실행
       const observer = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting) {
-          loadMore();
           console.log('loadmore')
+          loadMore();
           //버튼에 도달했을 때 pageNumber를 1씩 증가시켜 데이터를 10개씩 더 보여줌.
         }
       });
@@ -129,7 +129,6 @@ function PlantList() {
       <br />
       <h1>{JSON.stringify(plantList)}</h1>
       <button ref={target}>Load More</button>
-      <DownNavBar/> 
     </div>
   )
 };
