@@ -1,10 +1,11 @@
 import React from "react"
 import { KAKAO_AUTH_URL } from "../informations/oauth";
-import kakaoImage from '../img/kakao_login_medium_narrow.png'
+import kakaoImage from '../img/kakao_logo.png'
 function KakaoLogin() {
   const tempStyle = {
-    width: "200px",
-    height: "50px"
+    width: "50px",
+    height: "50px",
+    margin: "10px"
   }
   return (
     <a href={KAKAO_AUTH_URL}>
