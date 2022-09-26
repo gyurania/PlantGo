@@ -18,7 +18,7 @@ function Login() {
       }}>
       <Row style={{height: "15%"}}></Row>
       <Row >
-        <Image src={logo} alt="" className="mx-auto d-block mt-5 mb-3" style={{
+        <Image src={logo} alt="" className="mx-auto d-block my-5" style={{
           width: 270,
           height: 350,
           // marginTop: 50,
