@@ -57,7 +57,7 @@ function NaverMap(props: any) {
   // 1. 행정구역(area)받아오면 백에 식물 데이터 받아오기
   useEffect(() => {
     axios({
-      method: "get",
+      method: "post",
       url: `https://j7a703.p.ssafy.io/api/photocard/map/${area}`,
       headers: {
         Authorization: token,
