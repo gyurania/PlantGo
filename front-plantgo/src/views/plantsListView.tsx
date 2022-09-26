@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import spring from "../api/spring";
-import useIntersectionObserver from "../customHook/useIO";
 import Card from 'react-bootstrap/Card'
 
 function PlantList() {
@@ -9,40 +8,9 @@ function PlantList() {
   // useState
   const [userSeq, setUserSeq] = useState(0);
   const [plantList, setPlantList] = useState<any | any[]>([]);
-  const [pageNumber, setPageNumber] = useState<any | any[]>(1)
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [collectedPlantList, setCollectedPlantList] = useState([]);
-  const [nonCollectedPlantList, setNonCollectedPlantList] = useState([]);
-
-  // Loading 후 가져오기
-
-  const getMorePlant = async () => {
-    setIsLoaded(true);
-    setPageNumber((prev: number) => prev + 1);
-    console.log(pageNumber)
-    fetchPlantList()
-    setIsLoaded(false);
-  }
-
-  // interSection 콜백 함수
-
-  const onIntersect: IntersectionObserverCallback = async (
-    [entry],
-    observer
-  ) => {
-    if (entry.isIntersecting && !isLoaded && (pageNumber !== 419)) {
-      observer.unobserve(entry.target);
-      getMorePlant();
-      observer.observe(entry.target);
-    }
-  }
-
-  const { setTarget } = useIntersectionObserver({
-    root: null,
-    rootMargin: '0px',
-    threshold: 1.0,
-    onIntersect,
-  });
+  const [pageNumber, setPageNumber] = useState(1)
+  // const [collectedPlantList, setCollectedPlantList] = useState([]);
+  // const [nonCollectedPlantList, setNonCollectedPlantList] = useState([]);
 
   // Login key
 
@@ -69,52 +37,53 @@ function PlantList() {
     })
       .then((res) => {
         console.log(res.data)
-        setPlantList([...plantList, ...res.data.plantDtoList])
+        console.log(pageNumber)
+        setPlantList([...plantList, res.data.plantDtoList])
       })
       .catch((err) => console.error(err))
   };
 
-  const fetchCollected = async () => {
-    axios({
-      method: 'post',
-      url: spring.plants.collected(),
-      headers: {
-        'Authorization': `Bearer ${loginToken}`
-      },
-      data: {
-        'page': 1,
-        'userSeq': userSeq
-      }
-    })
-      .then(function (res) {
-        console.log(res.data)
-        setCollectedPlantList(res.data.plantDtoList)
-      })
-      .catch(function (err) {
-        console.error(err)
-      })
-  };
+  // const fetchCollected = () => {
+  //   axios({
+  //     method: 'post',
+  //     url: spring.plants.collected(),
+  //     headers: {
+  //       'Authorization': `Bearer ${loginToken}`
+  //     },
+  //     data: {
+  //       'page': 1,
+  //       'userSeq': userSeq
+  //     }
+  //   })
+  //     .then(function (res) {
+  //       console.log(res.data)
+  //       setCollectedPlantList(res.data.plantDtoList)
+  //     })
+  //     .catch(function (err) {
+  //       console.error(err)
+  //     })
+  // };
 
-  const fetchNotCollected = async () => {
-    axios({
-      method: 'post',
-      url: spring.plants.noncollected(),
-      headers: {
-        'Authorization': `Bearer ${loginToken}`
-      },
-      data: {
-        'page': 1,
-        'userSeq': userSeq
-      }
-    })
-      .then(function (res) {
-        console.log(res.data)
-        setNonCollectedPlantList(res.data.plantDtoList)
-      })
-      .catch(function (err) {
-        console.error(err)
-      })
-  };
+  // const fetchNotCollected = () => {
+  //   axios({
+  //     method: 'post',
+  //     url: spring.plants.noncollected(),
+  //     headers: {
+  //       'Authorization': `Bearer ${loginToken}`
+  //     },
+  //     data: {
+  //       'page': 1,
+  //       'userSeq': userSeq
+  //     }
+  //   })
+  //     .then(function (res) {
+  //       console.log(res.data)
+  //       setNonCollectedPlantList(res.data.plantDtoList)
+  //     })
+  //     .catch(function (err) {
+  //       console.error(err)
+  //     })
+  // };
 
   // 곧바로 실행되는 것
   useEffect(() => {
@@ -135,13 +104,10 @@ function PlantList() {
       .catch(function (err) {
         console.error(err)
       })
-  })
-
-  useEffect(() => {
     
     fetchPlantList()
-    fetchCollected()
-    fetchNotCollected()
+    // fetchCollected()
+    // fetchNotCollected()
   })
 
   return (
@@ -150,22 +116,7 @@ function PlantList() {
       height: 800
     }}>
       <br />
-      {JSON.parse(plantList)}
-      {/* {parseData.map((item: any) => (
-        <Card
-          bg={'Light'}
-          key={item}
-          text={'dark'}
-          style={{ width: '18rem' }}
-          className="mb-2"
-        >
-          <Card.Img variant="top" src={item.imgUrl} />
-          <Card.Body>
-            <Card.Title>{item.korName} Card Title </Card.Title>
-          </Card.Body>
-        </Card>
-      ))}; */}
-      <div ref={setTarget}>{isLoaded && <h1>Loading..</h1>}</div>
+      <h4>{JSON.stringify(plantList)}</h4>
     </div>
   )
 }
