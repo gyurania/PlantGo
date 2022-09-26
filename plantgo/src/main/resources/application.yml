@@ -72,8 +72,8 @@ jwt.secret: '8sknjlO3NPTBqo319DHLNqsQAfRJEdKsETOds'
 app:
   auth:
     tokenSecret: 926D96C90030DD58429D2751AC1BDBBC
-    tokenExpiry: 18000000
-    refreshTokenExpiry: 6048000000
+    tokenExpiry: 180000000000
+    refreshTokenExpiry: 604800000000000
   oauth2:
     authorizedRedirectUris:
       - http://j7a703.p.ssafy.io:3000/oauth/redirect
