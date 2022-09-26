@@ -12,7 +12,7 @@ function NaverMap(props: any) {
   const [isRenewed, setIsRenewed] = useState<boolean>(false);
   const [area, setArea] = useState<string>("");
 
-  const token: any = sessionStorage.getItem("userToken");
+  const token: any = sessionStorage.getItem("loginToken");
 
   // 1-1. 1초마다 현재 위치 갱신
   useInterval(() => {
@@ -21,8 +21,8 @@ function NaverMap(props: any) {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((pos) => {
         if (
-          Math.abs(position.lat - pos.coords.latitude) > 0.00001 ||
-          Math.abs(position.lng - pos.coords.longitude) > 0.00001
+          Math.abs(position.lat - pos.coords.latitude) > 0.00005 ||
+          Math.abs(position.lng - pos.coords.longitude) > 0.00005
         ) {
           console.log("위치 좀 변화 됨");
           setPosition({ lat: pos.coords.latitude, lng: pos.coords.longitude });
@@ -33,6 +33,7 @@ function NaverMap(props: any) {
 
   // 1-2. 10초마다 백단에 식물 정보 데이터 요청하기
   useInterval(() => {
+    console.log("10초");
     const time = new Date();
     console.log(time.getSeconds());
     axios({
@@ -80,13 +81,9 @@ function NaverMap(props: any) {
 
   // 네이버 맵 생성, 맵 관련 각종 이벤트리스너, 로직
   useEffect(() => {
-    console.log("랜더링 전");
     if (isRenewed) {
-      console.log("랜더링 후");
       const { naver } = window;
-      console.log("if 문 전");
       if (!mapElement.current || !naver) return;
-      console.log("if 문 후");
 
       // var lat: any = 37.5656;
       // var lng: any = 126.9769;
@@ -131,7 +128,7 @@ function NaverMap(props: any) {
       new naver.maps.Marker({
         map: map,
         title: "myLocation",
-        position: new naver.maps.LatLng(props.lat, props.lng),
+        position: new naver.maps.LatLng(position.lat, position.lng),
       });
 
       var markers: naver.maps.Marker[] = [];
