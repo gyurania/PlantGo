@@ -70,7 +70,7 @@ function PlantList() {
     })
       .then((res) => {
         console.log(res.data)
-        setPlantList([...plantList, ...res.data.plantDtoList])
+        setPlantList([...plantList, res.data.plantDtoList])
       })
       .catch((err) => console.error(err))
   };
