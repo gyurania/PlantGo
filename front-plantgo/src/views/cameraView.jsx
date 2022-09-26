@@ -53,11 +53,15 @@ const WebcamCapture = () => {
 
   // 2. 사진을 찍으면 base64에서 form-data로 바꿔주기
   useEffect(() => {
+    console.log(position);
     if (imgSrc !== "") {
+      console.log("여긴오면안돼 제발");
       fetch(imgSrc)
         .then((res) => res.blob())
         .then((blob) => {
           const newFile = new File([blob], "file_name", { type: "image/png" });
+          console.log(newFile);
+          console.log(typeof newFile);
           setFormImg(newFile);
         });
     }
@@ -67,6 +71,7 @@ const WebcamCapture = () => {
   useEffect(() => {
     if (formImg !== null) {
       console.log(formImg);
+      axios.post("http://j7a703.p.ssafy.io:8080/api/photocard");
       axios({
         method: "post",
         url: "/api/photocard",
@@ -74,15 +79,16 @@ const WebcamCapture = () => {
           Authorization: `Bearer ${token}`,
         },
         data: {
-          img: formImg,
           latitude: position.lat,
           longitude: position.lng,
           area: position.area,
           userSeq: 2,
         },
-      }).then((res) => {
-        navigate("/plantResult", { state: { plantInfo: res.data } });
-      });
+      })
+        .then((res) => {
+          navigate("/plantResult", { state: { plantInfo: res.data } });
+        })
+        .catch((err) => console.log(err));
     }
   }, [formImg]);
 
