@@ -14,12 +14,13 @@ function PlantList() {
   const [page, setPage] = useState<number>(1);
   const [loading, setLoading] = useState<boolean>(true)
   const [lastElement, setLastElement] = useState<any>(null);
-  // const [collectedPlantList, setCollectedPlantList] = useState([]);
-  // const [nonCollectedPlantList, setNonCollectedPlantList] = useState([]);
+  const [collectedPlantList, setCollectedPlantList] = useState([]);
+  const [nonCollectedPlantList, setNonCollectedPlantList] = useState([]);
 
   // Login key
 
   let loginToken = sessionStorage.getItem('loginToken')
+  // let loginToken: any =  "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyNDM1Nzg1MzAxIiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTg0NDI0NjQxNn0.8Ry1vFUXRfz8UpNZXprZ57oY0Nj0dvDAz76yOylMfXE";
 
   // 로그인 안되어 있으면 로그인 화면으로 보내기
 
@@ -58,12 +59,35 @@ function PlantList() {
   }
   
   // plantlist
-  const fetchPlantList = () => {
+  const fetchPlantList = async () => {
     
     setLoading(true)
     axios({
       method: 'post',
-      url: spring.plants.list(),
+      url: "/api/plants",
+      headers: {
+        'Authorization': `Bearer ${loginToken}`
+      },
+      data: {
+        'page': page,
+        'userSeq': 2
+      }
+    })
+    .then((res) => {
+      let all:any = new Set([...plantList, ...res.data.plantDtoList]);
+      setPlantList([...all]);
+      setLoading(false);
+    })
+    .catch((err) => {
+      console.error(err)
+    })
+  };
+
+  // 모은 식물
+  const fetchCollected = () => {
+    axios({
+      method: 'post',
+      url: spring.plants.collected(),
       headers: {
         'Authorization': `Bearer ${loginToken}`
       },
@@ -72,61 +96,38 @@ function PlantList() {
         'userSeq': userSeq
       }
     })
-    .then((res) => {
-      let all:any = new Set([...plantList, ...res.data.plantDtoList]);
-      console.log(res.data)
-      setPlantList([...all]);
-      console.log(page)
-      setLoading(false);
+      .then(function (res) {
+        console.log(res.data)
+        setCollectedPlantList(res.data.plantDtoList)
+      })
+      .catch(function (err) {
+        console.error(err)
+      })
+  };
+  
+  // 아직 안 모은 식물
+  const fetchNotCollected = () => {
+    axios({
+      method: 'post',
+      url: spring.plants.noncollected(),
+      headers: {
+        'Authorization': `Bearer ${loginToken}`
+      },
+      data: {
+        'page': page,
+        'userSeq': userSeq
+      }
     })
-    .catch((err) => {
-      console.error(err)
-    })
+      .then(function (res) {
+        console.log(res.data)
+        setNonCollectedPlantList(res.data.plantDtoList)
+      })
+      .catch(function (err) {
+        console.error(err)
+      })
   };
 
-  // const fetchCollected = () => {
-  //   axios({
-  //     method: 'post',
-  //     url: spring.plants.collected(),
-  //     headers: {
-  //       'Authorization': `Bearer ${loginToken}`
-  //     },
-  //     data: {
-  //       'page': 1,
-  //       'userSeq': userSeq
-  //     }
-  //   })
-  //     .then(function (res) {
-  //       console.log(res.data)
-  //       setCollectedPlantList(res.data.plantDtoList)
-  //     })
-  //     .catch(function (err) {
-  //       console.error(err)
-  //     })
-  // };
-
-  // const fetchNotCollected = () => {
-  //   axios({
-  //     method: 'post',
-  //     url: spring.plants.noncollected(),
-  //     headers: {
-  //       'Authorization': `Bearer ${loginToken}`
-  //     },
-  //     data: {
-  //       'page': 1,
-  //       'userSeq': userSeq
-  //     }
-  //   })
-  //     .then(function (res) {
-  //       console.log(res.data)
-  //       setNonCollectedPlantList(res.data.plantDtoList)
-  //     })
-  //     .catch(function (err) {
-  //       console.error(err)
-  //     })
-  // };
-
-  // 곧바로 실행되는 것(최초 1회)
+  // 체크 후 실행
   useEffect(() => {
     if (page <= TOTAL_PAGES) {
         fetchPlantList();
@@ -148,13 +149,18 @@ function PlantList() {
     };
   }, [lastElement]);
 
-  const UserCard = (data:any) => {
+  let UserCard = (plant:any) => {
     return (
         <div className='p-4 border border-gray-500 rounded bg-white flex items-center'>
+            <div>
+                <img
+                    src={plant.data.imgUrl}
+                    className='w-16 h-16 rounded-full border-2 border-green-600'
+                    alt='user'
+                />
+            </div>
             <div className='ml-3'>
-                <p className='text-base font-bold'>
-                  {data.korName}
-                </p>
+                <p className='text-base font-bold'>{plant.data.korName}</p>
             </div>
         </div>
       );
@@ -162,32 +168,29 @@ function PlantList() {
   
     return (
       <div className='mx-44 bg-gray-100 p-6'>
-        
           <h1 className='text-3xl text-center mt-4 mb-10'>All Plants</h1>
-            {JSON.stringify(plantList)}
-            <div className='grid grid-cols-3 gap-4'>
-              {plantList.map((plant:any, i:number) => {
-                console.log(plant[i])
-                return plant[i].korName
-              })}
-              {/* {plantList.length > 0 ?
+          <div className='grid grid-cols-3 gap-4'>
+              {plantList.length > 0 ? (
                   plantList.map((plant:any, i:number) => {
-                      return i === plantList.length - 1 &&
-                          !loading &&
-                          page <= TOTAL_PAGES ? (
+                    if(i === plantList.length - 1 &&
+                      !loading &&
+                      page <= TOTAL_PAGES)
+                      return (
                           <div
                               key={`${plant.korName}-${i}`}
                               ref={setLastElement}
                           >
                               <UserCard data={plant} />
                           </div>
-                      ) : (
+                      ) 
+                    else 
+                      return (
                           <UserCard
                               data={plant}
                               key={`${plant.korName}-${i}`}
                           />
-                      );
-                  }): <></>} */}
+                      )
+            })) :<div>test</div>}
           </div>
           {loading && <p className='text-center'>loading...</p>}
 
