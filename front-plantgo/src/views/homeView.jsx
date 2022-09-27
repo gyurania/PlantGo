@@ -6,9 +6,9 @@ import "./HomeView.css";
 import NaverMap from "../components/NaverMap";
 
 function HomeView({}) {
-  if (!sessionStorage.getItem("loginToken")) {
-    window.location.replace("/login");
-  }
+  // if (!sessionStorage.getItem("loginToken")) {
+  //   window.location.replace("/login");
+  // }
 
   const navigate = useNavigate();
 
@@ -19,20 +19,6 @@ function HomeView({}) {
   useEffect(() => {
     setIsRenewed(1);
   }, []);
-
-  // 2. 현재 위치 가져오기, 랜더링 될 떄 한번만
-  useEffect(() => {
-    if (isRenewed) {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition((pos) => {
-          setPosition({ lat: pos.coords.latitude, lng: pos.coords.longitude });
-          console.log(pos);
-        });
-      } else {
-        window.alert("현재위치를 확인할 수 없습니다ㅠㅠ");
-      }
-    }
-  }, [isRenewed]);
 
   // // 3. 2번에서 위치 받아오면 현재 위치
   // useEffect(() => {
