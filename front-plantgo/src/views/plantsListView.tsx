@@ -164,7 +164,10 @@ function PlantList() {
       <div className='mx-44 bg-gray-100 p-6'>
           <h1 className='text-3xl text-center mt-4 mb-10'>All Plants</h1>
           <div className='grid grid-cols-3 gap-4'>
-              {plantList.length > 0 ?
+              {plantList.map((plant:any) => {
+                return plant.korName
+              })}
+              {/* {plantList.length > 0 ?
                   plantList.map((plant:any, i:number) => {
                       return i === plantList.length - 1 &&
                           !loading &&
@@ -181,7 +184,7 @@ function PlantList() {
                               key={`${plant.korName}-${i}`}
                           />
                       );
-                  }): <></>}
+                  }): <></>} */}
           </div>
           {loading && <p className='text-center'>loading...</p>}
 
