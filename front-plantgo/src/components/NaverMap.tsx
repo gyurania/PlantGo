@@ -203,7 +203,7 @@ function NaverMap(props: any) {
 
   return (
     <div>
-      <div ref={mapElement} style={{ width: 360, height: 800 }} />
+      <div ref={mapElement} style={{ width: "100%", height: "100vh" }} />
     </div>
   );
 }
