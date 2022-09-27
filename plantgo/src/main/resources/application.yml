@@ -76,7 +76,7 @@ app:
     refreshTokenExpiry: 604800000000000
   oauth2:
     authorizedRedirectUris:
-      - http://j7a703.p.ssafy.io/oauth/redirect
+      - https://j7a703.p.ssafy.io/oauth/redirect
 
 
 cloud:
