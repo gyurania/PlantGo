@@ -10,19 +10,23 @@ function NaverMap(props: any) {
   const [currMarkers, setCurrMarkers] = useState(Array);
   const [dragedCenter, setDragedCenter] = useState(Object);
   const [isRenewed, setIsRenewed] = useState<boolean>(false);
-  const [area, setArea] = useState<string>("");
 
-  const token: any = sessionStorage.getItem("loginToken");
+  const token: string | null = sessionStorage.getItem("loginToken");
 
   // 1-1. 1초마다 현재 위치 갱신
   useInterval(() => {
+    console.log(position);
     const time = new Date();
     console.log(time.getSeconds());
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((pos) => {
+        const tmpLatitude = pos.coords.latitude;
+        const tmpLongitude = pos.coords.longitude;
         if (
-          Math.abs(position.lat - pos.coords.latitude) > 0.00005 ||
-          Math.abs(position.lng - pos.coords.longitude) > 0.00005
+          ((position.lat - tmpLatitude) ** 2 +
+            (position.lng - tmpLongitude) ** 2) **
+            0.5 >
+          0.0005
         ) {
           console.log("위치 좀 변화 됨");
           setPosition({ lat: pos.coords.latitude, lng: pos.coords.longitude });
@@ -36,19 +40,26 @@ function NaverMap(props: any) {
     console.log("10초");
     const time = new Date();
     console.log(time.getSeconds());
+    console.log("token", token);
     axios({
-      method: "get",
-      url: `https://j7a703.p.ssafy.io/api/photocard/map/${position.lat},${position.lng}`,
+      method: "post",
+      url: `https://j7a703.p.ssafy.io/api/photocard/map/`,
       headers: {
         Authorization: `Bearer ${token}`,
+      },
+      data: {
+        latitude: position.lat,
+        longitude: position.lng,
       },
     })
       .then((res) => {
         console.log(res.data);
-        setCurrMarkers(res.data.mapPhotocardList);
+        if (res.data.mapPhotocardList !== currMarkers) {
+          setCurrMarkers(res.data.mapPhotocardList);
+        }
       })
       .catch((err) => console.log(err));
-  }, 100000);
+  }, 10000);
 
   // 1. 랜더링 된 것 표시
   useEffect(() => {
@@ -84,20 +95,8 @@ function NaverMap(props: any) {
     if (isRenewed) {
       const { naver } = window;
       if (!mapElement.current || !naver) return;
-
-      // var lat: any = 37.5656;
-      // var lng: any = 126.9769;
-
-      // if (navigator.geolocation) {
-      //   navigator.geolocation.watchPosition((pos) => {
-      //     console.log("watch Position");
-      //     lat = pos.coords.latitude;
-      //     lng = pos.coords.longitude;
-      //   });
-      // }
-
       var areaArr: any = [];
-
+      const tmpCurrMarkers: any = currMarkers;
       areaArr.push(
         { location: "a", lat: 37.4959854, lng: 127.0664091 },
         { location: "a", lat: 37.5656, lng: 126.9769 },
@@ -133,6 +132,31 @@ function NaverMap(props: any) {
 
       var markers: naver.maps.Marker[] = [];
       var infowindows: naver.maps.InfoWindow[] = [];
+
+      // 실제 사용 식물 (포토카드) 데이터
+      for (var i = 0; i < tmpCurrMarkers.length; i++) {
+        const otherMarkers = new naver.maps.Marker({
+          map: map,
+          position: new naver.maps.LatLng(
+            tmpCurrMarkers[i].latitude,
+            tmpCurrMarkers[i].longitude
+          ),
+          icon: {
+            url: tmpCurrMarkers[i].photoUrl,
+            size: new naver.maps.Size(30, 30),
+          },
+        });
+
+        const infowindow = new naver.maps.InfoWindow({
+          content: `<div>클릭해보셈<div/>`,
+          borderWidth: 1,
+          anchorSize: new naver.maps.Size(10, 10),
+          pixelOffset: new naver.maps.Point(10, -10),
+        });
+
+        markers.push(otherMarkers);
+        infowindows.push(infowindow);
+      }
 
       // 식물들 위치 Marker
       for (var i = 0; i < areaArr.length; i++) {
@@ -191,7 +215,7 @@ function NaverMap(props: any) {
         naver.maps.Event.addListener(markers[i], "click", getClickHandler(i));
       }
     }
-  }, [position]); // 나중에는 props.nearPlants만 쓸꺼임
+  }, [isRenewed, position, currMarkers]); // 나중에는 props.nearPlants만 쓸꺼임
 
   return (
     <div>
