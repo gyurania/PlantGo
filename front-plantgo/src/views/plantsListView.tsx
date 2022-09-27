@@ -151,13 +151,13 @@ function PlantList() {
   const UserCard = (data:any) => {
     return (
         <div className='p-4 border border-gray-500 rounded bg-white flex items-center'>
-            <div>
+            {/* <div>
                 <img
                     src={data.imgUrl}
                     className='w-16 h-16 rounded-full border-2 border-green-600'
                     alt='user'
                 />
-            </div>
+            </div> */}
 
             <div className='ml-3'>
                 <p className='text-base font-bold'>
