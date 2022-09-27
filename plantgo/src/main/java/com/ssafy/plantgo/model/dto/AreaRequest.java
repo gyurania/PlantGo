@@ -12,6 +12,6 @@ import lombok.Data;
 @AllArgsConstructor
 public class AreaRequest {
 
-    private String latitude;
-    private String longitude;
+    private double latitude;
+    private double longitude;
 }
