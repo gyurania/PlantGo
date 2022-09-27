@@ -39,11 +39,11 @@ public class PhotocardController {
 		return ResponseEntity.ok(null);
 	}
 
-	/** area이름으로 포토카드 가져오기 */
-	@GetMapping("/map/{area}")
-	@ApiOperation(value="area이름으로 포토카드 가져오기", notes="area이름을 pathvariable로 넘겨주면 됩니다")
-	public ResponseEntity<MapResponse> getPhotocardsByArea(@PathVariable String area) {
-		MapResponse response = photocardService.getPhotocardsByArea(area);
+	/** 위도 경도로 포토카드 가져오기 */
+	@PostMapping("/map")
+	@ApiOperation(value="위도, 경도로 포토카드 가져오기", notes="longitude, latitude 정보 필요")
+	public ResponseEntity<MapResponse> getPhotocardsByArea(@RequestBody AreaRequest areaRequest) {
+		MapResponse response = photocardService.getPhotocardsByArea(areaRequest);
 		return ResponseEntity.ok(response);
 	}
 
