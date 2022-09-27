@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.entity.mime.content.FileBody;
@@ -151,10 +152,38 @@ public class PhotocardServiceImpl implements PhotocardService {
     }
 
     @Override
-    public MapResponse getPhotocardsByArea(String area) {
+    public MapResponse getPhotocardsByArea(AreaRequest areaRequest) {
+        StringBuilder sb = new StringBuilder();
+        System.out.println("Latitude : "+areaRequest.getLatitude());
+        System.out.println("Longitude : "+areaRequest.getLongitude());
+        sb.append("https://naveropenapi.apigw.ntruss.com/map-reversegeocode/v2/gc?coords=");
+        sb.append(areaRequest.getLongitude()).append(",").append(areaRequest.getLatitude()).append("&output=json");
+        HttpClient client = HttpClientBuilder.create().build();
+        System.out.println(sb.toString());
+        HttpGet httpGet = new HttpGet(sb.toString());
+        httpGet.addHeader("X-NCP-APIGW-API-KEY-ID", "6s70rnjtot");
+        httpGet.addHeader("X-NCP-APIGW-API-KEY", "uDvd8ChhbkZbYjXX1z7y88hd3bZEiLEzYtN8kiiq");
+        String area = "";
+        HttpResponse response;
+        try {
+            response = client.execute(httpGet);
+            String jsonString = EntityUtils.toString(response.getEntity());
+            System.out.println(jsonString);
+            JSONObject jsonObj = new JSONObject(jsonString);
+            JSONObject status = jsonObj.getJSONObject("status");
+            JSONArray resultarr = jsonObj.getJSONArray("results");
+            JSONObject result = resultarr.getJSONObject(0);
+            JSONObject region = result.getJSONObject("region");
+            JSONObject area2 = region.getJSONObject("area2");
+            area = area2.getString("name");
+            System.out.println("area : " + area);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         Optional<List<PhotoCard>> photocardList = mapRepository.findByArea(area);
-        MapResponse response = new MapResponse(photocardList);
-        return response;
+        MapResponse mapResponse = new MapResponse(photocardList);
+        return mapResponse;
     }
 
 
