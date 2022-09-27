@@ -19,6 +19,7 @@ import java.io.IOException;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
+@CrossOrigin("*")
 @RequestMapping("/api/photocard")
 public class PhotocardController {
 
