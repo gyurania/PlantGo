@@ -6,73 +6,65 @@ import useInterval from "../customHook/useInterval";
 function NaverMap(props: any) {
   const mapElement = useRef(null);
 
+  const [position, setPosition] = useState({ lat: 37.5656, lng: 126.9769 });
   const [currMarkers, setCurrMarkers] = useState(Array);
   const [dragedCenter, setDragedCenter] = useState(Object);
   const [isRenewed, setIsRenewed] = useState<boolean>(false);
-  const [area, setArea] = useState<string>("");
 
-  const token: any = sessionStorage.getItem("userToken");
+  const token: string | null = sessionStorage.getItem("loginToken");
 
-  // 0. 랜더링 되면 타이머 설정해서 6초마다 행정구역 받아오기
-  // 받아온 행정구역이 이전 값과 다르면 업데이트 하고 백에 요청 보내기
-  useInterval(() => {
-    const time = new Date();
-    console.log(time.getSeconds());
-    console.log("반복설정");
-    if (navigator.geolocation) {
-      console.log("셋쨰");
-      console.log("뭐임 대체");
-      navigator.geolocation.getCurrentPosition((pos) => {
-        console.log("왜 여기는 안 와줘..?");
-        const lat = pos.coords.latitude;
-        const lng = pos.coords.longitude;
-        console.log(lat);
-        console.log(lng);
-        axios({
-          method: "get",
-          url: `/map-reversegeocode/v2/gc?coords=${pos.coords.longitude},${pos.coords.latitude}&output=json`,
-          headers: {
-            "X-NCP-APIGW-API-KEY-ID": "6s70rnjtot",
-            "X-NCP-APIGW-API-KEY": "uDvd8ChhbkZbYjXX1z7y88hd3bZEiLEzYtN8kiiq",
-          },
-        }).then((res) => {
-          console.log("넷째");
-          console.log("res", res);
-          console.log("res.data", res.data);
-          const tmp_area = res.data.results[0].region.area2.name;
-          console.log("이전 구역 = ", area);
-          console.log("새로운 구역 = ", tmp_area);
-          if (tmp_area !== area) {
-            console.log("다섯째");
-            setArea(tmp_area);
-          }
-        });
-      });
-    } else {
-      window.alert("gps동의부터하셈");
-    }
-  }, 300000);
+  // 1-1. 1초마다 현재 위치 갱신
+  // useInterval(() => {
+  //   console.log(position);
+  //   const time = new Date();
+  //   console.log(time.getSeconds());
+  //   if (navigator.geolocation) {
+  //     navigator.geolocation.getCurrentPosition((pos) => {
+  //       const tmpLatitude = pos.coords.latitude;
+  //       const tmpLongitude = pos.coords.longitude;
+  //       if (
+  //         ((position.lat - tmpLatitude) ** 2 +
+  //           (position.lng - tmpLongitude) ** 2) **
+  //           0.5 >
+  //         0.0005
+  //       ) {
+  //         console.log("위치 좀 변화 됨");
+  //         setPosition({ lat: pos.coords.latitude, lng: pos.coords.longitude });
+  //       }
+  //     });
+  //   }
+  // }, 1000);
+
+  // 1-2. 10초마다 백단에 식물 정보 데이터 요청하기
+  // useInterval(() => {
+  //   console.log("10초");
+  //   const time = new Date();
+  //   console.log(time.getSeconds());
+  //   console.log("token", token);
+  //   axios({
+  //     method: "post",
+  //     url: `https://j7a703.p.ssafy.io/api/photocard/map/`,
+  //     headers: {
+  //       Authorization: `Bearer ${token}`,
+  //     },
+  //     data: {
+  //       latitude: position.lat,
+  //       longitude: position.lng,
+  //     },
+  //   })
+  //     .then((res) => {
+  //       console.log(res.data);
+  //       if (res.data.mapPhotocardList !== currMarkers) {
+  //         setCurrMarkers(res.data.mapPhotocardList);
+  //       }
+  //     })
+  //     .catch((err) => console.log(err));
+  // }, 10000);
 
   // 1. 랜더링 된 것 표시
   useEffect(() => {
     setIsRenewed(true);
   }, []);
-
-  // 1. 행정구역(area)받아오면 백에 식물 데이터 받아오기
-  useEffect(() => {
-    axios({
-      method: "post",
-      url: `https://j7a703.p.ssafy.io/api/photocard/map/${area}`,
-      headers: {
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyNDM3OTkyOTQ1Iiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTY2NDE4NjAxMX0.wdtHp36qdKK_uDFzO47HnhxDNhW5GCeI_OU8lhnHlDU",
-      },
-    })
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((err) => console.log(err));
-  }, [area]);
 
   // 드래그 했을 때 중앙 기준 식물정보 받아오기
   // useEffect(() => {
@@ -103,8 +95,8 @@ function NaverMap(props: any) {
     if (isRenewed) {
       const { naver } = window;
       if (!mapElement.current || !naver) return;
-
       var areaArr: any = [];
+      const tmpCurrMarkers: any = currMarkers;
 
       areaArr.push(
         { location: "a", lat: 37.4959854, lng: 127.0664091 },
@@ -119,8 +111,10 @@ function NaverMap(props: any) {
         { location: "언주역", lat: 37.5073732, lng: 127.0340489 }
       );
 
+      var lat = 37.6843202;
+      var lng = 126.7796355;
       // 현재 위치 변수 할당
-      const location = new naver.maps.LatLng(props.lat, props.lng);
+      const location = new naver.maps.LatLng(lat, lng);
 
       // 지도 옵션
       const mapOptions: naver.maps.MapOptions = {
@@ -131,16 +125,61 @@ function NaverMap(props: any) {
       // 지도 생성
       const map = new naver.maps.Map(mapElement.current, mapOptions);
 
+      var lat = 37.6843202;
+      var lng = 126.7796355;
+
+      setInterval(() => {
+        console.log("인터벌 되나");
+        navigator.geolocation.watchPosition((pos) => {
+          const tmpLat = pos.coords.latitude;
+          const tmpLng = pos.coords.longitude;
+          console.log();
+          if (((tmpLat - lat) ** 2 + (tmpLng - lng) ** 2) ** 0.5 > 0.0005) {
+            console.log("맵 내부 위도", tmpLat);
+            console.log("맵 내부 경도", tmpLng);
+            lat = tmpLat;
+            lng = tmpLng;
+            var tmpLocation = new naver.maps.LatLng(lat, lng);
+            map.setCenter(tmpLocation);
+          }
+        });
+      }, 1000);
+
       // 여기서부터 Marker
       // 내 위치 Marker
       new naver.maps.Marker({
         map: map,
         title: "myLocation",
-        position: new naver.maps.LatLng(props.lat, props.lng),
+        position: new naver.maps.LatLng(lat, lng),
       });
 
       var markers: naver.maps.Marker[] = [];
       var infowindows: naver.maps.InfoWindow[] = [];
+
+      // 실제 사용 식물 (포토카드) 데이터
+      for (var i = 0; i < tmpCurrMarkers.length; i++) {
+        const otherMarkers = new naver.maps.Marker({
+          map: map,
+          position: new naver.maps.LatLng(
+            tmpCurrMarkers[i].latitude,
+            tmpCurrMarkers[i].longitude
+          ),
+          icon: {
+            url: "/public/plantGO_logo_wot_rbg.png",
+            size: new naver.maps.Size(30, 30),
+          },
+        });
+
+        const infowindow = new naver.maps.InfoWindow({
+          content: `<div>클릭해보셈<div/>`,
+          borderWidth: 1,
+          anchorSize: new naver.maps.Size(10, 10),
+          pixelOffset: new naver.maps.Point(10, -10),
+        });
+
+        markers.push(otherMarkers);
+        infowindows.push(infowindow);
+      }
 
       // 식물들 위치 Marker
       for (var i = 0; i < areaArr.length; i++) {
@@ -199,7 +238,7 @@ function NaverMap(props: any) {
         naver.maps.Event.addListener(markers[i], "click", getClickHandler(i));
       }
     }
-  }, [props.lat, props.lng, props.nearPlants, currMarkers, isRenewed]); // 나중에는 props.nearPlants만 쓸꺼임
+  }, [isRenewed, position, currMarkers]); // 나중에는 props.nearPlants만 쓸꺼임
 
   return (
     <div>

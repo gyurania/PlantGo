@@ -26,12 +26,9 @@ function App(props) {
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((pos) => {
-        consoel.log(base_server_url);
         axios({
           method: "get",
-          url:
-            base_server_url +
-            `/map-reversegeocode/v2/gc?coords=${pos.coords.longitude},${pos.coords.latitude}&output=json`,
+          url: `/map-reversegeocode/v2/gc?coords=${pos.coords.longitude},${pos.coords.latitude}&output=json`,
           headers: {
             "X-NCP-APIGW-API-KEY-ID": "6s70rnjtot",
             "X-NCP-APIGW-API-KEY": "uDvd8ChhbkZbYjXX1z7y88hd3bZEiLEzYtN8kiiq",

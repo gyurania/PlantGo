@@ -15,29 +15,12 @@ function HomeView({}) {
   const navigate = useNavigate();
 
   const [position, setPosition] = useState({ lat: 37.5656, lng: 126.9769 });
-  // const [latitude, setLatitude] = useState(37.5656);
-  // const [longitude, setLongitude] = useState(126.9769);
-  const [nearPlants, setNearPlants] = useState([]); // {lat, lng, plantNm, plantImg}
   const [isRenewed, setIsRenewed] = useState(0);
 
   // 1. 랜더링 되면 isRenewed값 갱신
   useEffect(() => {
     setIsRenewed(1);
   }, []);
-
-  // 2. 현재 위치 가져오기, 랜더링 될 떄 한번만
-  useEffect(() => {
-    if (isRenewed) {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition((pos) => {
-          setPosition({ lat: pos.coords.latitude, lng: pos.coords.longitude });
-          console.log(pos);
-        });
-      } else {
-        window.alert("현재위치를 확인할 수 없습니다ㅠㅠ");
-      }
-    }
-  }, [isRenewed]);
 
   // // 3. 2번에서 위치 받아오면 현재 위치
   // useEffect(() => {
