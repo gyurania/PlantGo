@@ -162,10 +162,13 @@ function PlantList() {
   
     return (
       <div className='mx-44 bg-gray-100 p-6'>
+        
           <h1 className='text-3xl text-center mt-4 mb-10'>All Plants</h1>
-          <div className='grid grid-cols-3 gap-4'>
-              {plantList.map((plant:any) => {
-                return plant.korName
+            {JSON.stringify(plantList)}
+            <div className='grid grid-cols-3 gap-4'>
+              {plantList.map((plant:any, i:number) => {
+                console.log(plant[i])
+                return plant[i].korName
               })}
               {/* {plantList.length > 0 ?
                   plantList.map((plant:any, i:number) => {
