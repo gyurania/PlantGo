@@ -53,8 +53,9 @@ public class PlantServiceImpl implements PlantService{
                 .plantDtoList(plantDtoList)
                 .totalPage(result.getTotalPages())
                 .totalCnt(result.getTotalElements())
+                .size(this.plantIds.size())
                 .build();
-
+        this.plantIds = null;
         return plantResponseDto;
     }
 
@@ -77,8 +78,9 @@ public class PlantServiceImpl implements PlantService{
                 .plantDtoList(plantDtoList)
                 .totalPage(result.getTotalPages())
                 .totalCnt(result.getTotalElements())
+                .size(this.plantIds.size())
                 .build();
-
+        this.plantIds = null;
         return plantResponseDto;
     }
 
@@ -97,7 +99,7 @@ public class PlantServiceImpl implements PlantService{
                 .totalPage(result.getTotalPages())
                 .totalCnt(result.getTotalElements())
                 .build();
-
+        this.plantIds = null;
         return plantResponseDto;
     }
 
