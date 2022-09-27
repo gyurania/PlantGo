@@ -17,4 +17,5 @@ public class PlantResponse {
     List<PlantDto> plantDtoList = new ArrayList<>();
     int totalPage;
     long totalCnt;
+    int size;
 }

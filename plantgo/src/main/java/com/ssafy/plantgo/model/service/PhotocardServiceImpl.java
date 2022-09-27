@@ -7,6 +7,7 @@ import com.ssafy.plantgo.model.entity.Plant;
 import com.ssafy.plantgo.model.entity.User;
 import com.ssafy.plantgo.model.repository.MapRepository;
 import com.ssafy.plantgo.model.repository.PlantRepository;
+import com.ssafy.plantgo.model.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -21,6 +22,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.ssafy.plantgo.model.entity.PhotoCard;
@@ -37,6 +39,7 @@ import java.util.UUID;
 public class PhotocardServiceImpl implements PhotocardService {
 
     private final PhotocardRepository photocardRepository;
+    private final UserRepository userRepository;
     private final PlantRepository plantRepository;
     private final ModelMapper modelMapper;
     private final MapRepository mapRepository;
@@ -103,15 +106,47 @@ public class PhotocardServiceImpl implements PhotocardService {
 		Plant plant = plantRepository.findByScientificname(scientificName);
         System.out.println("식물 한글 이름");
         System.out.println(plant.getKorName());
+        /** 토큰에서 유저정보 가져오기 */
+        org.springframework.security.core.userdetails.User principal =
+                (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userRepository.findByUserId(principal.getUsername());
+
+        /** 위,경도 값으로 area가져오기 */
+        StringBuilder sb = new StringBuilder();
+        sb.append("https://naveropenapi.apigw.ntruss.com/map-reversegeocode/v2/gc?coords=");
+        sb.append(photocardRequest.getLatitude()).append(",").append(photocardRequest.getLongitude()).append("&output=json");
+        System.out.println(sb.toString());
+
+        HttpClient httpClient = HttpClientBuilder.create().build();
+        HttpGet httpGet = new HttpGet(sb.toString());
+        httpGet.addHeader("X-NCP-APIGW-API-KEY-ID", "6s70rnjtot");
+        httpGet.addHeader("X-NCP-APIGW-API-KEY", "uDvd8ChhbkZbYjXX1z7y88hd3bZEiLEzYtN8kiiq");
+        HttpResponse httpResponse;
+        String areaname = "";
+        try {
+            httpResponse = httpClient.execute(httpGet);
+            String jsonString = EntityUtils.toString(httpResponse.getEntity());
+            System.out.println(jsonString);
+            JSONObject jsonObj = new JSONObject(jsonString);
+            JSONObject status = jsonObj.getJSONObject("status");
+            JSONArray resultarr = jsonObj.getJSONArray("results");
+            JSONObject result = resultarr.getJSONObject(0);
+            JSONObject region = result.getJSONObject("region");
+            JSONObject area2 = region.getJSONObject("area2");
+            areaname = area2.getString("name");
+            System.out.println(areaname);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 
 		/** 포토카드 저장 */
         PhotoCard photocard = PhotoCard.builder()
                 .latitude(photocardRequest.getLatitude())
                 .longitude(photocardRequest.getLongitude())
-                .user(User.builder().userSeq(photocardRequest.getUserSeq()).build())
+                .user(user)
                 .photoUrl(photoUrl)
-                .area(photocardRequest.getArea())
+                .area(areaname)
                 .plantId(plant.getPlantId())
                 .build();
         photocardRepository.save(photocard);
