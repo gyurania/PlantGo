@@ -6,16 +6,13 @@ import "./HomeView.css";
 import NaverMap from "../components/NaverMap";
 
 function HomeView({}) {
-  // if (!sessionStorage.getItem("loginToken")) {
-  //   window.location.replace("/login");
-  // }
+  if (!sessionStorage.getItem("loginToken")) {
+    window.location.replace("/login");
+  }
 
   const navigate = useNavigate();
 
   const [position, setPosition] = useState({ lat: 37.5656, lng: 126.9769 });
-  // const [latitude, setLatitude] = useState(37.5656);
-  // const [longitude, setLongitude] = useState(126.9769);
-  const [nearPlants, setNearPlants] = useState([]); // {lat, lng, plantNm, plantImg}
   const [isRenewed, setIsRenewed] = useState(0);
 
   // 1. 랜더링 되면 isRenewed값 갱신
