@@ -52,14 +52,23 @@ public class PhotocardDummyTest {
             /** API URL 초기화 */
             sb.setLength(0);
 
+            /** only for 은우 */
+//            경도: 126.7700 ~ 126.7850
+//            위도: 37.6835 ~ 37.6855
+            double longtitude = (Math.random()) + 37;
+            double latitude = Math.random() + 126;
+            if(longtitude<37.6835 || longtitude>37.686)
+                continue;
+            if(latitude<126.77 || latitude > 126.79)
+                continue;
             /** 남한 124.36 ~ 131.52 && 33.45 ~ 37 */
             /** 랜덤 위치 설정 */
-            double longtitude = (Math.random() * 5) + 33;
-            double latitude = (Math.random() * 9) + 124;
-            if (longtitude < 33.45 || longtitude > 37)
-                continue;
-            if (latitude < 124.36 || latitude > 131.52)
-                continue;
+//            double longtitude = (Math.random() * 5) + 33;
+//            double latitude = (Math.random() * 9) + 124;
+//            if (longtitude < 33.45 || longtitude > 37)
+//                continue;
+//            if (latitude < 124.36 || latitude > 131.52)
+//                continue;
             sb.append("https://naveropenapi.apigw.ntruss.com/map-reversegeocode/v2/gc?coords=");
             longtitude = Math.floor(longtitude * 1000000) / 1000000.0;
             latitude = Math.floor(latitude * 1000000) / 1000000.0;

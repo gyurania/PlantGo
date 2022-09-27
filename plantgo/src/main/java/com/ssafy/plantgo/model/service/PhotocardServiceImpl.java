@@ -104,6 +104,7 @@ public class PhotocardServiceImpl implements PhotocardService {
         System.out.println("식물 한글 이름");
         System.out.println(plant.getKorName());
 
+
 		/** 포토카드 저장 */
         PhotoCard photocard = PhotoCard.builder()
                 .latitude(photocardRequest.getLatitude())
