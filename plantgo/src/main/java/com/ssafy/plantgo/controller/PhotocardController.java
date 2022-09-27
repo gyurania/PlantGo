@@ -30,7 +30,7 @@ public class PhotocardController {
 	@ApiOperation(value="포토카드 등록", notes="img 파일과 userSeq, latitude, longitude, plantId, area 정보 필요")
 	public ResponseEntity<PhotocardResponse> photocardRegist(@RequestPart PhotocardRequest photocardRequest, @RequestPart MultipartFile img) {
 		try {
-			String url = photocardService.upload(img);
+//			String url = photocardService.upload(img);
 			PhotocardResponse photocardResponse = photocardService.registPhotocard(photocardRequest, img);
 			return ResponseEntity.ok(photocardResponse);
 		} catch (IOException e) {
