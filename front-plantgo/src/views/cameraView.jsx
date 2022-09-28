@@ -82,6 +82,12 @@ function App(props) {
         new Blob([JSON.stringify(position)], { type: "application/json" })
       );
       console.log("위치 정보 append~~~~~~~~~~");
+
+      console.log(formData);
+      console.log(formData.formImg);
+      console.log(formImg);
+      console.log(position);
+      console.log(position.lat);
       axios({
         method: "post",
         url: "/api/photocard",
