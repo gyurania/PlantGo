@@ -6,8 +6,11 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import AltImg from './plantGO_logo_wot_rbg.png'
 import Button from 'react-bootstrap/Button'
+import { useLocation, useNavigate } from "react-router-dom";
 
 function PlantList() {
+  
+  const navigate = useNavigate();
 
   const TOTAL_PAGES = 419;
 
@@ -192,6 +195,7 @@ function PlantList() {
                       variant="top"
                       alt={AltImg}
                       style={{width:50, height:50}}
+                      onClick = {(e) => {navigate("/photocards", { state: plant.data });}}
                   />
               <Card.Body>
                   <Card.Title>{plant.data.korName}</Card.Title>
@@ -206,6 +210,7 @@ function PlantList() {
                       variant="top"
                       alt={AltImg}
                       style={{width:50, height:50}}
+                      onClick = {(e) => {navigate("/photocards", { state: plant.data });}}
                   />
               <Card.Body>
                   <Card.Title>{plant.data.korName}</Card.Title>
