@@ -9,9 +9,6 @@ function NaverMap(props) {
   const [position, setPosition] = useState({ lat: 37.5656, lng: 126.9769 });
   const [currMarkers, setCurrMarkers] = useState([]);
   const [plantMarkers, setPlantMarkers] = useState([]);
-  const [tmpMarkers, setTmpMarkers] = useState([]);
-  const [dragedCenter, setDragedCenter] = useState(Object);
-  const [isRenewed, setIsRenewed] = useState(0);
   const [map, setMap] = useState();
 
   const token = sessionStorage.getItem("loginToken");
@@ -118,8 +115,10 @@ function NaverMap(props) {
     })
       .then((res) => {
         const target = res.data.mapPhotocardList;
+        console.log("이전 식물 마커", plantMarkers);
         console.log(res.data);
         if (target !== plantMarkers) {
+          console.log("식물 마커 달라짐");
           // 이전 마커들 .setMap(null) 해줘야 할 듯
           for (var i = 0; i < plantMarkers.length; i++) {
             plantMarkers[i].setMap(null);
