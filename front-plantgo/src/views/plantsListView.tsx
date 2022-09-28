@@ -90,7 +90,7 @@ function PlantList() {
     setLoading(true)
     axios({
       method: 'post',
-      url: spring.plants.collected(),
+      url: "/api/plants/collected",
       headers: {
         'Authorization': `Bearer ${loginToken}`,
       },

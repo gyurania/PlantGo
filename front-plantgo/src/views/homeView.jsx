@@ -2,8 +2,10 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./HomeView.css";
+import HomeNavBar from "../components/HomeNavBar";
 
 import NaverMap from "../components/NaverMap";
+import DownNavBar from "../components/downNavBar";
 
 function HomeView({}) {
   // if (!sessionStorage.getItem("loginToken")) {
@@ -48,15 +50,16 @@ function HomeView({}) {
 
   return (
     <div>
-      <div className="over-map">
+      {/* <div className="over-map">
         <img src="./plantGO_logo_wot_rbg.jpg" alt="logo" />
         <p className="plus-icon">Plus Button</p>
         <p className="plus-icon">Renew Button</p>
         <p className="camera-icon" onClick={goCamera}>
           Camera Icon
         </p>
-      </div>
+      </div> */}
       <NaverMap lat={position.lat} lng={position.lng} />
+      <HomeNavBar></HomeNavBar>
     </div>
   );
 }
