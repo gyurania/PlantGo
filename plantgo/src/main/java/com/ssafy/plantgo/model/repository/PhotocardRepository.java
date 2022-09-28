@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @Repository
 public interface PhotocardRepository extends JpaRepository<PhotoCard, Integer> {
-    Optional<List<PhotoCard>> findByUser(User user);
+    Optional<List<PhotoCard>> findByUserAndPlantId(User user, int plantId);
 
 
 
