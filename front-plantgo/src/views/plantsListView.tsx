@@ -194,6 +194,7 @@ function PlantList() {
                       variant="top"
                       alt={AltImg}
                       style={{width:50, height:50}}
+                      onClick = {(e) => {navigate("/photocards", { state: plant.data });}}
                   />
               <Card.Body>
                   <Card.Title>{plant.data.korName}</Card.Title>
@@ -208,6 +209,7 @@ function PlantList() {
                       variant="top"
                       alt={AltImg}
                       style={{width:50, height:50}}
+                      onClick = {(e) => {navigate("/photocards", { state: plant.data });}}
                   />
               <Card.Body>
                   <Card.Title>{plant.data.korName}</Card.Title>
