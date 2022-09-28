@@ -51,9 +51,9 @@ public class PhotocardController {
 
 	/** 해당 유저의 모든 포토카드 가져오기 */
 	@GetMapping
-	@ApiOperation(value="해당 유저의 모든 포토카드 가져오기", notes="딱히 넘겨줄 것 없음")
-	public ResponseEntity<PhotocardListResponse> getAllPhotocardsByUser() {
-		PhotocardListResponse response = photocardService.getPhotocards(userService.getUserEntity());
+	@ApiOperation(value="해당 유저의 모든 포토카드 가져오기", notes="plantId 필수")
+	public ResponseEntity<PhotocardListResponse> getAllPhotocardsByUser(@RequestParam int plantId) {
+		PhotocardListResponse response = photocardService.getPhotocards(userService.getUserEntity(), plantId);
 		return ResponseEntity.ok(response);
 	}
 
