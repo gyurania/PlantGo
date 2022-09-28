@@ -111,7 +111,6 @@ function App(props) {
         onTakePhoto={(dataUri) => {
           handleTakePhoto(dataUri); // 사진 촬영하면 base64 이미지
         }}
-        isFullscreen={true}
         isImageMirror={false}
         idealFacingMode={FACING_MODES.ENVIRONMENT}
       />

@@ -117,7 +117,15 @@ function NaverMap(props) {
         const target = res.data.mapPhotocardList;
         console.log("이전 식물 마커", plantMarkers);
         console.log(res.data);
-        if (target !== plantMarkers) {
+        const tmpCompareMarker = new naver.maps.Marker({
+          map: map,
+          title: target[0].user.username,
+          position: new naver.maps.LatLng(
+            target[0].longitude,
+            target[0].latitude
+          ),
+        });
+        if (tmpCompareMarker !== plantMarkers[0]) {
           console.log("식물 마커 달라짐");
           // 이전 마커들 .setMap(null) 해줘야 할 듯
           for (var i = 0; i < plantMarkers.length; i++) {
@@ -128,8 +136,8 @@ function NaverMap(props) {
           var tmpPlantMarkers = [];
           for (var i = 0; i < target.length; i++) {
             const tmpLoc = new naver.maps.LatLng(
-              target[i].latitude,
-              target[i].longitude
+              target[i].longitude,
+              target[i].latitude
             );
             const tmpMarker = new naver.maps.Marker({
               map: map,
