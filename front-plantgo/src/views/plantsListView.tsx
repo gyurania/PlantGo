@@ -1,9 +1,12 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import spring from "../api/spring";
+import { useNavigate } from "react-router-dom";
 
 
 function PlantList() {
+
+  const navigate = useNavigate();
 
   const TOTAL_PAGES = 419;
 
@@ -186,8 +189,9 @@ function PlantList() {
                     else 
                       return (
                           <UserCard
-                              data={plant}
-                              key={`${plant.korName}-${i}`}
+                            data={plant}
+                            key={`${plant.korName}-${i}`}
+                            onClick = {() => {navigate("/photocards", { state: { plantInfo: plant } });}}
                           />
                       )
             })) :<div>test</div>}
