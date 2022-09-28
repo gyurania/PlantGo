@@ -8,6 +8,8 @@ import AltImg from './plantGO_logo_wot_rbg.png'
 import Button from 'react-bootstrap/Button'
 
 function PlantList() {
+  
+  const navigate = useNavigate();
 
   const TOTAL_PAGES = 419;
 
