@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Camera from "react-html5-camera-photo";
+import Camera, { FACING_MODES } from "react-html5-camera-photo";
 import "react-html5-camera-photo/build/css/index.css";
 import axios from "axios";
 import Spinner from "../img/leap.gif";
@@ -33,31 +33,6 @@ function App(props) {
       });
     }
   }, []);
-
-  // useEffect(() => {
-  //   if (navigator.geolocation) {
-  //     navigator.geolocation.getCurrentPosition((pos) => {
-  //       axios({
-  //         method: "get",
-  //         url: `/map-reversegeocode/v2/gc?coords=${pos.coords.longitude},${pos.coords.latitude}&output=json`,
-  //         headers: {
-  //           "X-NCP-APIGW-API-KEY-ID": "6s70rnjtot",
-  //           "X-NCP-APIGW-API-KEY": "uDvd8ChhbkZbYjXX1z7y88hd3bZEiLEzYtN8kiiq",
-  //         },
-  //       })
-  //         .then((res) => {
-  //           console.log("here");
-  //           // console.log(res.data);
-  //           setPosition({
-  //             lat: pos.coords.latitude,
-  //             lng: pos.coords.longitude,
-  //             area: res.data.results[0].region.area2.name,
-  //           });
-  //         })
-  //         .catch((err) => console.log(err));
-  //     });
-  //   }
-  // }, []);
 
   // 2. 사진을 찍으면 base64에서 form-data로 바꿔주기
   useEffect(() => {
@@ -123,6 +98,8 @@ function App(props) {
     // 여기로 base64가 넘어오면
     // Do stuff with the photo...
     console.log("takePhoto");
+    console.log(dataUri);
+    console.log(typeof dataUri);
     // console.log(dataUri);
     setImgSrc(dataUri); // setImgSrc에 저장이 되면 -> 2번이 실행됨
   }
@@ -134,7 +111,9 @@ function App(props) {
         onTakePhoto={(dataUri) => {
           handleTakePhoto(dataUri); // 사진 촬영하면 base64 이미지
         }}
-        idealResolution={{ width: 360, height: 800 }}
+        isFullscreen={true}
+        isImageMirror={false}
+        idealFacingMode={FACING_MODES.ENVIRONMENT}
       />
     );
   } else {
