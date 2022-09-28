@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import spring from "../api/spring";
-import { height } from "@mui/system";
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
@@ -146,7 +145,7 @@ function PlantList() {
   // 모은 식물 리스트 페이지 불러오기
 
   useEffect(() => {
-    if (collectedPage <= collectedPlantCount) {
+    if (collectedPage <= collectedPlantPage) {
       fetchCollected()
     }
   }, [collectedPage])
@@ -261,7 +260,7 @@ function PlantList() {
                 {collectedPlantList.length > 0 ? (
                     collectedPlantList.map((plant:any, i:number) => {
                       if(i === collectedPlantList.length - 1 &&
-                        !loading && collectedPage <= collectedPlantCount)
+                        !loading && collectedPage <= collectedPlantPage)
                         return (
                             <Col
                                 key={`${plant.korName}-${i}`}
@@ -284,7 +283,7 @@ function PlantList() {
               })) :<div>끝</div>}
             </Row>
             {loading && <p className='text-center'>loading...</p>}
-            {collectedPage - 1 === collectedPlantCount && (
+            {collectedPage - 1 === collectedPlantPage && (
                 <p className='text-center my-10'>더 이상의 정보가 없습니다.</p>
             )}
           </div>}
