@@ -31,10 +31,6 @@ function NaverMap(props) {
   };
   console.log("두번째", map);
 
-  const centerMap = () => {
-    map.setCenter(locationTwo);
-  };
-
   useEffect(() => {
     initMap();
   }, []);
@@ -49,12 +45,17 @@ function NaverMap(props) {
         const tmpLng = pos.coords.longitude;
         const tmpLoc = new naver.maps.LatLng(tmpLat, tmpLng);
         map.setCenter(tmpLoc);
+        new naver.maps.Marker({
+          map: map,
+          title: "myLocation",
+          position: new naver.maps.LatLng(tmpLat, tmpLng),
+        });
       },
       () => {
         window.alert("GPS동의 바람");
       }
     );
-  }, 5000);
+  }, 3000);
 
   // // 1-1. 1초마다 현재 위치 갱신
   // // useInterval(() => {
