@@ -36,7 +36,7 @@ function App(props) {
         })
           .then((res) => {
             console.log("here");
-            console.log(res.data);
+            // console.log(res.data);
             setPosition({
               lat: pos.coords.latitude,
               lng: pos.coords.longitude,
@@ -53,6 +53,7 @@ function App(props) {
     if (rendered) {
       console.log(position);
       if (imgSrc !== "") {
+        // 이미지가 비어있지 않으면??
         console.log("여긴오면안돼 제발");
         fetch(imgSrc)
           .then((res) => res.blob())
@@ -62,30 +63,40 @@ function App(props) {
             });
             console.log(newFile);
             console.log(typeof newFile);
-            setFormImg(newFile);
+            setFormImg(newFile); // 바뀐 걸 formImg에 넣음
           });
       }
     }
-  }, [imgSrc]);
+  }, [imgSrc]); // imgSrc에 변화가 생기면 useEffect 실행됨, base64 -> 이미지 파일로 변환하는 함수
 
   // 3. form-data가 생성되면 back에 postcard post요청
   useEffect(() => {
     if (formImg !== null) {
       const formData = new FormData();
       formData.append("files", formImg);
-      console.log(formImg);
+      // console.log(formImg);
+      console.log("formImg append!!!!!!!!!!!");
+
+      formData.append(
+        "position",
+        new Blob([JSON.stringify(position)], { type: "application/json" })
+      );
+      console.log("위치 정보 append~~~~~~~~~~");
       axios({
         method: "post",
-        url: "http://j7a703.p.ssafy.io/api/photocard",
+        url: "/api/photocard",
         headers: {
           Authorization: `Bearer ${token}`,
+          "Access-Control-Allow-Credentials": true,
           "Content-Type": "multipart/form-data",
         },
         data: {
-          latitude: position.lat,
-          longitude: position.lng,
-          area: position.area,
-          userSeq: 2,
+          // 여기서 formData를 어떻게 보내야 할지?? list 형식?
+          // latitude: position.lat,
+          // longitude: position.lng,
+          // area: position.area,
+          // userSeq: 2,
+          formData,
         },
       })
         .then((res) => {
@@ -93,32 +104,25 @@ function App(props) {
         })
         .catch((err) => console.log(err));
     }
-  }, [formImg]);
+  }, [formImg]); // formImg가 바뀌면
 
   function handleTakePhoto(dataUri) {
+    // 여기로 base64가 넘어오면
     // Do stuff with the photo...
     console.log("takePhoto");
-    console.log(dataUri);
-    setImgSrc(dataUri);
+    // console.log(dataUri);
+    setImgSrc(dataUri); // setImgSrc에 저장이 되면 -> 2번이 실행됨
   }
 
   // React DOM
   if (formImg === null) {
     return (
-      <Container
-        fluid
-        style={{
-          height: "100vh",
-          backgroundSize: "cover",
+      <Camera
+        onTakePhoto={(dataUri) => {
+          handleTakePhoto(dataUri); // 사진 촬영하면 base64 이미지
         }}
-      >
-        <Camera
-          onTakePhoto={(dataUri) => {
-            handleTakePhoto(dataUri);
-          }}
-          idealResolution={{ width: 360, height: 800 }}
-        />
-      </Container>
+        idealResolution={{ width: 360, height: 800 }}
+      />
     );
   } else {
     return (
