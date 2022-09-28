@@ -39,7 +39,7 @@ spring:
             clientSecret: dXGoKqRxWyc4Eibc0BxpX2evsEL2JTHH
             clientAuthenticationMethod: post
             authorizationGrantType: authorization_code
-            redirectUri: "http://j7a703.p.ssafy.io:8080/login/oauth2/code/KAKAO"
+            redirectUri: "http://localhost:3000/login/oauth2/code/KAKAO"
             scope:
               - profile_nickname
               - profile_image
