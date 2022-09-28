@@ -11,7 +11,7 @@ import Col from "react-bootstrap/Col";
 function App(props) {
   const [imgSrc, setImgSrc] = useState("");
   const [formImg, setFormImg] = useState(null);
-  const [position, setPosition] = useState({ lat: 0, lng: 0, area: "" });
+  const [position, setPosition] = useState({ latitude: 0, longitude: 0 });
   const [rendered, setRendered] = useState(0);
 
   const navigate = useNavigate();
@@ -26,27 +26,38 @@ function App(props) {
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((pos) => {
-        axios({
-          method: "get",
-          url: `/map-reversegeocode/v2/gc?coords=${pos.coords.longitude},${pos.coords.latitude}&output=json`,
-          headers: {
-            "X-NCP-APIGW-API-KEY-ID": "6s70rnjtot",
-            "X-NCP-APIGW-API-KEY": "uDvd8ChhbkZbYjXX1z7y88hd3bZEiLEzYtN8kiiq",
-          },
-        })
-          .then((res) => {
-            console.log("here");
-            // console.log(res.data);
-            setPosition({
-              lat: pos.coords.latitude,
-              lng: pos.coords.longitude,
-              area: res.data.results[0].region.area2.name,
-            });
-          })
-          .catch((err) => console.log(err));
+        setPosition({
+          latitude: pos.coords.latitude,
+          longitude: pos.coords.longitude,
+        });
       });
     }
   }, []);
+
+  // useEffect(() => {
+  //   if (navigator.geolocation) {
+  //     navigator.geolocation.getCurrentPosition((pos) => {
+  //       axios({
+  //         method: "get",
+  //         url: `/map-reversegeocode/v2/gc?coords=${pos.coords.longitude},${pos.coords.latitude}&output=json`,
+  //         headers: {
+  //           "X-NCP-APIGW-API-KEY-ID": "6s70rnjtot",
+  //           "X-NCP-APIGW-API-KEY": "uDvd8ChhbkZbYjXX1z7y88hd3bZEiLEzYtN8kiiq",
+  //         },
+  //       })
+  //         .then((res) => {
+  //           console.log("here");
+  //           // console.log(res.data);
+  //           setPosition({
+  //             lat: pos.coords.latitude,
+  //             lng: pos.coords.longitude,
+  //             area: res.data.results[0].region.area2.name,
+  //           });
+  //         })
+  //         .catch((err) => console.log(err));
+  //     });
+  //   }
+  // }, []);
 
   // 2. 사진을 찍으면 base64에서 form-data로 바꿔주기
   useEffect(() => {
@@ -54,7 +65,7 @@ function App(props) {
       console.log(position);
       if (imgSrc !== "") {
         // 이미지가 비어있지 않으면??
-        console.log("여긴오면안돼 제발");
+        console.log("여긴오면안돼 제발 와도 돼");
         fetch(imgSrc)
           .then((res) => res.blob())
           .then((blob) => {
@@ -73,37 +84,33 @@ function App(props) {
   useEffect(() => {
     if (formImg !== null) {
       const formData = new FormData();
-      formData.append("files", formImg);
+      // formData.append("img", formImg, {
+      //   type: "image/jpg",
+      // });
+      formData.append("img", formImg);
       // console.log(formImg);
       console.log("formImg append!!!!!!!!!!!");
 
+      // formData.append("photocardRequest", JSON.stringify(position), {
+      //   type: "application/json",
+      // });
       formData.append(
-        "position",
-        new Blob([JSON.stringify(position)], { type: "application/json" })
+        "photocardRequest",
+        new Blob([JSON.stringify(position)], {
+          type: "application/json",
+        })
       );
-      console.log("위치 정보 append~~~~~~~~~~");
 
-      console.log(formData);
-      console.log(formData.formImg);
-      console.log(formImg);
-      console.log(position);
-      console.log(position.lat);
+      // console.log(formData.position.longitude);
       axios({
         method: "post",
-        url: "/api/photocard",
+        url: "https://j7a703.p.ssafy.io/api/photocard",
         headers: {
           Authorization: `Bearer ${token}`,
           "Access-Control-Allow-Credentials": true,
           "Content-Type": "multipart/form-data",
         },
-        data: {
-          // 여기서 formData를 어떻게 보내야 할지?? list 형식?
-          // latitude: position.lat,
-          // longitude: position.lng,
-          // area: position.area,
-          // userSeq: 2,
-          formData,
-        },
+        data: formData,
       })
         .then((res) => {
           navigate("/plantResult", { state: { plantInfo: res.data } });
