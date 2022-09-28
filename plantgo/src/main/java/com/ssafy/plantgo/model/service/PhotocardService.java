@@ -15,7 +15,7 @@ public interface PhotocardService {
 	String upload(MultipartFile multipartFile) throws IOException;
 
 	PhotocardResponse updatePhotocard(PhotocardUpdateRequest photocardUpdateRequest, int photocard_id);
-	PhotocardListResponse getPhotocards(User user);
+	PhotocardListResponse getPhotocards(User user, int plantId);
 	MapResponse getPhotocardsByArea(AreaRequest areaRequest);
 
 }
