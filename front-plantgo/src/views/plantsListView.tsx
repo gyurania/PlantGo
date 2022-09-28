@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import spring from "../api/spring";
-import { height } from "@mui/system";
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
@@ -21,6 +20,7 @@ function PlantList() {
   const [lastElement1, setLastElement1] = useState<any>(null);
   const [lastElement2, setLastElement2] = useState<any>(null);
   const [collectedPlantList, setCollectedPlantList] = useState<any>([]);
+  const [collectedPlantPage, setCollectedPlantPage] = useState<number>(0);
   const [collectedPlantCount, setCollectedPlantCount] = useState<number>(0);
   const [nonCollectedPlantList, setNonCollectedPlantList] = useState<any>([]);
   const [watchMode, setWatchMode] = useState<number>(0);
@@ -65,7 +65,7 @@ function PlantList() {
     setLoading(true)
     axios({
       method: 'post',
-      url: "/api/plants",
+      url: spring.plants.list(),
       headers: {
         'Authorization': `Bearer ${loginToken}`,
       },
@@ -103,7 +103,8 @@ function PlantList() {
         console.log(res.data)
         let all:any = new Set([...collectedPlantList, ...res.data.plantDtoList]);
         setCollectedPlantList([...all]);
-        setCollectedPlantCount(res.data.totalPage)
+        setCollectedPlantCount(res.data.totalCnt)
+        setCollectedPlantPage(res.data.totalPage)
         setLoading(false)
       })
       .catch(function (err) {
@@ -137,15 +138,15 @@ function PlantList() {
   // 모든 리스트 페이지 불러오기
   useEffect(() => {
     if (wholePage <= TOTAL_PAGES) {
-        fetchPlantList();
+      fetchPlantList();
     }
   }, [wholePage]);
   
   // 모은 식물 리스트 페이지 불러오기
 
   useEffect(() => {
-    if (collectedPage <= collectedPlantCount) {
-    fetchCollected()
+    if (collectedPage <= collectedPlantPage) {
+      fetchCollected()
     }
   }, [collectedPage])
 
@@ -259,7 +260,7 @@ function PlantList() {
                 {collectedPlantList.length > 0 ? (
                     collectedPlantList.map((plant:any, i:number) => {
                       if(i === collectedPlantList.length - 1 &&
-                        !loading && collectedPage <= collectedPlantCount)
+                        !loading && collectedPage <= collectedPlantPage)
                         return (
                             <Col
                                 key={`${plant.korName}-${i}`}
@@ -282,7 +283,7 @@ function PlantList() {
               })) :<div>끝</div>}
             </Row>
             {loading && <p className='text-center'>loading...</p>}
-            {collectedPage - 1 === collectedPlantCount && (
+            {collectedPage - 1 === collectedPlantPage && (
                 <p className='text-center my-10'>더 이상의 정보가 없습니다.</p>
             )}
           </div>}
