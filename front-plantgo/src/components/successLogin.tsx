@@ -6,29 +6,28 @@ import axios from "axios";
 function SuccessLogin() {
   const location = useLocation();
   const CODE = location.search.split("=")[1];
-  
   useEffect(() => {
     sessionStorage.clear();
     sessionStorage.setItem("loginToken", CODE);
   });
   let loginToken = sessionStorage.getItem("loginToken")
   
-    const getUserSeq = () => {
-      axios({
-        method: 'get',
-        url: spring.user.getUser(),
-        headers: {
-          'Authorization': `Bearer ${loginToken}`
-        }
+  const getUserSeq = () => {
+    axios({
+      method: 'get',
+      url: spring.user.getUser(),
+      headers: {
+        'Authorization': `Bearer ${loginToken}`
+      }
+    })
+      .then(function (res) {          
+        sessionStorage.setItem("userSeq", res.data.body.user.userSeq);
+        window.location.replace("/");
       })
-        .then(function (res) {          
-          sessionStorage.setItem("userSeq", res.data.body.user.userSeq);
-          window.location.replace("/");
-        })
-        .catch(function (err) {
-          console.error(err)
-        })
-    }
+      .catch(function (err) {
+        console.error(err)
+      })
+  }
   useEffect(() => {
     getUserSeq()
   })

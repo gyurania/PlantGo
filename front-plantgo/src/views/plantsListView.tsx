@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 
 function PlantList() {
-
+  
   const navigate = useNavigate();
 
   const TOTAL_PAGES = 419;
@@ -68,11 +68,12 @@ function PlantList() {
       method: 'post',
       url: "/api/plants",
       headers: {
-        'Authorization': `Bearer ${loginToken}`
+        'Authorization': `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyNDM1Nzg1MzAxIiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTg0NDI1NzkwN30.vQ3YZoLrTA2CNRmSj--VDDd5yiZpXonegC4twFCAcyc`,
+        "Access-Control-Allow-Credentials": true,
       },
       data: {
         'page': page,
-        'userSeq': userSeq
+        'userSeq': 2
       }
     })
     .then((res) => {
@@ -159,6 +160,7 @@ function PlantList() {
                     src={plant.data.imgUrl}
                     className='w-16 h-16 rounded-full border-2 border-green-600'
                     alt='user'
+                    onClick = {(e) => {navigate("/photocards", { state: plant.data });}}
                 />
             </div>
             <div className='ml-3'>
@@ -190,7 +192,6 @@ function PlantList() {
                           <UserCard
                             data={plant}
                             key={`${plant.korName}-${i}`}
-                            onClick = {() => {navigate("/photocards", { state: { plantInfo: plant } });}}
                           />
                       )
             })) :<div>test</div>}
