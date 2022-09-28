@@ -11,7 +11,6 @@ function PlantList() {
   const TOTAL_PAGES = 419;
 
   // useState, useRef, useInview
-  const [userSeq, setUserSeq] = useState(0);
   const [plantList, setPlantList] = useState<any>([]);
   const [endPage, setEndPage] = useState<boolean>(true)
   const [page, setPage] = useState<number>(1);
@@ -20,10 +19,10 @@ function PlantList() {
   const [collectedPlantList, setCollectedPlantList] = useState([]);
   const [nonCollectedPlantList, setNonCollectedPlantList] = useState([]);
 
-  // Login key
+  // loginToken, userSeq
 
   let loginToken = sessionStorage.getItem('loginToken')
-  // let loginToken: any =  "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyNDM1Nzg1MzAxIiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTg0NDI0NjQxNn0.8Ry1vFUXRfz8UpNZXprZ57oY0Nj0dvDAz76yOylMfXE";
+  let userSeq = sessionStorage.getItem("userSeq")
 
   // 로그인 안되어 있으면 로그인 화면으로 보내기
 
@@ -44,22 +43,22 @@ function PlantList() {
   );
 
   // userSeq get
-  const getUserSeq = () => {
-    axios({
-      method: 'get',
-      url: spring.user.getUser(),
-      headers: {
-        'Authorization': `Bearer ${loginToken}`
-      }
-    })
-      .then(function (res) {
-        console.log(res.data.body.user.userSeq);
-        setUserSeq(res.data.body.user.userSeq);
-      })
-      .catch(function (err) {
-        console.error(err)
-      })
-  }
+  // const getUserSeq = () => {
+  //   axios({
+  //     method: 'get',
+  //     url: spring.user.getUser(),
+  //     headers: {
+  //       'Authorization': `Bearer ${loginToken}`
+  //     }
+  //   })
+  //     .then(function (res) {
+  //       console.log(res.data.body.user.userSeq);
+  //       setUserSeq(res.data.body.user.userSeq);
+  //     })
+  //     .catch(function (err) {
+  //       console.error(err)
+  //     })
+  // }
   
   // plantlist
   const fetchPlantList = async () => {
@@ -73,7 +72,7 @@ function PlantList() {
       },
       data: {
         'page': page,
-        'userSeq': 2
+        'userSeq': userSeq
       }
     })
     .then((res) => {
