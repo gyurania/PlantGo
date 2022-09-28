@@ -114,7 +114,7 @@ public class PhotocardServiceImpl implements PhotocardService {
         /** 위,경도 값으로 area가져오기 */
         StringBuilder sb = new StringBuilder();
         sb.append("https://naveropenapi.apigw.ntruss.com/map-reversegeocode/v2/gc?coords=");
-        sb.append(photocardRequest.getLatitude()).append(",").append(photocardRequest.getLongitude()).append("&output=json");
+        sb.append(photocardRequest.getLongitude()).append(",").append(photocardRequest.getLatitude()).append("&output=json");
         System.out.println(sb.toString());
 
         HttpClient httpClient = HttpClientBuilder.create().build();
