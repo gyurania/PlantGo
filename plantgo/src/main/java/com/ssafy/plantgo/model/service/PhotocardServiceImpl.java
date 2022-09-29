@@ -101,6 +101,7 @@ public class PhotocardServiceImpl implements PhotocardService {
 
         } catch (IOException e) {
             e.printStackTrace();
+            return null;
         }
 
 		Plant plant = plantRepository.findByScientificname(scientificName);
@@ -137,7 +138,7 @@ public class PhotocardServiceImpl implements PhotocardService {
             System.out.println(areaname);
         } catch (IOException e) {
             e.printStackTrace();
-            return null;
+
         }
 
         String photoUrl = upload(img);
