@@ -93,7 +93,7 @@ function PlantList() {
     setLoading(true)
     axios({
       method: 'post',
-      url: "/api/plants/collected",
+      url: spring.plants.collected(),
       headers: {
         'Authorization': `Bearer ${loginToken}`,
       },
@@ -189,31 +189,19 @@ function PlantList() {
   let UserCard = (plant:any) => {
     if (plant.data.collected==false) {
       return (
-          <Card>
-              <Card.Img
-                      src={plant.data.imgUrl}
-                      variant="top"
-                      alt={AltImg}
-                      style={{width:50, height:50}}
-                      onClick = {(e) => {navigate("/photocards", { state: plant.data });}}
-                  />
+          <Card border="danger" style={{ width: '18rem' }}>
               <Card.Body>
-                  <Card.Title>{plant.data.korName}</Card.Title>
+                <Card.Title>{plant.data.korName}</Card.Title>
+                <Card.Text>수집 미완료</Card.Text>
               </Card.Body>
           </Card>
         );
       } else {
         return (
-          <Card>
-              <Card.Img
-                      src={plant.data.imgUrl}
-                      variant="top"
-                      alt={AltImg}
-                      style={{width:50, height:50}}
-                      onClick = {(e) => {navigate("/photocards", { state: plant.data });}}
-                  />
+          <Card border="primary" style={{ width: '18rem' }}>
               <Card.Body>
-                  <Card.Title>{plant.data.korName}</Card.Title>
+                <Card.Title>{plant.data.korName}</Card.Title>
+                <Card.Text>완료</Card.Text>
               </Card.Body>
           </Card>
         );
