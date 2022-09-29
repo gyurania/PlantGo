@@ -49,7 +49,7 @@ public class PhotoCard extends BaseTimeEntity{
 	private String area;
 
 	@Column(name = "Kor_name")
-	private String kor_name;
+	private String korName;
 
 
 

@@ -25,19 +25,17 @@ public class PlantServiceImpl implements PlantService{
     private final PlantRepository plantRepository;
     private final PhotocardRepository photocardRepository;
     private final ModelMapper modelMapper;
-    private Set<Integer> plantIds;
 
     @Autowired
-    public PlantServiceImpl(PlantRepository plantRepository, PhotocardRepository photocardRepository, ModelMapper modelMapper, List<Integer> plantIds) {
+    public PlantServiceImpl(PlantRepository plantRepository, PhotocardRepository photocardRepository, ModelMapper modelMapper) {
         this.plantRepository = plantRepository;
         this.photocardRepository = photocardRepository;
         this.modelMapper = modelMapper;
-        this.plantIds = null;
     }
 
     @Override
     public PlantResponse plantList(Long userSeq, int page) {
-        if(this.plantIds == null) getPlantIds(userSeq);
+        Set<Integer> plantIds = getPlantIds(userSeq);
 
         Pageable pageable = PageRequest.of(page-1, 10, Sort.by("korName"));
         Page<Plant> result = plantRepository.findAll(pageable);
@@ -47,7 +45,7 @@ public class PlantServiceImpl implements PlantService{
             result.get().forEach(plant -> {
                 PlantDto plantDto =modelMapper.map(plant, PlantDto.class);
                 log.info("[plantListService]: plantDto {}", plantDto.toString());
-                log.info("[plantListService] plnatIds size {}", this.plantIds.size());
+                log.info("[plantListService] plnatIds size {}", plantIds.size());
                 if(plantIds.contains(plantDto.getPlantId())) plantDto.setCollected(true);
                 plantDtoList.add(plantDto);
             });
@@ -57,18 +55,18 @@ public class PlantServiceImpl implements PlantService{
                 .plantDtoList(plantDtoList)
                 .totalPage(result.getTotalPages())
                 .totalCnt(result.getTotalElements())
-                .size(this.plantIds.size())
+                .size(plantIds.size())
                 .build();
-        //this.plantIds = null;
+
         return plantResponseDto;
     }
 
     @Override
     public PlantResponse plantCollected(Long userSeq, int page) {
-        if(this.plantIds == null) getPlantIds(userSeq);
+        Set<Integer> plantIds = getPlantIds(userSeq);
 
         Pageable pageable = PageRequest.of(page-1, 10, Sort.by("korName"));
-        Page<Plant> result = plantRepository.findByPlantIdIn(this.plantIds, pageable);
+        Page<Plant> result = plantRepository.findByPlantIdIn(plantIds, pageable);
 
         List<PlantDto> plantDtoList = new ArrayList<>();
 
@@ -82,18 +80,18 @@ public class PlantServiceImpl implements PlantService{
                 .plantDtoList(plantDtoList)
                 .totalPage(result.getTotalPages())
                 .totalCnt(result.getTotalElements())
-                .size(this.plantIds.size())
+                .size(plantIds.size())
                 .build();
-        this.plantIds = null;
+
         return plantResponseDto;
     }
 
     @Override
     public PlantResponse plantNotCollected(Long userSeq, int page) {
-        if(this.plantIds == null) getPlantIds(userSeq);
+        Set<Integer> plantIds =  getPlantIds(userSeq);
 
         Pageable pageable = PageRequest.of(page-1, 10, Sort.by("korName"));
-        Page<Plant> result = plantRepository.findByPlantIdNotIn(this.plantIds, pageable);
+        Page<Plant> result = plantRepository.findByPlantIdNotIn(plantIds, pageable);
 
         List<PlantDto> plantDtoList = new ArrayList<>();
         result.get().forEach(plant -> plantDtoList.add(modelMapper.map(plant, PlantDto.class)));
@@ -103,12 +101,12 @@ public class PlantServiceImpl implements PlantService{
                 .totalPage(result.getTotalPages())
                 .totalCnt(result.getTotalElements())
                 .build();
-        this.plantIds = null;
+
         return plantResponseDto;
     }
 
     @Override
-    public void getPlantIds(Long userSeq) {
+    public Set<Integer> getPlantIds(Long userSeq) {
         User user = User.builder().userSeq(userSeq).build();
         Set<Integer> plantIds = new HashSet<>();
 
@@ -119,6 +117,6 @@ public class PlantServiceImpl implements PlantService{
             plantIds.add(card.getPlantId());
         }
 
-        this.plantIds = plantIds;
+        return plantIds;
     }
 }
