@@ -122,7 +122,7 @@ public class PhotocardDummyTest {
                         .user(User.builder().userSeq(userSeq).build())
                         .photoUrl(photoUrl)
                         .area(name)
-                        .kor_name(plant.getKorName())
+                        .korName(plant.getKorName())
                         .plantId(plant.getPlantId())
                         .build();
                 photocardRepository.save(photocard);
