@@ -4,6 +4,8 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.time.LocalDateTime;
+
 /** 포토카드 등록 시 들어오는 데이터 */
 
 @Data
@@ -36,6 +38,9 @@ public class PhotocardResponse {
 
 	@ApiModelProperty(name = "식물도감 아이디")
 	private int plantId;
+
+	@ApiModelProperty(name = "생성시간")
+	private LocalDateTime createdAt;
 
 	@ApiModelProperty(name = "구획")
 	private String area;
