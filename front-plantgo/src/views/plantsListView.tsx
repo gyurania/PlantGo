@@ -35,9 +35,9 @@ function PlantList() {
 
   // 로그인 안되어 있으면 로그인 화면으로 보내기
 
-  // if (!loginToken) {
-  //   window.location.replace('/login')
-  // }
+  if (!loginToken) {
+    window.location.replace('/login')
+  }
 
   // 모든 리스트 observer
 
