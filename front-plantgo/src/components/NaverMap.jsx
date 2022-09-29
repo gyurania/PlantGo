@@ -116,7 +116,7 @@ function NaverMap(props) {
         console.log(res.data);
         console.log(plantMarkers[0]);
         console.log(plantMarkers[0].title);
-        if (target.length === 0 || target[0] !== plantMarkers[0]) {
+        if (target.length !== 0) {
           console.log("식물 마커 달라짐");
           // 이전 마커들 .setMap(null) 해줘야 할 듯
           for (var i = 0; i < plantMarkers.length; i++) {
