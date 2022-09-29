@@ -202,7 +202,7 @@ function PlantList() {
           boxShadow: "3px 3px 5px #152967",
           textAlign: "center",
           display: "inline-block"
-        }}>
+        }} onClick = {() => {navigate("/photocards", { state: plant.data });}}>
           <Card.Body>
             <Card.Img src={AltImg} style={{
               height: 88,
@@ -233,7 +233,7 @@ function PlantList() {
           boxShadow: "3px 3px 5px #152967",
           textAlign: "center",
           display: "inline-block"
-        }}>
+        }} onClick = {() => {navigate("/photocards", { state: plant.data });}}>
           <Card.Body>
             <Card.Img src={AltImg} style={{
               height: 88,
