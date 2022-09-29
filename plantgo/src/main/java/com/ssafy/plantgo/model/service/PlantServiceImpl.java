@@ -43,11 +43,13 @@ public class PlantServiceImpl implements PlantService{
         Page<Plant> result = plantRepository.findAll(pageable);
 
         List<PlantDto> plantDtoList = new ArrayList<>();
-        result.get().forEach(plant -> {
-            PlantDto plantDto =modelMapper.map(plant, PlantDto.class);
-            if(plantIds.contains(plantDto.getPlantId())) plantDto.setCollected(true);
-            plantDtoList.add(plantDto);
-        });
+        if(result.getSize()>0){
+            result.get().forEach(plant -> {
+                PlantDto plantDto =modelMapper.map(plant, PlantDto.class);
+                if(plantIds.contains(plantDto.getPlantId())) plantDto.setCollected(true);
+                plantDtoList.add(plantDto);
+            });
+        }
 
         PlantResponse plantResponseDto = PlantResponse.builder()
                 .plantDtoList(plantDtoList)
