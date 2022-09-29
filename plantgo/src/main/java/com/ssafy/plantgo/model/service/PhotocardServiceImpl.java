@@ -159,7 +159,7 @@ public class PhotocardServiceImpl implements PhotocardService {
                 .user(user)
                 .photoUrl(photoUrl)
                 .area(areaname)
-                .kor_name(plant.getKorName())
+                .korName(plant.getKorName())
                 .plantId(plant.getPlantId())
                 .build();
         photocardRepository.save(photocard);
