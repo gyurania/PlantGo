@@ -79,7 +79,6 @@ app:
       - http://localhost:3000/oauth/redirect
 
 
-
 cloud:
   aws:
     credentials:
