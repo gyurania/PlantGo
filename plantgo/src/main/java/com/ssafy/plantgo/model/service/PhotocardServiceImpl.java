@@ -89,11 +89,16 @@ public class PhotocardServiceImpl implements PhotocardService {
         HttpResponse response;
         try {
             response = client.execute(request);
+            if(response.getEntity()==null)
+                return null;
             String jsonString = EntityUtils.toString(response.getEntity());
+
             System.out.println("Json형태의 리턴값");
             System.out.println(jsonString);
             System.out.println();
             JSONObject jsonObj = new JSONObject(jsonString);
+            if(jsonObj == null)
+                return null;
             JSONArray resultarr = jsonObj.getJSONArray("results");
             JSONObject mostcorrect = resultarr.getJSONObject(0);
             JSONObject species = mostcorrect.getJSONObject("species");
