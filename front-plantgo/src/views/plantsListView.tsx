@@ -6,6 +6,7 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import AltImg from './plantGO_logo_wot_rbg.png'
 import Button from 'react-bootstrap/Button'
+import CheckMark from './blue_check.png'
 import { useLocation, useNavigate } from "react-router-dom";
 
 function PlantList() {
@@ -197,7 +198,7 @@ function PlantList() {
           height: 200,
           width: 170,
           padding: 0,
-          margin: "1em",
+          margin: "0.75em",
           backgroundColor: "#FFFFFF",
           boxShadow: "3px 3px 5px #152967",
           textAlign: "center",
@@ -224,17 +225,24 @@ function PlantList() {
       );
     } else {
       return (
-        <Card border="success" style={{
+        <Card border="primary" style={{
           height: 200,
           width: 170,
           padding: 0,
-          margin: "1em",
+          margin: "0.75em",
           backgroundColor: "#FFFFFF",
           boxShadow: "3px 3px 5px #152967",
           textAlign: "center",
           display: "inline-block"
         }} onClick = {() => {navigate("/photocards", { state: plant.data });}}>
           <Card.Body>
+            <img src={CheckMark} style= {{
+              height: 30,
+              width: 30,
+              position: "absolute",
+              top: 0,
+              left:0
+            }}/>
             <Card.Img src={AltImg} style={{
               height: 88,
               width: 120
@@ -257,7 +265,10 @@ function PlantList() {
   }
   
     return (
-      <div className='mx-44 bg-gray-100 p-6'>
+      <div style={{
+        height: 800,
+        width: 420
+      }}>
           <h1 className='text-3xl text-center mt-4 mb-10'>Plants Guide</h1>
           <h2>총 식물 수 : 4188</h2>
           <h2>모은 식물 수 : {collectedPlantCount}</h2>
