@@ -71,6 +71,7 @@ public class PhotocardServiceImpl implements PhotocardService {
             bufferedReader.close();
         }catch (IOException e){
             e.printStackTrace();
+            return null;
         }
         File file = new File(f.toURI());
 
@@ -106,6 +107,8 @@ public class PhotocardServiceImpl implements PhotocardService {
 
 		Plant plant = plantRepository.findByScientificname(scientificName);
         System.out.println("식물 한글 이름");
+        if(plant==null)
+            return null;
         System.out.println(plant.getKorName());
         /** 토큰에서 유저정보 가져오기 */
         org.springframework.security.core.userdetails.User principal =
@@ -138,7 +141,7 @@ public class PhotocardServiceImpl implements PhotocardService {
             System.out.println(areaname);
         } catch (IOException e) {
             e.printStackTrace();
-
+            return null;
         }
 
         String photoUrl = upload(img);
