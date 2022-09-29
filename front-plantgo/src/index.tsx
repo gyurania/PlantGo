@@ -27,6 +27,7 @@ root.render(
         <Route path="/plantlist" element={<PlantList />} />
         <Route path="/plantResult" element={<PlantResultView />} />
         <Route path="/rank" element={<RankView />} />
+        <Route path="/check" element={<Check/>/}
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
