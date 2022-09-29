@@ -46,6 +46,8 @@ public class PlantServiceImpl implements PlantService{
         if(result.getSize()>0){
             result.get().forEach(plant -> {
                 PlantDto plantDto =modelMapper.map(plant, PlantDto.class);
+                log.info("[plantListService]: plantDto {}", plantDto.toString());
+                log.info("[plantListService] plnatIds size {}", this.plantIds.size());
                 if(plantIds.contains(plantDto.getPlantId())) plantDto.setCollected(true);
                 plantDtoList.add(plantDto);
             });
@@ -57,7 +59,7 @@ public class PlantServiceImpl implements PlantService{
                 .totalCnt(result.getTotalElements())
                 .size(this.plantIds.size())
                 .build();
-        this.plantIds = null;
+        //this.plantIds = null;
         return plantResponseDto;
     }
 
