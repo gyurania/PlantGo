@@ -30,7 +30,7 @@ const Ranking = () => {
     if (rendered === 1) {
       axios({
         method: "get",
-        url: "https://j7a703.p.ssafy.io/api/v1/users/rank",
+        url: "/api/v1/users/rank",
         headers: {
           Authorization: `Bearer ${token}`,
           "Access-Control-Allow-Credentials": true,

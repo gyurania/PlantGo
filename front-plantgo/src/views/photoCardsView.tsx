@@ -7,7 +7,8 @@ import photos from "../img/photos.png";
 import Row from "react-bootstrap/Row";
 
 function PhotoCards() {
-  const { state } = useLocation();
+  const { state } = useLocation()
+  const navigate = useNavigate();
   console.log(state);
 
   const Book = (imgUrl: any) => {
@@ -63,17 +64,13 @@ function PhotoCards() {
         <div className="book">
           <div className="imgBox">
             <div className="bark"></div>
-            <Container
-              style={{ background: "#013243", height: "100%", width: "100%" }}
-            >
-              <img
-                src={imgUrl.data}
-                style={{
-                  width: "90%",
-                  margin: "20px 0 0 15px",
-                }}
-              />
+            <Container style={{ background: "#013243", height: "100%", width: "100%" }}>
+              <img src={imgUrl.data} style={{
+                width: "90%",
+                margin: "20px 0 0 15px"
+              }} />
             </Container>
+
           </div>
           <div className="details">
             <h4 className="color1">{state.korName}</h4>
@@ -84,26 +81,22 @@ function PhotoCards() {
             <p>꽃 설명 : {state.flwrDesc}</p>
             <p>번식방법 {state.brdMthd}</p>
           </div>
-          <Container
-            style={{
-              marginTop: 50,
-              marginLeft: 30,
-            }}
-            className="photos"
-          >
+          <Container style={{
+            marginTop: 50,
+            marginLeft: 30
+          }} className="photos" onClick={() => { navigate("/photocard", { state: state.plantId }) }}>
             <h4>포토카드 보러가기 →</h4>
-            <img
-              src={photos}
+            <img src={photos}
               style={{
                 width: "200px",
-                height: "200px",
+                height: "200px"
               }}
+
             ></img>
           </Container>
         </div>
       </div>
-    );
-  };
+    )}
 
   if (!state.imgUrl) {
     return <Book data={state.imgUrl}></Book>;
