@@ -54,7 +54,7 @@ public class PhotocardServiceImpl implements PhotocardService {
      */
     @Override
     public PhotocardResponse registPhotocard(PhotocardRequest photocardRequest, MultipartFile img) throws IOException {
-        String photoUrl = upload(img);
+
 
         String scientificName = "";
         /** 사진으로 식물의 학명 찾아오기 */
@@ -137,9 +137,10 @@ public class PhotocardServiceImpl implements PhotocardService {
             System.out.println(areaname);
         } catch (IOException e) {
             e.printStackTrace();
+            return null;
         }
 
-
+        String photoUrl = upload(img);
 		/** 포토카드 저장 */
         PhotoCard photocard = PhotoCard.builder()
                 .latitude(photocardRequest.getLatitude())
@@ -147,6 +148,7 @@ public class PhotocardServiceImpl implements PhotocardService {
                 .user(user)
                 .photoUrl(photoUrl)
                 .area(areaname)
+                .kor_name(plant.getKorName())
                 .plantId(plant.getPlantId())
                 .build();
         photocardRepository.save(photocard);

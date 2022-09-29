@@ -45,6 +45,9 @@ public class PhotoCard {
 	@Column(name = "area")
 	private String area;
 
+	@Column(name = "Kor_name")
+	private String kor_name;
+
 	// Foreign key 회원아이디
 	@ManyToOne
 	@JoinColumn(name = "userSeq")
