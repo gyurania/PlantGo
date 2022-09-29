@@ -8,6 +8,7 @@ import Row from "react-bootstrap/Row";
 
 function PhotoCards() {
     const { state } = useLocation()
+    const navigate = useNavigate();
     console.log(state);
 
     const Book = (imgUrl: any) => {
@@ -74,7 +75,7 @@ function PhotoCards() {
                     <Container style={{
                         marginTop: 50,
                         marginLeft: 30
-                    }} className="photos">
+                    }} className="photos" onClick={() => {navigate("/photocard",  { state: state.plantId })}}>
                         <h4>포토카드 보러가기 →</h4>
                         <img src={photos}
                             style={{
