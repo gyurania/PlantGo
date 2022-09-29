@@ -145,8 +145,12 @@ function PlantList() {
     }
   }, [wholePage]);
   
-  // 모은 식물 리스트 페이지 불러오기
+  useEffect(() => {
+    fetchCollected();
+    fetchPlantList();
+  }, [watchMode])
 
+  // 모은 식물 리스트 페이지 불러오기
   useEffect(() => {
     if (collectedPage <= collectedPlantPage) {
       fetchCollected()
