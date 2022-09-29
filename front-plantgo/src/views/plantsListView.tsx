@@ -6,8 +6,11 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import AltImg from './plantGO_logo_wot_rbg.png'
 import Button from 'react-bootstrap/Button'
+import { useLocation, useNavigate } from "react-router-dom";
 
 function PlantList() {
+  
+  const navigate = useNavigate();
 
   const TOTAL_PAGES = 419;
 
@@ -32,9 +35,9 @@ function PlantList() {
 
   // 로그인 안되어 있으면 로그인 화면으로 보내기
 
-  // if (!loginToken) {
-  //   window.location.replace('/login')
-  // }
+  if (!loginToken) {
+    window.location.replace('/login')
+  }
 
   // 모든 리스트 observer
 
@@ -90,7 +93,7 @@ function PlantList() {
     setLoading(true)
     axios({
       method: 'post',
-      url: "/api/plants/collected",
+      url: spring.plants.collected(),
       headers: {
         'Authorization': `Bearer ${loginToken}`,
       },
@@ -142,8 +145,12 @@ function PlantList() {
     }
   }, [wholePage]);
   
-  // 모은 식물 리스트 페이지 불러오기
+  useEffect(() => {
+    fetchCollected();
+    fetchPlantList();
+  }, [watchMode])
 
+  // 모은 식물 리스트 페이지 불러오기
   useEffect(() => {
     if (collectedPage <= collectedPlantPage) {
       fetchCollected()
@@ -183,37 +190,71 @@ function PlantList() {
     };
   }, [lastElement2]);
 
-  let UserCard = (plant:any) => {
-    if (plant.data.collected==false) {
+  let UserCard = (plant: any) => {
+    if (plant.data.collected == false) {
       return (
-          <Card>
-              <Card.Img
-                      src={plant.data.imgUrl}
-                      variant="top"
-                      alt={AltImg}
-                      style={{width:50, height:50}}
-                  />
-              <Card.Body>
-                  <Card.Title>{plant.data.korName}</Card.Title>
-              </Card.Body>
-          </Card>
-        );
-      } else {
-        return (
-          <Card>
-              <Card.Img
-                      src={plant.data.imgUrl}
-                      variant="top"
-                      alt={AltImg}
-                      style={{width:50, height:50}}
-                  />
-              <Card.Body>
-                  <Card.Title>{plant.data.korName}</Card.Title>
-              </Card.Body>
-          </Card>
-        );
-      }
-  };
+        <Card border="danger" style={{
+          height: 200,
+          width: 170,
+          padding: 0,
+          margin: "1em",
+          backgroundColor: "#FFFFFF",
+          boxShadow: "3px 3px 5px #152967",
+          textAlign: "center",
+          display: "inline-block"
+        }} onClick = {() => {navigate("/photocards", { state: plant.data });}}>
+          <Card.Body>
+            <Card.Img src={AltImg} style={{
+              height: 88,
+              width: 120
+            }} />
+            <Card.Title style={{
+              fontFamily: "D2Coding",
+              fontWeight: "bold",
+              padding: ".3em",
+              fontSize: "0.8em",
+              lineHeight: "2em",
+              margin: 0
+            }}>{plant.data.korName}</Card.Title>
+            <Card.Text style={{
+              fontSize: "1.2em"
+            }}>수집 미완료</Card.Text>
+          </Card.Body>
+        </Card>
+      );
+    } else {
+      return (
+        <Card border="success" style={{
+          height: 200,
+          width: 170,
+          padding: 0,
+          margin: "1em",
+          backgroundColor: "#FFFFFF",
+          boxShadow: "3px 3px 5px #152967",
+          textAlign: "center",
+          display: "inline-block"
+        }} onClick = {() => {navigate("/photocards", { state: plant.data });}}>
+          <Card.Body>
+            <Card.Img src={AltImg} style={{
+              height: 88,
+              width: 120
+            }} />
+            <Card.Title style={{
+              fontFamily: "D2Coding",
+              fontWeight: "bold",
+              padding: ".3em",
+              fontSize: "0.8em",
+              lineHeight: "2em",
+              margin: 0
+            }}>{plant.data.korName}</Card.Title>
+            <Card.Text style={{
+              fontSize: "1em"
+            }}>수집 완료</Card.Text>
+          </Card.Body>
+        </Card>
+      );
+    };
+  }
   
     return (
       <div className='mx-44 bg-gray-100 p-6'>

@@ -9,6 +9,8 @@ import SuccessLogin from "./components/successLogin";
 import WebcamCapture from "./views/cameraView";
 import PlantList from "./views/plantsListView";
 import PlantResultView from "./views/plantResultView";
+import PhotoCards from "./views/photoCardsView";
+import PhotoCardView from "./views/PhotoCardView";
 import RankView from "./views/rankView";
 import "bootstrap/dist/css/bootstrap.css";
 
@@ -27,7 +29,8 @@ root.render(
         <Route path="/plantlist" element={<PlantList />} />
         <Route path="/plantResult" element={<PlantResultView />} />
         <Route path="/rank" element={<RankView />} />
-        <Route path="/check" element={<Check/>/}
+        <Route path="/photocards" element={<PhotoCards />} />
+        <Route path="/photocard" element={<PhotoCardView />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
