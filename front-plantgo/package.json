@@ -67,5 +67,4 @@
     "@typescript-eslint/parser": "^5.37.0",
     "eslint": "^8.23.1"
   },
-  "proxy": "http://j7a703.p.ssafy.io:8080"
 }
