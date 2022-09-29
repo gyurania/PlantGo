@@ -95,10 +95,14 @@ public class PhotocardServiceImpl implements PhotocardService {
 
             System.out.println("Json형태의 리턴값");
             System.out.println(jsonString);
+            if(jsonString.equals("{\"statusCode\":404,\"error\":\"Not Found\",\"message\":\"Species not found\"}"))
+                return null;
             System.out.println();
             JSONObject jsonObj = new JSONObject(jsonString);
             if(jsonObj == null)
                 return null;
+            System.out.println("statuscode 찍어보기");
+            System.out.println(jsonObj.getJSONObject("statusCode"));
             JSONArray resultarr = jsonObj.getJSONArray("results");
             JSONObject mostcorrect = resultarr.getJSONObject(0);
             JSONObject species = mostcorrect.getJSONObject("species");
