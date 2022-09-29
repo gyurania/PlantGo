@@ -195,7 +195,7 @@ function PlantList() {
       return (
         <Card border="danger" style={{
           height: 200,
-            width: 150,
+            width: 170,
             padding: 0,
             margin: "1em",
             backgroundColor: "#FFFFFF",
@@ -205,7 +205,8 @@ function PlantList() {
           }}>
           <Card.Body>
             <Card.Img src={AltImg} style = {{
-                height: 150
+              height: 100,
+              width: 100
                 }}/>
             <Card.Title style={{
               fontFamily: "D2Coding",
@@ -215,20 +216,43 @@ function PlantList() {
               lineHeight: "2em",
               margin: 0
             }}>{plant.data.korName}</Card.Title>
-            <Card.Text>수집 미완료</Card.Text>
+            <Card.Text style={{
+              fontSize: "1.2em"
+            }}>수집 미완료</Card.Text>
           </Card.Body>
         </Card>
         );
       } else {
         return (
-          <Card border="primary" style={{ width: '18rem' }}>
-              <Card.Body>
-                <Card.Title>{plant.data.korName}</Card.Title>
-                <Card.Text>완료</Card.Text>
-              </Card.Body>
+          <Card border="danger" style={{
+            height: 200,
+              width: 170,
+              padding: 0,
+              margin: "1em",
+              backgroundColor: "#FFFFFF",
+              boxShadow: "3px 3px 5px #152967",
+              textAlign: "center",
+              display: "inline-block"
+            }}>
+            <Card.Body>
+              <Card.Img src={AltImg} style = {{
+                height: 100,
+                width: 100
+                  }}/>
+              <Card.Title style={{
+                fontFamily: "D2Coding",
+                fontWeight: "bold",
+                padding: ".3em",
+                fontSize: "1.2em",
+                lineHeight: "2em",
+                margin: 0
+              }}>{plant.data.korName}</Card.Title>
+              <Card.Text style={{
+              fontSize: "1.2em"
+            }}>수집 완료</Card.Text>
+            </Card.Body>
           </Card>
-        );
-      }
+          );
   };
   
     return (
