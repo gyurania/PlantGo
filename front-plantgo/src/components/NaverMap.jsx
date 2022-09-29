@@ -114,31 +114,49 @@ function NaverMap(props) {
         const target = res.data.mapPhotocardList;
         console.log("이전 식물 마커", plantMarkers);
         console.log(res.data);
-        console.log(plantMarkers[0]);
-        console.log(plantMarkers[0].title);
-        if (target.length === 0 || target[0] !== plantMarkers[0]) {
-          console.log("식물 마커 달라짐");
-          // 이전 마커들 .setMap(null) 해줘야 할 듯
-          for (var i = 0; i < plantMarkers.length; i++) {
-            plantMarkers[i].setMap(null);
-          }
 
-          // 새로 들어온 데이터 마커로 치환 후 state에 push
-          var tmpPlantMarkers = [];
-          for (var i = 0; i < target.length; i++) {
-            const tmpLoc = new naver.maps.LatLng(
-              target[i].longitude,
-              target[i].latitude
-            );
-            const tmpMarker = new naver.maps.Marker({
-              map: map,
-              title: target[i].user.username,
-              position: tmpLoc,
-            });
-            tmpPlantMarkers.push(tmpMarker);
-          }
-          setPlantMarkers(tmpPlantMarkers); // 이전 마커들 다 지우고 다시 채움
+        for (var i = 0; i < plantMarkers.length; i++) {
+          plantMarkers[i].setMap(null);
         }
+
+        // 새로 들어온 데이터 마커로 치환 후 state에 push
+        var tmpPlantMarkers = [];
+        for (var i = 0; i < target.length; i++) {
+          const tmpLoc = new naver.maps.LatLng(
+            target[i].longitude,
+            target[i].latitude
+          );
+          const tmpMarker = new naver.maps.Marker({
+            map: map,
+            title: target[i].user.username,
+            position: tmpLoc,
+          });
+          tmpPlantMarkers.push(tmpMarker);
+        }
+        setPlantMarkers(tmpPlantMarkers); // 이전 마커들 다 지우고 다시 채움
+        // if (target.length !== 0) {
+        //   console.log("식물 마커 달라짐");
+        //   // 이전 마커들 .setMap(null) 해줘야 할 듯
+        //   for (var i = 0; i < plantMarkers.length; i++) {
+        //     plantMarkers[i].setMap(null);
+        //   }
+
+        //   // 새로 들어온 데이터 마커로 치환 후 state에 push
+        //   var tmpPlantMarkers = [];
+        //   for (var i = 0; i < target.length; i++) {
+        //     const tmpLoc = new naver.maps.LatLng(
+        //       target[i].longitude,
+        //       target[i].latitude
+        //     );
+        //     const tmpMarker = new naver.maps.Marker({
+        //       map: map,
+        //       title: target[i].user.username,
+        //       position: tmpLoc,
+        //     });
+        //     tmpPlantMarkers.push(tmpMarker);
+        //   }
+        //   setPlantMarkers(tmpPlantMarkers); // 이전 마커들 다 지우고 다시 채움
+        // }
       })
       .catch((err) => console.log(err));
   }, 9000);
