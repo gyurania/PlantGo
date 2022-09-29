@@ -6,18 +6,17 @@ import axios from "axios";
 function SuccessLogin() {
   const location = useLocation();
   const CODE = location.search.split("=")[1];
-  let loginToken = sessionStorage.getItem("loginToken")
   const getUserSeq = () => {
     axios({
       method: 'get',
       url: spring.user.getUser(),
       headers: {
-        'Authorization': `Bearer ${loginToken}`
+        'Authorization': `Bearer ${sessionStorage.getItem('loginToken')}`
       }
     })
       .then(function (res) {          
         sessionStorage.setItem("userSeq", res.data.body.user.userSeq);
-        window.location.replace("/");
+        window.location.replace('/')
       })
       .catch(function (err) {
         console.error(err)
@@ -28,7 +27,6 @@ function SuccessLogin() {
     sessionStorage.setItem("loginToken", CODE);
     getUserSeq()
   }, []);
-  
   return <></>;
 }
 export default SuccessLogin;
