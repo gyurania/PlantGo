@@ -190,15 +190,34 @@ function PlantList() {
     };
   }, [lastElement2]);
 
-  let UserCard = (plant:any) => {
-    if (plant.data.collected==false) {
+  let UserCard = (plant: any) => {
+    if (plant.data.collected == false) {
       return (
-          <Card border="danger" style={{ width: '18rem' }}>
-              <Card.Body>
-                <Card.Title>{plant.data.korName}</Card.Title>
-                <Card.Text>수집 미완료</Card.Text>
-              </Card.Body>
-          </Card>
+        <Card border="danger" style={{
+          height: 200,
+            width: 150,
+            padding: 0,
+            margin: "1em",
+            backgroundColor: "#FFFFFF",
+            boxShadow: "3px 3px 5px #152967",
+            textAlign: "center",
+            display: "inline-block"
+          }}>
+          <Card.Body>
+            <Card.Img src={AltImg} style = {{
+                height: 150
+                }}/>
+            <Card.Title style={{
+              fontFamily: "D2Coding",
+              fontWeight: "bold",
+              padding: ".3em",
+              fontSize: "1.2em",
+              lineHeight: "2em",
+              margin: 0
+            }}>{plant.data.korName}</Card.Title>
+            <Card.Text>수집 미완료</Card.Text>
+          </Card.Body>
+        </Card>
         );
       } else {
         return (
