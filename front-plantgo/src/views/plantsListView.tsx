@@ -195,19 +195,19 @@ function PlantList() {
       return (
         <Card border="danger" style={{
           height: 200,
-            width: 170,
-            padding: 0,
-            margin: "1em",
-            backgroundColor: "#FFFFFF",
-            boxShadow: "3px 3px 5px #152967",
-            textAlign: "center",
-            display: "inline-block"
-          }}>
+          width: 170,
+          padding: 0,
+          margin: "1em",
+          backgroundColor: "#FFFFFF",
+          boxShadow: "3px 3px 5px #152967",
+          textAlign: "center",
+          display: "inline-block"
+        }}>
           <Card.Body>
-            <Card.Img src={AltImg} style = {{
+            <Card.Img src={AltImg} style={{
               height: 100,
               width: 100
-                }}/>
+            }} />
             <Card.Title style={{
               fontFamily: "D2Coding",
               fontWeight: "bold",
@@ -221,39 +221,40 @@ function PlantList() {
             }}>수집 미완료</Card.Text>
           </Card.Body>
         </Card>
-        );
-      } else {
-        return (
-          <Card border="danger" style={{
-            height: 200,
-              width: 170,
-              padding: 0,
-              margin: "1em",
-              backgroundColor: "#FFFFFF",
-              boxShadow: "3px 3px 5px #152967",
-              textAlign: "center",
-              display: "inline-block"
-            }}>
-            <Card.Body>
-              <Card.Img src={AltImg} style = {{
-                height: 100,
-                width: 100
-                  }}/>
-              <Card.Title style={{
-                fontFamily: "D2Coding",
-                fontWeight: "bold",
-                padding: ".3em",
-                fontSize: "1.2em",
-                lineHeight: "2em",
-                margin: 0
-              }}>{plant.data.korName}</Card.Title>
-              <Card.Text style={{
+      );
+    } else {
+      return (
+        <Card border="danger" style={{
+          height: 200,
+          width: 170,
+          padding: 0,
+          margin: "1em",
+          backgroundColor: "#FFFFFF",
+          boxShadow: "3px 3px 5px #152967",
+          textAlign: "center",
+          display: "inline-block"
+        }}>
+          <Card.Body>
+            <Card.Img src={AltImg} style={{
+              height: 100,
+              width: 100
+            }} />
+            <Card.Title style={{
+              fontFamily: "D2Coding",
+              fontWeight: "bold",
+              padding: ".3em",
+              fontSize: "1.2em",
+              lineHeight: "2em",
+              margin: 0
+            }}>{plant.data.korName}</Card.Title>
+            <Card.Text style={{
               fontSize: "1.2em"
             }}>수집 완료</Card.Text>
-            </Card.Body>
-          </Card>
-          );
-  };
+          </Card.Body>
+        </Card>
+      );
+    };
+  }
   
     return (
       <div className='mx-44 bg-gray-100 p-6'>
