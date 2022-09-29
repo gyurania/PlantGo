@@ -48,7 +48,7 @@ public class PhotocardDummyTest {
     public void insertDummy() {
         StringBuilder sb = new StringBuilder();
         int count = 0;
-        for (int tc = 1; tc <= 100000; tc++) {
+        for (int tc = 1; tc <= 1; tc++) {
             if(count==30)
                 break;
 
