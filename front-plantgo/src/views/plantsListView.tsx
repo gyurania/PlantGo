@@ -205,14 +205,14 @@ function PlantList() {
         }}>
           <Card.Body>
             <Card.Img src={AltImg} style={{
-              height: 100,
+              height: 90,
               width: 100
             }} />
             <Card.Title style={{
               fontFamily: "D2Coding",
               fontWeight: "bold",
               padding: ".3em",
-              fontSize: "1.2em",
+              fontSize: "0.8em",
               lineHeight: "2em",
               margin: 0
             }}>{plant.data.korName}</Card.Title>
@@ -224,7 +224,7 @@ function PlantList() {
       );
     } else {
       return (
-        <Card border="danger" style={{
+        <Card border="success" style={{
           height: 200,
           width: 170,
           padding: 0,
@@ -236,19 +236,19 @@ function PlantList() {
         }}>
           <Card.Body>
             <Card.Img src={AltImg} style={{
-              height: 100,
+              height: 90,
               width: 100
             }} />
             <Card.Title style={{
               fontFamily: "D2Coding",
               fontWeight: "bold",
               padding: ".3em",
-              fontSize: "1.2em",
+              fontSize: "0.8em",
               lineHeight: "2em",
               margin: 0
             }}>{plant.data.korName}</Card.Title>
             <Card.Text style={{
-              fontSize: "1.2em"
+              fontSize: "1em"
             }}>수집 완료</Card.Text>
           </Card.Body>
         </Card>
