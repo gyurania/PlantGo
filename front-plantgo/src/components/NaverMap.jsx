@@ -32,7 +32,9 @@ function NaverMap(props) {
 
     naver.maps.Event.addListener(tmpMap, "zoom_changed", function (zoom) {
       console.log(zoom);
-      console.log("줌 바뀜 제발 제발");
+      console.log("줌 할때 마커들", plantMarkers);
+      if (zoom === 16) {
+      }
     });
 
     naver.maps.Event.addListener(tmpMap, "idle", () => {
@@ -74,31 +76,26 @@ function NaverMap(props) {
   useInterval(() => {
     const time = new Date();
     console.log(time.getSeconds());
-    navigator.geolocation.getCurrentPosition(
-      (pos) => {
-        const tmpLat = pos.coords.latitude;
-        const tmpLng = pos.coords.longitude;
-        if (
-          ((position.lat - tmpLat) ** 2 + (position.lng - tmpLng) ** 2) ** 0.5 >
-          0.0003
-        ) {
-          setPosition({ lat: tmpLat, lng: tmpLng });
-          const tmpLoc = new naver.maps.LatLng(tmpLat, tmpLng);
-          map.setCenter(tmpLoc); // 현재 위치로 지도 중앙 이동
-          console.log("currMarker", currMarkers);
-          currMarkers.setMap(null);
-          const tmpMarker = new naver.maps.Marker({
-            map: map,
-            title: "myLocation",
-            position: tmpLoc,
-          });
-          setCurrMarkers(tmpMarker);
-        }
-      },
-      () => {
-        window.alert("GPS동의 바람");
+    navigator.geolocation.getCurrentPosition((pos) => {
+      const tmpLat = pos.coords.latitude;
+      const tmpLng = pos.coords.longitude;
+      if (
+        ((position.lat - tmpLat) ** 2 + (position.lng - tmpLng) ** 2) ** 0.5 >
+        0.0003
+      ) {
+        setPosition({ lat: tmpLat, lng: tmpLng });
+        const tmpLoc = new naver.maps.LatLng(tmpLat, tmpLng);
+        map.setCenter(tmpLoc); // 현재 위치로 지도 중앙 이동
+        console.log("currMarker", currMarkers);
+        currMarkers.setMap(null);
+        const tmpMarker = new naver.maps.Marker({
+          map: map,
+          title: "myLocation",
+          position: tmpLoc,
+        });
+        setCurrMarkers(tmpMarker);
       }
-    );
+    });
   }, 3000);
 
   useInterval(() => {
@@ -117,37 +114,49 @@ function NaverMap(props) {
         const target = res.data.mapPhotocardList;
         console.log("이전 식물 마커", plantMarkers);
         console.log(res.data);
-        const tmpCompareMarker = new naver.maps.Marker({
-          map: map,
-          title: target[0].user.username,
-          position: new naver.maps.LatLng(
-            target[0].longitude,
-            target[0].latitude
-          ),
-        });
-        if (tmpCompareMarker !== plantMarkers[0]) {
-          console.log("식물 마커 달라짐");
-          // 이전 마커들 .setMap(null) 해줘야 할 듯
-          for (var i = 0; i < plantMarkers.length; i++) {
-            plantMarkers[i].setMap(null);
-          }
 
-          // 새로 들어온 데이터 마커로 치환 후 state에 push
-          var tmpPlantMarkers = [];
-          for (var i = 0; i < target.length; i++) {
-            const tmpLoc = new naver.maps.LatLng(
-              target[i].longitude,
-              target[i].latitude
-            );
-            const tmpMarker = new naver.maps.Marker({
-              map: map,
-              title: target[i].user.username,
-              position: tmpLoc,
-            });
-            tmpPlantMarkers.push(tmpMarker);
-          }
-          setPlantMarkers(tmpPlantMarkers); // 이전 마커들 다 지우고 다시 채움
+        for (var i = 0; i < plantMarkers.length; i++) {
+          plantMarkers[i].setMap(null);
         }
+
+        // 새로 들어온 데이터 마커로 치환 후 state에 push
+        var tmpPlantMarkers = [];
+        for (var i = 0; i < target.length; i++) {
+          const tmpLoc = new naver.maps.LatLng(
+            target[i].longitude,
+            target[i].latitude
+          );
+          const tmpMarker = new naver.maps.Marker({
+            map: map,
+            title: target[i].user.username,
+            position: tmpLoc,
+          });
+          tmpPlantMarkers.push(tmpMarker);
+        }
+        setPlantMarkers(tmpPlantMarkers); // 이전 마커들 다 지우고 다시 채움
+        // if (target.length !== 0) {
+        //   console.log("식물 마커 달라짐");
+        //   // 이전 마커들 .setMap(null) 해줘야 할 듯
+        //   for (var i = 0; i < plantMarkers.length; i++) {
+        //     plantMarkers[i].setMap(null);
+        //   }
+
+        //   // 새로 들어온 데이터 마커로 치환 후 state에 push
+        //   var tmpPlantMarkers = [];
+        //   for (var i = 0; i < target.length; i++) {
+        //     const tmpLoc = new naver.maps.LatLng(
+        //       target[i].longitude,
+        //       target[i].latitude
+        //     );
+        //     const tmpMarker = new naver.maps.Marker({
+        //       map: map,
+        //       title: target[i].user.username,
+        //       position: tmpLoc,
+        //     });
+        //     tmpPlantMarkers.push(tmpMarker);
+        //   }
+        //   setPlantMarkers(tmpPlantMarkers); // 이전 마커들 다 지우고 다시 채움
+        // }
       })
       .catch((err) => console.log(err));
   }, 9000);

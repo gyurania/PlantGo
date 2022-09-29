@@ -35,9 +35,9 @@ function PlantList() {
 
   // 로그인 안되어 있으면 로그인 화면으로 보내기
 
-  // if (!loginToken) {
-  //   window.location.replace('/login')
-  // }
+  if (!loginToken) {
+    window.location.replace('/login')
+  }
 
   // 모든 리스트 observer
 
@@ -93,7 +93,7 @@ function PlantList() {
     setLoading(true)
     axios({
       method: 'post',
-      url: "/api/plants/collected",
+      url: spring.plants.collected(),
       headers: {
         'Authorization': `Bearer ${loginToken}`,
       },
@@ -145,8 +145,12 @@ function PlantList() {
     }
   }, [wholePage]);
   
-  // 모은 식물 리스트 페이지 불러오기
+  useEffect(() => {
+    fetchCollected();
+    fetchPlantList();
+  }, [watchMode])
 
+  // 모은 식물 리스트 페이지 불러오기
   useEffect(() => {
     if (collectedPage <= collectedPlantPage) {
       fetchCollected()
@@ -189,31 +193,19 @@ function PlantList() {
   let UserCard = (plant:any) => {
     if (plant.data.collected==false) {
       return (
-          <Card>
-              <Card.Img
-                      src={plant.data.imgUrl}
-                      variant="top"
-                      alt={AltImg}
-                      style={{width:50, height:50}}
-                      onClick = {(e) => {navigate("/photocards", { state: plant.data });}}
-                  />
+          <Card border="danger" style={{ width: '18rem' }} onClick = {() => {navigate("/photocards", { state: plant.data });}}>
               <Card.Body>
-                  <Card.Title>{plant.data.korName}</Card.Title>
+                <Card.Title>{plant.data.korName}</Card.Title>
+                <Card.Text>수집 미완료</Card.Text>
               </Card.Body>
           </Card>
         );
       } else {
         return (
-          <Card>
-              <Card.Img
-                      src={plant.data.imgUrl}
-                      variant="top"
-                      alt={AltImg}
-                      style={{width:50, height:50}}
-                      onClick = {(e) => {navigate("/photocards", { state: plant.data });}}
-                  />
+          <Card border="primary" style={{ width: '18rem' }} onClick = {() => {navigate("/photocards", { state: plant.data });}}>
               <Card.Body>
-                  <Card.Title>{plant.data.korName}</Card.Title>
+                <Card.Title>{plant.data.korName}</Card.Title>
+                <Card.Text>완료</Card.Text>
               </Card.Body>
           </Card>
         );
