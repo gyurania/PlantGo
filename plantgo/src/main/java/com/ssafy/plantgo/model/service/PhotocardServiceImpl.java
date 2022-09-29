@@ -101,8 +101,6 @@ public class PhotocardServiceImpl implements PhotocardService {
             JSONObject jsonObj = new JSONObject(jsonString);
             if(jsonObj == null)
                 return null;
-            System.out.println("statuscode 찍어보기");
-            System.out.println(jsonObj.getJSONObject("statusCode"));
             JSONArray resultarr = jsonObj.getJSONArray("results");
             JSONObject mostcorrect = resultarr.getJSONObject(0);
             JSONObject species = mostcorrect.getJSONObject("species");
