@@ -1,9 +1,7 @@
 package com.ssafy.plantgo.util;
 
 import com.ssafy.plantgo.model.dto.PhotocardRequest;
-import com.ssafy.plantgo.model.entity.PhotoCard;
-import com.ssafy.plantgo.model.entity.Plant;
-import com.ssafy.plantgo.model.entity.User;
+import com.ssafy.plantgo.model.entity.*;
 import com.ssafy.plantgo.model.repository.PhotocardRepository;
 import com.ssafy.plantgo.model.repository.PlantRepository;
 import com.ssafy.plantgo.model.repository.UserRepository;
@@ -19,6 +17,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
@@ -47,34 +46,23 @@ public class PhotocardDummyTest {
     @Test
     public void insertDummy() {
         StringBuilder sb = new StringBuilder();
-        int count = 0;
         for (int tc = 1; tc <= 1; tc++) {
-            if(count==30)
-                break;
-
             /** API URL 초기화 */
             sb.setLength(0);
 
             /** only for 은우 */
 //            경도: 126.7700 ~ 126.7850
 //            위도: 37.6835 ~ 37.6855
-            double longtitude = Math.random() + 37;
-            double latitude = Math.random() + 127;
-//            double longtitude = 37.500786;
-//            double latitude = 127.036886;
-//            if(longtitude<37.5 || longtitude>37.6)
-//                continue;
 //            if(latitude<127.036 || latitude > 126.0423)
 //                continue;
-            System.out.println("범위에라도 들어가라 제에발");
             /** 남한 124.36 ~ 131.52 && 33.45 ~ 37 */
             /** 랜덤 위치 설정 */
-//            double longtitude = (Math.random() * 5) + 33;
-//            double latitude = (Math.random() * 9) + 124;
-//            if (longtitude < 33.45 || longtitude > 37)
-//                continue;
-//            if (latitude < 124.36 || latitude > 131.52)
-//                continue;
+            double longtitude = (Math.random() * 5) + 33;
+            double latitude = (Math.random() * 9) + 124;
+            if (longtitude < 33.45 || longtitude > 37)
+                continue;
+            if (latitude < 124.36 || latitude > 131.52)
+                continue;
             sb.append("https://naveropenapi.apigw.ntruss.com/map-reversegeocode/v2/gc?coords=");
             longtitude = Math.floor(longtitude * 1000000) / 1000000.0;
             latitude = Math.floor(latitude * 1000000) / 1000000.0;
@@ -107,8 +95,7 @@ public class PhotocardDummyTest {
                 System.out.println(name);
                 if (name.length()<3) // 이름 없는경우도 패스
                     continue;
-                if(!name.equals("강남구"))
-                    continue;
+
                 /** Query로 식물 랜덤 뽑기 */
                 System.out.println("JPA Query로 식물 랜덤 뽑기");
                 List<Plant> list = plantRepository.findAll();
@@ -122,12 +109,9 @@ public class PhotocardDummyTest {
                 System.out.println("userSeq랜덤추출");
                 int numberOfUser = userRepository.countUser();
                 System.out.println("현재유저몇명? " + numberOfUser);
-                Long userSeq = 60L;
-                System.out.println(userSeq);
-//                Long userSeq = (long)((int) ((Math.random() * 42) + 9));
-
-//                if(User.builder().userSeq(userSeq).build()==null)
-//                    continue;
+                Long userSeq = (long)((int) ((Math.random() * (numberOfUser-1)) + 1));
+                if(User.builder().userSeq(userSeq).build()==null)
+                    continue;
 
                 /** 뽑은 식물 + 랜덤 지역 + 랜덤 userSeq 조합해서 photocard 만들기 */
                 System.out.println("photocard만들기");
@@ -142,14 +126,11 @@ public class PhotocardDummyTest {
                         .plantId(plant.getPlantId())
                         .build();
                 photocardRepository.save(photocard);
-                count++;
                 System.out.println("photocard 저장완료!");
 
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-
-
 
         }
 
