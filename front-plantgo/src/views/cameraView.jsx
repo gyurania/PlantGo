@@ -81,14 +81,22 @@ function App(props) {
         method: "post",
         url: "https://j7a703.p.ssafy.io/api/photocard",
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyNDM1Nzg1MzAxIiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTg0NDI0NjQxNn0.8Ry1vFUXRfz8UpNZXprZ57oY0Nj0dvDAz76yOylMfXE`,
           "Access-Control-Allow-Credentials": true,
           "Content-Type": "multipart/form-data",
         },
         data: formData,
       })
         .then((res) => {
-          navigate("/plantResult", { state: { plantInfo: res.data } });
+          console.log("사진찍고 응답", res.data);
+          if (res.data === null) {
+            window.alert("사진을 인식할 수 없어요ㅠㅠ");
+            navigate("/camera");
+          } else {
+            navigate("/plantResult", {
+              state: { plantInfo: res.data, imgSrc: imgSrc },
+            });
+          }
         })
         .catch((err) => console.log(err));
     }
