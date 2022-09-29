@@ -205,8 +205,8 @@ function PlantList() {
         }}>
           <Card.Body>
             <Card.Img src={AltImg} style={{
-              height: 90,
-              width: 100
+              height: 88,
+              width: 120
             }} />
             <Card.Title style={{
               fontFamily: "D2Coding",
@@ -236,8 +236,8 @@ function PlantList() {
         }}>
           <Card.Body>
             <Card.Img src={AltImg} style={{
-              height: 90,
-              width: 100
+              height: 88,
+              width: 120
             }} />
             <Card.Title style={{
               fontFamily: "D2Coding",
