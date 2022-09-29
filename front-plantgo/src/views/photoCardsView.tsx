@@ -7,14 +7,9 @@ import photos from "../img/photos.png";
 import Row from "react-bootstrap/Row";
 
 function PhotoCards() {
-<<<<<<< HEAD
-    const { state } = useLocation()
-    const navigate = useNavigate();
-    console.log(state);
-=======
-  const { state } = useLocation();
+  const { state } = useLocation()
+  const navigate = useNavigate();
   console.log(state);
->>>>>>> 8906311ce9597d58b11291b847ea18a54209c3dc
 
   const Book = (imgUrl: any) => {
     console.log(imgUrl);
@@ -62,44 +57,6 @@ function PhotoCards() {
     );
   };
 
-<<<<<<< HEAD
-    const Book2 = (imgUrl: any) => {
-        console.log(imgUrl);
-        return (
-            <div className="plantBook">
-              <div className="book">
-                <div className="imgBox">
-                        <div className="bark"></div>
-                        <Container style={{background:"#013243", height: "100%", width:"100%"}}>
-                            <img src={imgUrl.data} style={{
-                                width: "90%",
-                                margin: "20px 0 0 15px"
-                            }} />
-                        </Container>
-                        
-                </div>
-                <div className="details">
-                        <h4 className="color1">{state.korName}</h4>
-                        <br></br>
-                        <p>학술명 : </p>
-                        <p>{state.schName}</p>
-                        <p>국내 분포 : {state.dstrb}</p>
-                        <p>꽃 설명 : {state.flwrDesc}</p>
-                        <p>번식방법 {state.brdMthd}</p>
-                    </div>
-                    <Container style={{
-                        marginTop: 50,
-                        marginLeft: 30
-                    }} className="photos" onClick={() => {navigate("/photocard",  { state: state.plantId })}}>
-                        <h4>포토카드 보러가기 →</h4>
-                        <img src={photos}
-                            style={{
-                                width: "200px",
-                                height: "200px"
-                            }}
-                            
-                        ></img>
-=======
   const Book2 = (imgUrl: any) => {
     console.log(imgUrl);
     return (
@@ -107,17 +64,13 @@ function PhotoCards() {
         <div className="book">
           <div className="imgBox">
             <div className="bark"></div>
-            <Container
-              style={{ background: "#013243", height: "100%", width: "100%" }}
-            >
-              <img
-                src={imgUrl.data}
-                style={{
-                  width: "90%",
-                  margin: "20px 0 0 15px",
-                }}
-              />
+            <Container style={{ background: "#013243", height: "100%", width: "100%" }}>
+              <img src={imgUrl.data} style={{
+                width: "90%",
+                margin: "20px 0 0 15px"
+              }} />
             </Container>
+
           </div>
           <div className="details">
             <h4 className="color1">{state.korName}</h4>
@@ -128,27 +81,22 @@ function PhotoCards() {
             <p>꽃 설명 : {state.flwrDesc}</p>
             <p>번식방법 {state.brdMthd}</p>
           </div>
-          <Container
-            style={{
-              marginTop: 50,
-              marginLeft: 30,
-            }}
-            className="photos"
-          >
+          <Container style={{
+            marginTop: 50,
+            marginLeft: 30
+          }} className="photos" onClick={() => { navigate("/photocard", { state: state.plantId }) }}>
             <h4>포토카드 보러가기 →</h4>
-            <img
-              src={photos}
+            <img src={photos}
               style={{
                 width: "200px",
-                height: "200px",
+                height: "200px"
               }}
+
             ></img>
           </Container>
         </div>
       </div>
-    );
-  };
->>>>>>> 8906311ce9597d58b11291b847ea18a54209c3dc
+    )}
 
   if (!state.imgUrl) {
     return <Book data={state.imgUrl}></Book>;

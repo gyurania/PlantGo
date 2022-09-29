@@ -193,7 +193,7 @@ function PlantList() {
   let UserCard = (plant:any) => {
     if (plant.data.collected==false) {
       return (
-          <Card border="danger" style={{ width: '18rem' }}>
+          <Card border="danger" style={{ width: '18rem' }} onClick = {() => {navigate("/photocards", { state: plant.data });}}>
               <Card.Body>
                 <Card.Title>{plant.data.korName}</Card.Title>
                 <Card.Text>수집 미완료</Card.Text>
@@ -202,7 +202,7 @@ function PlantList() {
         );
       } else {
         return (
-          <Card border="primary" style={{ width: '18rem' }}>
+          <Card border="primary" style={{ width: '18rem' }} onClick = {() => {navigate("/photocards", { state: plant.data });}}>
               <Card.Body>
                 <Card.Title>{plant.data.korName}</Card.Title>
                 <Card.Text>완료</Card.Text>
