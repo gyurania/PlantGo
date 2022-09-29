@@ -6,12 +6,7 @@ import axios from "axios";
 function SuccessLogin() {
   const location = useLocation();
   const CODE = location.search.split("=")[1];
-  useEffect(() => {
-    sessionStorage.clear();
-    sessionStorage.setItem("loginToken", CODE);
-  });
   let loginToken = sessionStorage.getItem("loginToken")
-  
   const getUserSeq = () => {
     axios({
       method: 'get',
@@ -29,8 +24,11 @@ function SuccessLogin() {
       })
   }
   useEffect(() => {
+    sessionStorage.clear();
+    sessionStorage.setItem("loginToken", CODE);
     getUserSeq()
-  })
+  }, []);
+  
   return <></>;
 }
 export default SuccessLogin;
