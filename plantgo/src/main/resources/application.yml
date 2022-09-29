@@ -77,7 +77,6 @@ app:
   oauth2:
     authorizedRedirectUris:
       - http://localhost:3000/oauth/redirect
-      - https://j7a703.p.ssafy.io/oauth/redirect
 
 
 cloud:
