@@ -5,32 +5,59 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 
-public class MultipartImage implements MultipartFile {
+public class MultipartImage implements MultipartFile, Serializable {
+
+    private static final long serialVersionUID = 7417500052547882043L;
+
     private byte[] bytes;
-    String name;
-    String originalFilename;
+
+    String fileName;
     String contentType;
+    String fieldName;
     boolean isEmpty;
     long size;
 
     public MultipartImage(byte[] bytes) {
         this.bytes = bytes;
-        this.name = name;
-        this.originalFilename = originalFilename;
+        this.fileName = fileName;
+        this.fieldName = fieldName;
         this.contentType = contentType;
         this.size = size;
         this.isEmpty = false;
     }
 
-    @Override
-    public String getName() {
-        return name;
+    public String getFileName() {
+        return fileName;
     }
 
-    @Override
-    public String getOriginalFilename() {
-        return originalFilename;
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
+    public String getFieldName() {
+        return fieldName;
+    }
+
+    public void setFieldName(String fieldName) {
+        this.fieldName = fieldName;
+    }
+
+    public void setBytes(byte[] bytes) {
+        this.bytes = bytes;
+    }
+
+    public void setContentType(String contentType) {
+        this.contentType = contentType;
+    }
+
+    public void setEmpty(boolean isEmpty) {
+        this.isEmpty = isEmpty;
+    }
+
+    public void setSize(long size) {
+        this.size = size;
     }
 
     @Override
@@ -56,7 +83,7 @@ public class MultipartImage implements MultipartFile {
     @Override
     public InputStream getInputStream() throws IOException {
         // TODO Auto-generated method stub
-        return this.getInputStream();
+        return null;
     }
 
     @Override
@@ -64,4 +91,17 @@ public class MultipartImage implements MultipartFile {
         // TODO Auto-generated method stub
 
     }
+
+    @Override
+    public String getName() {
+        // TODO Auto-generated method stub
+        return fileName;
+    }
+
+    @Override
+    public String getOriginalFilename() {
+        // TODO Auto-generated method stub
+        return fileName;
+    }
+
 }

@@ -53,6 +53,10 @@ dependencies {
 
 	//S3 서버
 	implementation "com.amazonaws:aws-java-sdk-s3:1.12.281"
+
+	implementation group: 'commons-fileupload', name: 'commons-fileupload', version: '1.4'
+	implementation group: 'commons-io', name: 'commons-io', version: '2.4'
+
 }
 
 tasks.named('test') {

@@ -173,7 +173,7 @@ public class PhotocardServiceImpl implements PhotocardService {
     @Override
     public String upload(MultipartFile multipartFile) throws IOException {
         String s3FileName = UUID.randomUUID() + "-" + multipartFile.getOriginalFilename();
-
+        System.out.println("s3파일이름은?? " + s3FileName);
         ObjectMetadata objMeta = new ObjectMetadata();
         objMeta.setContentLength(multipartFile.getInputStream().available());
 
