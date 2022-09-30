@@ -62,6 +62,7 @@ const Ranking = () => {
     );
   } else {
     const rendering = () => {
+      console.log("여기 드러와");
       const result = [];
       result.push(
         <div className="Rectangle">
