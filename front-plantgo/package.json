@@ -16,6 +16,7 @@
     "bootstrap": "^5.2.1",
     "http-proxy-middleware": "^2.0.6",
     "jwt-decode": "^3.1.2",
+    "moment": "^2.29.4",
     "node-sass": "^7.0.3",
     "node-scss": "^7.0.3",
     "prop-types": "^15.8.1",
