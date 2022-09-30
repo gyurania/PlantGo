@@ -11,6 +11,7 @@ import BackgroundImg from '../img/plantgo3.jpg'
 import BookIcon from '../img/book_icon.png'
 import { useLocation, useNavigate } from "react-router-dom";
 import { minWidth } from "@mui/system";
+import '../CSS/plantListView.css'
 
 function PlantList() {
   
@@ -148,11 +149,6 @@ function PlantList() {
       fetchPlantList();
     }
   }, [wholePage]);
-  
-  useEffect(() => {
-    fetchCollected();
-    fetchPlantList();
-  }, [watchMode])
 
   // 모은 식물 리스트 페이지 불러오기
   useEffect(() => {
@@ -268,12 +264,7 @@ function PlantList() {
   }
   
     return (
-      <div style={{
-        backgroundImage: `url(${BackgroundImg})`,
-        backgroundSize: 'cover',
-        minHeight: '100%',
-        minWidth: '100%'
-      }}>
+      <div>
         <br />
         <br />
           <img src={BookIcon} style={{
