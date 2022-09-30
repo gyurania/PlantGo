@@ -10,9 +10,12 @@ import axios from "axios";
 import spring from "../api/spring";
 import "./PhotoCardView.scss";
 import { keyframes } from "@emotion/react";
+import { MdArrowBack } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
 
 function PhotoCardView() {
   let loginToken = sessionStorage.getItem("loginToken");
+  let Navigate = useNavigate();
   const { state } = useLocation();
   const [photocardList, setphotocardList] = useState([]);
   const [index, setIndex] = useState(0);
@@ -58,6 +61,13 @@ function PhotoCardView() {
       }}
     >
       <Container>
+        <Row>
+          <MdArrowBack
+            onClick={() => {
+              Navigate("/plantlist");
+            }}
+          ></MdArrowBack>
+        </Row>
         <Row style={{ height: "150px", display: "block", paddingTop: "80px" }}>
           <h1 style={{ textAlign: "center" }}>Photocards</h1>
         </Row>
