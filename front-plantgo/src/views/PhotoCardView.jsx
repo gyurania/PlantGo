@@ -11,6 +11,7 @@ import spring from "../api/spring";
 import "./PhotoCardView.scss";
 import { keyframes } from "@emotion/react";
 import { MdArrowBack } from "react-icons/md";
+import PhotocardNavBar from "../components/PhotocardNavBar";
 
 function PhotoCardView() {
   let loginToken = sessionStorage.getItem("loginToken");
@@ -61,13 +62,6 @@ function PhotoCardView() {
     >
       <Container>
         <Row style={{ height: "150px", display: "block", paddingTop: "80px" }}>
-          <MdArrowBack
-            onClick={() => {
-              Navigate("/plantlist");
-            }}
-          ></MdArrowBack>
-        </Row>
-        <Row style={{ height: "150px", display: "block", paddingTop: "80px" }}>
           <h1 style={{ textAlign: "center" }}>Photocards</h1>
         </Row>
         <Row>
@@ -92,6 +86,7 @@ function PhotoCardView() {
             </Carousel>
           </Col>
         </Row>
+        <PhotocardNavBar></PhotocardNavBar>
       </Container>
     </div>
   );
