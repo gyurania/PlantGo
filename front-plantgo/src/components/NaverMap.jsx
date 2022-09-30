@@ -81,7 +81,7 @@ function NaverMap(props) {
       const tmpLng = pos.coords.longitude;
       if (
         ((position.lat - tmpLat) ** 2 + (position.lng - tmpLng) ** 2) ** 0.5 >
-        0.0003
+        0.0002
       ) {
         setPosition({ lat: tmpLat, lng: tmpLng });
         const tmpLoc = new naver.maps.LatLng(tmpLat, tmpLng);
@@ -96,7 +96,7 @@ function NaverMap(props) {
         setCurrMarkers(tmpMarker);
       }
     });
-  }, 3000);
+  }, 1000);
 
   useInterval(() => {
     axios({
