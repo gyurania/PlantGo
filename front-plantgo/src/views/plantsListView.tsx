@@ -12,6 +12,7 @@ import BookIcon from '../img/book_icon.png'
 import { useLocation, useNavigate } from "react-router-dom";
 import { minWidth } from "@mui/system";
 import '../CSS/plantListView.css'
+import Container from "react-bootstrap/esm/Container";
 
 function PlantList() {
   
@@ -143,6 +144,9 @@ function PlantList() {
   //     })
   // };
 
+  useEffect(() => {
+    document.body.classList.add('plantlist');
+  }, [])
   // 모든 리스트 페이지 불러오기
   useEffect(() => {
     if (wholePage <= TOTAL_PAGES) {
@@ -264,7 +268,7 @@ function PlantList() {
   }
   
     return (
-      <div>
+      <Container fluid>
         <br />
         <br />
           <img src={BookIcon} style={{
@@ -364,7 +368,7 @@ function PlantList() {
                 <p className='text-center my-10'>더 이상의 정보가 없습니다.</p>
             )}
           </div>}
-      </div>
+      </Container>
   );
 }
       
