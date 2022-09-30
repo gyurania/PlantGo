@@ -1,6 +1,6 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import "./photoCards.css";
+import "../CSS/photoCards.css";
 import Container from "react-bootstrap/Container";
 import logo from "../img/플랜트고-색-폰트.png";
 import photos from "../img/photos.png";

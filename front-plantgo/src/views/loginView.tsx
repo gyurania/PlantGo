@@ -9,7 +9,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Image from 'react-bootstrap/Image'
 import Carousel from 'react-bootstrap/Carousel';
-import "./loginView.css";
+import "../CSS/loginView.css";
 function Login() {
   return (
     <Container fluid className="backgroundImg">

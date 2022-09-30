@@ -8,7 +8,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import spring from "../api/spring";
-import "./PhotoCardView.scss";
+import "../CSS/PhotoCardView.scss";
 import { keyframes } from "@emotion/react";
 import { MdArrowBack } from "react-icons/md";
 import PhotocardNavBar from "../components/PhotocardNavBar";

@@ -3,7 +3,7 @@ import Nav from "react-bootstrap/Nav";
 import { useState } from "react";
 import { BsPlus, BsBook, BsBoxArrowRight, BsGeoAlt } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
-import "./HomeNavBar.css";
+import "../CSS/HomeNavBar.css";
 
 const RankNavBar = () => {
   let Navigate = useNavigate();

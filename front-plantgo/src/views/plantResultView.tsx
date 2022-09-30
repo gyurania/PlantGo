@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import "./TmpBook.scss";
+import "../CSS/TmpBook.scss";
 import logo from "../img/플랜트고-색-폰트.png";
 
 function PlantResultView() {

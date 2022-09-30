@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState, useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import "./RankView.css";
+import "../CSS/RankView.css";
 import Container from "react-bootstrap/Container";
 import RankNavBar from "../components/RankNavBar";
 import useInterval from "../customHook/useInterval.jsx";

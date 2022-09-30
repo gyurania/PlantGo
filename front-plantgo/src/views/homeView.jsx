@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./HomeView.css";
+import "../CSS/HomeView.css";
 import HomeNavBar from "../components/HomeNavBar";
 
 import NaverMap from "../components/NaverMap";
