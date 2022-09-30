@@ -4,6 +4,7 @@ import { useNavigate, Link } from "react-router-dom";
 import "./RankView.css";
 import Container from "react-bootstrap/Container";
 import RankNavBar from "../components/RankNavBar";
+import useInterval from "../customHook/useInterval.jsx";
 
 const Ranking = () => {
   const navigate = useNavigate();
@@ -35,6 +36,22 @@ const Ranking = () => {
         .catch((err) => console.log(err));
     }
   }, [rendered]);
+
+  useInterval(() => {
+    axios({
+      method: "get",
+      url: "/api/v1/users/rank",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Access-Control-Allow-Credentials": true,
+        "Content-Type": "aaplication/json",
+      },
+    })
+      .then((res) => {
+        setRank(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, 180000);
 
   useEffect(() => {
     console.log("rank!!!");
