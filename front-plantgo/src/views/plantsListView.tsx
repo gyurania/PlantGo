@@ -12,7 +12,7 @@ import BookIcon from '../img/book_icon.png'
 import { useLocation, useNavigate } from "react-router-dom";
 import { minWidth } from "@mui/system";
 import '../CSS/plantListView.css'
-import Container from "react-bootstrap/esm/Container";
+import Container from "react-bootstrap/Container";
 
 function PlantList() {
   
@@ -268,7 +268,7 @@ function PlantList() {
   }
   
     return (
-      <Container fluid>
+      <Container fluid className="backgroundImg">
         <br />
         <br />
           <img src={BookIcon} style={{
@@ -283,28 +283,30 @@ function PlantList() {
             fontFamily: "MICEGothic Bold",
             fontWeight: 'normal',
             fontSize: 30,
-            color: '#FFFFFF'
-          }}>Plants Guide</h1>
+            color: '#1C6758'
+          }}>Plants Book</h1>
 
           <h2 style={{
             textAlign: 'center',
             fontFamily: "MICEGothic Bold",
             fontWeight: 'normal',
-            fontSize: 10,
-            color: '#FFFFFF'
+            fontSize: 15,
+            color: '#1C6758'
           }}>총 식물 수 : 4188</h2>
           <h2 style={{
             textAlign: 'center',
             fontFamily: "MICEGothic Bold",
             fontWeight: 'normal',
-            fontSize: 10,
-            color: '#FFFFFF'
+            fontSize: 15,
+            color: '#1C6758'
           }}>모은 식물 수 : {collectedPlantCount}</h2>
-          <Button size="sm" variant="outline-light" style={{margin:'0.75em'}} onClick={() => {setWatchMode(0)}}>전체 식물 보기</Button>
-          <Button size="sm" variant="outline-light" onClick={() => {setWatchMode(1)}}>내가 모은 식물</Button>
+          <div style={{paddingRight: 0, display: 'flex', justifyContent: 'center'}}>
+            <Button size="sm" variant="outline-success" style={{marginRight:5}}onClick={() => {setWatchMode(0)}}>전체 식물 보기</Button>
+            <Button size="sm" variant="outline-success" onClick={() => {setWatchMode(1)}}>내가 모은 식물</Button>
+          </div>
           {/* <Button onClick={() => {setWatchMode(2)}}>내가 모으지 못한 식물</Button> */}
           {watchMode==0 && <div>
-            <Row xs={2} style = {{marginRight: 0}}>
+            <Row xs={2} style = {{marginRight: 0, justifyContent: 'center'}} >
                 {plantList.length > 0 ? (
                     plantList.map((plant:any, i:number) => {
                       if(i === plantList.length - 1 &&
@@ -313,14 +315,14 @@ function PlantList() {
                             <Col
                                 key={`${plant.korName}-${i}`}
                                 ref={setLastElement1}
-                                style = {{paddingRight: 0}}
+                                style = {{paddingRight: 0, display: 'flex', justifyContent: 'center'}}
                             >
                                 <UserCard data={plant} key={`${plant.korName}-${i}`} />
                             </Col>
                         ) 
                       else 
                         return (
-                            <Col style = {{paddingRight: 0}}>
+                            <Col style = {{paddingRight: 0, display: 'flex', justifyContent: 'center' }}>
                               <UserCard
                                   data={plant}
                                   key={`${plant.korName}-${i}`}
@@ -331,7 +333,10 @@ function PlantList() {
             </Row>
             {loading && <p className='text-center'>loading...</p>}
             {wholePage - 1 === TOTAL_PAGES && (
+              <div>
+                <br /><br /><br />
                 <p className='text-center my-10'>더 이상의 정보가 없습니다.</p>
+              </div>
             )}
           </div>}
 
@@ -361,11 +366,14 @@ function PlantList() {
                               />
                             </Col>
                         )
-              })) :<div>끝</div>}
+              })) :<div></div>}
             </Row>
             {loading && <p className='text-center'>loading...</p>}
             {collectedPage - 1 === collectedPlantPage && (
+              <div>
+                <br /><br /><br />
                 <p className='text-center my-10'>더 이상의 정보가 없습니다.</p>
+              </div>
             )}
           </div>}
       </Container>
