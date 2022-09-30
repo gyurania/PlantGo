@@ -112,7 +112,7 @@ const HomeNavBar = () => {
       )}
 
       {/* 상단메뉴 */}
-      <button>
+      <button className="p-0 m-0" style={{border: 0}}>
         <BsArrowRepeat
           onClick={reloadPage}
           style={{
@@ -139,7 +139,7 @@ const HomeNavBar = () => {
 
       {/* 하단메뉴 */}
       <Container>
-        <div className="navbar transparent navbar-inverse fixed-bottom">
+        <div className="navbar transparent navbar-inverse fixed-bottom p-0">
           <Nav.Link
             onClick={() => {
               Navigate("/camera");
