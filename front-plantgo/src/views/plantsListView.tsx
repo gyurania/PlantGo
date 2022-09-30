@@ -283,7 +283,7 @@ function PlantList() {
             fontFamily: "MICEGothic Bold",
             fontWeight: 'normal',
             fontSize: 30,
-            color: '#1c6758'
+            color: '#FFFFFF'
           }}>Plants Guide</h1>
 
           <h2 style={{
@@ -291,17 +291,17 @@ function PlantList() {
             fontFamily: "MICEGothic Bold",
             fontWeight: 'normal',
             fontSize: 10,
-            color: '#1c6758'
+            color: '#FFFFFF'
           }}>총 식물 수 : 4188</h2>
           <h2 style={{
             textAlign: 'center',
             fontFamily: "MICEGothic Bold",
             fontWeight: 'normal',
             fontSize: 10,
-            color: '#1c6758'
+            color: '#FFFFFF'
           }}>모은 식물 수 : {collectedPlantCount}</h2>
-          <Button size="sm" variant="outline-success" style={{margin:'0.75em'}} onClick={() => {setWatchMode(0)}}>전체 식물 보기</Button>
-          <Button size="sm" variant="outline-success" onClick={() => {setWatchMode(1)}}>내가 모은 식물</Button>
+          <Button size="sm" variant="outline-light" style={{margin:'0.75em'}} onClick={() => {setWatchMode(0)}}>전체 식물 보기</Button>
+          <Button size="sm" variant="outline-light" onClick={() => {setWatchMode(1)}}>내가 모은 식물</Button>
           {/* <Button onClick={() => {setWatchMode(2)}}>내가 모으지 못한 식물</Button> */}
           {watchMode==0 && <div>
             <Row xs={2} style = {{marginRight: 0}}>
