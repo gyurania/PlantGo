@@ -6,5 +6,5 @@ export const NAVER_AUTH_URL = `${BACK_URI}/naver?redirect_uri=${REDIRECT_URI}`;
 export const GOOGLE_AUTH_URL = `${BACK_URI}/google?redirect_uri=${REDIRECT_URI}`;
 
 // 바뀌는거 안보이겠지?
-// 왜 보이는거지?
 // 캐시 삭제후 재시도
+// 원래대로돌려놓기
