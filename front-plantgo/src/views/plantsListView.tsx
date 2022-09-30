@@ -272,7 +272,6 @@ function PlantList() {
         width: 420,
         backgroundImage: `url(${BackgroundImg})`,
         backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat',
       }}>
           <h1 style={{
             textAlign: 'center',
@@ -323,7 +322,7 @@ function PlantList() {
                               />
                             </Col>
                         )
-              })) :<div>끝</div>}
+              })) :<div></div>}
             </Row>
             {loading && <p className='text-center'>loading...</p>}
             {wholePage - 1 === TOTAL_PAGES && (
