@@ -209,9 +209,11 @@ function PlantList() {
           display: "inline-block"
         }} onClick = {() => {navigate("/photocards", { state: plant.data });}}>
           <Card.Body>
-            <Card.Img src={AltImg} style={{
-              height: 88,
-              width: 120
+            <Card.Img src={plant.data.imgUrl} alt={AltImg} style={{
+              height: 100,
+              width: 100,
+              borderRadius: '50%',
+              overflow: 'hidden'
             }} />
             <Card.Title style={{
               fontFamily: "D2Coding",
@@ -247,9 +249,11 @@ function PlantList() {
               top: 0,
               left:0
             }}/>
-            <Card.Img src={AltImg} style={{
-              height: 88,
-              width: 120
+            <Card.Img src={plant.data.imgUrl} alt={AltImg} style={{
+              height: 100,
+              width: 100,
+              borderRadius: '50%',
+              overflow: 'hidden'
             }} />
             <Card.Title style={{
               fontFamily: "D2Coding",
