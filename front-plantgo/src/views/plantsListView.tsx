@@ -13,7 +13,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { minWidth } from "@mui/system";
 import "../CSS/plantListView.css";
 import Container from "react-bootstrap/Container";
-import PlantsNavBar from "../components/PlantsNavBar";
 
 function PlantList() {
   const navigate = useNavigate();
@@ -312,7 +311,6 @@ function PlantList() {
 
   return (
     <Container fluid className="backgroundImg">
-      <PlantsNavBar></PlantsNavBar>
       <br />
       <br />
       <img
