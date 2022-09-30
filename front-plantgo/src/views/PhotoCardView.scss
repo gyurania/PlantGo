@@ -7,7 +7,7 @@ $red: hsl(10,80%,50%);
 $orange: hsl(50,80%,50%);
 
 html, body {
-  height: 100vh;
+  height: 100%;
   background-attachment: fixed;
   margin: 0px;
 	padding: 0px;
@@ -21,6 +21,20 @@ html, body {
   height: 100vh;
   width: 100%;
   box-sizing: border-box;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.photocardContainer2{
+  font-family: 'MICEGothic Bold', 'Indie Flower', cursive !important;
+  background-color: #D2DAFF; /*CAPE HONEY*/
+	margin: 0px;
+	padding: 0px;
+  height: 100vh;
+  width: 400px;
+  box-sizing: border-box;
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -29,10 +43,10 @@ html, body {
 
 .photocard{
   cursor: pointer;
-  width: 300px;
-  height: 500px;
+  width: 280px;
+  height: 450px;
   perspective: 1000px;
-  margin: 1rem;
+  margin: 50px auto;
   position: relative;
   // top:20%;
   // left: 50%
@@ -42,6 +56,7 @@ html, body {
   border-radius: 6px;
   background-position: center;
   background-size: cover;
+  display: flex;
   text-align: center;
   justify-content: center;
   align-items: center;
@@ -52,17 +67,23 @@ html, body {
   backface-visibility: hidden;
   transform-style: preserve-3d;
   transition: ease-in-out 600ms;
+  flex-direction: column;
 }
 
 .front {
   background-size: cover;
   // background-blend-mode: overlay;
   padding: 2rem;
-  font-size: 1.618rem;
   font-weight: 600;
-  color: #fff;
   overflow: hidden;
-  font-family: Poppins, sans-serif;
+
+  p {
+    font-family: Poppins, sans-serif;
+    font-size: 1.618rem;
+    font-weight: 600;
+    color: #fff;
+  }
+
   &:before {
     position: absolute;
     display: block;
@@ -93,7 +114,7 @@ html, body {
     
     &:before {
       box-shadow: 0 0 10px 10px rgba($primary, 0.25);
-    background-color: rgba($primary, 0.25);
+      background-color: rgba($primary, 0.25);
     }
   }
   
@@ -132,7 +153,7 @@ html, body {
   font: inherit;
   border: none;
   position: relative;
-    transform-style: preserve-3d;
+  transform-style: preserve-3d;
   transition: 300ms ease;
   
   &:before {
