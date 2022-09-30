@@ -6,7 +6,8 @@ const USER = 'v1/users/'
 
 export default {
   photocard: {
-    register : () => HOST + PHOTOCARD
+    register: () => HOST + PHOTOCARD,
+    modifyMemo: (photocard_id:number) => HOST + PHOTOCARD + photocard_id
   },
   plants: {
     list: () => HOST + PLANT,

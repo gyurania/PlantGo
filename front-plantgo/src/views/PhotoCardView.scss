@@ -110,6 +110,7 @@ html, body {
   padding: 0 2em;
   
   .photocardbutton {
+    margin-top: 15px;
     background: linear-gradient(135deg, adjust-hue($primary, -20deg), $primary);
     
     &:before {
