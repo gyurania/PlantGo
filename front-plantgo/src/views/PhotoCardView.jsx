@@ -10,7 +10,7 @@ import axios from "axios";
 import spring from "../api/spring";
 import "./PhotoCardView.scss";
 import { keyframes } from "@emotion/react";
-import { MdArrowBack } from "react-icons/bs";
+import { MdArrowBack } from "react-icons/md";
 
 function PhotoCardView() {
   let loginToken = sessionStorage.getItem("loginToken");
