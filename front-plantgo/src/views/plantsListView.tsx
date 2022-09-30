@@ -7,7 +7,12 @@ import Row from 'react-bootstrap/Row';
 import AltImg from './plantGO_logo_wot_rbg.png'
 import Button from 'react-bootstrap/Button'
 import CheckMark from './blue_check.png'
+import BackgroundImg from '../img/plantgo3.jpg'
+import BookIcon from '../img/book_icon.png'
 import { useLocation, useNavigate } from "react-router-dom";
+import { minWidth } from "@mui/system";
+import '../CSS/plantListView.css'
+import Container from "react-bootstrap/esm/Container";
 
 function PlantList() {
   
@@ -139,17 +144,15 @@ function PlantList() {
   //     })
   // };
 
+  useEffect(() => {
+    document.body.classList.add('plantlist');
+  }, [])
   // 모든 리스트 페이지 불러오기
   useEffect(() => {
     if (wholePage <= TOTAL_PAGES) {
       fetchPlantList();
     }
   }, [wholePage]);
-  
-  useEffect(() => {
-    fetchCollected();
-    fetchPlantList();
-  }, [watchMode])
 
   // 모은 식물 리스트 페이지 불러오기
   useEffect(() => {
@@ -195,8 +198,8 @@ function PlantList() {
     if (plant.data.collected == false) {
       return (
         <Card border="danger" style={{
-          height: 200,
-          width: 170,
+          height: 180,
+          width: 150,
           padding: 0,
           margin: "0.75em",
           backgroundColor: "#FFFFFF",
@@ -226,10 +229,10 @@ function PlantList() {
     } else {
       return (
         <Card border="primary" style={{
-          height: 200,
-          width: 170,
+          height: 180,
+          width: 150,
           padding: 0,
-          margin: "0.75em",
+          margin: "0.5em",
           backgroundColor: "#FFFFFF",
           boxShadow: "3px 3px 5px #152967",
           textAlign: "center",
@@ -265,19 +268,43 @@ function PlantList() {
   }
   
     return (
-      <div style={{
-        height: 800,
-        width: 420
-      }}>
-          <h1 className='text-3xl text-center mt-4 mb-10'>Plants Guide</h1>
-          <h2>총 식물 수 : 4188</h2>
-          <h2>모은 식물 수 : {collectedPlantCount}</h2>
-          <Button onClick={() => {setWatchMode(0)}}>전체 식물 보기</Button>
-          <Button onClick={() => {setWatchMode(1)}}>내가 모은 식물</Button>
+      <Container fluid>
+        <br />
+        <br />
+          <img src={BookIcon} style={{
+            height:100,
+            width:100,
+            textAlign: 'center',
+            display: 'block',
+            margin: 'auto'
+          }}></img>
+          <h1 style={{
+            textAlign: 'center',
+            fontFamily: "MICEGothic Bold",
+            fontWeight: 'normal',
+            fontSize: 30,
+            color: '#FFFFFF'
+          }}>Plants Guide</h1>
+
+          <h2 style={{
+            textAlign: 'center',
+            fontFamily: "MICEGothic Bold",
+            fontWeight: 'normal',
+            fontSize: 10,
+            color: '#FFFFFF'
+          }}>총 식물 수 : 4188</h2>
+          <h2 style={{
+            textAlign: 'center',
+            fontFamily: "MICEGothic Bold",
+            fontWeight: 'normal',
+            fontSize: 10,
+            color: '#FFFFFF'
+          }}>모은 식물 수 : {collectedPlantCount}</h2>
+          <Button size="sm" variant="outline-light" style={{margin:'0.75em'}} onClick={() => {setWatchMode(0)}}>전체 식물 보기</Button>
+          <Button size="sm" variant="outline-light" onClick={() => {setWatchMode(1)}}>내가 모은 식물</Button>
           {/* <Button onClick={() => {setWatchMode(2)}}>내가 모으지 못한 식물</Button> */}
-          
           {watchMode==0 && <div>
-            <Row xs={2}>
+            <Row xs={2} style = {{marginRight: 0}}>
                 {plantList.length > 0 ? (
                     plantList.map((plant:any, i:number) => {
                       if(i === plantList.length - 1 &&
@@ -286,20 +313,21 @@ function PlantList() {
                             <Col
                                 key={`${plant.korName}-${i}`}
                                 ref={setLastElement1}
+                                style = {{paddingRight: 0}}
                             >
                                 <UserCard data={plant} key={`${plant.korName}-${i}`} />
                             </Col>
                         ) 
                       else 
                         return (
-                            <Col>
+                            <Col style = {{paddingRight: 0}}>
                               <UserCard
                                   data={plant}
                                   key={`${plant.korName}-${i}`}
                               />
                             </Col>
                         )
-              })) :<div>끝</div>}
+              })) :<div></div>}
             </Row>
             {loading && <p className='text-center'>loading...</p>}
             {wholePage - 1 === TOTAL_PAGES && (
@@ -308,7 +336,7 @@ function PlantList() {
           </div>}
 
           {watchMode==1 && <div>
-            <Row xs={2}>
+            <Row xs={2} style = {{marginRight: 0}}>
                 {collectedPlantList.length > 0 ? (
                     collectedPlantList.map((plant:any, i:number) => {
                       if(i === collectedPlantList.length - 1 &&
@@ -317,6 +345,7 @@ function PlantList() {
                             <Col
                                 key={`${plant.korName}-${i}`}
                                 ref={setLastElement2}
+                                style = {{paddingRight: 0}}
                             >
                                 <UserCard 
                                   data={plant}
@@ -325,7 +354,7 @@ function PlantList() {
                         ) 
                       else 
                         return (
-                            <Col>
+                            <Col style = {{paddingRight: 0}}>
                               <UserCard
                                   data={plant}
                                   key={`${plant.korName}-${i}`}
@@ -339,7 +368,7 @@ function PlantList() {
                 <p className='text-center my-10'>더 이상의 정보가 없습니다.</p>
             )}
           </div>}
-      </div>
+      </Container>
   );
 }
       
