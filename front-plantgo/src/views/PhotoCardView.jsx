@@ -66,6 +66,8 @@ function PhotoCardView() {
               Navigate("/plantlist");
             }}
           ></MdArrowBack>
+        </Row>
+        <Row style={{ height: "150px", display: "block", paddingTop: "80px" }}>
           <h1 style={{ textAlign: "center" }}>Photocards</h1>
         </Row>
         <Row>
