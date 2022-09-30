@@ -275,7 +275,8 @@ function PlantList() {
         <br />
           <img src={BookIcon} style={{
             height:100,
-            width:100
+            width:100,
+            textAlign: 'center'
           }}></img>
           <h1 style={{
             textAlign: 'center',
@@ -299,10 +300,9 @@ function PlantList() {
             fontSize: 10,
             color: '#1c6758'
           }}>모은 식물 수 : {collectedPlantCount}</h2>
-          <Button size="sm" variant="outline-success" onClick={() => {setWatchMode(0)}}>전체 식물 보기</Button>
-          <Button size="sm" variant="outline-success" onClick={() => {setWatchMode(1)}}>내가 모은 식물</Button>
+          <Button size="sm" variant="outline-success" style={{margin:'0.75em'}} onClick={() => {setWatchMode(0)}}>전체 식물 보기</Button>
+          <Button size="sm" variant="outline-success" style={{margin:'0.75em'}} onClick={() => {setWatchMode(1)}}>내가 모은 식물</Button>
           {/* <Button onClick={() => {setWatchMode(2)}}>내가 모으지 못한 식물</Button> */}
-          
           {watchMode==0 && <div>
             <Row xs={2}>
                 {plantList.length > 0 ? (
