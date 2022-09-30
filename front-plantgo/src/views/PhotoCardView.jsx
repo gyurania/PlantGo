@@ -11,7 +11,7 @@ import spring from "../api/spring";
 import "./PhotoCardView.scss";
 import { keyframes } from "@emotion/react";
 import { MdArrowBack } from "react-icons/md";
-import HomeNavBar from "../components/HomeNavBar";
+import PhotocardNavBar from "../components/PhotocardNavBar";
 
 function PhotoCardView() {
   let loginToken = sessionStorage.getItem("loginToken");
@@ -86,7 +86,7 @@ function PhotoCardView() {
             </Carousel>
           </Col>
         </Row>
-        <HomeNavBar></HomeNavBar>
+        <PhotocardNavBar></PhotocardNavBar>
       </Container>
     </div>
   );
