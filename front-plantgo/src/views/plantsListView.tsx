@@ -4,13 +4,11 @@ import spring from "../api/spring";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import AltImg from "./plantGO_logo_wot_rbg.png";
+import AltImg from "../img/square_plantgo.png";
 import Button from "react-bootstrap/Button";
 import CheckMark from "./blue_check.png";
-import BackgroundImg from "../img/plantgo3.jpg";
 import BookIcon from "../img/book_icon.png";
 import { useLocation, useNavigate } from "react-router-dom";
-import { minWidth } from "@mui/system";
 import "../CSS/plantListView.css";
 import Container from "react-bootstrap/Container";
 
@@ -32,7 +30,9 @@ function PlantList() {
   const [collectedPlantCount, setCollectedPlantCount] = useState<number>(0);
   const [nonCollectedPlantList, setNonCollectedPlantList] = useState<any>([]);
   const [watchMode, setWatchMode] = useState<number>(0);
-
+  const onErrorImg = (e:any) => {
+    e.target.src = AltImg;
+  }
   // Login key, userSeq
 
   let loginToken = sessionStorage.getItem("loginToken");
@@ -215,7 +215,7 @@ function PlantList() {
           <Card.Body>
             <Card.Img
               src={plant.data.imgUrl}
-              alt={AltImg}
+              onError={onErrorImg}
               style={{
                 height: 100,
                 width: 100,
@@ -276,7 +276,7 @@ function PlantList() {
             />
             <Card.Img
               src={plant.data.imgUrl}
-              alt={AltImg}
+              onError={onErrorImg}
               style={{
                 height: 100,
                 width: 100,
