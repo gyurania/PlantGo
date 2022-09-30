@@ -11,7 +11,6 @@ import spring from "../api/spring";
 import "./PhotoCardView.scss";
 import { keyframes } from "@emotion/react";
 import { MdArrowBack } from "react-icons/bs";
-import { useNavigate } from "react-router-dom";
 
 function PhotoCardView() {
   let loginToken = sessionStorage.getItem("loginToken");
