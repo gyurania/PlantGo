@@ -146,6 +146,7 @@ function PlantList() {
 
   useEffect(() => {
     document.body.classList.add('plantlist');
+    fetchCollected()
   }, [])
   // 모든 리스트 페이지 불러오기
   useEffect(() => {
@@ -208,20 +209,22 @@ function PlantList() {
           display: "inline-block"
         }} onClick = {() => {navigate("/photocards", { state: plant.data });}}>
           <Card.Body>
-            <Card.Img src={AltImg} style={{
-              height: 88,
-              width: 120
+            <Card.Img src={plant.data.imgUrl} alt={AltImg} style={{
+              height: 100,
+              width: 100,
+              borderRadius: '50%',
+              overflow: 'hidden'
             }} />
             <Card.Title style={{
               fontFamily: "D2Coding",
               fontWeight: "bold",
               padding: ".3em",
-              fontSize: "0.8em",
+              fontSize: "1em",
               lineHeight: "2em",
               margin: 0
             }}>{plant.data.korName}</Card.Title>
             <Card.Text style={{
-              fontSize: "1.2em"
+              fontSize: "1em"
             }}>수집 미완료</Card.Text>
           </Card.Body>
         </Card>
@@ -246,15 +249,17 @@ function PlantList() {
               top: 0,
               left:0
             }}/>
-            <Card.Img src={AltImg} style={{
-              height: 88,
-              width: 120
+            <Card.Img src={plant.data.imgUrl} alt={AltImg} style={{
+              height: 100,
+              width: 100,
+              borderRadius: '50%',
+              overflow: 'hidden'
             }} />
             <Card.Title style={{
               fontFamily: "D2Coding",
               fontWeight: "bold",
               padding: ".3em",
-              fontSize: "0.8em",
+              fontSize: "1em",
               lineHeight: "2em",
               margin: 0
             }}>{plant.data.korName}</Card.Title>
@@ -306,7 +311,7 @@ function PlantList() {
           </div>
           {/* <Button onClick={() => {setWatchMode(2)}}>내가 모으지 못한 식물</Button> */}
           {watchMode==0 && <div>
-            <Row xs={2} style = {{marginRight: 0, justifyContent: 'center'}} >
+            <Row xs={2} style = {{marginRight: 0}} >
                 {plantList.length > 0 ? (
                     plantList.map((plant:any, i:number) => {
                       if(i === plantList.length - 1 &&
@@ -341,7 +346,7 @@ function PlantList() {
           </div>}
 
           {watchMode==1 && <div>
-            <Row xs={2} style = {{marginRight: 0}}>
+            <Row xs={2} style = {{marginRight: 0}} >
                 {collectedPlantList.length > 0 ? (
                     collectedPlantList.map((plant:any, i:number) => {
                       if(i === collectedPlantList.length - 1 &&
@@ -350,7 +355,7 @@ function PlantList() {
                             <Col
                                 key={`${plant.korName}-${i}`}
                                 ref={setLastElement2}
-                                style = {{paddingRight: 0}}
+                                style = {{paddingRight: 0, display: 'flex', justifyContent: 'center'}}
                             >
                                 <UserCard 
                                   data={plant}
@@ -359,7 +364,7 @@ function PlantList() {
                         ) 
                       else 
                         return (
-                            <Col style = {{paddingRight: 0}}>
+                            <Col style = {{paddingRight: 0, display: 'flex', justifyContent: 'center'}}>
                               <UserCard
                                   data={plant}
                                   key={`${plant.korName}-${i}`}
@@ -373,6 +378,7 @@ function PlantList() {
               <div>
                 <br /><br /><br />
                 <p className='text-center my-10'>더 이상의 정보가 없습니다.</p>
+                <br /><br /><br />
               </div>
             )}
           </div>}
