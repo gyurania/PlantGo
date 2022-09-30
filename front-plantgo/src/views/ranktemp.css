@@ -1259,3 +1259,7 @@ app {
   font-size: 20px;
   color: #1c6758;
 }
+
+.page-leaderboard .rank-title > img {
+  margin-top: 15px;
+}
