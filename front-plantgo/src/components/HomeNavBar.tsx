@@ -112,7 +112,11 @@ const HomeNavBar = () => {
       )}
 
       {/* 상단메뉴 */}
-      <button className="p-0 m-0" style={{border: 0}}>
+      <button className="btn btn-default" style={{
+            position: "fixed",
+            top: "15px",
+            right: "15px",
+          }}>
         <BsArrowRepeat
           onClick={reloadPage}
           style={{
@@ -139,12 +143,12 @@ const HomeNavBar = () => {
 
       {/* 하단메뉴 */}
       <Container>
-        <div className="navbar transparent navbar-inverse fixed-bottom p-0">
-          <Nav.Link
+        <div>
+          <button className="btn btn-default"
             onClick={() => {
               Navigate("/camera");
             }}
-            className="navbar-inner"
+
             style={{
               position: "absolute",
               left: "50%",
@@ -159,15 +163,14 @@ const HomeNavBar = () => {
                 height: 50,
               }}
             />
-          </Nav.Link>
-          <Nav.Link
+          </button>
+          <button
             onClick={toggleMenu}
-            className="navbar-inner"
+            className="btn btn-default"
             style={{
               position: "absolute",
               right: 0,
               bottom: "20px",
-              marginRight: "10px",
               display: "block",
             }}
           >
@@ -177,7 +180,7 @@ const HomeNavBar = () => {
                 height: 60,
               }}
             />
-          </Nav.Link>
+          </button>
         </div>
       </Container>
     </>
