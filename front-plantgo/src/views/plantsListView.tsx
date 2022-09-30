@@ -325,7 +325,7 @@ function PlantList() {
                         ) 
                       else 
                         return (
-                            <Col>
+                            <Col className = "pr-0">
                               <UserCard
                                   data={plant}
                                   key={`${plant.korName}-${i}`}
