@@ -309,7 +309,7 @@ function PlantList() {
           <Button size="sm" variant="outline-success" onClick={() => {setWatchMode(1)}}>내가 모은 식물</Button>
           {/* <Button onClick={() => {setWatchMode(2)}}>내가 모으지 못한 식물</Button> */}
           {watchMode==0 && <div>
-            <Row xs={2}>
+            <Row xs={2} style = {{marginRight: 0}}>
                 {plantList.length > 0 ? (
                     plantList.map((plant:any, i:number) => {
                       if(i === plantList.length - 1 &&
@@ -341,7 +341,7 @@ function PlantList() {
           </div>}
 
           {watchMode==1 && <div>
-            <Row xs={2}>
+            <Row xs={2} style = {{marginRight: 0}}>
                 {collectedPlantList.length > 0 ? (
                     collectedPlantList.map((plant:any, i:number) => {
                       if(i === collectedPlantList.length - 1 &&
