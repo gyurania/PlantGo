@@ -270,11 +270,32 @@ function PlantList() {
       <div style={{
         height: 800,
         width: 420,
-        background: 'url(../../img/plantgo2.jpg)'
+        backgroundImage: `url(${BackgroundImg})`,
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
       }}>
-          <h1 className='text-3xl text-center mt-4 mb-10'>Plants Guide</h1>
-          <h2>총 식물 수 : 4188</h2>
-          <h2>모은 식물 수 : {collectedPlantCount}</h2>
+          <h1 style={{
+            textAlign: 'center',
+            fontFamily: "MICEGothic Bold",
+            fontWeight: 'normal',
+            fontSize: 20,
+            color: '#1c6758'
+          }}>Plants Guide</h1>
+
+          <h2 style={{
+            textAlign: 'center',
+            fontFamily: "MICEGothic Bold",
+            fontWeight: 'normal',
+            fontSize: 10,
+            color: '#1c6758'
+          }}>총 식물 수 : 4188</h2>
+          <h2 style={{
+            textAlign: 'center',
+            fontFamily: "MICEGothic Bold",
+            fontWeight: 'normal',
+            fontSize: 10,
+            color: '#1c6758'
+          }}>모은 식물 수 : {collectedPlantCount}</h2>
           <Button onClick={() => {setWatchMode(0)}}>전체 식물 보기</Button>
           <Button onClick={() => {setWatchMode(1)}}>내가 모은 식물</Button>
           {/* <Button onClick={() => {setWatchMode(2)}}>내가 모으지 못한 식물</Button> */}
