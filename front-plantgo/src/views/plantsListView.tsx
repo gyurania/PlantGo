@@ -7,9 +7,9 @@ import Row from 'react-bootstrap/Row';
 import AltImg from './plantGO_logo_wot_rbg.png'
 import Button from 'react-bootstrap/Button'
 import CheckMark from './blue_check.png'
-import BackgroundImg from '../img/plantgo2.jpg'
+import BackgroundImg from '../img/plantgo3.jpg'
+import BookIcon from '../img/book_icon.png'
 import { useLocation, useNavigate } from "react-router-dom";
-import { Background } from "./loading";
 
 function PlantList() {
   
@@ -268,16 +268,20 @@ function PlantList() {
   
     return (
       <div style={{
-        height: 800,
-        width: 420,
         backgroundImage: `url(${BackgroundImg})`,
         backgroundSize: 'cover',
       }}>
+        <br />
+        <br />
+          <img src={BookIcon} style={{
+            height:100,
+            width:100
+          }}></img>
           <h1 style={{
             textAlign: 'center',
             fontFamily: "MICEGothic Bold",
             fontWeight: 'normal',
-            fontSize: 20,
+            fontSize: 30,
             color: '#1c6758'
           }}>Plants Guide</h1>
 
@@ -295,8 +299,8 @@ function PlantList() {
             fontSize: 10,
             color: '#1c6758'
           }}>모은 식물 수 : {collectedPlantCount}</h2>
-          <Button onClick={() => {setWatchMode(0)}}>전체 식물 보기</Button>
-          <Button onClick={() => {setWatchMode(1)}}>내가 모은 식물</Button>
+          <Button size="sm" variant="outline-success" onClick={() => {setWatchMode(0)}}>전체 식물 보기</Button>
+          <Button size="sm" variant="outline-success" onClick={() => {setWatchMode(1)}}>내가 모은 식물</Button>
           {/* <Button onClick={() => {setWatchMode(2)}}>내가 모으지 못한 식물</Button> */}
           
           {watchMode==0 && <div>
