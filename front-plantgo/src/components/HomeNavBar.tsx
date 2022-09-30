@@ -8,7 +8,8 @@ import Col from "react-bootstrap/Col";
 import { useState } from "react";
 import Image from "react-bootstrap/Image";
 import Button from "react-bootstrap/Button";
-
+import { useNavigate } from "react-router-dom";
+import "../CSS/HomeNavBar.css";
 import {
   BsCameraFill,
   BsPlus,
@@ -17,8 +18,6 @@ import {
   BsBoxArrowRight,
   BsArrowRepeat,
 } from "react-icons/bs";
-import { useNavigate } from "react-router-dom";
-import "./HomeNavBar.css";
 
 const HomeNavBar = () => {
   let Navigate = useNavigate();
