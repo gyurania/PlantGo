@@ -318,14 +318,14 @@ function PlantList() {
                             <Col
                                 key={`${plant.korName}-${i}`}
                                 ref={setLastElement1}
-                                className = "pr-0"
+                                style = {{paddingRight: 0}}
                             >
                                 <UserCard data={plant} key={`${plant.korName}-${i}`} />
                             </Col>
                         ) 
                       else 
                         return (
-                            <Col className = "pr-0">
+                            <Col style = {{paddingRight: 0}}>
                               <UserCard
                                   data={plant}
                                   key={`${plant.korName}-${i}`}
@@ -350,6 +350,7 @@ function PlantList() {
                             <Col
                                 key={`${plant.korName}-${i}`}
                                 ref={setLastElement2}
+                                style = {{paddingRight: 0}}
                             >
                                 <UserCard 
                                   data={plant}
@@ -358,7 +359,7 @@ function PlantList() {
                         ) 
                       else 
                         return (
-                            <Col>
+                            <Col style = {{paddingRight: 0}}>
                               <UserCard
                                   data={plant}
                                   key={`${plant.korName}-${i}`}
