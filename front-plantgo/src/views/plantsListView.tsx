@@ -199,8 +199,8 @@ function PlantList() {
         <Card
           border="danger"
           style={{
-            height: 180,
-            width: 150,
+            height: 200,
+            width: 180,
             padding: 0,
             margin: "0.75em",
             backgroundColor: "#FFFFFF",
@@ -228,7 +228,7 @@ function PlantList() {
                 fontFamily: "D2Coding",
                 fontWeight: "bold",
                 padding: ".3em",
-                fontSize: "1em",
+                fontSize: "0.8em",
                 lineHeight: "2em",
                 margin: 0,
               }}
@@ -237,7 +237,7 @@ function PlantList() {
             </Card.Title>
             <Card.Text
               style={{
-                fontSize: "1em",
+                fontSize: "0.6em",
               }}
             >
               수집 미완료
@@ -250,8 +250,8 @@ function PlantList() {
         <Card
           border="primary"
           style={{
-            height: 180,
-            width: 150,
+            height: 200,
+            width: 180,
             padding: 0,
             margin: "0.5em",
             backgroundColor: "#FFFFFF",
@@ -289,7 +289,7 @@ function PlantList() {
                 fontFamily: "D2Coding",
                 fontWeight: "bold",
                 padding: ".3em",
-                fontSize: "1em",
+                fontSize: "0.8em",
                 lineHeight: "2em",
                 margin: 0,
               }}
@@ -298,7 +298,7 @@ function PlantList() {
             </Card.Title>
             <Card.Text
               style={{
-                fontSize: "1em",
+                fontSize: "0.6em",
               }}
             >
               수집 완료
