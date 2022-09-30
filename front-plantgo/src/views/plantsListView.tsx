@@ -7,7 +7,9 @@ import Row from 'react-bootstrap/Row';
 import AltImg from './plantGO_logo_wot_rbg.png'
 import Button from 'react-bootstrap/Button'
 import CheckMark from './blue_check.png'
+import BackgroundImg from '../img/plantgo2.jpg'
 import { useLocation, useNavigate } from "react-router-dom";
+import { Background } from "./loading";
 
 function PlantList() {
   
@@ -267,7 +269,8 @@ function PlantList() {
     return (
       <div style={{
         height: 800,
-        width: 420
+        width: 420,
+        background: 'url(../../img/plantgo2.jpg)'
       }}>
           <h1 className='text-3xl text-center mt-4 mb-10'>Plants Guide</h1>
           <h2>총 식물 수 : 4188</h2>
