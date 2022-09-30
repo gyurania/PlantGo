@@ -29,7 +29,7 @@ class PlantApiUtilTest {
     public void insertPlant(){
         PlantApiUtil plantApiUtil = new PlantApiUtil(plantRepository, photocardService);
 
-        for(int i=1; i<=52; i++){
+        for(int i=1; i<=1; i++){
             plantApiUtil.insertPlant(i);
 
         }
