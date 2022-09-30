@@ -7,9 +7,8 @@ import Row from 'react-bootstrap/Row';
 import AltImg from './plantGO_logo_wot_rbg.png'
 import Button from 'react-bootstrap/Button'
 import CheckMark from './blue_check.png'
-import BackgroundImg from '../img/plantgo2.jpg'
+import BackgroundImg from '../img/plantgo3.jpg'
 import { useLocation, useNavigate } from "react-router-dom";
-import { Background } from "./loading";
 
 function PlantList() {
   
@@ -268,11 +267,12 @@ function PlantList() {
   
     return (
       <div style={{
-        height: 800,
-        width: 420,
         backgroundImage: `url(${BackgroundImg})`,
         backgroundSize: 'cover',
       }}>
+        <br />
+        <br />
+
           <h1 style={{
             textAlign: 'center',
             fontFamily: "MICEGothic Bold",
