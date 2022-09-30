@@ -318,6 +318,7 @@ function PlantList() {
                             <Col
                                 key={`${plant.korName}-${i}`}
                                 ref={setLastElement1}
+                                className = "pr-0"
                             >
                                 <UserCard data={plant} key={`${plant.korName}-${i}`} />
                             </Col>
