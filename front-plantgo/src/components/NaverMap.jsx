@@ -7,15 +7,13 @@ function NaverMap(props) {
   const { naver } = window;
 
   const [position, setPosition] = useState({ lat: 37.5656, lng: 126.9769 });
-  const [currMarkers, setCurrMarkers] = useState(Array);
-  const [dragedCenter, setDragedCenter] = useState(Object);
-  const [isRenewed, setIsRenewed] = useState(0);
+  const [currMarkers, setCurrMarkers] = useState([]);
+  const [plantMarkers, setPlantMarkers] = useState([]);
   const [map, setMap] = useState();
 
   const token = sessionStorage.getItem("loginToken");
 
   const location = new naver.maps.LatLng(position.lat, position.lng);
-  const locationTwo = new naver.maps.LatLng(37.6843202, 126.7796355);
 
   // 지도 옵션
   const mapOptions = {
@@ -23,61 +21,124 @@ function NaverMap(props) {
     zoom: 16,
   };
 
-  // 지도 생성
-  console.log("처음", map);
-
   const initMap = () => {
-    setMap(new naver.maps.Map("map", mapOptions));
+    var tmpMap = new naver.maps.Map("map", mapOptions);
+    var tmpMarker = new naver.maps.Marker({
+      map: tmpMap,
+      title: "myLocation",
+      position: new naver.maps.LatLng(location),
+    });
+    setCurrMarkers(tmpMarker);
+
+    naver.maps.Event.addListener(tmpMap, "zoom_changed", function (zoom) {
+      console.log(zoom);
+      console.log("줌 할때 마커들", plantMarkers);
+      if (zoom === 16) {
+      }
+    });
+
+    naver.maps.Event.addListener(tmpMap, "idle", () => {
+      updateMarkers(tmpMap, plantMarkers);
+    });
+
+    setMap(tmpMap);
   };
-  console.log("두번째", map);
 
   useEffect(() => {
     initMap();
   }, []);
 
+  const updateMarkers = (isMap, isMarkers) => {
+    const mapBounds = isMap.getBounds();
+    let marker;
+    let position;
+
+    for (let i = 0; i < isMarkers.length; i += 1) {
+      marker = isMarkers[i];
+      position = marker.getPosition();
+
+      if (mapBounds.hasLatLng(position)) {
+        showMarker(isMap, marker);
+      } else {
+        hideMarker(marker);
+      }
+    }
+  };
+
+  const showMarker = (isMap, marker) => {
+    marker.setMap(isMap);
+  };
+
+  const hideMarker = (marker) => {
+    marker.setMap(null);
+  };
+
   useInterval(() => {
     const time = new Date();
     console.log(time.getSeconds());
-    navigator.geolocation.getCurrentPosition(
-      (pos) => {
-        console.log(pos.coords.latitude, pos.coords.longitude);
-        const tmpLat = pos.coords.latitude;
-        const tmpLng = pos.coords.longitude;
+    navigator.geolocation.getCurrentPosition((pos) => {
+      const tmpLat = pos.coords.latitude;
+      const tmpLng = pos.coords.longitude;
+      if (
+        ((position.lat - tmpLat) ** 2 + (position.lng - tmpLng) ** 2) ** 0.5 >
+        0.0003
+      ) {
+        setPosition({ lat: tmpLat, lng: tmpLng });
         const tmpLoc = new naver.maps.LatLng(tmpLat, tmpLng);
-        map.setCenter(tmpLoc);
-        new naver.maps.Marker({
+        map.setCenter(tmpLoc); // 현재 위치로 지도 중앙 이동
+        console.log("currMarker", currMarkers);
+        currMarkers.setMap(null);
+        const tmpMarker = new naver.maps.Marker({
           map: map,
           title: "myLocation",
-          position: new naver.maps.LatLng(tmpLat, tmpLng),
+          position: tmpLoc,
         });
-      },
-      () => {
-        window.alert("GPS동의 바람");
+        setCurrMarkers(tmpMarker);
       }
-    );
+    });
   }, 3000);
 
-  // // 1-1. 1초마다 현재 위치 갱신
-  // // useInterval(() => {
-  // //   console.log(position);
-  // //   const time = new Date();
-  // //   console.log(time.getSeconds());
-  // //   if (navigator.geolocation) {
-  // //     navigator.geolocation.getCurrentPosition((pos) => {
-  // //       const tmpLatitude = pos.coords.latitude;
-  // //       const tmpLongitude = pos.coords.longitude;
-  // //       if (
-  // //         ((position.lat - tmpLatitude) ** 2 +
-  // //           (position.lng - tmpLongitude) ** 2) **
-  // //           0.5 >
-  // //         0.0005
-  // //       ) {
-  // //         console.log("위치 좀 변화 됨");
-  // //         setPosition({ lat: pos.coords.latitude, lng: pos.coords.longitude });
-  // //       }
-  // //     });
-  // //   }
-  // // }, 1000);
+  useInterval(() => {
+    axios({
+      method: "post",
+      url: "https://j7a703.p.ssafy.io/api/photocard/map",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      data: {
+        latitude: position.lat,
+        longitude: position.lng,
+      },
+    })
+      .then((res) => {
+        const target = res.data.mapPhotocardList;
+        console.log("이전 식물 마커", plantMarkers);
+        console.log(res.data);
+
+        if (target.length !== plantMarkers.length) {
+          for (var i = 0; i < plantMarkers.length; i++) {
+            plantMarkers[i].setMap(null);
+          }
+
+          // 새로 들어온 데이터 마커로 치환 후 state에 push
+          var tmpPlantMarkers = [];
+          for (var i = 0; i < target.length; i++) {
+            const tmpLoc = new naver.maps.LatLng(
+              target[i].longitude,
+              target[i].latitude
+            );
+            const tmpMarker = new naver.maps.Marker({
+              map: map,
+              title: target[i].user.username,
+              position: tmpLoc,
+            });
+            tmpPlantMarkers.push(tmpMarker);
+          }
+          setPlantMarkers(tmpPlantMarkers); // 이전 마커들 다 지우고 다시 채움
+        }
+      })
+      .catch((err) => console.log(err));
+  }, 9000);
 
   // // 1-2. 10초마다 백단에 식물 정보 데이터 요청하기
   // // useInterval(() => {
