@@ -17,11 +17,10 @@ import {
   BsBoxArrowRight,
   BsArrowRepeat,
 } from "react-icons/bs";
-import { MdKeyboardBackspace } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import "./HomeNavBar.css";
 
-const PlantsNavBar = () => {
+const HomeNavBar = () => {
   let Navigate = useNavigate();
   const [isShown, setIsShown] = useState(false);
 
@@ -47,7 +46,7 @@ const PlantsNavBar = () => {
           right: "15px",
         }}
       >
-        <MdKeyboardBackspace
+        <BsArrowRepeat
           onClick={home}
           style={{
             width: 50,
@@ -58,8 +57,20 @@ const PlantsNavBar = () => {
           }}
         />
       </button>
+      <Image
+        src={logo}
+        style={{
+          width: 90,
+          height: 90,
+          position: "fixed",
+          top: "15px",
+          left: "15px",
+          backgroundColor: "white",
+          borderRadius: "50%",
+        }}
+      />
     </>
   );
 };
 
-export default PlantsNavBar;
+export default HomeNavBar;
