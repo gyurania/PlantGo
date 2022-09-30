@@ -217,12 +217,12 @@ function PlantList() {
               fontFamily: "D2Coding",
               fontWeight: "bold",
               padding: ".3em",
-              fontSize: "0.8em",
+              fontSize: "1em",
               lineHeight: "2em",
               margin: 0
             }}>{plant.data.korName}</Card.Title>
             <Card.Text style={{
-              fontSize: "1.2em"
+              fontSize: "1em"
             }}>수집 미완료</Card.Text>
           </Card.Body>
         </Card>
@@ -255,7 +255,7 @@ function PlantList() {
               fontFamily: "D2Coding",
               fontWeight: "bold",
               padding: ".3em",
-              fontSize: "0.8em",
+              fontSize: "1em",
               lineHeight: "2em",
               margin: 0
             }}>{plant.data.korName}</Card.Title>
