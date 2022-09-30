@@ -10,6 +10,7 @@ import CheckMark from './blue_check.png'
 import BackgroundImg from '../img/plantgo3.jpg'
 import BookIcon from '../img/book_icon.png'
 import { useLocation, useNavigate } from "react-router-dom";
+import { minWidth } from "@mui/system";
 
 function PlantList() {
   
@@ -197,8 +198,8 @@ function PlantList() {
     if (plant.data.collected == false) {
       return (
         <Card border="danger" style={{
-          height: 200,
-          width: 170,
+          height: 180,
+          width: 150,
           padding: 0,
           margin: "0.75em",
           backgroundColor: "#FFFFFF",
@@ -228,10 +229,10 @@ function PlantList() {
     } else {
       return (
         <Card border="primary" style={{
-          height: 200,
-          width: 170,
+          height: 180,
+          width: 150,
           padding: 0,
-          margin: "0.75em",
+          margin: "0.5em",
           backgroundColor: "#FFFFFF",
           boxShadow: "3px 3px 5px #152967",
           textAlign: "center",
@@ -270,6 +271,8 @@ function PlantList() {
       <div style={{
         backgroundImage: `url(${BackgroundImg})`,
         backgroundSize: 'cover',
+        minHeight: '100%',
+        minWidth: '100%'
       }}>
         <br />
         <br />
