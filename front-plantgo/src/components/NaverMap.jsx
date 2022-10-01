@@ -10,10 +10,116 @@ function NaverMap(props) {
   const [currMarkers, setCurrMarkers] = useState([]);
   const [plantMarkers, setPlantMarkers] = useState([]);
   const [map, setMap] = useState();
+  const [tmpMarkerForZoom, setTmpMarkerForZoom] = useState([]);
 
   const token = sessionStorage.getItem("loginToken");
 
   const location = new naver.maps.LatLng(position.lat, position.lng);
+
+  const tmpMarkers = [
+    { lat: 37.6887371, lng: 126.7846376 },
+    { lat: 37.6857293, lng: 126.7786386 },
+    { lat: 37.6980726, lng: 126.7664948 },
+    { lat: 37.693819, lng: 126.780976 },
+    { lat: 37.6810649, lng: 126.7660589 },
+    { lat: 37.6969239, lng: 126.7704684 },
+    { lat: 37.6928105, lng: 126.7821193 },
+    { lat: 37.6915444, lng: 126.7651047 },
+    { lat: 37.6806735, lng: 126.7692261 },
+    { lat: 37.6871522, lng: 126.7795575 },
+    { lat: 37.6816072, lng: 126.7654713 },
+    { lat: 37.6854876, lng: 126.7688321 },
+    { lat: 37.6911751, lng: 126.7836991 },
+    { lat: 37.6933195, lng: 126.778545 },
+    { lat: 37.6899245, lng: 126.7834599 },
+    { lat: 37.6971122, lng: 126.783201 },
+    { lat: 37.6851134, lng: 126.783325 },
+    { lat: 37.692296, lng: 126.7789639 },
+    { lat: 37.6973139, lng: 126.7708711 },
+    { lat: 37.6857771, lng: 126.7848305 },
+    { lat: 37.6977715, lng: 126.7729631 },
+    { lat: 37.6916873, lng: 126.766929 },
+    { lat: 37.694581, lng: 126.7714456 },
+    { lat: 37.6964568, lng: 126.7835931 },
+    { lat: 37.6937457, lng: 126.7743304 },
+    { lat: 37.6815675, lng: 126.7756563 },
+    { lat: 37.6942786, lng: 126.7655234 },
+    { lat: 37.6876536, lng: 126.7805864 },
+    { lat: 37.6923464, lng: 126.7692389 },
+    { lat: 37.6898039, lng: 126.7777472 },
+    { lat: 37.6821305, lng: 126.7722636 },
+    { lat: 37.6939555, lng: 126.7652895 },
+    { lat: 37.6974921, lng: 126.7675053 },
+    { lat: 37.695066, lng: 126.7714841 },
+    { lat: 37.692129, lng: 126.7748648 },
+    { lat: 37.6869954, lng: 126.7730032 },
+    { lat: 37.683574, lng: 126.7682936 },
+    { lat: 37.6810586, lng: 126.7741027 },
+    { lat: 37.6959415, lng: 126.7760606 },
+    { lat: 37.6826798, lng: 126.7741713 },
+    { lat: 37.6907297, lng: 126.7723427 },
+    { lat: 37.6992186, lng: 126.7728969 },
+    { lat: 37.6882578, lng: 126.7747021 },
+    { lat: 37.6815031, lng: 126.7818412 },
+    { lat: 37.6824607, lng: 126.7702168 },
+    { lat: 37.6921077, lng: 126.7826622 },
+    { lat: 37.6837851, lng: 126.7691574 },
+    { lat: 37.6938868, lng: 126.7840651 },
+    { lat: 37.6903737, lng: 126.7783206 },
+  ];
+
+  const tmpMarkers2 = [
+    { lat: 37.6825028, lng: 126.803479 },
+    { lat: 37.6803765, lng: 126.8042497 },
+    { lat: 37.6830861, lng: 126.8004077 },
+    { lat: 37.6870405, lng: 126.795442 },
+    { lat: 37.6838755, lng: 126.795529 },
+    { lat: 37.675437, lng: 126.7902437 },
+    { lat: 37.68694, lng: 126.7987575 },
+    { lat: 37.6869294, lng: 126.7917361 },
+    { lat: 37.6743857, lng: 126.7926848 },
+    { lat: 37.675668, lng: 126.8016781 },
+    { lat: 37.6832347, lng: 126.7982068 },
+    { lat: 37.6832529, lng: 126.7990177 },
+    { lat: 37.6869673, lng: 126.797413 },
+    { lat: 37.6872292, lng: 126.8025874 },
+    { lat: 37.6717532, lng: 126.8003155 },
+    { lat: 37.6874469, lng: 126.8077986 },
+    { lat: 37.6811184, lng: 126.8010205 },
+    { lat: 37.6891567, lng: 126.7962853 },
+    { lat: 37.6820735, lng: 126.7914402 },
+    { lat: 37.6706207, lng: 126.7961641 },
+    { lat: 37.6824315, lng: 126.7958591 },
+    { lat: 37.6830615, lng: 126.7924317 },
+    { lat: 37.6895066, lng: 126.7948306 },
+    { lat: 37.6825424, lng: 126.7978814 },
+    { lat: 37.6756857, lng: 126.7947284 },
+    { lat: 37.68403, lng: 126.7945458 },
+    { lat: 37.6873425, lng: 126.7985114 },
+    { lat: 37.6798418, lng: 126.8094798 },
+    { lat: 37.6825038, lng: 126.8059573 },
+    { lat: 37.6727906, lng: 126.7995048 },
+    { lat: 37.6850415, lng: 126.8037211 },
+    { lat: 37.6862668, lng: 126.8034928 },
+    { lat: 37.6773302, lng: 126.7983913 },
+    { lat: 37.6895211, lng: 126.8018378 },
+    { lat: 37.6793872, lng: 126.7978797 },
+    { lat: 37.6769154, lng: 126.795715 },
+    { lat: 37.6858266, lng: 126.8018991 },
+    { lat: 37.672321, lng: 126.8012392 },
+    { lat: 37.6755601, lng: 126.7926133 },
+    { lat: 37.6807928, lng: 126.8012701 },
+    { lat: 37.6731426, lng: 126.8074612 },
+    { lat: 37.6770122, lng: 126.8001821 },
+    { lat: 37.6869959, lng: 126.7983829 },
+    { lat: 37.6821233, lng: 126.7987866 },
+    { lat: 37.6893451, lng: 126.7927215 },
+    { lat: 37.6738308, lng: 126.8060185 },
+    { lat: 37.6807212, lng: 126.7947884 },
+    { lat: 37.6786405, lng: 126.8076909 },
+    { lat: 37.6834315, lng: 126.8083983 },
+    { lat: 37.679942, lng: 126.8051732 },
+  ];
 
   // 지도 옵션
   const mapOptions = {
@@ -26,14 +132,17 @@ function NaverMap(props) {
     var tmpMarker = new naver.maps.Marker({
       map: tmpMap,
       title: "myLocation",
-      position: new naver.maps.LatLng(location),
+      position: location,
     });
     setCurrMarkers(tmpMarker);
 
     naver.maps.Event.addListener(tmpMap, "zoom_changed", function (zoom) {
-      console.log(zoom);
-      console.log("줌 할때 마커들", plantMarkers);
-      if (zoom === 16) {
+      console.log("zoom = ", zoom);
+      console.log("줌 할때 마커들", tmpMarkerForZoom);
+      const center = tmpMap.getCenter();
+      const centerPosition = { lat: center._lat, lng: center._lng };
+
+      if (zoom === 15) {
       }
     });
 
@@ -75,10 +184,11 @@ function NaverMap(props) {
 
   useInterval(() => {
     const time = new Date();
-    console.log(time.getSeconds());
+    // console.log(time.getSeconds());
     navigator.geolocation.getCurrentPosition((pos) => {
       const tmpLat = pos.coords.latitude;
       const tmpLng = pos.coords.longitude;
+      // console.log(tmpLat, tmpLng);
       if (
         ((position.lat - tmpLat) ** 2 + (position.lng - tmpLng) ** 2) ** 0.5 >
         0.0002
@@ -99,6 +209,20 @@ function NaverMap(props) {
   }, 1000);
 
   useInterval(() => {
+    var tmpMarkersZoom = [];
+    for (var i = 0; i < tmpMarkers2.length; i++) {
+      var tmpLoc2 = new naver.maps.LatLng(
+        tmpMarkers2[i].lat,
+        tmpMarkers2[i].lng
+      );
+      var dummyMarker = new naver.maps.Marker({
+        map: map,
+        position: tmpLoc2,
+      });
+      tmpMarkersZoom.push(dummyMarker);
+    }
+
+    setTmpMarkerForZoom(tmpMarkersZoom);
     axios({
       method: "post",
       url: "https://j7a703.p.ssafy.io/api/photocard/map",
