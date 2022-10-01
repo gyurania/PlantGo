@@ -12,6 +12,7 @@ import PlantResultView from "./views/plantResultView";
 import PhotoCards from "./views/photoCardsView";
 import PhotoCardView from "./views/PhotoCardView";
 import RankView from "./views/rankView";
+import KakaoMap from "./components/KakaoMap";
 import "bootstrap/dist/css/bootstrap.css";
 
 const container = document.getElementById("root")!;
@@ -31,6 +32,7 @@ root.render(
         <Route path="/rank" element={<RankView />} />
         <Route path="/photocards" element={<PhotoCards />} />
         <Route path="/photocard" element={<PhotoCardView />} />
+        <Route path="/kakaomap" element={<KakaoMap />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
