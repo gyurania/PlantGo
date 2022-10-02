@@ -58,7 +58,7 @@ function PhotoCardView() {
         margin: 0,
         padding: 0,
       }}
-      className="backgroundImg"
+      className="backgroundImg2"
     >
       <Container >
         <Row style={{ height: "15%", display: "block", paddingTop: "15%" }}>
