@@ -1,4 +1,4 @@
-const HOST = 'https://j7a703.p.ssafy.io/api/'
+const HOST = '/api/'
 
 const PHOTOCARD = 'photocard/'
 const PLANT = 'plants/'

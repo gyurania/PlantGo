@@ -43,7 +43,6 @@ let PhotoCard = (props) => {
     <div className="photocard">
       <div
         style={{
-          // backgroundImage: `URL("http://www.nature.go.kr/fileUpload/plants/basic/Polygonaceae/Persicaria/1314/1314_20160817152323712files.jpg")`
           backgroundImage: `url(${props.data.photoUrl})`,
         }}
         className="front"
@@ -52,12 +51,7 @@ let PhotoCard = (props) => {
         <br></br>
         <p>{props.data.area}</p>
       </div>
-      {/* <div className="back read">
-                <div>
-                    <p>{props.data.memo}</p> 
-                </div>
-                <button className="photocardbutton">Modify</button>
-            </div> */}
+
       {read ? (
         <div className="back read">
           <div>
