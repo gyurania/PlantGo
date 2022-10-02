@@ -12,7 +12,7 @@ import Carousel from 'react-bootstrap/Carousel';
 import "./loginView.css";
 function Login() {
   return (
-    <Container fluid className="backgroundImg">
+    <Container fluid className="backgroundImg loginview">
       
       <Row style={{height: "10%"}}></Row>
       <Row >
