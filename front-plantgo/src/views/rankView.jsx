@@ -5,6 +5,7 @@ import "./RankView.css";
 import Container from "react-bootstrap/Container";
 import RankNavBar from "../components/RankNavBar";
 import useInterval from "../customHook/useInterval.jsx";
+import icon from "../img/leaf.png";
 
 const Ranking = () => {
   const navigate = useNavigate();
@@ -139,7 +140,14 @@ const Ranking = () => {
                     } else {
                       return (
                         <div class="ranking-table-row">
-                          <div class="ranking-table-data">{idx + 1}</div>
+                          <div class="ranking-table-data">
+                            <div class="number-wrap">
+                              <div class="number-img">
+                                <img src={icon} />
+                              </div>
+                              <div class="number-rank"> {idx + 1}</div>
+                            </div>
+                          </div>
                           <div class="ranking-table-data">{item.userName}</div>
                           <div class="ranking-table-data">
                             {item.plantsCollects}
