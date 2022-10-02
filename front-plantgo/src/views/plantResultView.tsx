@@ -1,6 +1,6 @@
-import axios from "axios";
-import React, { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+// import axios from "axios";
+// import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import "./TmpBook.scss";
 import logo from "../img/플랜트고-색-폰트.png";
 
@@ -10,12 +10,12 @@ function PlantResultView() {
   const imgSrc = location.state.imgSrc;
 
   // location.state.plantInfo -> name, studyName,
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const [info, setInfo] = useState<Object>({});
-  const [removebgImg, setRemovebgImg] = useState<string>("");
+  // const [info, setInfo] = useState<Object>({});
+  // const [removebgImg, setRemovebgImg] = useState<string>("");
 
-  const token = sessionStorage.getItem("loginToken");
+  // const token = sessionStorage.getItem("loginToken");
 
   return (
     <div className="container">

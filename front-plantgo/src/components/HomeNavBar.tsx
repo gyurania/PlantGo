@@ -19,6 +19,7 @@ import {
 } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import "./HomeNavBar.css";
+import "./KakaoMap.css";
 
 const HomeNavBar = () => {
   let Navigate = useNavigate();
@@ -37,7 +38,7 @@ const HomeNavBar = () => {
     Navigate("/login");
   };
   return (
-    <>
+    <div className="kakao-map-buttons">
       {/* 추가메뉴 */}
       {isShown && (
         <Container>
@@ -60,6 +61,7 @@ const HomeNavBar = () => {
                   style={{
                     width: 50,
                     height: 50,
+                    zIndex: 2,
                   }}
                 ></BsAward>
               </button>
@@ -84,6 +86,7 @@ const HomeNavBar = () => {
                   style={{
                     width: 50,
                     height: 50,
+                    zIndex: 2,
                   }}
                 ></BsBook>
               </button>
@@ -103,6 +106,7 @@ const HomeNavBar = () => {
                   style={{
                     width: 50,
                     height: 50,
+                    zIndex: 2,
                   }}
                 ></BsBoxArrowRight>
               </button>
@@ -112,11 +116,15 @@ const HomeNavBar = () => {
       )}
 
       {/* 상단메뉴 */}
-      <button className="btn btn-default" style={{
-            position: "fixed",
-            top: "15px",
-            right: "15px",
-          }}>
+      <button
+        className="btn btn-default"
+        style={{
+          position: "fixed",
+          top: "15px",
+          right: "15px",
+          zIndex: 2,
+        }}
+      >
         <BsArrowRepeat
           onClick={reloadPage}
           style={{
@@ -125,6 +133,7 @@ const HomeNavBar = () => {
             position: "fixed",
             top: "15px",
             right: "15px",
+            zIndex: 2,
           }}
         />
       </button>
@@ -138,29 +147,32 @@ const HomeNavBar = () => {
           left: "15px",
           backgroundColor: "white",
           borderRadius: "50%",
+          zIndex: 2,
         }}
       />
 
       {/* 하단메뉴 */}
       <Container>
         <div>
-          <button className="btn btn-default"
+          <button
+            className="btn btn-default"
             onClick={() => {
               Navigate("/camera");
             }}
-
             style={{
               position: "absolute",
               left: "50%",
               bottom: "25px",
               marginLeft: "-25px",
               display: "block",
+              zIndex: 2,
             }}
           >
             <BsCameraFill
               style={{
                 width: 50,
                 height: 50,
+                zIndex: 2,
               }}
             />
           </button>
@@ -172,18 +184,20 @@ const HomeNavBar = () => {
               right: 0,
               bottom: "20px",
               display: "block",
+              zIndex: 2,
             }}
           >
             <BsPlus
               style={{
                 width: 60,
                 height: 60,
+                zIndex: 2,
               }}
             />
           </button>
         </div>
       </Container>
-    </>
+    </div>
   );
 };
 
