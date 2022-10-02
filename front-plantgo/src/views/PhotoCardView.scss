@@ -13,13 +13,13 @@ html, body {
 	padding: 0px;
   box-sizing: border-box;
 }
-.backgroundImg{
+.backgroundImg2{
   position: relative;
   z-index: 1;
   height: 100vh;
 }
 
-.backgroundImg::before{
+.backgroundImg2::before{
   content: "";
   position: absolute;
   top: 0;
