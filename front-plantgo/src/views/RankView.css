@@ -1275,3 +1275,27 @@ app {
 .page-leaderboard .rank-title > img {
   margin-top: 15px;
 }
+
+.number-wrap {
+  width: 100%;
+  position: relative;
+}
+
+.number-img {
+  /* width: 50%; */
+  margin: 0px 0px 0px 10px;
+  /* vertical-align: middle; */
+  padding: 0px 0px 0px 5px;
+  text-align: center;
+  width: 65%;
+  display: block;
+}
+
+.number-rank {
+  position: absolute;
+  top: 45%;
+  left: 51%;
+  width: 100%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
