@@ -23,7 +23,6 @@
     z-index: -1;
     background: url('../img/plantgo5.jpg');
     background-size: cover;
-    /* filter: saturate(70%); */
     background-position: center;
 }
 
