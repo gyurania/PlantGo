@@ -150,6 +150,11 @@ function NaverMap(props) {
       updateMarkers(tmpMap, plantMarkers);
     });
 
+    naver.maps.Event.addListener(tmpMap, "dragend", () => {
+      console.log(tmpMap.getCenter().x);
+      console.log(tmpMap.getCenter().y);
+    });
+
     setMap(tmpMap);
   };
 
@@ -478,33 +483,3 @@ function NaverMap(props) {
 }
 
 export default NaverMap;
-
-// import React, { useEffect } from "react";
-
-// export const NaverMap = () => {
-//   const { naver } = window;
-//   useEffect(() => {
-//     let map = null;
-//     const initMap = () => {
-//       const map = new naver.maps.Map("map", {
-//         center: new naver.maps.LatLng(37.5656, 126.9769),
-//         zoom: 13,
-//       });
-//     };
-//     initMap();
-//   }, []);
-
-//   //지도 사이즈 관련 스타일
-//   const mapStyle = {
-//     width: "80%",
-//     height: "600px",
-//   };
-
-//   return (
-//     <React.Fragment>
-//       <div id="map" style={{ width: "100%", height: "100vh" }}></div>
-//     </React.Fragment>
-//   );
-// };
-
-// export default NaverMap;
