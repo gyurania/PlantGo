@@ -3,10 +3,9 @@ import { useNavigate } from "react-router-dom";
 import Camera, { FACING_MODES } from "react-html5-camera-photo";
 import "react-html5-camera-photo/build/css/index.css";
 import axios from "axios";
-import Spinner from "../img/leap.gif";
+import Spinner from "../img/loading.gif";
 import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import "./cameraView.css";
 
 function App(props) {
   const [imgSrc, setImgSrc] = useState("");
@@ -132,10 +131,34 @@ function App(props) {
           height: "100vh",
         }}
       >
-        <div class="row justify-content-center">
-          <img src={Spinner} alt="로딩 페이지" width="30%" />
-          식물 정보 가져오는 중..
-        </div>
+        <Container
+          fluid
+          className="backgroundImg"
+          style={{
+            height: "100vh",
+          }}
+        >
+          <div class="row justify-content-center">
+            <div class="loading">
+              {/* <div class="row justify-content-center"> */}
+              <img src={Spinner} alt="로딩 페이지" width="300px" />
+              <br />
+              <div class="loadgin-text">
+                <span>식</span>
+                <span>물 </span>
+                <span>정</span>
+                <span>보 </span>
+                <span>가</span>
+                <span>져</span>
+                <span>오</span>
+                <span>는 </span>
+                <span>중</span>
+                <span>.</span>
+                <span>.</span>
+              </div>
+            </div>
+          </div>
+        </Container>
       </Container>
     );
   }
