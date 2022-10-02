@@ -36,18 +36,15 @@ function PlantResultView() {
         <div className="preface">
           <div className="content">
             <div className="header">
-              <div className="result-title">몬스테라</div>
+              <div className="result-title">코스모스</div>
             </div>
             <div className="author">by Eunwoo Choi</div>
             <div className="body2">
               <div className="content-top">
-                길지 따뜻한 것은 동산에는 보이는 생의 뿐이다. 몸이 낙원을 따뜻한
-                봄바람이다. 가는 소리다.이것은 그것은 웅대한 피고 아름다우냐? 뭇
-                끓는 그들을 든 이는 노래하며 크고 같이, 천자만홍이 위하여서.
-                몸이 그들은 힘차게 것이다. 이성은 더운지라 품에 풀이 것은 피다.
-                그들에게 청춘 용기가 부패뿐이다. 오직 그들에게 새 풀이 석가는
-                운다. 가지에 없는 꽃 발휘하기 힘차게 사랑의 풀이 피고, 약동하다.
-                커다란 가장 몸이 있다.
+                코스모스(Cosmos bipinnatus)는 한국 고유어로 살사리꽃이라 불린다.
+                가을을 상징하는 꽃이며 곧게 선 줄기에 털이 없는 가지가 많이
+                갈라져 있다. 꽃의 색깔은 연분홍색, 흰색, 붉은색 등 매우
+                다양하다. 현대에서 속명인 코스모스는 '우주'를 뜻한다.
               </div>
               <div className="result-bottom-nav">
                 <img className="result-logo" src={logo} alt="" />
