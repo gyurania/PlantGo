@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import useInterval from "../customHook/useInterval";
 import plantsMarkerImage from "../img/plant_marker_image.png";
 import HomeNavBar from "./HomeNavBar";
+import "./KakaoMap.css";
 
 function KakaoMap() {
   const { kakao } = window;
@@ -346,7 +347,11 @@ function KakaoMap() {
 
   return (
     <div>
-      <div id="map" style={{ width: "100%", height: "100vh", zIndex: "-1" }} />
+      <div
+        id="map"
+        style={{ width: "100%", height: "100vh" }}
+        className="kakao-map"
+      />
       {/* <HomeNavBar /> */}
     </div>
   );
