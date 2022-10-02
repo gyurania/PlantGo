@@ -36,8 +36,10 @@ html, body {
 
 .photocard{
   cursor: pointer;
-  width: 280px;
-  height: 450px;
+  max-width: 280px;
+  max-height: 450px;
+  width: 60vw;
+  height: 50vh;
   perspective: 1000px;
   margin: 50px auto;
   position: relative;
@@ -101,7 +103,12 @@ html, body {
   background-image: url('../img/5186124.jpg');
   transform: rotateY(-180deg);
   padding: 0 2em;
-  
+
+  p {
+    font-family: 'MICEGothic';
+    font-weight: 700;
+    font-size: 15px;
+  }
   .photocardbutton {
     margin-top: 15px;
     background: linear-gradient(135deg, adjust-hue($primary, -20deg), $primary);
