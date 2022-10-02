@@ -53,16 +53,16 @@ function PhotoCardView() {
   return (
     <div
       style={{
-        backgroundColor: "#D2DAFF",
         height: "100vh",
         width: "100%",
         margin: 0,
         padding: 0,
       }}
+      className="backgroundImg"
     >
-      <Container>
-        <Row style={{ height: "150px", display: "block", paddingTop: "80px" }}>
-          <h1 style={{ textAlign: "center" }}>Photocards</h1>
+      <Container >
+        <Row style={{ height: "15%", display: "block", paddingTop: "15%" }}>
+          <h1 style={{ textAlign: "center" , fontFamily:"MICEGothic Bold", fontSize:"50px", color: "white"}}>Photocards</h1>
         </Row>
         <Row>
           <Col>
@@ -70,7 +70,7 @@ function PhotoCardView() {
               style={{ minWidth: "100%", minHeight: "400px" }}
               activeIndex={index}
               onSelect={handleSelect}
-              variant="dark"
+              // variant="dark"
             >
               {photocardList.length > 0 ? (
                 photocardList.map((photocard) => {
