@@ -5,6 +5,7 @@ import "./HomeView.css";
 import HomeNavBar from "../components/HomeNavBar";
 
 import NaverMap from "../components/NaverMap";
+import KakaoMap from "../components/KakaoMap";
 import DownNavBar from "../components/downNavBar";
 
 function HomeView({}) {
@@ -50,6 +51,13 @@ function HomeView({}) {
 
   return (
     <div>
+      <div className="map">
+        {/* <NaverMap lat={position.lat} lng={position.lng} /> */}
+        <KakaoMap lat={position.lat} lng={position.lng} />
+      </div>
+      <div>
+        <HomeNavBar></HomeNavBar>
+      </div>
       {/* <div className="over-map">
         <img src="./plantGO_logo_wot_rbg.jpg" alt="logo" />
         <p className="plus-icon">Plus Button</p>
@@ -58,8 +66,6 @@ function HomeView({}) {
           Camera Icon
         </p>
       </div> */}
-      <NaverMap lat={position.lat} lng={position.lng} />
-      <HomeNavBar></HomeNavBar>
     </div>
   );
 }
