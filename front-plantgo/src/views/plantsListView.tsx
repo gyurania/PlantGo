@@ -11,7 +11,7 @@ import BookIcon from "../img/book_icon.png";
 import { useLocation, useNavigate } from "react-router-dom";
 import "../CSS/plantListView.css";
 import Container from "react-bootstrap/Container";
-import RankNavBar from "../components/PhotocardNavBar";
+import ListNavBar from "../components/PhotocardNavBar";
 
 function PlantList() {
   const navigate = useNavigate();
@@ -490,7 +490,7 @@ function PlantList() {
         </div>
       )}
       
-    <RankNavBar></RankNavBar>
+    <ListNavBar></ListNavBar>
     </Container>
   );
 }
