@@ -51,7 +51,7 @@ const ListNavBar = () => {
               position: "fixed",
               right: 0,
               zIndex: 1030,
-              bottom: 150,
+              bottom: 210,
               marginRight: "5px",
             }}
           >
@@ -64,8 +64,7 @@ const ListNavBar = () => {
                 <BsAward
                   style={{
                     width: 50,
-                    height: 50,
-                    zIndex: 2,
+                    height: 50
                   }}
                 ></BsAward>
               </button>
