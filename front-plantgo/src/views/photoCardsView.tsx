@@ -72,7 +72,7 @@ function PhotoCards() {
             </Container>
 
           </div>
-          <div className="details" style={{overflow: 'auto'}}>
+          <div className="details" style={{overflow: 'auto', height:300}}>
             <h4 className="color1">{state.korName}</h4>
             <br></br>
             <p>학술명 : {state.schName}</p>
