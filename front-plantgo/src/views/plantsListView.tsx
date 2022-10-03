@@ -146,7 +146,7 @@ function PlantList() {
 
   useEffect(() => {
     document.body.classList.add("plantlist");
-    fetchPlantList();
+    fetchCollected();
   }, []);
   // 모든 리스트 페이지 불러오기
   useEffect(() => {
@@ -489,7 +489,6 @@ function PlantList() {
           )}
         </div>
       )}
-      
     <ListNavBar></ListNavBar>
     </Container>
   );
