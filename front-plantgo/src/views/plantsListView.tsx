@@ -11,6 +11,7 @@ import BookIcon from "../img/book_icon.png";
 import { useLocation, useNavigate } from "react-router-dom";
 import "../CSS/plantListView.css";
 import Container from "react-bootstrap/Container";
+import ListNavBar from "../components/PhotocardNavBar";
 
 function PlantList() {
   const navigate = useNavigate();
@@ -29,7 +30,7 @@ function PlantList() {
   const [collectedPlantPage, setCollectedPlantPage] = useState<number>(0);
   const [collectedPlantCount, setCollectedPlantCount] = useState<number>(0);
   const [nonCollectedPlantList, setNonCollectedPlantList] = useState<any>([]);
-  const [watchMode, setWatchMode] = useState<number>(0);
+  const [watchMode, setWatchMode] = useState<number>(1);
   const onErrorImg = (e:any) => {
     e.target.src = AltImg;
   }
@@ -145,7 +146,7 @@ function PlantList() {
 
   useEffect(() => {
     document.body.classList.add("plantlist");
-    fetchCollected();
+    fetchPlantList();
   }, []);
   // 모든 리스트 페이지 불러오기
   useEffect(() => {
@@ -360,6 +361,16 @@ function PlantList() {
       <div
         style={{ paddingRight: 0, display: "flex", justifyContent: "center" }}
       >
+        
+        <Button
+          size="sm"
+          variant="outline-success"
+          onClick={() => {
+            setWatchMode(1);
+          }}
+        >
+        내가 모은 식물
+        </Button>
         <Button
           size="sm"
           variant="outline-success"
@@ -369,15 +380,6 @@ function PlantList() {
           }}
         >
           전체 식물 보기
-        </Button>
-        <Button
-          size="sm"
-          variant="outline-success"
-          onClick={() => {
-            setWatchMode(1);
-          }}
-        >
-          내가 모은 식물
         </Button>
       </div>
       {/* <Button onClick={() => {setWatchMode(2)}}>내가 모으지 못한 식물</Button> */}
@@ -487,6 +489,8 @@ function PlantList() {
           )}
         </div>
       )}
+      
+    <ListNavBar></ListNavBar>
     </Container>
   );
 }
