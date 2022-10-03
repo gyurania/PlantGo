@@ -72,11 +72,10 @@ function PhotoCards() {
             </Container>
 
           </div>
-          <div className="details">
+          <div className="details" style={{overflow: 'auto'}}>
             <h4 className="color1">{state.korName}</h4>
             <br></br>
-            <p>학술명 : </p>
-            <p>{state.schName}</p>
+            <p>학술명 : {state.schName}</p>
             <p>국내 분포 : {state.dstrb}</p>
             <p>꽃 설명 : {state.flwrDesc}</p>
             <p>번식방법 {state.brdMthd}</p>
