@@ -11,7 +11,7 @@ import BookIcon from "../img/book_icon.png";
 import { useLocation, useNavigate } from "react-router-dom";
 import "../CSS/plantListView.css";
 import Container from "react-bootstrap/Container";
-import ListNavBar from "../components/PhotocardNavBar";
+import ListNavBar from "../components/ListNavbar";
 
 function PlantList() {
   const navigate = useNavigate();
