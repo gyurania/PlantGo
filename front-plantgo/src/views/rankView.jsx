@@ -110,7 +110,7 @@ const Ranking = () => {
                 src="https://d125fmws0bore1.cloudfront.net/assets/svgs/icon_trophy_leaderboard-3442a4b2312e6cdd02aa9870e636dc082890277a6267c4ed986a750fef7cbb35.svg"
               />
               <br />
-              PlantGo! Ranking
+              <h1 style={{ textAlign: "center" , fontFamily:"MICEGothic Bold", fontSize:"30px", color: "#1C6758"}}>PlantGo! Ranking</h1>
             </div>
             <section class="ranking">
               <div class="contain">

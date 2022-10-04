@@ -1,7 +1,7 @@
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import { useState } from "react";
-import { BsPlus, BsBook, BsBoxArrowRight, BsGeoAlt } from "react-icons/bs";
+import { BsPlus, BsBook, BsBoxArrowRight, BsGeoAlt, BsAward } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import "./HomeNavBar.css";
 
@@ -22,6 +22,28 @@ const RankNavBar = () => {
       {/* 추가메뉴 */}
       {isShown && (
         <Container>
+          <Nav
+            style={{
+              position: "fixed",
+              right: 0,
+              zIndex: 1030,
+              bottom: 280,
+              marginRight: "5px"
+            }}
+          >
+            <Nav.Item onClick={() => {
+                Navigate("/rank");
+              }}>
+              <button className="btn btn-default">
+                <BsAward
+                  style={{
+                    width: 50,
+                    height: 50,
+                  }}
+                ></BsAward>
+              </button>
+            </Nav.Item>
+          </Nav>
           <Nav
             style={{
               position: "fixed",
