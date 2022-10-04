@@ -88,14 +88,16 @@ function App(props) {
           console.log("사진찍고 응답", res.data);
           console.log(typeof res.data);
           console.log(res.data.length);
-          if (res.data === null || res.data.length == 0) {
-            window.alert("사진을 인식할 수 없어요ㅠㅠ");
-            navigate("/");
-          } else {
-            navigate("/plantResult", {
-              state: { plantInfo: res.data, imgSrc: imgSrc },
-            });
-          }
+          // if (res.data === null || res.data.length == 0) {
+          //   window.alert("사진을 인식할 수 없어요ㅠㅠ");
+          //   navigate("/");
+          // } else {
+          //   navigate("/plantResult", {
+          //     state: { plantInfo: res.data, imgSrc: imgSrc },
+          //   });
+          navigate("/plantResult", {
+            state: { plantInfo: res.data, imgSrc: imgSrc },
+          });
         })
         .catch((err) => console.log(err));
     }
@@ -121,6 +123,7 @@ function App(props) {
         isFullscreen={true}
         isImageMirror={false}
         idealFacingMode={FACING_MODES.ENVIRONMENT}
+        style = {{ bottom: 50 }}
       />
     );
   } else {
