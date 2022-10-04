@@ -101,7 +101,7 @@ const RankNavBar = () => {
             style={{
               position: "absolute",
               right: 0,
-              bottom: "22px",
+              bottom: "25px",
               marginRight: "12px",
               display: "block",
             }}
