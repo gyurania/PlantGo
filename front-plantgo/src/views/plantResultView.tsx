@@ -1,6 +1,6 @@
 // import axios from "axios";
 // import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./TmpBook.scss";
 import logo from "../img/플랜트고-색-폰트.png";
 import { useEffect } from "react";
@@ -10,6 +10,7 @@ function PlantResultView() {
   const plantInfo = location.state.plantInfo;
   const imgSrc = location.state.imgSrc;
   const userName = sessionStorage.getItem('userName')
+  let navigate = useNavigate();
 
   // location.state.plantInfo -> name, studyName,
   // const navigate = useNavigate();
@@ -40,13 +41,17 @@ function PlantResultView() {
         <div className="preface">
           <div className="content">
             <div className="header">
-              <div className="result-title">{plantInfo.korName}</div>
+              <div className="result-title">{plantInfo.kor_name}</div>
             </div>
             <div className="author">by {userName}</div>
             <div className="body2">
               <div className="content-top">
-                {plantInfo}
+                {plantInfo.content}
               </div>
+              <button 
+              onClick={() => {
+                navigate("/photocard", { state: plantInfo.plantId });
+              }}>포토카드 확인하기</button>
               <div className="result-bottom-nav">
                 <img className="result-logo" src={logo} alt="" />
               </div>
