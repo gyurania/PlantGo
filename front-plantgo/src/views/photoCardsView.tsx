@@ -5,7 +5,7 @@ import Container from "react-bootstrap/Container";
 import logo from "../img/플랜트고-색-폰트.png";
 import photos from "../img/photos.png";
 import Row from "react-bootstrap/Row";
-import RankNavBar from "../components/RankNavBar";
+import PhotocardNavbar from "../components/PhotocardNavBar";
 
 function PhotoCards() {
   const { state } = useLocation();
@@ -72,7 +72,7 @@ function PhotoCards() {
             ></img>
             </Container>
         </div>
-        <RankNavBar></RankNavBar>
+        <PhotocardNavbar></PhotocardNavbar>
       </div>
     );
   };
