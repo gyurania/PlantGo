@@ -39,15 +39,15 @@ function PhotoCards() {
             {state.origin.replace(" ","")?<p>원산지: {state.origin}</p>:<></>}
             {state.dstrb.replace(" ", "") ? <p>국내 분포 : {state.dstrb}</p> : <></>}
             {state.foreDstrb.replace(" ", "") ? <p>해외 분포 : {state.foreDstrb}</p> : <></>}
-            {state.grwEnvDesc.replace(" ","")?<p>생육환경 {state.grwEnvDesc}</p>:<></>}
+            {state.grwEnvDesc.replace(" ","")?<p>생육환경 : {state.grwEnvDesc}</p>:<></>}
             {state.flwrDesc.replace(" ","")?<p>꽃 설명 : {state.flwrDesc}</p>:<></>}
             {state.leafDesc.replace(" ","")?<p>잎 설명 : {state.leafDesc}</p>:<></>}
             {state.branchDesc.replace(" ","")?<p>줄기 설명 : {state.branchDesc}</p>:<></>}
-            {state.fruitDesc.replace(" ","")?<p>열매 설명 : {state.leafDesc}</p>:<></>}
+            {state.fruitDesc.replace(" ","")?<p>열매 설명 : {state.fruitDesc}</p>:<></>}
             {state.rootDesc.replace(" ","")?<p>뿌리 설명 : {state.rootDesc}</p>:<></>}
             {state.brdMthd.replace(" ", "") ? <p>번식방법 {state.brdMthd}</p> : <></>}
             {state.farmDesc.replace(" ", "") ? <p>재배특성 : {state.farmDesc}</p> : <></>}
-            {state.useMthd.replace(" ", "") ? <p>사용법 {state.useMthd}</p> : <></>}
+            {state.useMthd.replace(" ", "") ? <p>사용법 : {state.useMthd}</p> : <></>}
             {state.prtcDesc.replace(" ","")?<p>보호방안 :   {state.prtcDesc}</p>:<></>}
           </div>
           <Container style={{
