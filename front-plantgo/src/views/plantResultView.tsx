@@ -42,18 +42,18 @@ function PlantResultView() {
         <div className="preface">
           <div className="content">
             <div className="header">
-              <div className="result-title">{plantInfo.kor_name}</div>
+              <div className="result-title">무언가 식물의 이름</div>
             </div>
             <div className="author">by {userName}</div>
             <div className="body2">
               <div className="content-top">
-                {plantInfo.content}
+                어떻게 식물 설명을 써야할 지 매우 고민이었는데 이렇게나마 쓰게 되니 너무 반갑고 하드코딩을 하려니 회의감이 들고 내가 이러려고 개발자하나 고민되고 많은 노력 끝에 사람들이 성과를 쟁취했듯 나도 그렇게 할 수 있을까 고민되고 그럽니다.
               </div>
               <button className="btn btn-sm btn-outline-success"
               onClick={() => {
                 navigate("/photocard", { state: plantInfo.plantId });
               }}
-              style={{position:"relative", bottom:0, left:"50%"}}>포토카드 확인하기</button>
+              style={{position:"relative", bottom:0, left:"25%"}}>포토카드 확인하기</button>
               <div className="result-bottom-nav">
                 <img className="result-logo" src={logo} alt="" />
               </div>
