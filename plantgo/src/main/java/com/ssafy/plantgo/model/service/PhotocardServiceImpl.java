@@ -165,7 +165,7 @@ public class PhotocardServiceImpl implements PhotocardService {
         photocardRepository.save(photocard);
         PhotocardResponse photocardResponse = modelMapper.map(photocard, PhotocardResponse.class);
 		photocardResponse.setKor_name(plant.getKorName());
-
+        photocardResponse.setContent(plant.getFlwrDesc());
         return photocardResponse;
     }
 
