@@ -20,6 +20,7 @@ function PlantResultView() {
 
   return (
     <div className="container">
+      {plantInfo}
       <div className="mobile-layout">
         <div className="notification-header">
           <div className="time">plantGo!</div>
