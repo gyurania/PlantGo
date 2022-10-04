@@ -11,52 +11,6 @@ function PhotoCards() {
   const navigate = useNavigate();
   console.log(state);
 
-  const Book = (imgUrl: any) => {
-    console.log(imgUrl);
-    return (
-      <div className="plantBook">
-        <div className="book">
-          <div className="imgBox">
-            <div className="bark"></div>
-            <Container
-              style={{ background: "#ADDDD0", height: "100%", width: "100%" }}
-            >
-              <img
-                src={imgUrl.data}
-                style={{
-                  width: "100%",
-                  marginTop: 10,
-                }}
-              />
-
-              <div style={{ height: "20%", width: "100%" }}></div>
-              <h2
-                style={{ textAlign: "center", fontFamily: "MICEGothic Bold" }}
-                className="mx-auto"
-              >
-                {state.korName}
-              </h2>
-            </Container>
-          </div>
-          <div className="details">
-            <h4 className="color1">You're not a Fossil! (YET)</h4>
-            <h4 className="color2 margin">(HAPPY BIRTHDAY)</h4>
-            <p>Dear Dad,</p>
-            <p>Let's see.. .</p>
-            <p>You’re never around, you</p>
-            <p>hate the music I’m into, you</p>
-            <p>practically despise the movies I</p>
-            <p>like, and yet somehow you still</p>
-            <p>manage to be the best dad every year.</p>
-            <p>How do you do that? :)</p>
-            <p className="text-right">Happy Birthday, papa!</p>
-            <p className="text-right">♥Sarah</p>
-          </div>
-        </div>
-      </div>
-    );
-  };
-
   const Book2 = (imgUrl: any) => {
     console.log(imgUrl);
     return (
@@ -65,30 +19,50 @@ function PhotoCards() {
           <div className="imgBox">
             <div className="bark"></div>
             <Container style={{ background: "#013243", height: "100%", width: "100%" }}>
-              <img src={imgUrl.data} style={{
-                width: "90%",
-                margin: "20px 0 0 15px"
+              <img src={logo} style={{
+                maxWidth: "250px",
+                maxHeight: "375px",
+                width: "70vw",
+                height: "45vh",
+                margin: "10% 0 0 5%"
               }} />
             </Container>
 
           </div>
-          <div className="details" style={{overflow: 'auto', height:300}}>
+          <div className="details" style={{overflow: 'auto'}}>
             <h4 className="color1">{state.korName}</h4>
             <br></br>
-            <p>학술명 : {state.schName}</p>
-            <p>국내 분포 : {state.dstrb}</p>
-            <p>꽃 설명 : {state.flwrDesc}</p>
-            <p>번식방법 {state.brdMthd}</p>
+            {state.familyKor? <p>과명 : {state.familyKor}</p> : <></>}
+            {state.genusKor?<p>속명 : {state.genusKor}</p> :<></>}
+            {state.schName ? <p>학술명 : {state.schName}</p> : <></>}
+            {state.origin.replace(" ","")?<p>원산지: {state.origin}</p>:<></>}
+            {state.dstrb.replace(" ", "") ? <p>국내 분포 : {state.dstrb}</p> : <></>}
+            {state.foreDstrb.replace(" ", "") ? <p>해외 분포 : {state.foreDstrb}</p> : <></>}
+            {state.grwEnvDesc.replace(" ","")?<p>생육환경 {state.grwEnvDesc}</p>:<></>}
+            {state.flwrDesc.replace(" ","")?<p>꽃 설명 : {state.flwrDesc}</p>:<></>}
+            {state.leafDesc.replace(" ","")?<p>잎 설명 : {state.leafDesc}</p>:<></>}
+            {state.branchDesc.replace(" ","")?<p>줄기 설명 : {state.branchDesc}</p>:<></>}
+            {state.fruitDesc.replace(" ","")?<p>열매 설명 : {state.leafDesc}</p>:<></>}
+            {state.rootDesc.replace(" ","")?<p>뿌리 설명 : {state.rootDesc}</p>:<></>}
+            {state.brdMthd.replace(" ", "") ? <p>번식방법 {state.brdMthd}</p> : <></>}
+            {state.farmDesc.replace(" ", "") ? <p>재배특성 : {state.farmDesc}</p> : <></>}
+            {state.useMthd.replace(" ", "") ? <p>사용법 {state.useMthd}</p> : <></>}
+            {state.prtcDesc.replace(" ","")?<p>보호방안 :   {state.prtcDesc}</p>:<></>}
           </div>
           <Container style={{
-            marginTop: 50,
-            marginLeft: 30
+            display: "flex",
+            flexDirection: "column",
+            marginTop: "15%",
+            justifyContent:"center"
           }} className="photos" onClick={() => { navigate("/photocard", { state: state.plantId }) }}>
-            <h4>포토카드 보러가기 →</h4>
+            <h4>PhotoCards →</h4>
             <img src={photos}
               style={{
-                width: "200px",
-                height: "200px"
+                maxWidth: "200px",
+                maxHeight: "200px",
+                width: "70%",
+                height: "40%",
+                marginLeft: "15%"
               }}
 
             ></img>
@@ -97,36 +71,11 @@ function PhotoCards() {
       </div>
     )}
 
-  if (!state.imgUrl) {
-    return <Book data={state.imgUrl}></Book>;
+  if (state.imgUrl) {
+    return <Book2 data={state.imgUrl}></Book2>;
   } else {
     return <Book2 data={logo}></Book2>;
   }
-
-  return (
-    <div className="plantBook">
-      <div className="book">
-        <div className="imgBox">
-          <div className="bark"></div>
-          <img src="https://image.ibb.co/fYzTrb/lastofus.jpg" />
-        </div>
-        <div className="details">
-          <h4 className="color1">You're not a Fossil! (YET)</h4>
-          <h4 className="color2 margin">(HAPPY BIRTHDAY)</h4>
-          <p>Dear Dad,</p>
-          <p>Let's see.. .</p>
-          <p>You’re never around, you</p>
-          <p>hate the music I’m into, you</p>
-          <p>practically despise the movies I</p>
-          <p>like, and yet somehow you still</p>
-          <p>manage to be the best dad every year.</p>
-          <p>How do you do that? :)</p>
-          <p className="text-right">Happy Birthday, papa!</p>
-          <p className="text-right">♥Sarah</p>
-        </div>
-      </div>
-    </div>
-  );
 }
 
 export default PhotoCards;
