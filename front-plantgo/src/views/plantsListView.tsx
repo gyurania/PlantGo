@@ -38,6 +38,9 @@ function PlantList() {
 
   let loginToken = sessionStorage.getItem("loginToken");
   let userSeq = sessionStorage.getItem("userSeq");
+  let userName = sessionStorage.getItem('userName');
+  let tmp = collectedPlantCount/4188*100
+  let percentage = tmp.toFixed(2)
 
   // 로그인 안되어 있으면 로그인 화면으로 보내기
 
@@ -356,7 +359,17 @@ function PlantList() {
           color: "#1C6758",
         }}
       >
-        모은 식물 수 : {collectedPlantCount}
+        {userName}님이 모은 식물 수 : {collectedPlantCount} </h2>
+      <h2
+        style={{
+          textAlign: "center",
+          fontFamily: "MICEGothic Bold",
+          fontWeight: "normal",
+          fontSize: 15,
+          color: "#1C6758",
+        }}
+      >
+        {userName}님의 수집 달성률 : {percentage}%
       </h2>
       <div
         style={{ paddingRight: 0, display: "flex", justifyContent: "center" }}
