@@ -123,7 +123,6 @@ function App(props) {
         isFullscreen={true}
         isImageMirror={false}
         idealFacingMode={FACING_MODES.ENVIRONMENT}
-        style = {{bottom: 150}}
       />
     );
   } else {
