@@ -1,0 +1,8 @@
+.kakao-map {
+    z-index: 2;
+    /* position: absolute */
+}
+
+.kakao-map-buttons {
+    z-index: 2;
+}
