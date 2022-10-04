@@ -6,7 +6,7 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-/** 포토카드 등록 시 들어오는 데이터 */
+/** 포토카드 등록 시 반환하는 데이터 */
 
 @Data
 @ApiModel("PhotocardResponse")
@@ -32,6 +32,9 @@ public class PhotocardResponse {
 
 	@ApiModelProperty(name = "사진 저장 경로")
 	private String photoUrl;
+
+	@ApiModelProperty(name = "식물 정보")
+	private String content;
 
 	@ApiModelProperty(name = "메모")
 	private String memo;
