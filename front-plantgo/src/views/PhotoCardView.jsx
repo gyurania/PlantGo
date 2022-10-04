@@ -81,7 +81,33 @@ function PhotoCardView() {
                   );
                 })
               ) : (
-                <li>포토카드가 없습니다.</li>
+                <Carousel.Item>
+                    <div className="photocard">
+                      <div style={{
+                        borderRadius: "6px",
+                        display: "flex",
+                        textAlign: "center",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        position: "absolute",
+                        height: "100%",
+                        width: "100%",
+                        flexDirection: "column",
+                      }}>
+                        <p style={{
+                          fontFamily: 'MICEGothic Bold',
+                          fontSize: "1.618rem",
+                          color: "#fff"
+                        }}>포토카드를</p>
+                        <br></br>
+                        <p style={{
+                          fontFamily: 'MICEGothic Bold',
+                          fontSize: "1.618rem",
+                          color: "#fff"
+                        }}>등록해주세요</p>
+                      </div>
+                    </div>
+                </Carousel.Item>
               )}
             </Carousel>
           </Col>
