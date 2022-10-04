@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import "./TmpBook.scss";
 import logo from "../img/플랜트고-색-폰트.png";
 import { useEffect } from "react";
+import Button from "react-bootstrap/esm/Button";
 
 function PlantResultView() {
   const location = useLocation();
@@ -31,7 +32,7 @@ function PlantResultView() {
         <div className="actions"></div>
         <div className="book-cover">
           <div className="book-top-cover"></div>
-          <img className="book-top" src={imgSrc} alt="book-top" style={{objectFit:"cover", height:244, width:162}} />
+          <img className="book-top" src={imgSrc} alt="book-top" />
           <img
             className="book-side"
             src="https://raw.githubusercontent.com/atomic-variable/images-repo/e37f432405904a280858e5437ce1960753bc78a3/book-side.svg"
@@ -48,10 +49,11 @@ function PlantResultView() {
               <div className="content-top">
                 {plantInfo.content}
               </div>
-              <button 
+              <button className="btn btn-sm btn-outline-success"
               onClick={() => {
                 navigate("/photocard", { state: plantInfo.plantId });
-              }}>포토카드 확인하기</button>
+              }}
+              style={{position:"relative", bottom:0, left:"50%"}}>포토카드 확인하기</button>
               <div className="result-bottom-nav">
                 <img className="result-logo" src={logo} alt="" />
               </div>
