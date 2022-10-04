@@ -111,11 +111,14 @@ public class PhotocardServiceImpl implements PhotocardService {
             e.printStackTrace();
             return null;
         }
-
-		Plant plant = plantRepository.findByScientificname(scientificName);
-        System.out.println("식물 한글 이름");
-        if(plant==null)
+        Plant plant = null;
+        try {
+            plant = plantRepository.findByScientificname(scientificName);
+        } catch(NullPointerException e) {
+            e.printStackTrace();
             return null;
+        }
+        System.out.println("식물 한글 이름");
         System.out.println(plant.getKorName());
         /** 토큰에서 유저정보 가져오기 */
         org.springframework.security.core.userdetails.User principal =
