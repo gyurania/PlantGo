@@ -16,6 +16,7 @@ function SuccessLogin() {
     })
       .then(function (res) {          
         sessionStorage.setItem("userSeq", res.data.body.user.userSeq);
+        sessionStorage.setItem("userName", res.data.body.user.username);
         window.location.replace('/')
       })
       .catch(function (err) {
