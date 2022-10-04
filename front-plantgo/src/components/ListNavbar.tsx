@@ -64,7 +64,7 @@ const ListNavBar = () => {
                 <BsAward
                   style={{
                     width: 50,
-                    height: 50
+                    height: 50,
                   }}
                 ></BsAward>
               </button>
@@ -101,7 +101,7 @@ const ListNavBar = () => {
             style={{
               position: "absolute",
               right: 0,
-              bottom: "20px",
+              bottom: "30px",
               marginRight: "10px",
               display: "block",
             }}

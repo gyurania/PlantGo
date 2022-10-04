@@ -5,9 +5,10 @@ import Container from "react-bootstrap/Container";
 import logo from "../img/플랜트고-색-폰트.png";
 import photos from "../img/photos.png";
 import Row from "react-bootstrap/Row";
+import RankNavBar from "../components/RankNavBar";
 
 function PhotoCards() {
-  const { state } = useLocation()
+  const { state } = useLocation();
   const navigate = useNavigate();
   console.log(state);
 
@@ -64,12 +65,26 @@ function PhotoCards() {
                 height: "40%",
                 marginLeft: "15%"
               }}
-
-            ></img>
-          </Container>
+              className="photos"
+              onClick={() => {
+                navigate("/photocard", { state: state.plantId });
+              }}
+            >
+              <h4>포토카드 보러가기 →</h4>
+              <img
+                src={photos}
+                style={{
+                  width: "200px",
+                  height: "200px",
+                }}
+              ></img>
+            </Container>
+          </div>
         </div>
+        <RankNavBar></RankNavBar>
       </div>
-    )}
+    );
+  };
 
   if (state.imgUrl) {
     return <Book2 data={state.imgUrl}></Book2>;
