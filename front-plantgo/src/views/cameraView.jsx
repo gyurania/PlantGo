@@ -80,9 +80,7 @@ function App(props) {
         method: "post",
         url: "https://j7a703.p.ssafy.io/api/photocard",
         headers: {
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyNDM1Nzg1MzAxIiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTg0NDI0NjQxNn0.8Ry1vFUXRfz8UpNZXprZ57oY0Nj0dvDAz76yOylMfXE`,
-          "Access-Control-Allow-Credentials": true,
-          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
         },
         data: formData,
       })
