@@ -86,9 +86,11 @@ function App(props) {
       })
         .then((res) => {
           console.log("사진찍고 응답", res.data);
-          if (res.data === null) {
+          console.log(typeof res.data);
+          console.log(res.data.length);
+          if (res.data === null || res.data.length == 0) {
             window.alert("사진을 인식할 수 없어요ㅠㅠ");
-            navigate("/camera");
+            navigate("/");
           } else {
             navigate("/plantResult", {
               state: { plantInfo: res.data, imgSrc: imgSrc },
