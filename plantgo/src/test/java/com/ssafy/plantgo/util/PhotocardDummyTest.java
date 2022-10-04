@@ -46,7 +46,7 @@ public class PhotocardDummyTest {
     @Test
     public void insertDummy() {
         StringBuilder sb = new StringBuilder();
-        for (int tc = 1; tc <= 1000000; tc++) {
+        for (int tc = 1; tc <= 1; tc++) {
             /** API URL 초기화 */
             sb.setLength(0);
 
