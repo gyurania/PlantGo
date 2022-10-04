@@ -1,12 +1,16 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import useInterval from "../customHook/useInterval";
 import plantsMarkerImage from "../img/plant_marker_image.png";
 import HomeNavBar from "./HomeNavBar";
 import "./KakaoMap.css";
+import "./KakaoMap.scss";
 
 function KakaoMap() {
   const { kakao } = window;
+
+  const navigate = useNavigate();
 
   const [position, setPosition] = useState({ lat: 37.5656, lng: 126.9769 });
   const [currMarkers, setCurrMarkers] = useState([]);
@@ -22,55 +26,55 @@ function KakaoMap() {
   const location = new kakao.maps.LatLng(position.lat, position.lng);
 
   const tmpMarkers = [
-    { lat: 37.6887371, lng: 126.7846376 },
-    { lat: 37.6857293, lng: 126.7786386 },
-    { lat: 37.6980726, lng: 126.7664948 },
-    { lat: 37.693819, lng: 126.780976 },
-    { lat: 37.6810649, lng: 126.7660589 },
-    { lat: 37.6969239, lng: 126.7704684 },
-    { lat: 37.6928105, lng: 126.7821193 },
-    { lat: 37.6915444, lng: 126.7651047 },
-    { lat: 37.6806735, lng: 126.7692261 },
-    { lat: 37.6871522, lng: 126.7795575 },
-    { lat: 37.6816072, lng: 126.7654713 },
-    { lat: 37.6854876, lng: 126.7688321 },
-    { lat: 37.6911751, lng: 126.7836991 },
-    { lat: 37.6933195, lng: 126.778545 },
-    { lat: 37.6899245, lng: 126.7834599 },
-    { lat: 37.6971122, lng: 126.783201 },
-    { lat: 37.6851134, lng: 126.783325 },
-    { lat: 37.692296, lng: 126.7789639 },
-    { lat: 37.6973139, lng: 126.7708711 },
-    { lat: 37.6857771, lng: 126.7848305 },
-    { lat: 37.6977715, lng: 126.7729631 },
-    { lat: 37.6916873, lng: 126.766929 },
-    { lat: 37.694581, lng: 126.7714456 },
-    { lat: 37.6964568, lng: 126.7835931 },
-    { lat: 37.6937457, lng: 126.7743304 },
-    { lat: 37.6815675, lng: 126.7756563 },
-    { lat: 37.6942786, lng: 126.7655234 },
-    { lat: 37.6876536, lng: 126.7805864 },
-    { lat: 37.6923464, lng: 126.7692389 },
-    { lat: 37.6898039, lng: 126.7777472 },
-    { lat: 37.6821305, lng: 126.7722636 },
-    { lat: 37.6939555, lng: 126.7652895 },
-    { lat: 37.6974921, lng: 126.7675053 },
-    { lat: 37.695066, lng: 126.7714841 },
-    { lat: 37.692129, lng: 126.7748648 },
-    { lat: 37.6869954, lng: 126.7730032 },
-    { lat: 37.683574, lng: 126.7682936 },
-    { lat: 37.6810586, lng: 126.7741027 },
-    { lat: 37.6959415, lng: 126.7760606 },
-    { lat: 37.6826798, lng: 126.7741713 },
-    { lat: 37.6907297, lng: 126.7723427 },
-    { lat: 37.6992186, lng: 126.7728969 },
-    { lat: 37.6882578, lng: 126.7747021 },
-    { lat: 37.6815031, lng: 126.7818412 },
-    { lat: 37.6824607, lng: 126.7702168 },
-    { lat: 37.6921077, lng: 126.7826622 },
-    { lat: 37.6837851, lng: 126.7691574 },
-    { lat: 37.6938868, lng: 126.7840651 },
-    { lat: 37.6903737, lng: 126.7783206 },
+    { name: "더미식물!!", lat: 37.6857293, lng: 126.7786386 },
+    { name: "더미식물!!", lat: 37.6980726, lng: 126.7664948 },
+    { name: "더미식물!!", lat: 37.6887371, lng: 126.7846376 },
+    { name: "더미식물!!", lat: 37.693819, lng: 126.780976 },
+    { name: "더미식물!!", lat: 37.6810649, lng: 126.7660589 },
+    { name: "더미식물!!", lat: 37.6969239, lng: 126.7704684 },
+    { name: "더미식물!!", lat: 37.6928105, lng: 126.7821193 },
+    { name: "더미식물!!", lat: 37.6915444, lng: 126.7651047 },
+    // { name: "더미식물!!", lat: 37.6806735, lng: 126.7692261 },
+    // { name: "더미식물!!", lat: 37.6871522, lng: 126.7795575 },
+    // { name: "더미식물!!", lat: 37.6816072, lng: 126.7654713 },
+    // { name: "더미식물!!", lat: 37.6854876, lng: 126.7688321 },
+    // { name: "더미식물!!", lat: 37.6911751, lng: 126.7836991 },
+    // { name: "더미식물!!", lat: 37.6933195, lng: 126.778545 },
+    // { name: "더미식물!!", lat: 37.6899245, lng: 126.7834599 },
+    // { name: "더미식물!!", lat: 37.6971122, lng: 126.783201 },
+    // { name: "더미식물!!", lat: 37.6851134, lng: 126.783325 },
+    // { name: "더미식물!!", lat: 37.692296, lng: 126.7789639 },
+    // { name: "더미식물!!", lat: 37.6973139, lng: 126.7708711 },
+    // { name: "더미식물!!", lat: 37.6857771, lng: 126.7848305 },
+    // { name: "더미식물!!", lat: 37.6977715, lng: 126.7729631 },
+    // { name: "더미식물!!", lat: 37.6916873, lng: 126.766929 },
+    // { name: "더미식물!!", lat: 37.694581, lng: 126.7714456 },
+    // { name: "더미식물!!", lat: 37.6964568, lng: 126.7835931 },
+    // { name: "더미식물!!", lat: 37.6937457, lng: 126.7743304 },
+    // { name: "더미식물!!", lat: 37.6815675, lng: 126.7756563 },
+    // { name: "더미식물!!", lat: 37.6942786, lng: 126.7655234 },
+    // { name: "더미식물!!", lat: 37.6876536, lng: 126.7805864 },
+    // { name: "더미식물!!", lat: 37.6923464, lng: 126.7692389 },
+    // { name: "더미식물!!", lat: 37.6898039, lng: 126.7777472 },
+    // { name: "더미식물!!", lat: 37.6821305, lng: 126.7722636 },
+    // { name: "더미식물!!", lat: 37.6939555, lng: 126.7652895 },
+    // { name: "더미식물!!", lat: 37.6974921, lng: 126.7675053 },
+    // { name: "더미식물!!", lat: 37.695066, lng: 126.7714841 },
+    // { name: "더미식물!!", lat: 37.692129, lng: 126.7748648 },
+    // { name: "더미식물!!", lat: 37.6869954, lng: 126.7730032 },
+    // { name: "더미식물!!", lat: 37.683574, lng: 126.7682936 },
+    // { name: "더미식물!!", lat: 37.6810586, lng: 126.7741027 },
+    // { name: "더미식물!!", lat: 37.6959415, lng: 126.7760606 },
+    // { name: "더미식물!!", lat: 37.6826798, lng: 126.7741713 },
+    // { name: "더미식물!!", lat: 37.6907297, lng: 126.7723427 },
+    // { name: "더미식물!!", lat: 37.6992186, lng: 126.7728969 },
+    // { name: "더미식물!!", lat: 37.6882578, lng: 126.7747021 },
+    // { name: "더미식물!!", lat: 37.6815031, lng: 126.7818412 },
+    // { name: "더미식물!!", lat: 37.6824607, lng: 126.7702168 },
+    // { name: "더미식물!!", lat: 37.6921077, lng: 126.7826622 },
+    // { name: "더미식물!!", lat: 37.6837851, lng: 126.7691574 },
+    // { name: "더미식물!!", lat: 37.6938868, lng: 126.7840651 },
+    // { name: "더미식물!!", lat: 37.6903737, lng: 126.7783206 },
   ];
 
   const tmpMarkersTwo = [
@@ -226,6 +230,7 @@ function KakaoMap() {
     });
   }, 1000);
 
+  // 올림픽 공원 주변 더미마커
   useInterval(() => {
     var imageSrc = plantsMarkerImage;
     var imageSize = new kakao.maps.Size(42, 42);
@@ -262,6 +267,7 @@ function KakaoMap() {
     // setTmpMarkerForZoom(tmpMarkersZoom);
   }, 5000);
 
+  // 은우 집 주변 더미마커
   useInterval(() => {
     var imageSrc = plantsMarkerImage;
     var imageSize = new kakao.maps.Size(42, 42);
@@ -275,12 +281,49 @@ function KakaoMap() {
     var tmpMarkersZoom = [];
     for (var i = 0; i < tmpMarkers.length; i++) {
       var tmpLoc = new kakao.maps.LatLng(tmpMarkers[i].lat, tmpMarkers[i].lng);
+      // 정보창 생성
+      var infowindow = new kakao.maps.InfoWindow({
+        content: `<div>${tmpMarkers[i].name}</div>`,
+        removable: true,
+      });
+      // 마커 생성
       var dummyMarker = new kakao.maps.Marker({
         map: map,
         position: tmpLoc,
         image: markerImage,
+        clickable: true,
       });
       tmpMarkersZoom.push(dummyMarker);
+      // 커스텀 오버레이 생성
+      var customOverlay = new kakao.maps.CustomOverlay({
+        clickable: true,
+        map: map,
+        position: tmpLoc,
+        yAnchor: 1.7,
+        xAnchor: 0.53,
+      });
+
+      var content = document.createElement("button");
+      content.type = "button";
+      content.className = "btn btn-success";
+      content.innerHTML = tmpMarkers[i].name;
+      // var content = `<button type="button" class="btn btn-success">${tmpMarkers[i].name}</button>`;
+      content.addEventListener("click", () => {
+        customOverlay.setMap(null);
+      });
+
+      customOverlay.setContent(content);
+
+      kakao.maps.event.addListener(
+        dummyMarker,
+        "click",
+        setOverlay(map, customOverlay)
+      );
+      // kakao.maps.event.addListener(
+      //   dummyMarker,
+      //   "click",
+      //   closeOverlay(map, customOverlay)
+      // );
     }
 
     var tmpClusterer = new kakao.maps.MarkerClusterer({
@@ -295,55 +338,77 @@ function KakaoMap() {
     setTmpMarkerForZoom(tmpMarkersZoom);
   }, 5000);
 
-  useInterval(() => {
-    axios({
-      method: "post",
-      url: "https://j7a703.p.ssafy.io/api/photocard/map",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      data: {
-        latitude: position.lat,
-        longitude: position.lng,
-      },
-    })
-      .then((res) => {
-        const target = res.data.mapPhotocardList;
-        if (target.length !== plantMarkers.length) {
-          clusterer.clear(); // 이전 클러스터러 삭제
-          for (var i = 0; i < plantMarkers.length; i++) {
-            plantMarkers[i].setMap(null); // 이전 마커 삭제
-          }
+  function setOverlay(map, overlay) {
+    overlay.setMap(map);
+  }
 
-          // 새로 들어온 데이터 마커로 치환 후 state에 push
-          var tmpPlantMarkers = [];
-          for (var i = 0; i < target.length; i++) {
-            const tmpLoc = new kakao.maps.LatLng(
-              target[i].longitude,
-              target[i].latitude
-            );
-            const tmpMarker = new kakao.maps.Marker({
-              map: map,
-              title: target[i].user.username,
-              position: tmpLoc,
-            });
-            tmpPlantMarkers.push(tmpMarker);
-          }
+  // function closeOverlay(map, overlay) {
+  //   overlay.setMap(null);
+  // }
 
-          var tmpClusterer = new kakao.maps.MarkerClusterer({
-            map: map,
-            averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정
-            minLevel: 5, // 클러스터 할 최소 지도 레벨
-            disableClickZoom: false, // 클러스터 마커를 클릭했을 때 지도가 확대되지 않도록 설정한다
-          });
-          tmpClusterer.addMarkers(tmpPlantMarkers);
-          setClusterer(tmpPlantMarkers);
+  function makeOutListener(infowindow) {
+    return function () {
+      infowindow.close();
+    };
+  }
 
-          setPlantMarkers(tmpPlantMarkers); // 이전 마커들 다 지우고 다시 채움
-        }
-      })
-      .catch((err) => console.log(err));
-  }, 5000);
+  function makeOverListener(map, marker, infowindow) {
+    return function () {
+      infowindow.open(map, marker);
+    };
+  }
+
+  // // 실제 실시간 식물 마커
+  // useInterval(() => {
+  //   axios({
+  //     method: "post",
+  //     url: "https://j7a703.p.ssafy.io/api/photocard/map",
+  //     headers: {
+  //       Authorization: `Bearer ${token}`,
+  //     },
+  //     data: {
+  //       latitude: position.lat,
+  //       longitude: position.lng,
+  //     },
+  //   })
+  //     .then((res) => {
+  //       const target = res.data.mapPhotocardList;
+  //       console.log("target", target);
+  //       if (target.length !== plantMarkers.length) {
+  //         clusterer.clear(); // 이전 클러스터러 삭제
+  //         for (var i = 0; i < plantMarkers.length; i++) {
+  //           plantMarkers[i].setMap(null); // 이전 마커 삭제
+  //         }
+
+  //         // 새로 들어온 데이터 마커로 치환 후 state에 push
+  //         var tmpPlantMarkers = [];
+  //         for (var i = 0; i < target.length; i++) {
+  //           const tmpLoc = new kakao.maps.LatLng(
+  //             target[i].longitude,
+  //             target[i].latitude
+  //           );
+  //           const tmpMarker = new kakao.maps.Marker({
+  //             map: map,
+  //             title: target[i].user.username,
+  //             position: tmpLoc,
+  //           });
+  //           tmpPlantMarkers.push(tmpMarker);
+  //         }
+
+  //         var tmpClusterer = new kakao.maps.MarkerClusterer({
+  //           map: map,
+  //           averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정
+  //           minLevel: 5, // 클러스터 할 최소 지도 레벨
+  //           disableClickZoom: false, // 클러스터 마커를 클릭했을 때 지도가 확대되지 않도록 설정한다
+  //         });
+  //         tmpClusterer.addMarkers(tmpPlantMarkers);
+  //         setClusterer(tmpPlantMarkers);
+
+  //         setPlantMarkers(tmpPlantMarkers); // 이전 마커들 다 지우고 다시 채움
+  //       }
+  //     })
+  //     .catch((err) => console.log(err));
+  // }, 5000);
 
   return (
     <div>
