@@ -51,7 +51,7 @@ const ListNavBar = () => {
               position: "fixed",
               right: 0,
               zIndex: 1030,
-              bottom: 180,
+              bottom: 210,
               marginRight: "5px",
             }}
           >

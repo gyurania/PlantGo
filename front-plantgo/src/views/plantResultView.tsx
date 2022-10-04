@@ -3,6 +3,7 @@
 import { useLocation } from "react-router-dom";
 import "./TmpBook.scss";
 import logo from "../img/플랜트고-색-폰트.png";
+import { useEffect } from "react";
 
 function PlantResultView() {
   const location = useLocation();
@@ -17,7 +18,9 @@ function PlantResultView() {
   // const [removebgImg, setRemovebgImg] = useState<string>("");
 
   // const token = sessionStorage.getItem("loginToken");
-
+  useEffect(() => {
+    console.log(plantInfo)
+  })
   return (
     <div className="container">
       <div className="mobile-layout">
