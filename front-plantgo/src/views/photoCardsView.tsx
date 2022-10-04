@@ -61,49 +61,51 @@ function PhotoCards() {
   const Book2 = (imgUrl: any) => {
     console.log(imgUrl);
     return (
-      <div className="plantBook">
-        <div className="book">
-          <div className="imgBox">
-            <div className="bark"></div>
+      <div>
+        <div className="plantBook">
+          <div className="book">
+            <div className="imgBox">
+              <div className="bark"></div>
+              <Container
+                style={{ background: "#013243", height: "100%", width: "100%" }}
+              >
+                <img
+                  src={imgUrl.data}
+                  style={{
+                    width: "90%",
+                    margin: "20px 0 0 15px",
+                  }}
+                />
+              </Container>
+            </div>
+            <div className="details" style={{ overflow: "auto", height: 300 }}>
+              <h4 className="color1">{state.korName}</h4>
+              <br></br>
+              <p>학술명 : {state.schName}</p>
+              <p>국내 분포 : {state.dstrb}</p>
+              <p>꽃 설명 : {state.flwrDesc}</p>
+              <p>번식방법 {state.brdMthd}</p>
+            </div>
             <Container
-              style={{ background: "#013243", height: "100%", width: "100%" }}
+              style={{
+                marginTop: 50,
+                marginLeft: 30,
+              }}
+              className="photos"
+              onClick={() => {
+                navigate("/photocard", { state: state.plantId });
+              }}
             >
+              <h4>포토카드 보러가기 →</h4>
               <img
-                src={imgUrl.data}
+                src={photos}
                 style={{
-                  width: "90%",
-                  margin: "20px 0 0 15px",
+                  width: "200px",
+                  height: "200px",
                 }}
-              />
+              ></img>
             </Container>
           </div>
-          <div className="details" style={{ overflow: "auto", height: 300 }}>
-            <h4 className="color1">{state.korName}</h4>
-            <br></br>
-            <p>학술명 : {state.schName}</p>
-            <p>국내 분포 : {state.dstrb}</p>
-            <p>꽃 설명 : {state.flwrDesc}</p>
-            <p>번식방법 {state.brdMthd}</p>
-          </div>
-          <Container
-            style={{
-              marginTop: 50,
-              marginLeft: 30,
-            }}
-            className="photos"
-            onClick={() => {
-              navigate("/photocard", { state: state.plantId });
-            }}
-          >
-            <h4>포토카드 보러가기 →</h4>
-            <img
-              src={photos}
-              style={{
-                width: "200px",
-                height: "200px",
-              }}
-            ></img>
-          </Container>
         </div>
         <RankNavBar></RankNavBar>
       </div>
