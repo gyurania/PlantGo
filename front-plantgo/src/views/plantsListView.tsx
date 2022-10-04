@@ -428,8 +428,6 @@ function PlantList() {
             <div>
               <br />
               <br />
-              <br />
-              <p className="text-center my-10">더 이상의 정보가 없습니다.</p>
             </div>
           )}
         </div>
@@ -478,11 +476,6 @@ function PlantList() {
           {loading && <p className="text-center">loading...</p>}
           {collectedPage - 1 === collectedPlantPage && (
             <div>
-              <br />
-              <br />
-              <br />
-              <p className="text-center my-10">더 이상의 정보가 없습니다.</p>
-              <br />
               <br />
               <br />
             </div>
