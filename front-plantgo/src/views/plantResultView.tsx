@@ -30,9 +30,8 @@ function PlantResultView() {
         </div>
         <div className="actions"></div>
         <div className="book-cover">
-          <div className="book-top-cover">
-            <img className="book-top" src={imgSrc} alt="book-top" style={{objectFit:"cover"}} />
-          </div>
+          <div className="book-top-cover"></div>
+          <img className="book-top" src={imgSrc} alt="book-top" style={{objectFit:"cover", height:244, width:162}} />
           <img
             className="book-side"
             src="https://raw.githubusercontent.com/atomic-variable/images-repo/e37f432405904a280858e5437ce1960753bc78a3/book-side.svg"
