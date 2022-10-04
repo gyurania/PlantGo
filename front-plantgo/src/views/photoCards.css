@@ -7,6 +7,7 @@
 	margin: 0px;
 	padding: 0px;
     height: 100vh;
+	width: 100%;
 }
 
 ::selection {
@@ -17,6 +18,7 @@ h4 {
 	font-size: 26px;
 	line-height: 1px;
 	font-family: 'MICEGothic Bold','Amatic SC', cursive !important;
+	text-align: center;
 }
 
 .color1{color:#1BBC9B}/*MOUNTAIN MEADOW*/
@@ -28,8 +30,10 @@ h4 {
 	position: absolute;
 	top: 35%;
 	left: 50%;
-	width: 300px;
-	height: 400px;
+	max-width: 300px;
+	max-height: 450px;
+	width: 85vw;
+	height: 50vh;
 	background: #e0e1dc;
 	transform-style: preserve-3d;
 	transform: translate(-50%,-50%) perspective(2000px);
@@ -71,8 +75,10 @@ h4 {
 }
 
 .book .imgBox {
-	width: 100%;
-	height: 100%;
+	max-width: 300px;
+	max-height: 450px;
+	width: 85vw;
+	height: 50vh;
 	position: relative;
 	transform-origin: left;
 	transition: .7s;
@@ -81,15 +87,19 @@ h4 {
 .book .bark {
 	position: absolute;
 	background: #e0e1dc;
-	width: 100%;
-	height: 100%;
+	max-width: 300px;
+	max-height: 450px;
+	width: 85vw;
+	height: 50vh;
 	opacity: 0;
 	transition: .7s;
 }
 
 .book .imgBox img {
-	min-width: 250px;
-	max-height: 400px;
+	max-width: 300px;
+	max-height: 450px;
+	width: 80vw;
+	height: 50vh;
 }
 
 .book:hover .imgBox {
@@ -99,28 +109,33 @@ h4 {
 .book:hover .bark {
 	opacity: 1;
 	transition: .6s;
-  box-shadow: 300px 200px 100px rgba(0, 0, 0, .4) inset;
+  	box-shadow: 300px 200px 100px rgba(0, 0, 0, .4) inset;
 }
 
 .book .details {
 	position: absolute;
+	max-width: 300px;
+	max-height: 450px;
+	width: 85vw;
+	height: 43vh;
 	top: 0;
 	left: 0;
 	box-sizing: border-box;
 	padding: 0 0 0 10px;
 	z-index: -1;
-	margin-top: 70px;
+	margin-top: 30px;
 }
 
 .book .details p {
 	font-size: 15px;
-	line-height: 15px;
+	line-height: 20px;
 	/* transform: rotate(-10deg); */
 	padding: 0 10px 0 5px;
 }
 
 .book .details h4 {
 	text-align: center;
+	line-height: 100%;
 }
 
 .text-right {
