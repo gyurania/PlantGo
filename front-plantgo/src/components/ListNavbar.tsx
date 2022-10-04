@@ -75,7 +75,7 @@ const ListNavBar = () => {
               position: "fixed",
               right: 0,
               zIndex: 1030,
-              bottom: 90,
+              bottom: 85,
             }}
           >
             <Nav.Item onClick={logOut}>
