@@ -57,6 +57,8 @@ dependencies {
 	implementation group: 'commons-fileupload', name: 'commons-fileupload', version: '1.4'
 	implementation group: 'commons-io', name: 'commons-io', version: '2.4'
 
+	implementation 'commons-codec:commons-codec:1.15'
+
 }
 
 tasks.named('test') {
