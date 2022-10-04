@@ -75,7 +75,7 @@ const RankNavBar = () => {
               position: "fixed",
               right: 0,
               zIndex: 1030,
-              bottom: 80,
+              bottom: 90,
             }}
           >
             <Nav.Item onClick={logOut}>
