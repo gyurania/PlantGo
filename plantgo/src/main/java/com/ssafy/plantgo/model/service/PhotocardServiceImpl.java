@@ -118,6 +118,8 @@ public class PhotocardServiceImpl implements PhotocardService {
             e.printStackTrace();
             return null;
         }
+        if (plant == null || plant.getKorName() == null)
+            return null;
         System.out.println("식물 한글 이름");
         System.out.println(plant.getKorName());
         /** 토큰에서 유저정보 가져오기 */
