@@ -20,7 +20,6 @@ function PlantResultView() {
 
   return (
     <div className="container">
-      {plantInfo}
       <div className="mobile-layout">
         <div className="notification-header">
           <div className="time">plantGo!</div>
@@ -43,7 +42,7 @@ function PlantResultView() {
             <div className="author">by {userName}</div>
             <div className="body2">
               <div className="content-top">
-                {plantInfo.flwrDesc}
+                {plantInfo}
               </div>
               <div className="result-bottom-nav">
                 <img className="result-logo" src={logo} alt="" />
