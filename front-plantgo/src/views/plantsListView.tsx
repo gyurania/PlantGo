@@ -74,7 +74,7 @@ function PlantList() {
     setLoading(true);
     axios({
       method: "post",
-      url: spring.plants.list(),
+      url: spring.plants.noncollected(),
       headers: {
         Authorization: `Bearer ${loginToken}`,
       },
@@ -207,7 +207,7 @@ function PlantList() {
             width: 180,
             padding: 0,
             margin: "0.75em",
-            backgroundColor: "#FFFFFF",
+            backgroundColor: "white",
             boxShadow: "3px 3px 5px #152967",
             textAlign: "center",
             display: "inline-block",
@@ -221,10 +221,13 @@ function PlantList() {
               src={plant.data.imgUrl}
               onError={onErrorImg}
               style={{
-                height: 100,
-                width: 100,
+                height: "16vh",
+                width: "36vw",
+                maxHeight: 115,
+                maxWidth: "100%",
                 borderRadius: "50%",
                 overflow: "hidden",
+                opacity: .5
               }}
             />
             <Card.Title
@@ -232,20 +235,13 @@ function PlantList() {
                 fontFamily: "D2Coding",
                 fontWeight: "bold",
                 padding: ".3em",
-                fontSize: "0.8em",
+                fontSize: "80%",
                 lineHeight: "2em",
-                margin: 0,
+                marginTop: 15,
               }}
             >
               {plant.data.korName}
             </Card.Title>
-            <Card.Text
-              style={{
-                fontSize: "0.6em",
-              }}
-            >
-              수집 미완료
-            </Card.Text>
           </Card.Body>
         </Card>
       );
@@ -282,10 +278,13 @@ function PlantList() {
               src={plant.data.imgUrl}
               onError={onErrorImg}
               style={{
-                height: 100,
-                width: 100,
+                height: "16vh",
+                width: "36vw",
+                maxHeight: 120,
+                maxWidth: "100%",
                 borderRadius: "50%",
                 overflow: "hidden",
+                marginTop:5
               }}
             />
             <Card.Title
@@ -293,20 +292,13 @@ function PlantList() {
                 fontFamily: "D2Coding",
                 fontWeight: "bold",
                 padding: ".3em",
-                fontSize: "0.8em",
+                fontSize: "80%",
                 lineHeight: "2em",
-                margin: 0,
+                marginTop: 15,
               }}
             >
               {plant.data.korName}
             </Card.Title>
-            <Card.Text
-              style={{
-                fontSize: "0.6em",
-              }}
-            >
-              수집 완료
-            </Card.Text>
           </Card.Body>
         </Card>
       );
@@ -359,7 +351,8 @@ function PlantList() {
           color: "#1C6758",
         }}
       >
-        {userName}님이 모은 식물 수 : {collectedPlantCount} </h2>
+        수집 달성률 : {percentage}%
+      </h2>
       <h2
         style={{
           textAlign: "center",
@@ -369,8 +362,8 @@ function PlantList() {
           color: "#1C6758",
         }}
       >
-        {userName}님의 수집 달성률 : {percentage}%
-      </h2>
+        {userName}님이 발견한 식물 : {collectedPlantCount} 개 </h2>
+      
       <div
         style={{ paddingRight: 0, display: "flex", justifyContent: "center" }}
       >
@@ -378,21 +371,21 @@ function PlantList() {
         <Button
           size="sm"
           variant="outline-success"
+          style={{ marginRight: 10 }}
           onClick={() => {
             setWatchMode(1);
           }}
         >
-        내가 모은 식물
+        Collected
         </Button>
         <Button
           size="sm"
           variant="outline-success"
-          style={{ marginRight: 5 }}
           onClick={() => {
             setWatchMode(0);
           }}
         >
-          전체 식물 보기
+          UnCollected
         </Button>
       </div>
       {/* <Button onClick={() => {setWatchMode(2)}}>내가 모으지 못한 식물</Button> */}
