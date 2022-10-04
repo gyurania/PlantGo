@@ -87,7 +87,7 @@ function App(props) {
         .then((res) => {
           console.log("사진찍고 응답", res.data);
           console.log(typeof res.data);
-          console.log(res.data.length());
+          console.log(res.data.length);
           if (res.data === null) {
             window.alert("사진을 인식할 수 없어요ㅠㅠ");
             navigate("/camera");
