@@ -62,7 +62,7 @@ function PhotoCardView() {
     >
       <Container >
         <Row style={{ height: "15%", display: "block", paddingTop: "15%" }}>
-          <h1 style={{ textAlign: "center" , fontFamily:"MICEGothic Bold", fontSize:"50px", color: "white"}}>Photocards</h1>
+          <h1 style={{ textAlign: "center" , fontFamily:"MICEGothic Bold", fontSize:"40px", color: "#1C6758"}}>Photocards</h1>
         </Row>
         <Row>
           <Col>
