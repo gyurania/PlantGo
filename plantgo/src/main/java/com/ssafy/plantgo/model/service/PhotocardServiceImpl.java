@@ -8,7 +8,9 @@ import com.ssafy.plantgo.model.entity.User;
 import com.ssafy.plantgo.model.repository.MapRepository;
 import com.ssafy.plantgo.model.repository.PlantRepository;
 import com.ssafy.plantgo.model.repository.UserRepository;
+import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -29,7 +31,11 @@ import com.ssafy.plantgo.model.entity.PhotoCard;
 import com.ssafy.plantgo.model.repository.PhotocardRepository;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -44,11 +50,33 @@ public class PhotocardServiceImpl implements PhotocardService {
     private final ModelMapper modelMapper;
     private final MapRepository mapRepository;
 
-    private static final String PlantNetApi = "https://my-api.plantnet.org/v2/identify/all?api-key=2b10gA30OhZUKxTfs01xa0Tgh";
     @Value("${cloud.aws.s3.bucket}")
     private String bucket;
     private final AmazonS3 amazonS3;
 
+
+
+    public static String sendPostRequest(String urlString, JSONObject data) throws Exception {
+        java.net.URL url = new URL(urlString);
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+
+        con.setDoOutput(true);
+        con.setDoInput(true);
+        con.setRequestMethod("POST");
+        con.setRequestProperty("Content-Type", "application/json");
+
+        OutputStream os = con.getOutputStream();
+        os.write(data.toString().getBytes());
+        os.close();
+
+        InputStream is = con.getInputStream();
+        String response = new String(IOUtils.toByteArray(is));
+
+        System.out.println("Response code : " + con.getResponseCode());
+        System.out.println("Response : " + response);
+        con.disconnect();
+        return response;
+    }
     /**
      * 포토카드 등록하기
      */
@@ -56,61 +84,109 @@ public class PhotocardServiceImpl implements PhotocardService {
     public PhotocardResponse registPhotocard(PhotocardRequest photocardRequest, MultipartFile img) throws IOException {
 
 
-        String scientificName = "";
+
         /** 사진으로 식물의 학명 찾아오기 */
 
-        File f = null;
-        int n;
-        f = new File(img.getOriginalFilename());
-        try (InputStream in  = img.getInputStream(); OutputStream os = new FileOutputStream(f)){
-            byte[] buffer = new byte[4096];
-            while ((n = in.read(buffer,0,4096)) != -1){
-                os.write(buffer,0,n);
-            }
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(f));
-            bufferedReader.close();
-        }catch (IOException e){
-            e.printStackTrace();
-            return null;
-        }
-        File file = new File(f.toURI());
+//        File f = null;
+//        int n;
+//        f = new File(img.getOriginalFilename());
+//        try (InputStream in  = img.getInputStream(); OutputStream os = new FileOutputStream(f)){
+//            byte[] buffer = new byte[4096];
+//            while ((n = in.read(buffer,0,4096)) != -1){
+//                os.write(buffer,0,n);
+//            }
+//            BufferedReader bufferedReader = new BufferedReader(new FileReader(f));
+//            bufferedReader.close();
+//        }catch (IOException e){
+//            e.printStackTrace();
+//            return null;
+//        }
+//        File file = new File(f.toURI());
+//
+//        HttpEntity entity = MultipartEntityBuilder.create()
+//                .addPart("images", new FileBody(file))
+//                .addTextBody("organs", "flower")
+//                .build();
+//
+//
+//
+//        HttpPost request = new HttpPost(PlantNetApi);
+//        request.setEntity(entity);
+//
+//        HttpClient client = HttpClientBuilder.create().build();
+//        HttpResponse response;
+//        try {
+//            response = client.execute(request);
+//            if(response.getEntity()==null)
+//                return null;
+//            String jsonString = EntityUtils.toString(response.getEntity());
+//
+//            System.out.println("Json형태의 리턴값");
+//            System.out.println(jsonString);
+//            if(jsonString.equals("{\"statusCode\":404,\"error\":\"Not Found\",\"message\":\"Species not found\"}"))
+//                return null;
+//            System.out.println();
+//            JSONObject jsonObj = new JSONObject(jsonString);
+//            if(jsonObj == null)
+//                return null;
+//            JSONArray resultarr = jsonObj.getJSONArray("results");
+//            JSONObject mostcorrect = resultarr.getJSONObject(0);
+//            JSONObject species = mostcorrect.getJSONObject("species");
+//            scientificName = species.getString("scientificNameWithoutAuthor");
+//            System.out.println(scientificName);
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//            return null;
+//        }
+        /** planetID API */
+        String scientificName = "";
+        BufferedImage image = ImageIO.read(img.getInputStream());
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ImageIO.write(image, "jpg", baos);
+        String encodedImage = Base64.encode(baos.toByteArray());
+        String apiKey = "IoMPgMn0fWIlD5rjBSHMUpR7NblA5rZI93gAjXyVTUWJqrhzgD";
+        System.out.println(encodedImage);
+        JSONObject data = new JSONObject();
+        data.put("api_key", apiKey);
+        JSONArray images = new JSONArray();
+        images.put(encodedImage);
+        data.put("images", images);
 
-        HttpEntity entity = MultipartEntityBuilder.create()
-                .addPart("images", new FileBody(file))
-                .addTextBody("organs", "flower")
-                .build();
+        JSONArray modifiers = new JSONArray()
+                .put("crops_fast")
+                .put("similar_images");
+        data.put("modifiers", modifiers);
+        data.put("plant_language", "en");
 
-
-
-        HttpPost request = new HttpPost(PlantNetApi);
-        request.setEntity(entity);
-
-        HttpClient client = HttpClientBuilder.create().build();
-        HttpResponse response;
+        // add plant details
+        // more info here: https://github.com/flowerchecker/Plant-id-API/wiki/Plant-details
+        JSONArray plantDetails = new JSONArray()
+                .put("common_names")
+                .put("url")
+                .put("name_authority")
+                .put("wiki_description")
+                .put("taxonomy")
+                .put("synonyms");
+        data.put("plant_details", plantDetails);
+        String res = "";
         try {
-            response = client.execute(request);
-            if(response.getEntity()==null)
-                return null;
-            String jsonString = EntityUtils.toString(response.getEntity());
+            res = sendPostRequest("https://api.plant.id/v2/identify", data);
+            JSONObject jsonObj = new JSONObject(res);
+            JSONArray suggestions = jsonObj.getJSONArray("suggestions");
+            JSONObject plantdetail = suggestions.getJSONObject(0).getJSONObject("plant_details");
+//            JSONObject scientificname = plantdetail.getJSONObject("scientific_name");
+            scientificName = plantdetail.getString("scientific_name");
 
-            System.out.println("Json형태의 리턴값");
-            System.out.println(jsonString);
-            if(jsonString.equals("{\"statusCode\":404,\"error\":\"Not Found\",\"message\":\"Species not found\"}"))
-                return null;
-            System.out.println();
-            JSONObject jsonObj = new JSONObject(jsonString);
-            if(jsonObj == null)
-                return null;
-            JSONArray resultarr = jsonObj.getJSONArray("results");
-            JSONObject mostcorrect = resultarr.getJSONObject(0);
-            JSONObject species = mostcorrect.getJSONObject("species");
-            scientificName = species.getString("scientificNameWithoutAuthor");
-            System.out.println(scientificName);
-
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
+
+        System.out.println(res);
+        System.out.println(scientificName);
+
+        /** 학명으로 가져오기 */
         Plant plant = null;
         try {
             plant = plantRepository.findByScientificname(scientificName);
