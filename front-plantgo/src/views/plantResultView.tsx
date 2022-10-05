@@ -26,7 +26,7 @@ function PlantResultView() {
     console.log(plantInfo)
   })
   return (
-    <div className="container">
+    <div className="container" style={{padding:0}}>
       <div className="mobile-layout">
         <div className="notification-header">
           <div className="time">plantGo!</div>
