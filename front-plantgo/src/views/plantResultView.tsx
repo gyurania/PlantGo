@@ -52,12 +52,12 @@ function PlantResultView() {
               <div className="content-top">
                 {content}
               </div>
-              <div>
+              <div style={{textAlign:"center"}}>
                 <button className="btn btn-sm btn-outline-success"
                 onClick={() => {
                   navigate("/photocard", { state: plantInfo.plantId });
                 }}
-                style={{position:"relative", bottom:0, left:"50%"}}>포토카드 확인하기</button>
+                style={{display: "inline-block"}}>포토카드 확인하기</button>
               </div>
               <div className="result-bottom-nav">
                 <img className="result-logo" src={logo} alt="" />
