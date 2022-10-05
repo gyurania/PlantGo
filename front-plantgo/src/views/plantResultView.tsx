@@ -52,11 +52,13 @@ function PlantResultView() {
               <div className="content-top">
                 {content}
               </div>
-              <button className="btn btn-sm btn-outline-success"
-              onClick={() => {
-                navigate("/photocard", { state: plantInfo.plantId });
-              }}
-              style={{position:"relative", bottom:0, left:"25%"}}>포토카드 확인하기</button>
+              <div>
+                <button className="btn btn-sm btn-outline-success"
+                onClick={() => {
+                  navigate("/photocard", { state: plantInfo.plantId });
+                }}
+                style={{position:"relative", bottom:0, left:"50%"}}>포토카드 확인하기</button>
+              </div>
               <div className="result-bottom-nav">
                 <img className="result-logo" src={logo} alt="" />
               </div>
