@@ -98,25 +98,23 @@ const RankNavBar = () => {
 
       {/* 하단메뉴 */}
       <Container>
-        <div className="navbar transparent navbar-inverse fixed-bottom">
-          <Nav.Link
+        <div>
+          <button
             onClick={toggleMenu}
-            className="navbar-inner"
+            className="btn btn-default"
             style={{
-              position: "absolute",
+              position: "fixed",
               right: 0,
-              bottom: "30px",
-              marginRight: "12px",
+              bottom: 0,
               display: "block",
-            }}
-          >
+            }}>
             <BsPlus
               style={{
                 width: 60,
                 height: 60,
               }}
             />
-          </Nav.Link>
+          </button>
         </div>
       </Container>
     </div>
