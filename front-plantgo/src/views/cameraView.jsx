@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Camera, { FACING_MODES } from "react-html5-camera-photo";
+import Camera, { FACING_MODES, IMAGE_TYPES } from "react-html5-camera-photo";
 import "react-html5-camera-photo/build/css/index.css";
 import axios from "axios";
 import Spinner from "../img/loading.gif";
@@ -37,6 +37,7 @@ function App(props) {
   useEffect(() => {
     if (rendered) {
       console.log(position);
+      console.log(imgSrc);
       if (imgSrc !== "") {
         // 이미지가 비어있지 않으면??
         console.log("여긴오면안돼 제발 와도 돼");
@@ -118,9 +119,12 @@ function App(props) {
         onTakePhoto={(dataUri) => {
           handleTakePhoto(dataUri); // 사진 촬영하면 base64 이미지
         }}
-        isFullscreen={true}
+        // isFullscreen={true}
         isImageMirror={false}
         idealFacingMode={FACING_MODES.ENVIRONMENT}
+        imageType={IMAGE_TYPES.JPG}
+        imageCompression={0.5}
+        idealResolution={{ width: 360, height: 800 }}
       />
     );
   } else {
