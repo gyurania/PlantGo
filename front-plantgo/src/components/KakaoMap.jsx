@@ -5,6 +5,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import useInterval from "../customHook/useInterval";
 import plantsMarkerImage from "../img/plant_marker_image.png";
+import overlayImage from "../img/93708.jpg";
 import HomeNavBar from "./HomeNavBar";
 import "./KakaoMap.css";
 import "./KakaoMap.scss";
@@ -26,14 +27,54 @@ function KakaoMap() {
   const token = sessionStorage.getItem("loginToken");
 
   const tmpMarkers = [
-    { name: "더미식물1", lat: 37.6857293, lng: 126.7786386 },
-    { name: "더미식물2", lat: 37.6980726, lng: 126.7664948 },
-    { name: "더미식물3", lat: 37.6887371, lng: 126.7846376 },
-    { name: "더미식물4", lat: 37.693819, lng: 126.780976 },
-    { name: "더미식물5", lat: 37.6810649, lng: 126.7660589 },
-    { name: "더미식물6", lat: 37.6969239, lng: 126.7704684 },
-    { name: "더미식물7", lat: 37.6928105, lng: 126.7821193 },
-    { name: "더미식물8", lat: 37.6915444, lng: 126.7651047 },
+    {
+      name: "더미식물1",
+      memo: "메모가 들어갈 공간입니당당구리",
+      lat: 37.6857293,
+      lng: 126.7786386,
+    },
+    {
+      name: "더미식물2",
+      memo: "메모가 들어갈 공간입니당당구리",
+      lat: 37.6980726,
+      lng: 126.7664948,
+    },
+    {
+      name: "더미식물3",
+      memo: "메모가 들어갈 공간입니당당구리",
+      lat: 37.6887371,
+      lng: 126.7846376,
+    },
+    {
+      name: "더미식물4",
+      memo: "메모가 들어갈 공간입니당당구리",
+      lat: 37.693819,
+      lng: 126.780976,
+    },
+    {
+      name: "더미식물5",
+      memo: "메모가 들어갈 공간입니당당구리",
+      lat: 37.6810649,
+      lng: 126.7660589,
+    },
+    {
+      name: "더미식물6",
+      memo: "메모가 들어갈 공간입니당당구리",
+      lat: 37.6969239,
+      lng: 126.7704684,
+    },
+    {
+      name: "더미식물7",
+      memo: "메모가 들어갈 공간입니당당구리",
+      lat: 37.6928105,
+      lng: 126.7821193,
+    },
+    {
+      name: "더미식물8",
+      memo: "메모가 들어갈 공간입니당당구리",
+      lat: 37.6915444,
+      lng: 126.7651047,
+    },
   ];
 
   const location = new kakao.maps.LatLng(position.lat, position.lng);
@@ -87,13 +128,9 @@ function KakaoMap() {
       imageOption
     );
 
-    console.log(ewMarkers);
     for (var i = 0; i < ewMarkers.length; i++) {
       ewMarkers[i].setMap(null);
     }
-
-    console.log("지웠다");
-    console.log(ewMarkers);
 
     for (var i = 0; i < ewOverlays.length; i++) {
       ewOverlays[i].setMap(null);
@@ -116,20 +153,49 @@ function KakaoMap() {
 
       // 2. 오버레이 생성
       // 2.1. 오버레이 content 생성
-      var content = document.createElement("button");
-      content.type = "button";
-      content.className = "btn btn-success";
-      content.appendChild(document.createTextNode(tmpMarker.name));
+      var content = document.createElement("div");
+      content.className = "card";
+      content.style = "width: 10rem";
 
-      // 2.2. 닫기 이벤트 추가
-      content.onclick = function () {
+      var imageBox = document.createElement("img");
+      imageBox.className = "card-img-top";
+      imageBox.src = overlayImage;
+      imageBox.onclick = function () {
         overlay.setMap(null);
       };
+
+      var cardBody = document.createElement("div");
+      cardBody.className = "card-body";
+
+      var title = document.createElement("h5");
+      title.className = "card-title";
+      title.appendChild(document.createTextNode(tmpMarker.name));
+
+      cardBody.append(title);
+      content.append(imageBox, cardBody);
+
+      // var divBox = document.createElement("div");
+
+      // var imageBox = document.createElement("img");
+      // imageBox.className = "img-thumbnail";
+      // imageBox.src = overlayImage;
+
+      // var content = document.createElement("button");
+      // content.type = "button";
+      // content.className = "btn btn-success";
+      // content.appendChild(document.createTextNode(tmpMarker.name));
+
+      // divBox.append(imageBox, content);
+
+      // 2.2. 닫기 이벤트 추가
+      // content.onclick = function () {
+      //   overlay.setMap(null);
+      // };
 
       var overlay = new kakao.maps.CustomOverlay({
         clickable: true,
         position: location,
-        yAnchor: 1.7,
+        yAnchor: 1.5,
         xAnchor: 0.53,
         content: content,
       });
@@ -152,7 +218,7 @@ function KakaoMap() {
 
     setEwMarkers(eunwooMarkers);
     setEwOverlays(eunwooOverlays);
-  }, 20000);
+  }, 5000);
 
   useInterval(() => {
     var imageSrc = plantsMarkerImage;
@@ -215,20 +281,31 @@ function KakaoMap() {
 
             // 2. 오버레이 생성
             // 2.1. 오버레이 content 생성
-            var content = document.createElement("button");
-            content.type = "button";
-            content.className = "btn btn-success";
-            content.appendChild(document.createTextNode(target.korName));
+            var content = document.createElement("div");
+            content.className = "card";
+            content.style = "width: 10rem";
 
-            // 2.2. 닫기 이벤트 추가
-            content.onclick = function () {
+            var imageBox = document.createElement("img");
+            imageBox.className = "card-img-top";
+            imageBox.src = target.photoUrl;
+            imageBox.onclick = function () {
               overlay.setMap(null);
             };
+
+            var cardBody = document.createElement("div");
+            cardBody.className = "card-body";
+
+            var title = document.createElement("h5");
+            title.className = "card-title";
+            title.appendChild(document.createTextNode(target.korName));
+
+            cardBody.append(title);
+            content.append(imageBox, cardBody);
 
             var overlay = new kakao.maps.CustomOverlay({
               clickable: true,
               position: location,
-              yAnchor: 1.7,
+              yAnchor: 1.5,
               xAnchor: 0.53,
               content: content,
             });
