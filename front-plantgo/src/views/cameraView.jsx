@@ -119,12 +119,12 @@ function App(props) {
         onTakePhoto={(dataUri) => {
           handleTakePhoto(dataUri); // 사진 촬영하면 base64 이미지
         }}
-        // isFullscreen={true}
+        isFullscreen={true}
         isImageMirror={false}
         idealFacingMode={FACING_MODES.ENVIRONMENT}
         imageType={IMAGE_TYPES.JPG}
         imageCompression={0.5}
-        idealResolution={{ width: 360, height: 800 }}
+        // idealResolution={{ width: 360, height: 800 }}
       />
     );
   } else {
