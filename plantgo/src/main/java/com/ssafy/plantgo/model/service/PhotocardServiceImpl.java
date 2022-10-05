@@ -85,60 +85,6 @@ public class PhotocardServiceImpl implements PhotocardService {
 
 
 
-        /** 사진으로 식물의 학명 찾아오기 */
-
-//        File f = null;
-//        int n;
-//        f = new File(img.getOriginalFilename());
-//        try (InputStream in  = img.getInputStream(); OutputStream os = new FileOutputStream(f)){
-//            byte[] buffer = new byte[4096];
-//            while ((n = in.read(buffer,0,4096)) != -1){
-//                os.write(buffer,0,n);
-//            }
-//            BufferedReader bufferedReader = new BufferedReader(new FileReader(f));
-//            bufferedReader.close();
-//        }catch (IOException e){
-//            e.printStackTrace();
-//            return null;
-//        }
-//        File file = new File(f.toURI());
-//
-//        HttpEntity entity = MultipartEntityBuilder.create()
-//                .addPart("images", new FileBody(file))
-//                .addTextBody("organs", "flower")
-//                .build();
-//
-//
-//
-//        HttpPost request = new HttpPost(PlantNetApi);
-//        request.setEntity(entity);
-//
-//        HttpClient client = HttpClientBuilder.create().build();
-//        HttpResponse response;
-//        try {
-//            response = client.execute(request);
-//            if(response.getEntity()==null)
-//                return null;
-//            String jsonString = EntityUtils.toString(response.getEntity());
-//
-//            System.out.println("Json형태의 리턴값");
-//            System.out.println(jsonString);
-//            if(jsonString.equals("{\"statusCode\":404,\"error\":\"Not Found\",\"message\":\"Species not found\"}"))
-//                return null;
-//            System.out.println();
-//            JSONObject jsonObj = new JSONObject(jsonString);
-//            if(jsonObj == null)
-//                return null;
-//            JSONArray resultarr = jsonObj.getJSONArray("results");
-//            JSONObject mostcorrect = resultarr.getJSONObject(0);
-//            JSONObject species = mostcorrect.getJSONObject("species");
-//            scientificName = species.getString("scientificNameWithoutAuthor");
-//            System.out.println(scientificName);
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            return null;
-//        }
         /** planetID API */
         String scientificName = "";
         BufferedImage image = ImageIO.read(img.getInputStream());
@@ -175,7 +121,6 @@ public class PhotocardServiceImpl implements PhotocardService {
             JSONObject jsonObj = new JSONObject(res);
             JSONArray suggestions = jsonObj.getJSONArray("suggestions");
             JSONObject plantdetail = suggestions.getJSONObject(0).getJSONObject("plant_details");
-//            JSONObject scientificname = plantdetail.getJSONObject("scientific_name");
             scientificName = plantdetail.getString("scientific_name");
 
         } catch (Exception e) {
@@ -195,6 +140,8 @@ public class PhotocardServiceImpl implements PhotocardService {
             return null;
         }
         if (plant == null || plant.getKorName() == null)
+            return null;
+        if (plant.getKorName().length()==0)
             return null;
         System.out.println("식물 한글 이름");
         System.out.println(plant.getKorName());
