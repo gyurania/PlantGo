@@ -36,7 +36,8 @@ const RankNavBar = () => {
                 Navigate("/");
               }}
             >
-              <button className="btn btn-default">
+              <button className="btn btn-default" style={{
+                margin:0}}>
                 <BsGeoAlt
                   style={{
                     width: 48,
@@ -60,7 +61,8 @@ const RankNavBar = () => {
                 Navigate("/plantlist");
               }}
             >
-              <button className="btn btn-default">
+              <button className="btn btn-default" style={{
+                margin:0}}>
                 <BsBook
                   style={{
                     width: 50,
@@ -79,7 +81,8 @@ const RankNavBar = () => {
             }}
           >
             <Nav.Item onClick={logOut}>
-              <button className="btn btn-default">
+            <button className="btn btn-default" style={{
+                margin:0}}>
                 <BsBoxArrowRight
                   style={{
                     width: 50,

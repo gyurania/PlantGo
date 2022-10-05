@@ -36,12 +36,12 @@ const ListNavBar = () => {
                 Navigate("/");
               }}
             >
-              <button className="btn btn-default">
+              <button className="btn btn-default" style={{
+                margin:0}}> 
                 <BsGeoAlt
                   style={{
                     width: 48,
                     height: 48,
-                    margin:0
                   }}
                 ></BsGeoAlt>
               </button>
@@ -61,12 +61,12 @@ const ListNavBar = () => {
                 Navigate("/rank");
               }}
             >
-              <button className="btn btn-default">
+              <button className="btn btn-default" style={{
+                    margin:0}}>
                 <BsAward
                   style={{
                     width: 50,
                     height: 50,
-                    margin:0
                   }}
                 ></BsAward>
               </button>
@@ -81,12 +81,12 @@ const ListNavBar = () => {
             }}
           >
             <Nav.Item onClick={logOut}>
-              <button className="btn btn-default">
+              <button className="btn btn-default" style={{
+                    margin:0}}>
                 <BsBoxArrowRight
                   style={{
                     width: 50,
-                    height: 50,
-                    margin:0
+                    height: 50
                   }}
                 ></BsBoxArrowRight>
               </button>
