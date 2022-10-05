@@ -160,9 +160,9 @@ const HomeNavBar = () => {
               Navigate("/camera");
             }}
             style={{
-              position: "absolute",
+              position: "fixed",
               left: "50%",
-              bottom: "25px",
+              bottom: 0,
               marginLeft: "-25px",
               display: "block",
               zIndex: 2,
@@ -180,9 +180,9 @@ const HomeNavBar = () => {
             onClick={toggleMenu}
             className="btn btn-default"
             style={{
-              position: "absolute",
+              position: "fixed",
               right: 0,
-              bottom: "20px",
+              bottom: 0,
               display: "block",
               zIndex: 2,
             }}

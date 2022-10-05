@@ -60,8 +60,9 @@ function PhotoCardView() {
       }}
       className="backgroundImg2"
     >
+      <meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=0"></meta>
       <Container >
-        <Row style={{ height: "15%", display: "block", paddingTop: "15%" }}>
+        <Row style={{ height: "15%", display: "block", paddingTop: "7vh" }}>
           <h1 style={{ textAlign: "center" , fontFamily:"MICEGothic Bold", fontSize:"40px", color: "#1C6758"}}>Photocards</h1>
         </Row>
         <Row>

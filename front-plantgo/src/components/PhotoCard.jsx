@@ -80,11 +80,11 @@ let PhotoCard = (props) => {
       ) : (
         <div className="back modify">
           <Form onSubmit={submitHandler}>
-            <Form.Label>Memo</Form.Label>
+            <Form.Label style={{fontFamily:"MICEGothic Bold"}}>Memo</Form.Label>
             <Form.Control
               as="textarea"
               rows={5}
-              style={{ height: "250px" }}
+              style={{ height: "auto" }}
               value={memo}
               onChange={memoChangeHandler}
             />
