@@ -27,7 +27,7 @@ function PlantResultView() {
     console.log(plantInfo)
   })
   return (
-    <div className="container" style={{padding:0}}>
+    <div className="container" style={{padding:0, minHeight:'100vh', minWidth:'100vw'}}>
       <div className="mobile-layout">
         <div className="notification-header">
           <h1 style={{ textAlign: "center" , fontFamily:"MICEGothic Bold", fontSize:"40px", color: "#1C6758"}}>PlantSearch Result</h1>
