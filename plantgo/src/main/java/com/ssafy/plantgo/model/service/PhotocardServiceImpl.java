@@ -89,11 +89,14 @@ public class PhotocardServiceImpl implements PhotocardService {
         /** planetID API */
         String scientificName = "";
         BufferedImage image = ImageIO.read(img.getInputStream());
-        String imageType = img.getContentType();
+        String[] imageType = img.getContentType().split("/");
         System.out.println("contentType은 ? ?");
-        System.out.println(imageType);
+        System.out.println(imageType[1]);
+        if (imageType.length==0)
+            return null;
+
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        ImageIO.write(image, imageType, baos);
+        ImageIO.write(image, imageType[1], baos);
         String encodedImage = Base64.encode(baos.toByteArray());
         String apiKey = "IoMPgMn0fWIlD5rjBSHMUpR7NblA5rZI93gAjXyVTUWJqrhzgD";
         System.out.println(encodedImage);
