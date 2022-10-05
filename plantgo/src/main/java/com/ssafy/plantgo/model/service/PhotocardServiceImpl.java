@@ -84,12 +84,16 @@ public class PhotocardServiceImpl implements PhotocardService {
     public PhotocardResponse registPhotocard(PhotocardRequest photocardRequest, MultipartFile img) throws IOException {
 
 
-
+        System.out.println("이미지의 이름은 ");
+        System.out.println(img.getName());
         /** planetID API */
         String scientificName = "";
         BufferedImage image = ImageIO.read(img.getInputStream());
+        String imageType = img.getContentType();
+        System.out.println("contentType은 ? ?");
+        System.out.println(imageType);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        ImageIO.write(image, "jpg", baos);
+        ImageIO.write(image, imageType, baos);
         String encodedImage = Base64.encode(baos.toByteArray());
         String apiKey = "IoMPgMn0fWIlD5rjBSHMUpR7NblA5rZI93gAjXyVTUWJqrhzgD";
         System.out.println(encodedImage);
