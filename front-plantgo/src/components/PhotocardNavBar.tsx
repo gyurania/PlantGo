@@ -5,7 +5,7 @@ import { BsPlus, BsBook, BsBoxArrowRight, BsGeoAlt, BsAward } from "react-icons/
 import { useNavigate } from "react-router-dom";
 import "./HomeNavBar.css";
 
-const RankNavBar = () => {
+const PhotoCardNavBar = () => {
   let Navigate = useNavigate();
   const [isShown, setIsShown] = useState(false);
 
@@ -34,7 +34,8 @@ const RankNavBar = () => {
             <Nav.Item onClick={() => {
                 Navigate("/rank");
               }}>
-              <button className="btn btn-default">
+              <button className="btn btn-default" style={{
+                margin:0}}>
                 <BsAward
                   style={{
                     width: 50,
@@ -58,7 +59,8 @@ const RankNavBar = () => {
                 Navigate("/");
               }}
             >
-              <button className="btn btn-default">
+              <button className="btn btn-default" style={{
+                margin:0}}>
                 <BsGeoAlt
                   style={{
                     width: 48,
@@ -82,7 +84,8 @@ const RankNavBar = () => {
                 Navigate("/plantlist");
               }}
             >
-              <button className="btn btn-default">
+              <button className="btn btn-default" style={{
+                margin:0}}>
                 <BsBook
                   style={{
                     width: 50,
@@ -101,7 +104,8 @@ const RankNavBar = () => {
             }}
           >
             <Nav.Item onClick={logOut}>
-              <button className="btn btn-default">
+            <button className="btn btn-default" style={{
+                margin:0}}>
                 <BsBoxArrowRight
                   style={{
                     width: 50,
@@ -141,4 +145,4 @@ const RankNavBar = () => {
   );
 };
 
-export default RankNavBar;
+export default PhotoCardNavBar;

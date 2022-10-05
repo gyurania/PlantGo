@@ -5,6 +5,7 @@ import "./TmpBook.scss";
 import logo from "../img/플랜트고-색-폰트.png";
 import { useEffect } from "react";
 import Button from "react-bootstrap/esm/Button";
+import PhotoCardNavBar from "../components/PhotocardNavBar";
 
 function PlantResultView() {
   const location = useLocation();
@@ -63,6 +64,7 @@ function PlantResultView() {
           </div>
         </div>
       </div>
+      <PhotoCardNavBar></PhotoCardNavBar>
     </div>
   );
 }
