@@ -125,6 +125,7 @@ public class PhotocardServiceImpl implements PhotocardService {
         String res = "";
         try {
             res = sendPostRequest("https://api.plant.id/v2/identify", data);
+            System.out.println(res);
             JSONObject jsonObj = new JSONObject(res);
             JSONArray suggestions = jsonObj.getJSONArray("suggestions");
             JSONObject plantdetail = suggestions.getJSONObject(0).getJSONObject("plant_details");
@@ -137,6 +138,8 @@ public class PhotocardServiceImpl implements PhotocardService {
 
         System.out.println(res);
         System.out.println(scientificName);
+        if (scientificName.length()==0)
+            return null;
 
         /** 학명으로 가져오기 */
         Plant plant = null;
@@ -144,12 +147,17 @@ public class PhotocardServiceImpl implements PhotocardService {
             plant = plantRepository.findByScientificname(scientificName);
         } catch(NullPointerException e) {
             e.printStackTrace();
-            return null;
+            PhotocardResponse pr = new PhotocardResponse();
+            pr.setSch_name(scientificName);
+            pr.setKor_name("없음");
+            return pr;
         }
-        if (plant == null || plant.getKorName() == null)
-            return null;
-        if (plant.getKorName().length()==0)
-            return null;
+        if (plant == null || plant.getKorName() == null || plant.getKorName().length()==0) {
+            PhotocardResponse pr = new PhotocardResponse();
+            pr.setSch_name(scientificName);
+            pr.setKor_name("없음");
+            return pr;
+        }
         System.out.println("식물 한글 이름");
         System.out.println(plant.getKorName());
         /** 토큰에서 유저정보 가져오기 */
