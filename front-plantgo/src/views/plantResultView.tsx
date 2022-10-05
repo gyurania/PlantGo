@@ -30,7 +30,7 @@ function PlantResultView() {
     <div className="container" style={{padding:0}}>
       <div className="mobile-layout">
         <div className="notification-header">
-          <div className="time">plantGo!</div>
+          <h1 style={{ textAlign: "center" , fontFamily:"MICEGothic Bold", fontSize:"40px", color: "#1C6758"}}>PlantSearch Result</h1>
         </div>
         <div className="actions"></div>
         <div className="book-cover">
