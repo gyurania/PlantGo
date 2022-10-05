@@ -105,7 +105,7 @@ const ListNavBar = () => {
               position: "absolute",
               right: 0,
               bottom: "30px",
-              marginRight: "10px",
+              marginRight: "12px",
               display: "block",
             }}
           >
