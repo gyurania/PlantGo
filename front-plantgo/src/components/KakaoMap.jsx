@@ -15,7 +15,7 @@ function KakaoMap() {
   const [currMarkers, setCurrMarkers] = useState([]);
   const [plantMarkers, setPlantMarkers] = useState([]);
   const [plantOverlays, setPlantOverlays] = useState([]);
-  const [plantClusterer, setPlantClusterer] = useState();
+  const [plantClusterer, setPlantClusterer] = useState(null);
 
   const [ewMarkers, setEwMarkers] = useState([]);
   const [ewOverlays, setEwOverlays] = useState([]);
@@ -181,7 +181,9 @@ function KakaoMap() {
 
         // 새 데이터가 이전 데이터랑 다르면 state바꾸기
         if (targets.length !== plantMarkers.length) {
-          plantClusterer.clear(); // 이전 클러스터 삭제
+          if (plantClusterer !== null) {
+            plantClusterer.clear(); // 이전 클러스터 삭제
+          }
 
           // 이전 마커 삭제
           plantMarkers.forEach(function (plantMarker) {
@@ -198,8 +200,8 @@ function KakaoMap() {
           var tmpPlantOverlays = [];
           targets.forEach(function (target) {
             const location = new kakao.maps.LatLng(
-              target.longitude,
-              target.latitude
+              target.latitude,
+              target.longitude
             );
 
             // 1. 마커 생성
