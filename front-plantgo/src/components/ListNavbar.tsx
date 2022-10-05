@@ -41,6 +41,7 @@ const ListNavBar = () => {
                   style={{
                     width: 48,
                     height: 48,
+                    margin:0
                   }}
                 ></BsGeoAlt>
               </button>
@@ -65,6 +66,7 @@ const ListNavBar = () => {
                   style={{
                     width: 50,
                     height: 50,
+                    margin:0
                   }}
                 ></BsAward>
               </button>
@@ -84,6 +86,7 @@ const ListNavBar = () => {
                   style={{
                     width: 50,
                     height: 50,
+                    margin:0
                   }}
                 ></BsBoxArrowRight>
               </button>
