@@ -47,7 +47,7 @@ const HomeNavBar = () => {
               position: "fixed",
               right: 0,
               zIndex: 1030,
-              bottom: 150,
+              bottom: 130,
               marginRight: "5px",
             }}
           >
@@ -56,7 +56,7 @@ const HomeNavBar = () => {
                 Navigate("/rank");
               }}
             >
-              <button className="btn btn-default">
+              <button className="btn btn-default" style={{padding:0}}>
                 <BsAward
                   style={{
                     width: 50,
@@ -72,7 +72,7 @@ const HomeNavBar = () => {
               position: "fixed",
               right: 0,
               zIndex: 1030,
-              bottom: 210,
+              bottom: 195,
               marginRight: "5px",
             }}
           >
@@ -81,7 +81,7 @@ const HomeNavBar = () => {
                 Navigate("/plantlist");
               }}
             >
-              <button className="btn btn-default">
+              <button className="btn btn-default" style={{padding:0}}>
                 <BsBook
                   style={{
                     width: 50,
@@ -97,11 +97,11 @@ const HomeNavBar = () => {
               position: "fixed",
               right: 0,
               zIndex: 1030,
-              bottom: 80,
+              bottom: 65,
             }}
           >
             <Nav.Item onClick={logOut}>
-              <button className="btn btn-default">
+              <button className="btn btn-default" style={{padding:0}}>
                 <BsBoxArrowRight
                   style={{
                     width: 50,
@@ -182,6 +182,7 @@ const HomeNavBar = () => {
             style={{
               position: "fixed",
               right: 0,
+              padding:0,
               bottom: 0,
               display: "block",
               zIndex: 2,
