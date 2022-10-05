@@ -6,6 +6,7 @@ import axios from "axios";
 import Spinner from "../img/loading.gif";
 import Container from "react-bootstrap/Container";
 import "./cameraView.css";
+import spring from "../api/spring";
 
 function App(props) {
   const [imgSrc, setImgSrc] = useState("");
@@ -79,7 +80,7 @@ function App(props) {
       // console.log(formData.position.longitude);
       axios({
         method: "post",
-        url: "https://j7a703.p.ssafy.io/api/photocard",
+        url: spring.photocard.register(),
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -142,12 +143,12 @@ function App(props) {
             height: "100vh",
           }}
         >
-          <div class="row justify-content-center">
-            <div class="loading">
+          <div className="row justify-content-center">
+            <div className="loading">
               {/* <div class="row justify-content-center"> */}
               <img src={Spinner} alt="로딩 페이지" width="300px" />
               <br />
-              <div class="loadgin-text">
+              <div className="loadgin-text">
                 <span>식</span>
                 <span>물 </span>
                 <span>정</span>
