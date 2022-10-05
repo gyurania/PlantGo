@@ -127,8 +127,8 @@ const PhotoCardNavBar = () => {
             style={{
               position: "absolute",
               right: 0,
-              bottom: "20px",
-              marginRight: "10px",
+              bottom: "30px",
+              marginRight: "12px",
               display: "block",
             }}
           >

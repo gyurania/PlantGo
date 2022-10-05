@@ -4,7 +4,6 @@ import { useState } from "react";
 import { BsPlus, BsBook, BsBoxArrowRight, BsGeoAlt } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import "./HomeNavBar.css";
-import "./KakaoMap.css";
 
 const RankNavBar = () => {
   let Navigate = useNavigate();
@@ -19,7 +18,7 @@ const RankNavBar = () => {
     Navigate("/login");
   };
   return (
-    <div className="kakao-map-buttons">
+    <>
       {/* 추가메뉴 */}
       {isShown && (
         <Container>
@@ -28,7 +27,7 @@ const RankNavBar = () => {
               position: "fixed",
               right: 0,
               zIndex: 1030,
-              bottom: 210,
+              bottom: 150,
               marginRight: "5px",
             }}
           >
@@ -53,7 +52,7 @@ const RankNavBar = () => {
               position: "fixed",
               right: 0,
               zIndex: 1030,
-              bottom: 150,
+              bottom: 210,
               marginRight: "5px",
             }}
           >
@@ -98,26 +97,28 @@ const RankNavBar = () => {
 
       {/* 하단메뉴 */}
       <Container>
-        <div>
-          <button
+        <div className="navbar transparent navbar-inverse fixed-bottom">
+          <Nav.Link
             onClick={toggleMenu}
-            className="btn btn-default"
+            className="navbar-inner"
             style={{
-              position: "fixed",
+              position: "absolute",
               right: 0,
-              bottom: 0,
+              bottom: "30px",
+              marginRight: "12px",
               display: "block",
-            }}>
+            }}
+          >
             <BsPlus
               style={{
                 width: 60,
                 height: 60,
               }}
             />
-          </button>
+          </Nav.Link>
         </div>
       </Container>
-    </div>
+    </>
   );
 };
 
