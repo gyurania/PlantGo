@@ -9,6 +9,8 @@ import Button from "react-bootstrap/esm/Button";
 function PlantResultView() {
   const location = useLocation();
   const plantInfo = location.state.plantInfo;
+  const plantName = plantInfo.kor_name
+  const content = plantInfo.content
   const imgSrc = location.state.imgSrc;
   const userName = sessionStorage.getItem('userName')
   let navigate = useNavigate();
@@ -42,12 +44,12 @@ function PlantResultView() {
         <div className="preface">
           <div className="content">
             <div className="header">
-              <div className="result-title">무언가 식물의 이름</div>
+              <div className="result-title">{plantName}</div>
             </div>
             <div className="author">by {userName}</div>
             <div className="body2">
               <div className="content-top">
-                어떻게 식물 설명을 써야할 지 매우 고민이었는데 이렇게나마 쓰게 되니 너무 반갑고 하드코딩을 하려니 회의감이 들고 내가 이러려고 개발자하나 고민되고 많은 노력 끝에 사람들이 성과를 쟁취했듯 나도 그렇게 할 수 있을까 고민되고 그럽니다.
+                {content}
               </div>
               <button className="btn btn-sm btn-outline-success"
               onClick={() => {
