@@ -73,9 +73,9 @@
 - Main page
   - 소셜 로그인 구현 (카카오톡, 구글, 네이버)
 
-![main](readmeimg/main.png)
+![main](readmeimg/GIF/main.png)
 
-![login](readmeimg/login.gif)
+![login](readmeimg/GIF/login.gif)
 <br>
 
 - Map
@@ -84,7 +84,7 @@
   - map 드래그, zoom in/out
   - 마커 클러스터링 구현
 
-![map](readmeimg/map.gif)
+![map](readmeimg/GIF/map.gif)
 <br>
 
 - Camera & Plant Information
@@ -92,14 +92,14 @@
   - Plant.id API를 이용한 식물 정보 제공
   - 식물 사진 등록
 
-![camera](readmeimg/camera.gif)
+![camera](readmeimg/GIF/camera.gif)
 <br>
 
 - Plants Book
   - Collected/Uncollected 식물 조회
   - 무한스크롤 구현
 
-![plantBook](readmeimg/plantBook.gif)
+![plantBook](readmeimg/GIF/plantBook.gif)
 <br>
 
 - Ranking
@@ -108,5 +108,5 @@
   - 상위 30위 랭킹 조회
   - 3분 간격으로 랭킹 갱신
 
-![ranking](readmeimg/ranking.gif)
+![ranking](readmeimg/GIF/ranking.gif)
 <br>
