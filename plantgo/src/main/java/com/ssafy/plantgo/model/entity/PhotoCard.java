@@ -13,6 +13,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
+
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -20,7 +23,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "photocard")
-public class PhotoCard {
+public class PhotoCard extends BaseTimeEntity{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,6 +44,14 @@ public class PhotoCard {
 
 	@Column(name = "plant_id", columnDefinition = "INT", nullable = false)
 	private int plantId;
+
+	@Column(name = "area")
+	private String area;
+
+	@Column(name = "Kor_name")
+	private String korName;
+
+
 
 	// Foreign key 회원아이디
 	@ManyToOne

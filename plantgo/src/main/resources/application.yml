@@ -35,8 +35,8 @@ spring:
               - email
               - profile
           kakao:
-            clientId: af10b5e33831fbf68e8b842a655d20d9
-            clientSecret: YqeQLgtC3GvwHwF5LVg8BPqj1Jq9hitQ
+            clientId: 07efa27cef29c1f8650069e247c5b553
+            clientSecret: dXGoKqRxWyc4Eibc0BxpX2evsEL2JTHH
             clientAuthenticationMethod: post
             authorizationGrantType: authorization_code
             redirectUri: "http://j7a703.p.ssafy.io:8080/login/oauth2/code/KAKAO"
@@ -59,11 +59,11 @@ spring:
             userNameAttribute: id
 
 # cors 설정
-cors:
-  allowed-origins: 'http://localhost:3000'
-  allowed-methods: GET,POST,PUT,DELETE,OPTIONS
-  allowed-headers: '*'
-  max-age: 3600
+#cors:
+#  allowed-origins: 'https://j7a703.p.ssafy.io'
+#  allowed-methods: GET,POST,PUT,DELETE,OPTIONS
+#  allowed-headers: '*'
+#  max-age: 3600
 
 # jwt secret key 설정
 jwt.secret: '8sknjlO3NPTBqo319DHLNqsQAfRJEdKsETOds'
@@ -72,8 +72,8 @@ jwt.secret: '8sknjlO3NPTBqo319DHLNqsQAfRJEdKsETOds'
 app:
   auth:
     tokenSecret: 926D96C90030DD58429D2751AC1BDBBC
-    tokenExpiry: 18000000
-    refreshTokenExpiry: 6048000000
+    tokenExpiry: 180000000000
+    refreshTokenExpiry: 604800000000000
   oauth2:
     authorizedRedirectUris:
       - http://localhost:3000/oauth/redirect
@@ -91,3 +91,4 @@ cloud:
       static: ap-northeast-2
     stack:
       auto: false
+

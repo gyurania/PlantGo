@@ -8,9 +8,9 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class PhotocardRequest {
-    private Long userSeq;
+
     private double latitude;
     private double longitude;
-    private int plantId;
+
 
 }

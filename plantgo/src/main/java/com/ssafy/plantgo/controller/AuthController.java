@@ -26,6 +26,7 @@ import java.util.Date;
 
 @RestController
 @RequestMapping("/api/v1/auth")
+@CrossOrigin("*")
 @RequiredArgsConstructor
 public class AuthController {
 

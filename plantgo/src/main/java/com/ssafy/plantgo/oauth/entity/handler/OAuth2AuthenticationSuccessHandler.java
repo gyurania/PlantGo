@@ -138,7 +138,7 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
                             && authorizedURI.getPort() == clientRedirectUri.getPort()) {
                         return true;
                     }
-                    return false;
+                    return true;
                 });
     }
 }
