@@ -1,4 +1,3 @@
-
 ![Untitled](readmeimg/plantgo1.png)
 
 <br>
@@ -55,7 +54,7 @@
 
 <br>
 
-# ⚙ 시스템 아케틱쳐
+# ⚙ 시스템 아키텍처처
 ![architecture](readmeimg/architecture.png)
 <br>
 
