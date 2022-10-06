@@ -55,7 +55,8 @@
 <br>
 
 # ⚙ 시스템 아키텍처
-![architecture](readmeimg/architecture.png)  
+
+![architecture](readmeimg/architecture.png)
 
 <br>
 
@@ -65,9 +66,47 @@
 
 ![Untitled](readmeimg/intro2.jpg)
 
-
-
 <br>
 
 # 🎞 실행 화면
 
+- Main page
+  - 소셜 로그인 구현 (카카오톡, 구글, 네이버)
+
+![main](readmeimg/main.png)
+
+![login](readmeimg/login.gif)
+<br>
+
+- Map
+  - 등록된 식물 마커 표시
+  - 사진 조회
+  - map 드래그, zoom in/out
+  - 마커 클러스터링 구현
+
+![map](readmeimg/map.gif)
+<br>
+
+- Camera & Plant Information
+  - 식물 사진 촬영
+  - Plant.id API를 이용한 식물 정보 제공
+  - 식물 사진 등록
+
+![camera](readmeimg/camera.gif)
+<br>
+
+- Plants Book
+  - Collected/Uncollected 식물 조회
+  - 무한스크롤 구현
+
+![plantBook](readmeimg/plantBook.gif)
+<br>
+
+- Ranking
+  - 클러스터 서버, Spark를 이용한 분산 처리
+  - 회원별 수집한 식물 종류 갯수 카운트
+  - 상위 30위 랭킹 조회
+  - 3분 간격으로 랭킹 갱신
+
+![ranking](readmeimg/ranking.gif)
+<br>
