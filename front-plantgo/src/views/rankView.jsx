@@ -64,7 +64,7 @@ const Ranking = () => {
     }).catch((err) => console.log(err));
     
     
-  }, 180000);
+  }, 10000);
 
   useEffect(() => {
     console.log("rank!!!");
