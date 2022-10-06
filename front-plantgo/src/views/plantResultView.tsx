@@ -15,6 +15,10 @@ function PlantResultView() {
   const plantName = plantInfo.kor_name;
   const content = plantInfo.content;
   const imgSrc = location.state.imgSrc;
+  // const plantInfo = "";
+  // const plantName = "없음";
+  // const content = "plantInfo.content";
+  // const imgSrc = "location.state.imgSrc";
   const userName = sessionStorage.getItem("userName");
 
   let navigate = useNavigate();
@@ -26,7 +30,9 @@ function PlantResultView() {
     return (
       <div className="backgroundImg">
         <div className="wrapper">
-          <div className="content">식물 정보가 곧 추가될 예정이에요ㅠㅠ</div>
+          <div className="content" style={{ textAlign: "center" }}>
+            식물 정보가<br></br>곧 추가될 예정이에요<br></br>ㅠㅠ
+          </div>
         </div>
       </div>
     );
