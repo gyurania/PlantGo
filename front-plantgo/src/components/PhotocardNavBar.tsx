@@ -27,7 +27,7 @@ const PhotoCardNavBar = () => {
               position: "fixed",
               right: 0,
               zIndex: 1030,
-              bottom: 280,
+              bottom: 150,
               marginRight: "5px"
             }}
           >
@@ -50,7 +50,7 @@ const PhotoCardNavBar = () => {
               position: "fixed",
               right: 0,
               zIndex: 1030,
-              bottom: 150,
+              bottom: 270,
               marginRight: "5px",
             }}
           >
@@ -100,7 +100,7 @@ const PhotoCardNavBar = () => {
               position: "fixed",
               right: 0,
               zIndex: 1030,
-              bottom: 80,
+              bottom: 90,
             }}
           >
             <Nav.Item onClick={logOut}>
@@ -127,8 +127,8 @@ const PhotoCardNavBar = () => {
             style={{
               position: "absolute",
               right: 0,
-              bottom: "20px",
-              marginRight: "10px",
+              bottom: "30px",
+              marginRight: "12px",
               display: "block",
             }}
           >

@@ -90,7 +90,11 @@ function App(props) {
           console.log("사진찍고 응답", res.data);
           console.log(typeof res.data);
           console.log(res.data.length);
-          if (res.data === null || res.data.length == 0) {
+          if (
+            res.data === null ||
+            res.data.length == 0 ||
+            res.data.kor_name === "없음"
+          ) {
             window.alert("사진을 인식할 수 없어요ㅠㅠ");
             navigate("/");
           } else {
