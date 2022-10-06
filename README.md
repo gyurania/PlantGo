@@ -54,8 +54,9 @@
 
 <br>
 
-# ⚙ 시스템 아키텍처처
-![architecture](readmeimg/architecture.png)
+# ⚙ 시스템 아키텍처
+![architecture](readmeimg/architecture.png)  
+
 <br>
 
 # 🎞 프로젝트 설명
