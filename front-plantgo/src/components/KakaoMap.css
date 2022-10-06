@@ -1,0 +1,73 @@
+.kakao-map {
+    z-index: 2;
+    /* position: absolute */
+}
+
+.kakao-map-buttons {
+    z-index: 2;
+}
+
+button {
+    font-family: 'Raleway', sans-serif;
+    font-size: 15px;
+    line-height: 22.6px;
+    background-color: transparent;
+    padding: 16px 32px 16px 40px;
+    cursor: pointer;
+}
+
+.btn-black {
+    border: 4px solid #000000;
+    color: #000000;
+}
+
+.btn-grey {
+    border: 4px solid #45423C;
+    color: #45423C;
+}
+
+.arrow {
+    height: 2px;
+    width: 25px;
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    margin-right: 15px;
+    margin-bottom: 4px;
+    transition: all .4s ease;
+}
+
+button:hover .arrow {
+    width: 35px;
+    margin-right: 5px;
+}
+
+.arrow-black {
+    background: black;
+}
+
+.arrow-grey {
+    background: #45423C;
+}
+
+.arrow:before,
+.arrow:after {
+    content: "";
+    background: black;
+    position: absolute;
+    height: 2px;
+    width: 10px;
+    border-radius: 30%;
+}
+
+.arrow:before {
+    right: -2px;
+    bottom: -3px;
+    transform: rotate(-45deg);
+}
+
+.arrow:after {
+    right: -2px;
+    top: -3px;
+    transform: rotate(45deg);
+}
