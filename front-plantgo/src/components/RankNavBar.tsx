@@ -27,7 +27,7 @@ const RankNavBar = () => {
               position: "fixed",
               right: 0,
               zIndex: 1030,
-              bottom: 150,
+              bottom: 210,
               marginRight: "5px",
             }}
           >
@@ -52,7 +52,7 @@ const RankNavBar = () => {
               position: "fixed",
               right: 0,
               zIndex: 1030,
-              bottom: 210,
+              bottom: 150,
               marginRight: "5px",
             }}
           >
