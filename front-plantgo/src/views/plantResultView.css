@@ -1,0 +1,14 @@
+.wrapper {
+  position: relative;
+  top: 38vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+.content {
+  font-family: 'Jua', sans-serif;
+  font-size: 30px;
+  padding: 3rem;
+}
