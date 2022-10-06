@@ -23,21 +23,6 @@ function PlantResultView() {
 
   let navigate = useNavigate();
 
-  if (plantName === "없음") {
-    setInterval(() => {
-      navigate("/");
-    }, 3000);
-    return (
-      <div className="backgroundImg">
-        <div className="wrapper">
-          <div className="content" style={{ textAlign: "center" }}>
-            식물 정보가<br></br>곧 추가될 예정이에요<br></br>ㅠㅠ
-          </div>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="container-result" style={{ padding: 0 }}>
       <div className="mobile-layout">
