@@ -29,7 +29,7 @@ public class SimpleApp {
                 .jdbc(MYSQL_CONNECTION_URL, MYSQL_DBtable, connectionProperties);
 
         //MySql 테이블에서 필요없는 칼럼 삭제
-        Dataset<Row> collected = photocards.drop("photocard_id","area","latitude","longitude","memo","photo_url","plant");
+        Dataset<Row> collected = photocards.drop("photocard_id","area","latitude","longitude","memo","photo_url","created_at","kor_name");
         //중복되는 row 삭제
         Dataset<Row> dropped = collected.dropDuplicates();
 
