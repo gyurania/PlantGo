@@ -18,11 +18,11 @@
 
 # 🛠 프로젝트 팀원
 
-- 류인영 (팀장/데이터 분산)
-- 김규란 (팀원/CI&CD, 데이터 분산)
-- 배현중 (팀원/백엔드)
-- 이재익 (팀원/프론트)
-- 최은우 (팀원/프론트)
+- #### **류인영** (팀장/데이터 분산)
+- #### **김규란** (팀원/CI&CD, 데이터 분산)
+- #### **배현중** (팀원/백엔드)
+- #### **이재익** (팀원/프론트)
+- #### **최은우** (팀원/프론트)
 
 <br>
 
@@ -31,6 +31,14 @@
 <br>
 
 # 🎮 협업툴
+
+<br>
+<img alt="Gitlab" src ="https://img.shields.io/badge/Gitlab-181717.svg?&style=for-the-badge&logo=Gitlab&logoColor=white"/>
+<img alt="MatterMost" src ="https://img.shields.io/badge/MatterMost-blue.svg?&style=for-the-badge&logo=MatterMost&logoColor=white"/>
+<img alt="Notion" src ="https://img.shields.io/badge/Notion-white.svg?&style=for-the-badge&logo=Notion&logoColor=black"/>
+<img alt="Webex" src ="https://img.shields.io/badge/Webex-181717.svg?&style=for-the-badge&logo=Webex&logoColor=green"/>
+
+### <a href="https://www.notion.so/PlantGo-da7d1513eb2648ebbeb1d3d08a08e572"> 🌿 Plant Go! 노션 링크 </a>
 
 <br>
 
