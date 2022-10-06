@@ -31,10 +31,11 @@
 <br>
 <img src ="https://img.shields.io/badge/framework-SpringBoot-green"></img>
 <img src="https://img.shields.io/badge/Library-React-blue"> 
-<img src ="https://img.shields.io/badge/database-MySQLDB-lightgrey"></img>
+<img src ="https://img.shields.io/badge/database-MySQLDB-purple"></img>
 <br>
 <img src ="https://img.shields.io/badge/language-Java%2C%20JavaScript-blueviolet"></img>
-<img src ="https://img.shields.io/badge/server-S3-blue"></img>
+<img src ="https://img.shields.io/badge/server-S3-orange"></img>
+<img src ="https://img.shields.io/badge/server-Docker-blue"></img>
 <img src ="https://img.shields.io/badge/server-Jenkins-red"></img>
 <img src ="https://img.shields.io/badge/server-Nginx-green"></img>
 <br>
