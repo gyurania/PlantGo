@@ -10,7 +10,12 @@ import PhotoCardNavBar from "../components/PhotocardNavBar";
 function PlantResultView() {
   const location = useLocation();
   const plantInfo = location.state.plantInfo;
-  const plantName = plantInfo.kor_name
+  var plantName = ''
+  if (plantInfo.kor_name === '없음') {
+    plantName = '식물 정보가 곧 추가될 예정이에요ㅠㅠ'
+  } else {
+    plantName = plantInfo.kor_name
+  }
   const content = plantInfo.content
   const imgSrc = location.state.imgSrc;
   const userName = sessionStorage.getItem('userName')
@@ -26,6 +31,8 @@ function PlantResultView() {
   useEffect(() => {
     console.log(plantInfo)
   })
+
+
   return (
     <div className="container-result" style={{padding:0}}>
       <div className="mobile-layout">
