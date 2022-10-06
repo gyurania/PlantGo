@@ -59,5 +59,15 @@
 
 <br>
 
-# 🎞 프로젝트 상세 설명
+# 🎞 프로젝트 설명
+
+![Untitled](readmeimg/intro1.jpg)
+
+![Untitled](readmeimg/intro2.jpg)
+
+
+
+<br>
+
+# 🎞 실행 화면
 
