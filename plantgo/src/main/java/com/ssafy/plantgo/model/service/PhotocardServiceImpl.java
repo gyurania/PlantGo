@@ -98,7 +98,7 @@ public class PhotocardServiceImpl implements PhotocardService {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         ImageIO.write(image, "jpg", baos);
         String encodedImage = Base64.encode(baos.toByteArray());
-        String apiKey = "IoMPgMn0fWIlD5rjBSHMUpR7NblA5rZI93gAjXyVTUWJqrhzgD";
+        String apiKey = "XCKZNhKQEmswDX98LCbXAjVNHdATgoyQ5pJaGz5i3tBbYAbvnf";
         System.out.println(encodedImage);
         JSONObject data = new JSONObject();
         data.put("api_key", apiKey);
