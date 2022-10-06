@@ -102,11 +102,17 @@
 <img src="readmeimg/GIF/plantBook.gif" width="200" height="400"/>
 <br><br>
 
+- Photo Cards
+  - 포토카드 등록 후 메모 수정 기능
+
+<img src="readmeimg/GIF/photoCard.gif" width="200" height="400"/>
+<br><br>
+
 - Ranking
   - 클러스터 서버, Spark를 이용한 분산 처리
   - 회원별 수집한 식물 종류 갯수 카운트
   - 상위 30위 랭킹 조회
   - 3분 간격으로 랭킹 갱신
 
-<img src="readmeimg/GIF/ranking.gif" width="200" height="400"/>
+<img src="readmeimg/GIF/ranking_new.gif" width="200" height="400"/>
 <br><br>
