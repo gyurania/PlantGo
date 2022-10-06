@@ -9,9 +9,9 @@ import KakaoMap from "../components/KakaoMap";
 import DownNavBar from "../components/downNavBar";
 
 function HomeView({}) {
-  // if (!sessionStorage.getItem("loginToken")) {
-  //   window.location.replace("/login");
-  // }
+  if (!sessionStorage.getItem("loginToken")) {
+    window.location.replace("/login");
+  }
 
   const navigate = useNavigate();
 
