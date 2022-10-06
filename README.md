@@ -56,7 +56,7 @@
 <br>
 
 # ⚙ 시스템 아케틱쳐
-
+![architecture](readmeimg/architecture.png)
 <br>
 
 # 🎞 프로젝트 설명
