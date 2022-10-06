@@ -13,7 +13,7 @@ import "./KakaoMap.scss";
 function KakaoMap() {
   const [kakaoMap, setKakaoMap] = useState(null);
   const [position, setPosition] = useState({ lat: 37.5656, lng: 126.9769 });
-  const [dragPosition, setDragPosition] = useState({});
+  const [dragPosition, setDragPosition] = useState(null);
   const [currMarkers, setCurrMarkers] = useState([]);
   const [dragMarkers, setDragMarkers] = useState([]);
   const [dragClusterer, setDragClusterer] = useState(null);
@@ -43,6 +43,7 @@ function KakaoMap() {
     kakao.maps.event.addListener(map, "dragend", function () {
       const tmpLac = map.getCenter().Ma;
       const tmpLng = map.getCenter().La;
+      console.log("드래그 좌표", tmpLac, tmpLng);
       setDragPosition({ lat: tmpLac, lng: tmpLng });
     });
     setCurrMarkers(tmpMarker);
@@ -51,10 +52,11 @@ function KakaoMap() {
 
   // 드래그 시 식물 데이터 받아오기
   useEffect(() => {
-    if (dragPosition === {}) {
+    console.log("useEffect 들어옴");
+    if (dragPosition === null) {
       return;
     }
-
+    console.log("if문 통과");
     var imageSrc = plantsMarkerImage;
     var imageSize = new kakao.maps.Size(42, 42);
     var imageOption = { offset: new kakao.maps.Point(27, 69) };
@@ -76,6 +78,7 @@ function KakaoMap() {
       },
     }).then((res) => {
       const targets = res.data.mapPhotocardList;
+      console.log("drag target", targets);
       if (targets.length !== dragMarkers.length) {
         if (dragClusterer !== null) {
           dragClusterer.clear();
