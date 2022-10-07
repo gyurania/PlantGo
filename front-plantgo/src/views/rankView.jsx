@@ -39,6 +39,17 @@ const Ranking = () => {
   }, [rendered]);
 
   useInterval(() => {
+    let rankcards = document.querySelectorAll(".flipcard");
+    rankcards.forEach((el) => {
+      el.classList.add('flippedcard');
+    })
+
+    setTimeout(() => {
+      rankcards.forEach((el) => {
+        el.classList.remove('flippedcard');
+      })
+    }, 1000);
+
     axios({
       method: "get",
       url: "/api/v1/users/rank",
@@ -47,12 +58,13 @@ const Ranking = () => {
         "Access-Control-Allow-Credentials": true,
         "Content-Type": "aaplication/json",
       },
-    })
-      .then((res) => {
-        setRank(res.data);
-      })
-      .catch((err) => console.log(err));
-  }, 180000);
+    }).then((res) => {
+      setRank(res.data);
+      
+    }).catch((err) => console.log(err));
+    
+    
+  }, 10000);
 
   useEffect(() => {
     console.log("rank!!!");
@@ -122,7 +134,7 @@ const Ranking = () => {
                   <div class="ranking-table-header-data h6">Plants</div>
                 </div>
 
-                <div class="ranking-table-row-leader-1">
+                <div class="ranking-table-row-leader-1 flipcard">
                   <div class="ranking-table-data-leader-1">
                     <div class="medal-gold"></div>
                   </div>
@@ -139,7 +151,7 @@ const Ranking = () => {
                     if (idx === 0) {
                     } else {
                       return (
-                        <div class="ranking-table-row">
+                        <div class="ranking-table-row flipcard">
                           <div class="ranking-table-data">
                             <div class="number-wrap">
                               <div class="number-img">
