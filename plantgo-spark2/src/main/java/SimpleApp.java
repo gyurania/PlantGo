@@ -11,10 +11,10 @@ import static org.apache.spark.sql.functions.lit;
 public class SimpleApp {
 
     private static final String MYSQL_DRIVER = "com.mysql.jdbc.Driver";
-    private static final String MYSQL_CONNECTION_URL = "jdbc:mysql://j7a703.p.ssafy.io:3306/plantgo?allowPublicKeyRetrieval=true&useSSL=false";
+    private static final String MYSQL_CONNECTION_URL = "jdbc:mysql://[IP주소]:[port번호]/plantgo?allowPublicKeyRetrieval=true&useSSL=false";
     private static final String MYSQL_DBtable = "photocard";
     private static final String MYSQL_USERNAME = "plantgo";
-    private static final String MYSQL_PWD = "a703pg7";
+    private static final String MYSQL_PWD = "";
 
     public static void main(String[] args) {
         //Spark세션 및 앱 설정&생성
