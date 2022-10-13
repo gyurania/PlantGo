@@ -100,6 +100,7 @@
   - 무한스크롤 구현
 
 <img src="readmeimg/GIF/plantBook.gif" width="200" height="400"/>
+![plantBook](/uploads/5fe7e3b77571e9f0e516e5caa879f444/plantBook.gif)
 <br><br>
 
 - Photo Cards
